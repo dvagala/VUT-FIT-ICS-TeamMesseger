@@ -5,7 +5,7 @@ namespace ICS.Project.DAL.Entities
 {
     public class EmailAdressEntity
     {
-        public string Email;
+        public string Email { get; set; }
 
         public EmailAdressEntity (string EmailInput)
         {

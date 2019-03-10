@@ -6,9 +6,10 @@ namespace ICS.Project.DAL.Entities
 {
     public class UserEntity : EntityBase
     {
-        public string UserName;
+        public string UserName { get; set; }
+        public TimeSpan LastActivity { get; set; }
         public EmailAdressEntity Email { get; set; }
-        private string Password; //TODO: has to be kept in secure form
+        private string Password; //has to be kept in secure form
 
         public ICollection<TeamEntity> Teams { get; set; } = new List<TeamEntity>();
     }
