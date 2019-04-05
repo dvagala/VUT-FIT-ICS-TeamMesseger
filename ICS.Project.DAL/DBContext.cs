@@ -11,7 +11,6 @@ namespace ICS.Project.DAL
         }
 
 
-        public DbSet<EmailAdressEntity> Emails { get; set; } 
         public DbSet<CommentEntity> Comments { get; set; }
         public DbSet<PostEntity> Posts { get; set; }
         public DbSet<TeamEntity> Teams { get; set; }
