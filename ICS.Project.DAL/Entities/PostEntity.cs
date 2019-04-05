@@ -7,7 +7,7 @@ namespace ICS.Project.DAL.Entities
     public class PostEntity : EntityBase, IMessageEntity
     {
         public UserEntity Autor { get; set; }
-        public TimeSpan PublishDate { get; set; }
+        public DateTime PublishDate { get; set; }
         public string MessageText { get; set; }
 
         public string Title { get; set; }
