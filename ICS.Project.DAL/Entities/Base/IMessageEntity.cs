@@ -6,6 +6,6 @@ namespace ICS.Project.DAL.Entities.Base
     {
         UserEntity Autor { get; }
         string MessageText { get; }
-        TimeSpan PublishDate { get; }
+        DateTime PublishDate { get; }
     }
 }
