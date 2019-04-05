@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using ICS.Project.DAL.Entities.Base;
 
 namespace ICS.Project.DAL.Entities
 {

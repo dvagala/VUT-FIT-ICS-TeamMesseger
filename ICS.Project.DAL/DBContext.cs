@@ -1,8 +1,5 @@
 using ICS.Project.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-
 
 namespace ICS.Project.DAL
 {

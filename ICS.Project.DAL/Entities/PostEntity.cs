@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ICS.Project.DAL.Entities.Base;
 
 namespace ICS.Project.DAL.Entities
 {
-    public class PostEntity : EntityBase, IMessageEntity
+    public class PostEntity : MessageEntityBase
     {
-        public UserEntity Autor { get; set; }
-        public TimeSpan PublishDate { get; set; }
-        public string MessageText { get; set; }
-
         public string Title { get; set; }
 
-        public ICollection<CommentEntity> Comments = new List<CommentEntity>();
+        public ICollection<CommentEntity> Comments { get; set; } = new List<CommentEntity>();
     }
 }

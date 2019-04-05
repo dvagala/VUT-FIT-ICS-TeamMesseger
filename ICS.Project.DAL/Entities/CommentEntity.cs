@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ICS.Project.DAL.Entities.Base;
 
 namespace ICS.Project.DAL.Entities
 {
-    public class CommentEntity : EntityBase,IMessageEntity
+    public class CommentEntity : MessageEntityBase
     {
-        public UserEntity Autor { get; set; }
-        public string MessageText { get; set; }
-        public TimeSpan PublishDate { get; set; }
     }
 }

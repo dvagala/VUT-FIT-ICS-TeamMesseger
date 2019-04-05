@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ICS.Project.DAL.Entities
+namespace ICS.Project.DAL.Entities.Base
 {
     public abstract class EntityBase : IEntity
     {

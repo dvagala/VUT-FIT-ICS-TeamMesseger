@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ICS.Project.DAL.Entities
+namespace ICS.Project.DAL.Entities.Base
 {
     public interface IMessageEntity
     {
