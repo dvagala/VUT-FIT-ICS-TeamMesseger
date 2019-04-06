@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ICS.Project.DAL.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    [Migration("20190404202733_Initial")]
-    partial class Initial
+    [Migration("20190406094239_Test2")]
+    partial class Test2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,25 +30,17 @@ namespace ICS.Project.DAL.Migrations
 
                     b.Property<string>("MessageText");
 
-                    b.Property<TimeSpan>("PublishDate");
+                    b.Property<Guid?>("PostEntityID");
+
+                    b.Property<DateTime>("PublishDate");
 
                     b.HasKey("ID");
 
                     b.HasIndex("AutorID");
 
+                    b.HasIndex("PostEntityID");
+
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("ICS.Project.DAL.Entities.EmailAdressEntity", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Emails");
                 });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.PostEntity", b =>
@@ -60,7 +52,7 @@ namespace ICS.Project.DAL.Migrations
 
                     b.Property<string>("MessageText");
 
-                    b.Property<TimeSpan>("PublishDate");
+                    b.Property<DateTime>("PublishDate");
 
                     b.Property<Guid?>("TeamEntityID");
 
@@ -98,15 +90,15 @@ namespace ICS.Project.DAL.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("EmailID");
+                    b.Property<string>("Email");
 
-                    b.Property<TimeSpan>("LastActivity");
+                    b.Property<DateTime>("LastActivity");
 
-                    b.Property<string>("UserName");
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Surname");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("EmailID");
 
                     b.ToTable("Users");
                 });
@@ -116,6 +108,10 @@ namespace ICS.Project.DAL.Migrations
                     b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Autor")
                         .WithMany()
                         .HasForeignKey("AutorID");
+
+                    b.HasOne("ICS.Project.DAL.Entities.PostEntity")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostEntityID");
                 });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.PostEntity", b =>
@@ -134,13 +130,6 @@ namespace ICS.Project.DAL.Migrations
                     b.HasOne("ICS.Project.DAL.Entities.UserEntity")
                         .WithMany("Teams")
                         .HasForeignKey("UserEntityID");
-                });
-
-            modelBuilder.Entity("ICS.Project.DAL.Entities.UserEntity", b =>
-                {
-                    b.HasOne("ICS.Project.DAL.Entities.EmailAdressEntity", "Email")
-                        .WithMany()
-                        .HasForeignKey("EmailID");
                 });
 #pragma warning restore 612, 618
         }
