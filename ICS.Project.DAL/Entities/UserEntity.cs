@@ -60,6 +60,7 @@ namespace ICS.Project.DAL.Entities
         }
 
         public static IEqualityComparer<UserEntity> UserComparer { get; } = new UserEqualityComparer();
+        public string MessageText { get; set; }
     }
 
 }
