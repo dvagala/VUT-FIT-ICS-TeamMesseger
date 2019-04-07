@@ -40,7 +40,7 @@ namespace Entities.DAL.test
             using (var dbx = _testContext.CreateMessengerDbContext())
             {
                 var retievedPost = dbx.Posts.First(entity => entity.ID == PEntity.ID);
-                Assert.Equal(PEntity, retievedPost, PostEntity.TitleCommentsIdComparer);
+                Assert.Equal(PEntity, retievedPost, PostEntityComparer.TitleCommentsIdComparer);
             }
         }
 
