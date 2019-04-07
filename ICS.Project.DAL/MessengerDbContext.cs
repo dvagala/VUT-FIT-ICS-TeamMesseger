@@ -5,6 +5,9 @@ namespace ICS.Project.DAL
 {
     public class MessengerDbContext : DbContext
     {
+        public object PEntity;
+        public object Team;
+
         public MessengerDbContext()
         {
         }
