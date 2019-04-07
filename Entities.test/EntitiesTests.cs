@@ -1,5 +1,6 @@
 ﻿using ICS.Project.DAL;
 using ICS.Project.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 using Project.DAL.Tests;
 using System;
 using System.Collections.Generic;
@@ -52,63 +53,111 @@ namespace Entities.DAL.test
                 dbx.Attach(PEntity);
                 dbx.Remove(PEntity);
                 dbx.SaveChanges();
+                Assert.Null(dbx.Posts.Find(PEntity.ID));
+
+
             }
                 
         }
-        //[Fact]
-        //public void CommentEntityAddTests()
-        //{
-            //UserEntity User = new UserEntity();
-            //CommentEntity Comment = new CommentEntity();
-            //Comment.Autor = User;
-            //Comment.MessageText = "Ahoj!";
-            //Comment.PublishDate = new TimeSpan(15, 49, 30);
-  
-        //}
-        /*
-        [Fact]
 
+        [Fact]
+        public void CommentEntityAddTests()
+        {
+            UserEntity User = new UserEntity();
+            CommentEntity Comment = new CommentEntity();
+            Comment.Autor = User;
+            Comment.MessageText = "Ahoj!";
+            Comment.PublishDate = new DateTime(2018, 10, 10);
+
+            //Act
+            _testContext.MessengerDbContextSUT.Comments.Add(Comment);
+            _testContext.MessengerDbContextSUT.SaveChanges();
+
+            //Assert TODO comparer in Comments entity for Equals()
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                var retievedComment = dbx.Comments.First(entity => entity.ID == Comment.ID);
+                Assert.Equal(Comment, retievedComment);
+            }
+
+        }
+
+        [Fact]
+        public void CommentEntityDeleteTest()
+        {
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                CommentEntity Comment = new CommentEntity() { ID = new Guid() };
+                dbx.Attach(Comment);
+                dbx.Remove(Comment);
+                dbx.SaveChanges();
+                Assert.Null(dbx.Comments.Find(Comment.ID));
+            }
+
+        }
+        
+        [Fact]
         public void UserEntityAddTest()
         {
             TeamEntity Team = new TeamEntity();
             UserEntity User = new UserEntity();
             User.Name = "Jojo";
             User.Surname = "G";
-            User.LastActivity = new TimeSpan(15, 49, 30);
+            //User.LastActivity = new TimeSpan(15, 49, 30);
             User.Email = "xjojog@vutbr.cz";
-            User.Password = "123jojo";
+            //User.Password = "123jojo";
             User.Teams.Add(Team);
 
-            using (var db = new MessengerDbContext()) ;
-            db.add(User);
-            db.saveChanges();
+            //Act
+            _testContext.MessengerDbContextSUT.Users.Add(User);
+            _testContext.MessengerDbContextSUT.SaveChanges();
+        }
+        [Fact]
+        public void UserEntityDeleteTest()
+        {
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                UserEntity User = new UserEntity() { ID = new Guid() };
+                dbx.Attach(User);
+                dbx.Remove(User);
+                dbx.SaveChanges();
+                Assert.Null(dbx.Users.Find(User.ID));
+            }
+
         }
 
-
+        [Fact]
         public void TeamEntityAddTest()
         {
             UserEntity User = new UserEntity();
             var PEntity = new PostEntity();
             var TEntity = new TeamEntity();
             TEntity.Name = "Bang!";
-            TEntity.Description = "You're gonna carry that weight"; 
-            TEntity.Users.Add(User);
-            TEntity.Posts.Add(PEntity);
+            TEntity.Description = "You're gonna carry that weight";
 
+            //Add
+            _testContext.MessengerDbContextSUT.Teams.Add(TEntity);
+            _testContext.MessengerDbContextSUT.SaveChanges();
 
-            using (var db = new MessengerDbContext()) ;
-            db.add(TEntity);
-            db.saveChanges();
         }
 
-
+        [Fact]
         public void TeamEntityDeleteTest()
         {
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                TeamEntity Team  = new TeamEntity() { ID = new Guid() };
+                dbx.Attach(Team);
+                dbx.Remove(Team);
+                dbx.SaveChanges();
 
-
+                Assert.Null(dbx.Teams.Find(Team.ID));
+            }
+        
 
         }
-        */
+
+
         //[Fact]
         //{
         //    ID = id,
