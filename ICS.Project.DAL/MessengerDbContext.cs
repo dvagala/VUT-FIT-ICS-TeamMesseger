@@ -5,7 +5,6 @@ namespace ICS.Project.DAL
 {
     public class MessengerDbContext : DbContext
     {
-
         public MessengerDbContext()
         {
         }
@@ -14,13 +13,13 @@ namespace ICS.Project.DAL
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-        }
-
         public DbSet<CommentEntity> Comments { get; set; }
         public DbSet<PostEntity> Posts { get; set; }
         public DbSet<TeamEntity> Teams { get; set; }
         public DbSet<UserEntity> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+        }
     }
 }

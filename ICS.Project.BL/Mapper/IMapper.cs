@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ICS.Project.BL.Models;
 using ICS.Project.DAL.Entities;
-using ICS.Project.BL.Models;
 
 namespace ICS.Project.BL.Mapper
 {

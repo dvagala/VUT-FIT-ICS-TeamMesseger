@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ICS.Project.DAL.Entities.Base;
 
 namespace ICS.Project.DAL.Entities
@@ -18,5 +16,4 @@ namespace ICS.Project.DAL.Entities
 
         public string MessageText { get; set; }
     }
-
 }

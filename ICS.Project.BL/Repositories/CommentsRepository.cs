@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.Text;
 using System.Linq;
-using ICS.Project.BL.Models;
 using ICS.Project.BL.Mapper;
+using ICS.Project.BL.Models;
 using ICS.Project.DAL;
 using ICS.Project.DAL.Entities;
 

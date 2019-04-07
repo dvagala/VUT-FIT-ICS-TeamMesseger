@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
+﻿using System.Linq;
 using ICS.Project.BL.Models;
 using ICS.Project.DAL.Entities;
 
@@ -40,8 +37,8 @@ namespace ICS.Project.BL.Mapper
                 MessageText = model.MessageText,
                 PublishDate = model.PublishDate,
                 Comments = model.Comments
-                  .Select(x => MapCommentModelToEntity(x))
-                  .ToList()
+                    .Select(x => MapCommentModelToEntity(x))
+                    .ToList()
             };
         }
 
@@ -54,8 +51,8 @@ namespace ICS.Project.BL.Mapper
                 MessageText = post.MessageText,
                 PublishDate = post.PublishDate,
                 Comments = post.Comments
-                  .Select(x => MapCommentModelFromEntity(x))
-                  .ToList()
+                    .Select(x => MapCommentModelFromEntity(x))
+                    .ToList()
             };
         }
 
@@ -67,9 +64,9 @@ namespace ICS.Project.BL.Mapper
                 Name = model.Name,
                 Description = model.Description,
                 Posts = model.Posts
-                  .Select(x => MapPostModelToEntity(x))
-                  .ToList()
-        };
+                    .Select(x => MapPostModelToEntity(x))
+                    .ToList()
+            };
         }
 
         public TeamModel MapTeamModelFromEntity(TeamEntity team)
@@ -80,8 +77,8 @@ namespace ICS.Project.BL.Mapper
                 Name = team.Name,
                 Description = team.Description,
                 Posts = team.Posts
-                  .Select(x => MapPostModelFromEntity(x))
-                  .ToList()
+                    .Select(x => MapPostModelFromEntity(x))
+                    .ToList()
             };
         }
 

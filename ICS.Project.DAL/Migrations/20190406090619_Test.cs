@@ -8,68 +8,68 @@ namespace ICS.Project.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Users_Emails_EmailID",
-                table: "Users");
+                "FK_Users_Emails_EmailID",
+                "Users");
 
             migrationBuilder.DropTable(
-                name: "Emails");
+                "Emails");
 
             migrationBuilder.DropIndex(
-                name: "IX_Users_EmailID",
-                table: "Users");
+                "IX_Users_EmailID",
+                "Users");
 
             migrationBuilder.DropColumn(
-                name: "EmailID",
-                table: "Users");
+                "EmailID",
+                "Users");
 
             migrationBuilder.RenameColumn(
-                name: "UserName",
-                table: "Users",
-                newName: "Surname");
+                "UserName",
+                "Users",
+                "Surname");
 
             migrationBuilder.AlterColumn<DateTime>(
-                name: "LastActivity",
-                table: "Users",
+                "LastActivity",
+                "Users",
                 nullable: false,
                 oldClrType: typeof(TimeSpan));
 
             migrationBuilder.AddColumn<string>(
-                name: "Email",
-                table: "Users",
+                "Email",
+                "Users",
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "Name",
-                table: "Users",
+                "Name",
+                "Users",
                 nullable: true);
 
             migrationBuilder.AlterColumn<DateTime>(
-                name: "PublishDate",
-                table: "Posts",
+                "PublishDate",
+                "Posts",
                 nullable: false,
                 oldClrType: typeof(TimeSpan));
 
             migrationBuilder.AlterColumn<DateTime>(
-                name: "PublishDate",
-                table: "Comments",
+                "PublishDate",
+                "Comments",
                 nullable: false,
                 oldClrType: typeof(TimeSpan));
 
             migrationBuilder.AddColumn<Guid>(
-                name: "PostEntityID",
-                table: "Comments",
+                "PostEntityID",
+                "Comments",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_PostEntityID",
-                table: "Comments",
-                column: "PostEntityID");
+                "IX_Comments_PostEntityID",
+                "Comments",
+                "PostEntityID");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Comments_Posts_PostEntityID",
-                table: "Comments",
-                column: "PostEntityID",
-                principalTable: "Posts",
+                "FK_Comments_Posts_PostEntityID",
+                "Comments",
+                "PostEntityID",
+                "Posts",
                 principalColumn: "ID",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -77,75 +77,72 @@ namespace ICS.Project.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Comments_Posts_PostEntityID",
-                table: "Comments");
+                "FK_Comments_Posts_PostEntityID",
+                "Comments");
 
             migrationBuilder.DropIndex(
-                name: "IX_Comments_PostEntityID",
-                table: "Comments");
+                "IX_Comments_PostEntityID",
+                "Comments");
 
             migrationBuilder.DropColumn(
-                name: "Email",
-                table: "Users");
+                "Email",
+                "Users");
 
             migrationBuilder.DropColumn(
-                name: "Name",
-                table: "Users");
+                "Name",
+                "Users");
 
             migrationBuilder.DropColumn(
-                name: "PostEntityID",
-                table: "Comments");
+                "PostEntityID",
+                "Comments");
 
             migrationBuilder.RenameColumn(
-                name: "Surname",
-                table: "Users",
-                newName: "UserName");
+                "Surname",
+                "Users",
+                "UserName");
 
             migrationBuilder.AlterColumn<TimeSpan>(
-                name: "LastActivity",
-                table: "Users",
+                "LastActivity",
+                "Users",
                 nullable: false,
                 oldClrType: typeof(DateTime));
 
             migrationBuilder.AddColumn<Guid>(
-                name: "EmailID",
-                table: "Users",
+                "EmailID",
+                "Users",
                 nullable: true);
 
             migrationBuilder.AlterColumn<TimeSpan>(
-                name: "PublishDate",
-                table: "Posts",
+                "PublishDate",
+                "Posts",
                 nullable: false,
                 oldClrType: typeof(DateTime));
 
             migrationBuilder.AlterColumn<TimeSpan>(
-                name: "PublishDate",
-                table: "Comments",
+                "PublishDate",
+                "Comments",
                 nullable: false,
                 oldClrType: typeof(DateTime));
 
             migrationBuilder.CreateTable(
-                name: "Emails",
-                columns: table => new
+                "Emails",
+                table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
                     Email = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Emails", x => x.ID);
-                });
+                constraints: table => { table.PrimaryKey("PK_Emails", x => x.ID); });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_EmailID",
-                table: "Users",
-                column: "EmailID");
+                "IX_Users_EmailID",
+                "Users",
+                "EmailID");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Users_Emails_EmailID",
-                table: "Users",
-                column: "EmailID",
-                principalTable: "Emails",
+                "FK_Users_Emails_EmailID",
+                "Users",
+                "EmailID",
+                "Emails",
                 principalColumn: "ID",
                 onDelete: ReferentialAction.Restrict);
         }

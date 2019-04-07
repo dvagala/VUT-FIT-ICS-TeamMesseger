@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ICS.Project.DAL
 {
@@ -11,7 +8,7 @@ namespace ICS.Project.DAL
         {
             var optionsBuilder = new DbContextOptionsBuilder<MessengerDbContext>();
             optionsBuilder.UseSqlServer(
-                    @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog = TasksDB;MultipleActiveResultSets = True;Integrated Security = True");
+                @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog = TasksDB;MultipleActiveResultSets = True;Integrated Security = True");
             return new MessengerDbContext(optionsBuilder.Options);
         }
     }

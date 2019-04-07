@@ -1,16 +1,21 @@
-﻿using ICS.Project.DAL;
+﻿using System;
+using ICS.Project.DAL;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Project.DAL.Tests
 {
     public class MessengerDbContextTestsClassSetupFixture : IDisposable
     {
-        public MessengerDbContext MessengerDbContextSUT { get; set; }
-
         public MessengerDbContextTestsClassSetupFixture()
         {
-            this.MessengerDbContextSUT = CreateMessengerDbContext();
+            MessengerDbContextSUT = CreateMessengerDbContext();
+        }
+
+        public MessengerDbContext MessengerDbContextSUT { get; set; }
+
+        public void Dispose()
+        {
+            MessengerDbContextSUT?.Dispose();
         }
 
         public MessengerDbContext CreateMessengerDbContext()
@@ -23,11 +28,6 @@ namespace Project.DAL.Tests
             var contextOptionsBuilder = new DbContextOptionsBuilder<MessengerDbContext>();
             contextOptionsBuilder.UseInMemoryDatabase("Messenger");
             return contextOptionsBuilder.Options;
-        }
-
-        public void Dispose()
-        {
-            MessengerDbContextSUT?.Dispose();
         }
     }
 }

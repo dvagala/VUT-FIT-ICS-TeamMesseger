@@ -1,78 +1,22 @@
 ﻿using System;
-using Xunit;
-using ICS.Project.BL.Mapper;
+using System.Collections.Generic;
+using System.Linq;
 using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using Xunit;
 
 namespace ICS.Project.BL.Tests
 {
     public class RepositoryLayerTests
     {
-
-        [Fact]
-        public void GetAll_WithNoData_ReturnsEmptyEnumerable()
+        private IPostsRepository CreatePostsSUT()
         {
-            //Arrange
-            var sut = CreatePostsSUT();
-
-            //Act
-            var models = sut.GetAll();
-
-            //Assert
-            Assert.False(models.Any());
+            return new PostsRepository(new InMemoryDbContextFactory(), new Mapper.Mapper());
         }
 
-        [Fact]
-        public void FindById_ExistingItem_ReturnsIt()
+        private IUsersRepository CreateUsersSUT()
         {
-            //Arrange
-            var sut = CreateUsersSUT();            
-
-            var posts = new System.Collections.Generic.List<PostModel> { };
-
-            var teams = new System.Collections.Generic.List<TeamModel> { new TeamModel { Name = "Heroes", Description = "Some descr", Posts = posts } };
-
-            var user = new UserModel { Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz", Surname = "Puk", Teams = teams };
-
-            var model = sut.Add(user);
-
-            try
-            {
-                //Act
-                var foundModel = sut.GetById(model.ID);
-
-                //Assert
-                Assert.NotNull(foundModel);
-            }
-            finally
-            {
-                //Teardown
-                sut.Remove(model.ID);
-            }
-        }
-
-        [Fact]
-        public void Remove_ExistingItem_RemovesIt()
-        {
-            //Arrange
-
-            var sut = CreateUsersSUT();
-
-            var posts = new System.Collections.Generic.List<PostModel> { };
-
-            var teams = new System.Collections.Generic.List<TeamModel> { new TeamModel { Name = "Heroes", Description = "Some descr", Posts = posts } };
-
-            var user = new UserModel { Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz", Surname = "Puk", Teams = teams };
-            
-            var model = sut.Add(user);
-
-            //Act
-            sut.Remove(model.ID);
-
-            //Assert
-            Assert.Null(sut.GetById(model.ID));
+            return new UsersRepository(new InMemoryDbContextFactory(), new Mapper.Mapper());
         }
 
         [Fact]
@@ -81,15 +25,28 @@ namespace ICS.Project.BL.Tests
             //Arrange
             var sut = CreatePostsSUT();
 
-            var posts = new System.Collections.Generic.List<PostModel> { };
+            var posts = new List<PostModel>();
 
-            var teams = new System.Collections.Generic.List<TeamModel> { new TeamModel { Name = "Heroes", Description = "Some descr", Posts = posts } };
+            var teams = new List<TeamModel>
+                {new TeamModel {Name = "Heroes", Description = "Some descr", Posts = posts}};
 
-            var user = new UserModel { Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz", Surname = "Puk", Teams = teams };
+            var user = new UserModel
+            {
+                Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz",
+                Surname = "Puk", Teams = teams
+            };
 
-            var comments = new System.Collections.Generic.List<CommentModel> { new CommentModel { Autor = user, MessageText = "This is comment", PublishDate = new DateTime(2017, 9, 3, 2, 4, 2) } };
+            var comments = new List<CommentModel>
+            {
+                new CommentModel
+                    {Autor = user, MessageText = "This is comment", PublishDate = new DateTime(2017, 9, 3, 2, 4, 2)}
+            };
 
-            var post = new PostModel { Autor = user, MessageText = "Hello mates", Comments = comments, PublishDate = new DateTime(2017, 8, 3, 2, 4, 2), Title = "This is title" };
+            var post = new PostModel
+            {
+                Autor = user, MessageText = "Hello mates", Comments = comments,
+                PublishDate = new DateTime(2017, 8, 3, 2, 4, 2), Title = "This is title"
+            };
 
             PostModel model = null;
 
@@ -104,10 +61,7 @@ namespace ICS.Project.BL.Tests
             finally
             {
                 //Teardown
-                if (model != null)
-                {
-                    sut.Remove(model.ID);
-                }
+                if (model != null) sut.Remove(model.ID);
             }
         }
 
@@ -117,15 +71,28 @@ namespace ICS.Project.BL.Tests
         {
             var sut = CreatePostsSUT();
 
-            var posts = new System.Collections.Generic.List<PostModel> { };
+            var posts = new List<PostModel>();
 
-            var teams = new System.Collections.Generic.List<TeamModel> { new TeamModel { Name = "Heroes", Description = "Some descr", Posts = posts } };
+            var teams = new List<TeamModel>
+                {new TeamModel {Name = "Heroes", Description = "Some descr", Posts = posts}};
 
-            var user = new UserModel { Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz", Surname = "Puk", Teams = teams };
+            var user = new UserModel
+            {
+                Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz",
+                Surname = "Puk", Teams = teams
+            };
 
-            var comments = new System.Collections.Generic.List<CommentModel> { new CommentModel { Autor = user, MessageText = "This is comment", PublishDate = new DateTime(2017, 9, 3, 2, 4, 2) } };
+            var comments = new List<CommentModel>
+            {
+                new CommentModel
+                    {Autor = user, MessageText = "This is comment", PublishDate = new DateTime(2017, 9, 3, 2, 4, 2)}
+            };
 
-            var post = new PostModel { Autor = user, MessageText = "Hello mates", Comments = comments, PublishDate = new DateTime(2017, 8, 3, 2, 4, 2), Title = "This is title" };
+            var post = new PostModel
+            {
+                Autor = user, MessageText = "Hello mates", Comments = comments,
+                PublishDate = new DateTime(2017, 8, 3, 2, 4, 2), Title = "This is title"
+            };
 
             var model = sut.Add(post);
 
@@ -150,11 +117,16 @@ namespace ICS.Project.BL.Tests
             //Arrange
             var sut = CreateUsersSUT();
 
-            var posts = new System.Collections.Generic.List<PostModel> { };
+            var posts = new List<PostModel>();
 
-            var teams = new System.Collections.Generic.List<TeamModel> { new TeamModel { Name = "Heroes", Description = "Some descr", Posts = posts } };
+            var teams = new List<TeamModel>
+                {new TeamModel {Name = "Heroes", Description = "Some descr", Posts = posts}};
 
-            var user = new UserModel { Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz", Surname = "Puk", Teams = teams };
+            var user = new UserModel
+            {
+                Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz",
+                Surname = "Puk", Teams = teams
+            };
 
             var model = sut.Add(user);
 
@@ -164,7 +136,7 @@ namespace ICS.Project.BL.Tests
                 var foundModel = sut.GetById(model.ID);
 
                 //Assert
-                Assert.Equal((new DateTime(2018, 9, 3, 2, 4, 2)).Date, foundModel.LastActivity.Date);
+                Assert.Equal(new DateTime(2018, 9, 3, 2, 4, 2).Date, foundModel.LastActivity.Date);
             }
             finally
             {
@@ -179,11 +151,16 @@ namespace ICS.Project.BL.Tests
             //Arrange
             var sut = CreateUsersSUT();
 
-            var posts = new System.Collections.Generic.List<PostModel> { };
+            var posts = new List<PostModel>();
 
-            var teams = new System.Collections.Generic.List<TeamModel> { new TeamModel { Name = "Heroes", Description = "Some descr", Posts = posts } };
+            var teams = new List<TeamModel>
+                {new TeamModel {Name = "Heroes", Description = "Some descr", Posts = posts}};
 
-            var user = new UserModel { Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz", Surname = "Puk", Teams = teams };
+            var user = new UserModel
+            {
+                Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz",
+                Surname = "Puk", Teams = teams
+            };
 
             var model = sut.Add(user);
 
@@ -202,15 +179,78 @@ namespace ICS.Project.BL.Tests
             }
         }
 
-
-        private IPostsRepository CreatePostsSUT()
+        [Fact]
+        public void FindById_ExistingItem_ReturnsIt()
         {
-            return new PostsRepository(new InMemoryDbContextFactory(), new Mapper.Mapper());
+            //Arrange
+            var sut = CreateUsersSUT();
+
+            var posts = new List<PostModel>();
+
+            var teams = new List<TeamModel>
+                {new TeamModel {Name = "Heroes", Description = "Some descr", Posts = posts}};
+
+            var user = new UserModel
+            {
+                Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz",
+                Surname = "Puk", Teams = teams
+            };
+
+            var model = sut.Add(user);
+
+            try
+            {
+                //Act
+                var foundModel = sut.GetById(model.ID);
+
+                //Assert
+                Assert.NotNull(foundModel);
+            }
+            finally
+            {
+                //Teardown
+                sut.Remove(model.ID);
+            }
         }
 
-        private IUsersRepository CreateUsersSUT()
+        [Fact]
+        public void GetAll_WithNoData_ReturnsEmptyEnumerable()
         {
-            return new UsersRepository(new InMemoryDbContextFactory(), new Mapper.Mapper());
+            //Arrange
+            var sut = CreatePostsSUT();
+
+            //Act
+            var models = sut.GetAll();
+
+            //Assert
+            Assert.False(models.Any());
+        }
+
+        [Fact]
+        public void Remove_ExistingItem_RemovesIt()
+        {
+            //Arrange
+
+            var sut = CreateUsersSUT();
+
+            var posts = new List<PostModel>();
+
+            var teams = new List<TeamModel>
+                {new TeamModel {Name = "Heroes", Description = "Some descr", Posts = posts}};
+
+            var user = new UserModel
+            {
+                Email = "user@gmail.com", LastActivity = new DateTime(2018, 9, 3, 2, 4, 2), Name = "Alfonz",
+                Surname = "Puk", Teams = teams
+            };
+
+            var model = sut.Add(user);
+
+            //Act
+            sut.Remove(model.ID);
+
+            //Assert
+            Assert.Null(sut.GetById(model.ID));
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using ICS.Project.BL.Models.Base;
 
 namespace ICS.Project.BL.Models

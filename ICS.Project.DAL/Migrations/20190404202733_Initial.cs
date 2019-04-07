@@ -8,20 +8,17 @@ namespace ICS.Project.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Emails",
-                columns: table => new
+                "Emails",
+                table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
                     Email = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Emails", x => x.ID);
-                });
+                constraints: table => { table.PrimaryKey("PK_Emails", x => x.ID); });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
+                "Users",
+                table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
                     UserName = table.Column<string>(nullable: true),
@@ -32,16 +29,16 @@ namespace ICS.Project.DAL.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Users_Emails_EmailID",
-                        column: x => x.EmailID,
-                        principalTable: "Emails",
-                        principalColumn: "ID",
+                        "FK_Users_Emails_EmailID",
+                        x => x.EmailID,
+                        "Emails",
+                        "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
+                "Comments",
+                table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
                     AutorID = table.Column<Guid>(nullable: true),
@@ -52,16 +49,16 @@ namespace ICS.Project.DAL.Migrations
                 {
                     table.PrimaryKey("PK_Comments", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Comments_Users_AutorID",
-                        column: x => x.AutorID,
-                        principalTable: "Users",
-                        principalColumn: "ID",
+                        "FK_Comments_Users_AutorID",
+                        x => x.AutorID,
+                        "Users",
+                        "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teams",
-                columns: table => new
+                "Teams",
+                table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
@@ -72,16 +69,16 @@ namespace ICS.Project.DAL.Migrations
                 {
                     table.PrimaryKey("PK_Teams", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Teams_Users_UserEntityID",
-                        column: x => x.UserEntityID,
-                        principalTable: "Users",
-                        principalColumn: "ID",
+                        "FK_Teams_Users_UserEntityID",
+                        x => x.UserEntityID,
+                        "Users",
+                        "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Posts",
-                columns: table => new
+                "Posts",
+                table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
                     AutorID = table.Column<Guid>(nullable: true),
@@ -94,61 +91,61 @@ namespace ICS.Project.DAL.Migrations
                 {
                     table.PrimaryKey("PK_Posts", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Posts_Users_AutorID",
-                        column: x => x.AutorID,
-                        principalTable: "Users",
-                        principalColumn: "ID",
+                        "FK_Posts_Users_AutorID",
+                        x => x.AutorID,
+                        "Users",
+                        "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Posts_Teams_TeamEntityID",
-                        column: x => x.TeamEntityID,
-                        principalTable: "Teams",
-                        principalColumn: "ID",
+                        "FK_Posts_Teams_TeamEntityID",
+                        x => x.TeamEntityID,
+                        "Teams",
+                        "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_AutorID",
-                table: "Comments",
-                column: "AutorID");
+                "IX_Comments_AutorID",
+                "Comments",
+                "AutorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_AutorID",
-                table: "Posts",
-                column: "AutorID");
+                "IX_Posts_AutorID",
+                "Posts",
+                "AutorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_TeamEntityID",
-                table: "Posts",
-                column: "TeamEntityID");
+                "IX_Posts_TeamEntityID",
+                "Posts",
+                "TeamEntityID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teams_UserEntityID",
-                table: "Teams",
-                column: "UserEntityID");
+                "IX_Teams_UserEntityID",
+                "Teams",
+                "UserEntityID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_EmailID",
-                table: "Users",
-                column: "EmailID");
+                "IX_Users_EmailID",
+                "Users",
+                "EmailID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Comments");
+                "Comments");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                "Posts");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                "Teams");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                "Users");
 
             migrationBuilder.DropTable(
-                name: "Emails");
+                "Emails");
         }
     }
 }

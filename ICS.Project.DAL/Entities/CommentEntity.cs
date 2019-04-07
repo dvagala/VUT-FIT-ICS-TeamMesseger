@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ICS.Project.DAL.Entities.Base;
+﻿using ICS.Project.DAL.Entities.Base;
 
 namespace ICS.Project.DAL.Entities
 {
