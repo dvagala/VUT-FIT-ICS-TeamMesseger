@@ -81,9 +81,9 @@ namespace Entities.DAL.test
         [Fact]
         public void CommentEntityAddTests()
         {
-            UserEntity User = new UserEntity();
+            //UserEntity User = new UserEntity(); TODO Zistit ako pridat entitu v entite do databazy
             CommentEntity Comment = new CommentEntity();
-            Comment.Autor = User;
+            Comment.Autor = null;
             Comment.MessageText = "Ahoj!";
             Comment.PublishDate = new DateTime(2018, 10, 10);
 
@@ -94,8 +94,11 @@ namespace Entities.DAL.test
             //Assert
             using (var dbx = _testContext.CreateMessengerDbContext())
             {
-                var retievedComment = dbx.Comments.First(entity => entity.ID == Comment.ID);
-                Assert.Equal(Comment, retievedComment);
+                var retrievedComment = dbx.Comments.First(entity => entity.ID == Comment.ID);
+                Assert.Equal(Comment.Autor,retrievedComment.Autor);
+                Assert.Equal(Comment.MessageText, retrievedComment.MessageText);
+                Assert.Equal(Comment.PublishDate, retrievedComment.PublishDate);
+                Assert.Equal(Comment.ID, retrievedComment.ID);
             }
 
         }
@@ -121,10 +124,11 @@ namespace Entities.DAL.test
             UserEntity User = new UserEntity();
             User.Name = "Jojo";
             User.Surname = "G";
-            //User.LastActivity = new TimeSpan(15, 49, 30);
+            User.LastActivity = new DateTime(2017, 5, 5);
             User.Email = "xjojog@vutbr.cz";
-            //User.Password = "123jojo";
-            User.Teams.Add(Team);
+            User.Password = "123jojo";
+            //User.Teams.Add(Team); TODO zistit ako pridavat entitu v entite do databazy
+            
 
             //Act
             _testContext.MessengerDbContextSUT.Users.Add(User);
