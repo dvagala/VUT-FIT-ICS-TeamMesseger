@@ -40,7 +40,7 @@ namespace ICS.Project.DAL.Entities
                     return false;
                 }
 
-                return x.Teams.SequenceEqual(y.Teams) && x.Teams.Count == y.Teams.Count && string.Equals(x.Name, y.Name) && string.Equals(x.Surname, y.Surname) && string.Equals(x.Email, y.Email) && string.Equals(x.Password, y.Password) && DateTime.Equals(x.LastActivity, y.LastActivity) && x.ID.Equals(y.ID);
+                return x.Teams.SequenceEqual(y.Teams) && x.Teams.Count == y.Teams.Count && string.Equals(x.Name, y.Name) && string.Equals(x.Surname, y.Surname) && string.Equals(x.Email, y.Email)  && DateTime.Equals(x.LastActivity.ToString("MM/dd/yyyy HH:mm:ss"), y.LastActivity.ToString("MM/dd/yyyy HH:mm:ss"));
             }
 
             public int GetHashCode(UserEntity obj)

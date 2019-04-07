@@ -59,6 +59,24 @@ namespace Entities.DAL.test
             }
                 
         }
+        [Fact]
+        public void PostEntityUpdateTest()
+        {
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                PostEntity PEntity = new PostEntity() { ID = new Guid() };
+                PEntity.MessageText = "Pre-Update text";
+                dbx.Attach(PEntity);
+                dbx.Add(PEntity);
+                dbx.SaveChanges();
+                dbx.Update(dbx.Posts.Find(PEntity.ID));
+                dbx.Posts.Find(PEntity.ID).MessageText = "Post-Update text";
+                dbx.SaveChanges();
+                string postUpdate = "Post-Update text";
+                Console.WriteLine(dbx.Posts.Find(PEntity.ID).MessageText);
+                Assert.Equal(postUpdate,dbx.Posts.Find(PEntity.ID).MessageText);
+            }
+        }
 
         [Fact]
         public void CommentEntityAddTests()
