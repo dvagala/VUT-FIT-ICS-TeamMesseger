@@ -73,7 +73,7 @@ namespace Entities.DAL.test
             _testContext.MessengerDbContextSUT.Comments.Add(Comment);
             _testContext.MessengerDbContextSUT.SaveChanges();
 
-            //Assert TODO comparer in Comments entity for Equals()
+            //Assert
             using (var dbx = _testContext.CreateMessengerDbContext())
             {
                 var retievedComment = dbx.Comments.First(entity => entity.ID == Comment.ID);
@@ -138,6 +138,13 @@ namespace Entities.DAL.test
             //Add
             _testContext.MessengerDbContextSUT.Teams.Add(TEntity);
             _testContext.MessengerDbContextSUT.SaveChanges();
+
+            //Assert
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                var retievedTeam = dbx.Teams.First(entity => entity.ID == TEntity.ID);
+                Assert.Equal(TEntity, retievedTeam, TeamEntity.NameDescriptionIdComparer);
+            }
 
         }
 
