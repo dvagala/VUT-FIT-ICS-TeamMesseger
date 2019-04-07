@@ -40,7 +40,7 @@ namespace Entities.DAL.test
             using (var dbx = _testContext.CreateMessengerDbContext())
             {
                 var retievedPost = dbx.Posts.First(entity => entity.ID == PEntity.ID);
-                Assert.Equal(PEntity, retievedPost, PostEntity.TitleCommentsIdComparer);
+                Assert.Equal(PEntity, retievedPost, PostEntityComparer.PostComparer);
             }
         }
 
@@ -150,7 +150,7 @@ namespace Entities.DAL.test
             using (var dbx = _testContext.CreateMessengerDbContext())
             {
                 var retievedTeam = dbx.Teams.First(entity => entity.ID == TEntity.ID);
-                Assert.Equal(TEntity, retievedTeam, TeamEntity.NameDescriptionIdComparer);
+                Assert.Equal(TEntity, retievedTeam, TeamEntityComparer.TeamComparer);
             }
 
         }
