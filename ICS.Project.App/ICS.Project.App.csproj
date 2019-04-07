@@ -182,6 +182,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ICS.Project.BL\ICS.Project.BL.csproj">
+      <Project>{f638ade3-f3f4-449c-b844-29eb2f08dce1}</Project>
+      <Name>ICS.Project.BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ICS.Project.DAL\ICS.Project.DAL.csproj">
       <Project>{f7c3a871-1b5a-4f79-8b95-76b4db8d972c}</Project>
       <Name>ICS.Project.DAL</Name>

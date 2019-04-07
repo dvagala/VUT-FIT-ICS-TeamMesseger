@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ICS.Project.BL.Models.Base;
 
 namespace ICS.Project.BL.Models
 {
-    public class PostModel
+    public class PostModel : MessageModelBase
     {
-        public Guid ID { get; set; }
         public string Title { get; set; }
+
+        public ICollection<CommentModel> Comments { get; set; } = new List<CommentModel>();
     }
 }

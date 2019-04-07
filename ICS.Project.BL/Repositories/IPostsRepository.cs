@@ -8,7 +8,7 @@ namespace ICS.Project.BL.Repositories
     public interface IPostsRepository
     {
         IEnumerable<PostModel> GetAll();
-        PostModel GetById(int id);
+        PostModel GetById(Guid id);
         void Update(PostModel post);
         PostModel Add(PostModel post);
         void Remove(Guid id);

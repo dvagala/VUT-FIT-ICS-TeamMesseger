@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ICS.Project.DAL.Entities.Base;
+using ICS.Project.BL.Models.Base;
 
-namespace ICS.Project.DAL.Entities
+namespace ICS.Project.BL.Models
 {
-    public class UserEntity : EntityBase
+    public class UserModel : ModelBase
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -13,6 +13,6 @@ namespace ICS.Project.DAL.Entities
         public string Email { get; set; }
         public string Password { get; set; } //has to be kept in secure form
 
-        public ICollection<TeamEntity> Teams { get; set; } = new List<TeamEntity>();
+        public ICollection<TeamModel> Teams { get; set; } = new List<TeamModel>();
     }
 }

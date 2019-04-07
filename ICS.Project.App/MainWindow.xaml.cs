@@ -14,6 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ICS.Project.DAL.Entities;
 using ICS.Project.DAL;
+using ICS.Project.BL.Mapper;
+using ICS.Project.BL.Models;
+using ICS.Project.BL.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace ICS.Project.App
@@ -23,6 +26,10 @@ namespace ICS.Project.App
     /// </summary>
     public partial class MainWindow : Window
     {
+
+
+        // Do not go here, this is all just for quick nasty testing
+
 
         public class InMemoryDbContextFactory : IDbContextFactory
         {
@@ -40,38 +47,49 @@ namespace ICS.Project.App
         {
             InitializeComponent();
 
-            //dbContextFactory = new InMemoryDbContextFactory();
             dbContextFactory = new DefaultDbContextFactory();
 
-            //Arrange
-            //var postEntity = new PostEntity
-            //{
-            //    Title = "Post title"
-            //};
+            IMapper mapper = new Mapper();
 
-            ////Act
-            //using (var dbContext = dbContextFactory.CreateDbContext())
-            //{
-            //    dbContext.Posts.Add(postEntity);
-            //    dbContext.SaveChanges();
-            //}
+            PostsRepository postsRepository = new PostsRepository(dbContextFactory, mapper);
 
-            //Assert
+            PostModel todoDetailModel = new PostModel
+            {
+                Title = "Hoo5"
+            };
+
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                PostEntity retrievedPostEntity = null;
+                ICollection<PostEntity> retrievedAllPostEntities = null;
                 try
                 {
-                    retrievedPostEntity = dbContext.Posts.First();
-                    myLabel.Content = retrievedPostEntity.Title;
-                    //Assert.NotNull(retrievedPerson);
+                    PostEntity finded = dbContext.Posts.FirstOrDefault(e => e.Title == "Hoo5");
+
+                    PostModel a = postsRepository.GetById(finded.ID);
+
+                    myLabel.Content = a.Title;
+
+                    //if (finded != null)
+                    //    postsRepository.Remove(finded.ID);
+
+                    //retrievedAllPostEntities = dbContext.Posts.ToList();
+
+                    //String str = "Post Entities:\n\n";
+
+                    //foreach (var item in retrievedAllPostEntities)
+                    //{
+                    //    str += item.Title + "\n";
+                    //}
+
+                    //myLabel.Content = str;
+
                 }
                 finally
                 {
-                    ////Teardown
-                    //if (retrievedPerson != null)
+                    //////Teardown
+                    //if (retrievedPostEntity != null)
                     //{
-                    //    dbContext.People.Remove(retrievedPerson);
+                    //    dbContext.Posts.Remove(retrievedPostEntity);
                     //}
                 }
             }

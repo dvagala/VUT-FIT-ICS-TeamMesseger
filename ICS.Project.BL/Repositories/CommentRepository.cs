@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
 using System.Linq;
 using ICS.Project.BL.Models;
 using ICS.Project.BL.Mapper;
@@ -8,51 +10,51 @@ using ICS.Project.DAL.Entities;
 
 namespace ICS.Project.BL.Repositories
 {
-    public class PostsRepository : IPostsRepository
+    public class CommentRepository : ICommentRepository
     {
         private readonly IDbContextFactory dbContextFactory;
         private readonly IMapper mapper;
 
-        public PostsRepository(IDbContextFactory dbContextFactory, IMapper mapper)
+        public CommentRepository(IDbContextFactory dbContextFactory, IMapper mapper)
         {
             this.dbContextFactory = dbContextFactory;
             this.mapper = mapper;
         }
 
-        public IEnumerable<PostModel> GetAll()
+        public IEnumerable<CommentModel> GetAll()
         {
             return dbContextFactory.CreateDbContext()
-                .Posts
-                .Select(mapper.MapPostModelFromEntity);
+                .Comments
+                .Select(mapper.MapCommentModelFromEntity);
         }
 
-        public PostModel GetById(Guid id)
+        public CommentModel GetById(Guid id)
         {
             var foundEntity = dbContextFactory
                 .CreateDbContext()
-                .Posts
+                .Comments
                 .FirstOrDefault(t => t.ID == id);
-            return foundEntity == null ? null : mapper.MapPostModelFromEntity(foundEntity);
+            return foundEntity == null ? null : mapper.MapCommentModelFromEntity(foundEntity);
         }
 
-        public void Update(PostModel post)
+        public void Update(CommentModel comment)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = mapper.MapPostModelToEntity(post);
-                dbContext.Posts.Update(entity);
+                var entity = mapper.MapCommentModelToEntity(comment);
+                dbContext.Comments.Update(entity);
                 dbContext.SaveChanges();
             }
         }
 
-        public PostModel Add(PostModel post)
+        public CommentModel Add(CommentModel comment)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = mapper.MapPostModelToEntity(post);
-                dbContext.Posts.Add(entity);
+                var entity = mapper.MapCommentModelToEntity(comment);
+                dbContext.Comments.Add(entity);
                 dbContext.SaveChanges();
-                return mapper.MapPostModelFromEntity(entity);
+                return mapper.MapCommentModelFromEntity(entity);
             }
         }
 
@@ -60,12 +62,12 @@ namespace ICS.Project.BL.Repositories
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var post = new PostEntity
+                var comment = new CommentEntity
                 {
                     ID = id
                 };
-                dbContext.Posts.Attach(post);
-                dbContext.Posts.Remove(post);
+                dbContext.Comments.Attach(comment);
+                dbContext.Comments.Remove(comment);
                 dbContext.SaveChanges();
             }
         }
