@@ -36,7 +36,13 @@ namespace ICS.Project.BL.Mapper
             return new PostEntity
             {
                 ID = model.ID,
-                Title = model.Title
+                Title = model.Title,
+                MessageText = model.MessageText,
+                PublishDate = model.PublishDate,
+                Autor = MapUserModelToEntity(model.Autor),
+                Comments = model.Comments
+                  .Select(x => MapCommentModelToEntity(x))
+                  .ToList()
             };
         }
 
@@ -45,7 +51,13 @@ namespace ICS.Project.BL.Mapper
             return new PostModel
             {
                 ID = post.ID,
-                Title = post.Title
+                Title = post.Title,
+                MessageText = post.MessageText,
+                PublishDate = post.PublishDate,
+                Autor = MapUserModelFromEntity(post.Autor),
+                Comments = post.Comments
+                  .Select(x => MapCommentModelFromEntity(x))
+                  .ToList()
             };
         }
 

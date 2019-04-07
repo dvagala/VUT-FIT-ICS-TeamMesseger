@@ -5,7 +5,7 @@ using ICS.Project.BL.Models;
 
 namespace ICS.Project.BL.Repositories
 {
-    public interface IUserRepository
+    public interface IUsersRepository
     {
         IEnumerable<UserModel> GetAll();
         UserModel GetById(Guid id);

@@ -5,7 +5,7 @@ using ICS.Project.BL.Models;
 
 namespace ICS.Project.BL.Repositories
 {
-    public interface ITeamRepository
+    public interface ITeamsRepository
     {
         IEnumerable<TeamModel> GetAll();
         TeamModel GetById(Guid id);

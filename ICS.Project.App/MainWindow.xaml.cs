@@ -55,17 +55,18 @@ namespace ICS.Project.App
 
             PostModel todoDetailModel = new PostModel
             {
-                Title = "Hoo5"
+                Title = "ho2",
+                Autor = new UserModel()
             };
+
+
+            var model = postsRepository.Add(todoDetailModel);
 
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                ICollection<PostEntity> retrievedAllPostEntities = null;
                 try
                 {
-                    PostEntity finded = dbContext.Posts.FirstOrDefault(e => e.Title == "Hoo5");
-
-                    PostModel a = postsRepository.GetById(finded.ID);
+                    PostModel a = postsRepository.GetById(model.ID);
 
                     myLabel.Content = a.Title;
 

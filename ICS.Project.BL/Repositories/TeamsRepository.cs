@@ -10,12 +10,12 @@ using ICS.Project.DAL.Entities;
 
 namespace ICS.Project.BL.Repositories
 {
-    public class TeamRepository : ITeamRepository
+    public class TeamsRepository : ITeamsRepository
     {
         private readonly IDbContextFactory dbContextFactory;
         private readonly IMapper mapper;
 
-        public TeamRepository(IDbContextFactory dbContextFactory, IMapper mapper)
+        public TeamsRepository(IDbContextFactory dbContextFactory, IMapper mapper)
         {
             this.dbContextFactory = dbContextFactory;
             this.mapper = mapper;

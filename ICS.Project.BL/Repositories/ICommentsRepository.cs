@@ -5,7 +5,7 @@ using ICS.Project.BL.Models;
 
 namespace ICS.Project.BL.Repositories
 {
-    public interface ICommentRepository
+    public interface ICommentsRepository
     {
         IEnumerable<CommentModel> GetAll();
         CommentModel GetById(Guid id);

@@ -10,51 +10,51 @@ using ICS.Project.DAL.Entities;
 
 namespace ICS.Project.BL.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class CommentsRepository : ICommentsRepository
     {
         private readonly IDbContextFactory dbContextFactory;
         private readonly IMapper mapper;
 
-        public UserRepository(IDbContextFactory dbContextFactory, IMapper mapper)
+        public CommentsRepository(IDbContextFactory dbContextFactory, IMapper mapper)
         {
             this.dbContextFactory = dbContextFactory;
             this.mapper = mapper;
         }
 
-        public IEnumerable<UserModel> GetAll()
+        public IEnumerable<CommentModel> GetAll()
         {
             return dbContextFactory.CreateDbContext()
-                .Users
-                .Select(mapper.MapUserModelFromEntity);
+                .Comments
+                .Select(mapper.MapCommentModelFromEntity);
         }
 
-        public UserModel GetById(Guid id)
+        public CommentModel GetById(Guid id)
         {
             var foundEntity = dbContextFactory
                 .CreateDbContext()
-                .Users
+                .Comments
                 .FirstOrDefault(t => t.ID == id);
-            return foundEntity == null ? null : mapper.MapUserModelFromEntity(foundEntity);
+            return foundEntity == null ? null : mapper.MapCommentModelFromEntity(foundEntity);
         }
 
-        public void Update(UserModel post)
+        public void Update(CommentModel comment)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = mapper.MapUserModelToEntity(post);
-                dbContext.Users.Update(entity);
+                var entity = mapper.MapCommentModelToEntity(comment);
+                dbContext.Comments.Update(entity);
                 dbContext.SaveChanges();
             }
         }
 
-        public UserModel Add(UserModel post)
+        public CommentModel Add(CommentModel comment)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = mapper.MapUserModelToEntity(post);
-                dbContext.Users.Add(entity);
+                var entity = mapper.MapCommentModelToEntity(comment);
+                dbContext.Comments.Add(entity);
                 dbContext.SaveChanges();
-                return mapper.MapUserModelFromEntity(entity);
+                return mapper.MapCommentModelFromEntity(entity);
             }
         }
 
@@ -62,12 +62,12 @@ namespace ICS.Project.BL.Repositories
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var post = new UserEntity
+                var comment = new CommentEntity
                 {
                     ID = id
                 };
-                dbContext.Users.Attach(post);
-                dbContext.Users.Remove(post);
+                dbContext.Comments.Attach(comment);
+                dbContext.Comments.Remove(comment);
                 dbContext.SaveChanges();
             }
         }
