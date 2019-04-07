@@ -24,10 +24,12 @@ namespace Entities.DAL.test
             CommentEntity Comment = new CommentEntity();
             PostEntity PEntity = new PostEntity();
             PEntity.ID = new Guid();
+            PEntity.Autor = null;
             PEntity.MessageText = "See you space cowboy!";
             PEntity.PublishDate = new DateTime(2018, 10, 10);
             PEntity.Title = "Accelerated spread of Weebs";
             
+
 
             //Act
             _testContext.MessengerDbContextSUT.Posts.Add(PEntity);
@@ -37,7 +39,7 @@ namespace Entities.DAL.test
             using (var dbx = _testContext.CreateMessengerDbContext())
             {
                 var retievedPost = dbx.Posts.First(entity => entity.ID == PEntity.ID);
-                Assert.Equal(PEntity, retievedPost);
+                Assert.Equal(PEntity, retievedPost, PostEntity.TitleCommentsIdComparer);
             }
         }
 
