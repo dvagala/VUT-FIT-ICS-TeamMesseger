@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using ICS.Project.DAL.Entities.Base;
+using System.Text;
 
 namespace ICS.Project.DAL.Entities
 {
     public class UserEntity : EntityBase
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public DateTime LastActivity { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; } //has to be kept in secure form
+        public string UserName { get; set; }
+        public TimeSpan LastActivity { get; set; }
+        public EmailAdressEntity Email { get; set; }
+        private string Password; //has to be kept in secure form
 
         public ICollection<TeamEntity> Teams { get; set; } = new List<TeamEntity>();
-
-        public string MessageText { get; set; }
     }
 }
