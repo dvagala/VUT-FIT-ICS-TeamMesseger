@@ -5,7 +5,7 @@ using ICS.Project.DAL.Entities;
 
 static internal class PostEntityComparer
 {
-    private sealed class TitleCommentsIdEqualityComparer : IEqualityComparer<PostEntity>
+    private sealed class PostsComparer : IEqualityComparer<PostEntity>
     {
         public bool Equals(PostEntity x, PostEntity y)
         {
@@ -44,5 +44,5 @@ static internal class PostEntityComparer
         }
     }
 
-    public static IEqualityComparer<PostEntity> TitleCommentsIdComparer { get; } = new TitleCommentsIdEqualityComparer();
+    public static IEqualityComparer<PostEntity> PostComparer { get; } = new PostsComparer();
 }
