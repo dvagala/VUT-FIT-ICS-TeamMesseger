@@ -134,6 +134,25 @@ namespace Entities.DAL.test
         }
 
         [Fact]
+        public void UserEntityUpdateTest()
+        {
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                UserEntity User = new UserEntity() { ID = new Guid() };
+                User.Name = "Jojo";
+                dbx.Attach(User);
+                dbx.Add(User);
+                dbx.SaveChanges();
+                dbx.Update(dbx.Users.Find(User.ID));
+                dbx.Users.Find(User.ID).Name = "Joji";
+                dbx.SaveChanges();
+                string postUpdate = "Joji";
+                Console.WriteLine(dbx.Users.Find(User.ID).Name);
+                Assert.Equal(postUpdate, dbx.Users.Find(User.ID).Name);
+            }
+        }
+
+        [Fact]
         public void TeamEntityAddTest()
         {
             UserEntity User = new UserEntity();
@@ -171,23 +190,28 @@ namespace Entities.DAL.test
 
         }
 
+        [Fact]
+        public void TeamEntityUpdateTest()
+        {
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                TeamEntity Team = new TeamEntity() { ID = new Guid() };
+                Team.Description = "Number 1";
+                dbx.Attach(Team);
+                dbx.Add(Team);
+                dbx.SaveChanges();
+                dbx.Update(dbx.Teams.Find(Team.ID));
+                dbx.Teams.Find(Team.ID).Description = "Number 2";
+                dbx.SaveChanges();
+                string postUpdate = "Number 2";
+                Console.WriteLine(dbx.Teams.Find(Team.ID).Description);
+                Assert.Equal(postUpdate, dbx.Teams.Find(Team.ID).Description);
+            }
+        }
 
-        //[Fact]
-        //{
-        //    ID = id,
-        //    Email = "Spike@gmail.com"
-        //};
-        //using (var db = new DataDBContext())
-        //{
-        //    db.Emails.Add(TestEmailAdressEntity);
-        //    db.SaveChanges();
-        //}
-        ////TODO Treba opravit, Addnuty email neostava v databaze
-        //using (var db = new DataDBContext())
-        //{
-        //    var Email = db.Emails.FirstOrDefault(x => x.ID == id);
-        //    Assert.Equal(TestEmailAdressEntity, Email);
-        //}
+
+
+
     }
 
     //[Fact]
