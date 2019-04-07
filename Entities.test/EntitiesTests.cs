@@ -43,15 +43,18 @@ namespace Entities.DAL.test
             }
         }
 
-        //[Fact]
-        //public void PostEntityDeleteTest()
-        //{
-          //  using (var context = new MessengerDbContext()) ;
-          //PostEntity PEntity = new PostEntity() { Id = 1};
-          //  context.PEntity.Attach(PEntity);
-          //  context.PEntity.Remove(PEntity);
-          //  context.SaveChanges();
-      //  }
+        [Fact]
+        public void PostEntityDeleteTest()
+        {
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                PostEntity PEntity = new PostEntity() { ID = new Guid()};
+                dbx.Attach(PEntity);
+                dbx.Remove(PEntity);
+                dbx.SaveChanges();
+            }
+                
+        }
         //[Fact]
         //public void CommentEntityAddTests()
         //{
