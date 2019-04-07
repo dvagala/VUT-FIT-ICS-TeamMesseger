@@ -24,11 +24,8 @@ namespace Entities.DAL.test
             
             CommentEntity Comment = new CommentEntity();
             PostEntity PEntity = new PostEntity();
-            UserEntity Autor = new UserEntity();
-
             PEntity.ID = new Guid();
-            PEntity.Autor = Autor;
-            PEntity.Autor.Name = "Spike";
+            PEntity.Autor = null;
             PEntity.MessageText = "See you space cowboy!";
             PEntity.PublishDate = new DateTime(2018, 10, 10);
             PEntity.Title = "Accelerated spread of Weebs";
@@ -37,14 +34,13 @@ namespace Entities.DAL.test
 
             //Act
             _testContext.MessengerDbContextSUT.Posts.Add(PEntity);
-            _testContext.MessengerDbContextSUT.Users.Add(PEntity.Autor);
             _testContext.MessengerDbContextSUT.SaveChanges();
 
             //Assert
             using (var dbx = _testContext.CreateMessengerDbContext())
             {
                 var retievedPost = dbx.Posts.First(entity => entity.ID == PEntity.ID);
-                Assert.Equal(PEntity, retievedPost);
+                Assert.Equal(PEntity, retievedPost, PostEntityComparer.PostComparer);
             }
         }
 
