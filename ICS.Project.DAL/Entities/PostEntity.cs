@@ -36,7 +36,7 @@ namespace ICS.Project.DAL.Entities
                     return false;
                 }
 
-                return x.Comments.SequenceEqual(y.Comments) && string.Equals(x.Title, y.Title) && x.ID.Equals(y.ID);
+                return x.Comments.SequenceEqual(y.Comments) && x.Comments.Count == y.Comments.Count && string.Equals(x.Title, y.Title) && x.ID.Equals(y.ID);
             }
 
             public int GetHashCode(PostEntity obj)
