@@ -59,13 +59,31 @@ namespace Entities.DAL.test
             }
                 
         }
+        [Fact]
+        public void PostEntityUpdateTest()
+        {
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                PostEntity PEntity = new PostEntity() { ID = new Guid() };
+                PEntity.MessageText = "Pre-Update text";
+                dbx.Attach(PEntity);
+                dbx.Add(PEntity);
+                dbx.SaveChanges();
+                dbx.Update(dbx.Posts.Find(PEntity.ID));
+                dbx.Posts.Find(PEntity.ID).MessageText = "Post-Update text";
+                dbx.SaveChanges();
+                string postUpdate = "Post-Update text";
+                Console.WriteLine(dbx.Posts.Find(PEntity.ID).MessageText);
+                Assert.Equal(postUpdate,dbx.Posts.Find(PEntity.ID).MessageText);
+            }
+        }
 
         [Fact]
         public void CommentEntityAddTests()
         {
-            UserEntity User = new UserEntity();
+            //UserEntity User = new UserEntity(); TODO Zistit ako pridat entitu v entite do databazy
             CommentEntity Comment = new CommentEntity();
-            Comment.Autor = User;
+            Comment.Autor = null;
             Comment.MessageText = "Ahoj!";
             Comment.PublishDate = new DateTime(2018, 10, 10);
 
@@ -76,8 +94,11 @@ namespace Entities.DAL.test
             //Assert
             using (var dbx = _testContext.CreateMessengerDbContext())
             {
-                var retievedComment = dbx.Comments.First(entity => entity.ID == Comment.ID);
-                Assert.Equal(Comment, retievedComment);
+                var retrievedComment = dbx.Comments.First(entity => entity.ID == Comment.ID);
+                Assert.Equal(Comment.Autor,retrievedComment.Autor);
+                Assert.Equal(Comment.MessageText, retrievedComment.MessageText);
+                Assert.Equal(Comment.PublishDate, retrievedComment.PublishDate);
+                Assert.Equal(Comment.ID, retrievedComment.ID);
             }
 
         }
@@ -103,10 +124,11 @@ namespace Entities.DAL.test
             UserEntity User = new UserEntity();
             User.Name = "Jojo";
             User.Surname = "G";
-            //User.LastActivity = new TimeSpan(15, 49, 30);
+            User.LastActivity = new DateTime(2017, 5, 5);
             User.Email = "xjojog@vutbr.cz";
-            //User.Password = "123jojo";
-            User.Teams.Add(Team);
+            User.Password = "123jojo";
+            //User.Teams.Add(Team); TODO zistit ako pridavat entitu v entite do databazy
+            
 
             //Act
             _testContext.MessengerDbContextSUT.Users.Add(User);
@@ -131,6 +153,25 @@ namespace Entities.DAL.test
                 Assert.Null(dbx.Users.Find(User.ID));
             }
 
+        }
+
+        [Fact]
+        public void UserEntityUpdateTest()
+        {
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                UserEntity User = new UserEntity() { ID = new Guid() };
+                User.Name = "Jojo";
+                dbx.Attach(User);
+                dbx.Add(User);
+                dbx.SaveChanges();
+                dbx.Update(dbx.Users.Find(User.ID));
+                dbx.Users.Find(User.ID).Name = "Joji";
+                dbx.SaveChanges();
+                string postUpdate = "Joji";
+                Console.WriteLine(dbx.Users.Find(User.ID).Name);
+                Assert.Equal(postUpdate, dbx.Users.Find(User.ID).Name);
+            }
         }
 
         [Fact]
@@ -171,23 +212,28 @@ namespace Entities.DAL.test
 
         }
 
+        [Fact]
+        public void TeamEntityUpdateTest()
+        {
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                TeamEntity Team = new TeamEntity() { ID = new Guid() };
+                Team.Description = "Number 1";
+                dbx.Attach(Team);
+                dbx.Add(Team);
+                dbx.SaveChanges();
+                dbx.Update(dbx.Teams.Find(Team.ID));
+                dbx.Teams.Find(Team.ID).Description = "Number 2";
+                dbx.SaveChanges();
+                string postUpdate = "Number 2";
+                Console.WriteLine(dbx.Teams.Find(Team.ID).Description);
+                Assert.Equal(postUpdate, dbx.Teams.Find(Team.ID).Description);
+            }
+        }
 
-        //[Fact]
-        //{
-        //    ID = id,
-        //    Email = "Spike@gmail.com"
-        //};
-        //using (var db = new DataDBContext())
-        //{
-        //    db.Emails.Add(TestEmailAdressEntity);
-        //    db.SaveChanges();
-        //}
-        ////TODO Treba opravit, Addnuty email neostava v databaze
-        //using (var db = new DataDBContext())
-        //{
-        //    var Email = db.Emails.FirstOrDefault(x => x.ID == id);
-        //    Assert.Equal(TestEmailAdressEntity, Email);
-        //}
+
+
+
     }
 
     //[Fact]
