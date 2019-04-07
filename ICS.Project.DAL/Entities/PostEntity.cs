@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ICS.Project.DAL.Entities.Base;
 
@@ -35,7 +36,7 @@ namespace ICS.Project.DAL.Entities
                     return false;
                 }
 
-                return string.Equals(x.Comments, y.Comments) && string.Equals(x.Title, y.Title) && x.ID.Equals(y.ID);
+                return x.Comments.SequenceEqual(y.Comments) && string.Equals(x.Title, y.Title) && x.ID.Equals(y.ID);
             }
 
             public int GetHashCode(PostEntity obj)
