@@ -111,6 +111,13 @@ namespace Entities.DAL.test
             //Act
             _testContext.MessengerDbContextSUT.Users.Add(User);
             _testContext.MessengerDbContextSUT.SaveChanges();
+
+            //Assert
+            using (var dbx = _testContext.CreateMessengerDbContext())
+            {
+                var retievedUser = dbx.Users.First(entity => entity.ID == User.ID);
+                Assert.Equal(User, retievedUser, UserEntity.UserComparer);
+            }
         }
         [Fact]
         public void UserEntityDeleteTest()
