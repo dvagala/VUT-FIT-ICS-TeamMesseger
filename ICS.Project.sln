@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICS.Project.DAL", "ICS.Project.DAL\ICS.Project.DAL.csproj", "{F7C3A871-1B5A-4F79-8B95-76B4DB8D972C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities.DAL.test", "Entities.test\Entities.DAL.test.csproj", "{A10B7A81-631A-45B2-8447-427C0D014919}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICS.Project.DAL.Tests", "Entities.test\ICS.Project.DAL.Tests.csproj", "{A10B7A81-631A-45B2-8447-427C0D014919}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICS.Project.App", "ICS.Project.App\ICS.Project.App.csproj", "{50D9659C-A475-46D3-BA9F-1CEE0075AE50}"
 EndProject

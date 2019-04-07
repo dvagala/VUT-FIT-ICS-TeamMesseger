@@ -39,7 +39,6 @@ namespace ICS.Project.BL.Mapper
                 Title = model.Title,
                 MessageText = model.MessageText,
                 PublishDate = model.PublishDate,
-                Autor = MapUserModelToEntity(model.Autor),
                 Comments = model.Comments
                   .Select(x => MapCommentModelToEntity(x))
                   .ToList()
@@ -54,7 +53,6 @@ namespace ICS.Project.BL.Mapper
                 Title = post.Title,
                 MessageText = post.MessageText,
                 PublishDate = post.PublishDate,
-                Autor = MapUserModelFromEntity(post.Autor),
                 Comments = post.Comments
                   .Select(x => MapCommentModelFromEntity(x))
                   .ToList()

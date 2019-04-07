@@ -27,75 +27,9 @@ namespace ICS.Project.App
     public partial class MainWindow : Window
     {
 
-
-        // Do not go here, this is all just for quick nasty testing
-
-
-        public class InMemoryDbContextFactory : IDbContextFactory
-        {
-            public MessengerDbContext CreateDbContext()
-            {
-                var optionsBuilder = new DbContextOptionsBuilder<MessengerDbContext>();
-                optionsBuilder.UseInMemoryDatabase("TodoDbName");
-                return new MessengerDbContext(optionsBuilder.Options);
-            }
-        }
-
-        private readonly IDbContextFactory dbContextFactory;
-
         public MainWindow()
         {
             InitializeComponent();
-
-            dbContextFactory = new DefaultDbContextFactory();
-
-            IMapper mapper = new Mapper();
-
-            PostsRepository postsRepository = new PostsRepository(dbContextFactory, mapper);
-
-            PostModel todoDetailModel = new PostModel
-            {
-                Title = "ho2",
-                Autor = new UserModel()
-            };
-
-
-            var model = postsRepository.Add(todoDetailModel);
-
-            using (var dbContext = dbContextFactory.CreateDbContext())
-            {
-                try
-                {
-                    PostModel a = postsRepository.GetById(model.ID);
-
-                    myLabel.Content = a.Title;
-
-                    //if (finded != null)
-                    //    postsRepository.Remove(finded.ID);
-
-                    //retrievedAllPostEntities = dbContext.Posts.ToList();
-
-                    //String str = "Post Entities:\n\n";
-
-                    //foreach (var item in retrievedAllPostEntities)
-                    //{
-                    //    str += item.Title + "\n";
-                    //}
-
-                    //myLabel.Content = str;
-
-                }
-                finally
-                {
-                    //////Teardown
-                    //if (retrievedPostEntity != null)
-                    //{
-                    //    dbContext.Posts.Remove(retrievedPostEntity);
-                    //}
-                }
-            }
-
-
         }
     }
 }

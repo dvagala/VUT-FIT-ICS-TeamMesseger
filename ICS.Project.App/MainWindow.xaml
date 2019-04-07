@@ -6,8 +6,5 @@
         xmlns:local="clr-namespace:ICS.Project.App"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Label x:Name="myLabel" Content="Label" HorizontalAlignment="Left" Margin="67,51,0,0" VerticalAlignment="Top"/>
-
-    </Grid>
+    <Grid/>
 </Window>
