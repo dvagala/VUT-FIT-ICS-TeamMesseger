@@ -1,6 +1,6 @@
 ﻿using ICS.Project.DAL;
 using ICS.Project.DAL.Entities;
-using MessengerDbContext.DAL.Tests;
+using Project.DAL.Tests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace Entities.DAL.test
             PEntity.MessageText = "See you space cowboy!";
             PEntity.PublishDate = new DateTime(2018, 10, 10);
             PEntity.Title = "Accelerated spread of Weebs";
-            PEntity.Comments.Add(Comment);
+            
 
             //Act
             _testContext.MessengerDbContextSUT.Posts.Add(PEntity);

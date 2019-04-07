@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ICS.Project.DAL;
+using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace MessengerDbContext.DAL.Tests
+namespace Project.DAL.Tests
 {
     public class MessengerDbContextTestsClassSetupFixture : IDisposable
     {
