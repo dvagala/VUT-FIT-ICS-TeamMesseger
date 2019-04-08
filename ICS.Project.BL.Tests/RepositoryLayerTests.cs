@@ -56,7 +56,7 @@ namespace ICS.Project.BL.Tests
                 model = sut.Add(post);
 
                 //Assert
-                Assert.NotNull(model);
+                Assert.Null(model);
             }
             finally
             {
