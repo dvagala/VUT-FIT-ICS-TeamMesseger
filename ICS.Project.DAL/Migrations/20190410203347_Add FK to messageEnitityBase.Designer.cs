@@ -127,7 +127,7 @@ namespace ICS.Project.BL.Migrations
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.CommentEntity", b =>
                 {
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Autor")
+                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Author")
                         .WithMany()
                         .HasForeignKey("AutorID");
 
@@ -135,18 +135,18 @@ namespace ICS.Project.BL.Migrations
                         .WithMany("Comments")
                         .HasForeignKey("PostEntityID");
 
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "AutorId")
+                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "AuthorId")
                         .WithMany()
                         .HasForeignKey("UserEntity");
                 });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.PostEntity", b =>
                 {
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Autor")
+                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Author")
                         .WithMany()
                         .HasForeignKey("AutorID");
 
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "AutorId")
+                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "AuthorId")
                         .WithMany()
                         .HasForeignKey("UserEntity");
                 });

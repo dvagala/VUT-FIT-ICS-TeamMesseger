@@ -31,7 +31,7 @@ namespace ICS.Project.DAL.Tests
             var postEntity = new PostEntity
             {
                 Title = "Post title",
-                AutorId = userEntity.ID
+                AuthorId = userEntity.ID
             };
 
             using (var dbContextLoc = _fixture.CreateMessengerDbContext())
@@ -48,7 +48,7 @@ namespace ICS.Project.DAL.Tests
                 .Posts
                 .FirstOrDefault();
 
-            Assert.Equal(retrievedPost.AutorId, retrievedUser.ID);
+            Assert.Equal(retrievedPost.AuthorId, retrievedUser.ID);
             Assert.Equal("Michael", retrievedUser.Name);
             Assert.Equal("Post title", retrievedPost.Title);
 
@@ -76,7 +76,7 @@ namespace ICS.Project.DAL.Tests
             var commentEntity = new CommentEntity
             {
                 MessageText = "Comment text",
-                AutorId = userEntity.ID
+                AuthorId = userEntity.ID
             };
 
             using (var dbContextLoc = _fixture.CreateMessengerDbContext())
@@ -93,7 +93,7 @@ namespace ICS.Project.DAL.Tests
                 .Comments
                 .FirstOrDefault();
 
-            Assert.Equal(retrievedComment.AutorId, retrievedUser.ID);
+            Assert.Equal(retrievedComment.AuthorId, retrievedUser.ID);
             Assert.Equal("Andy", retrievedUser.Name);
             Assert.Equal("Comment text", retrievedComment.MessageText);
 

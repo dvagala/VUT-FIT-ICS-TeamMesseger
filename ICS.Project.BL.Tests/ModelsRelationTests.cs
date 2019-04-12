@@ -27,7 +27,7 @@ namespace ICS.Project.BL.Tests
             var postModel = new PostModel
             {
                 Title = "Whoo",
-                AutorId = userModel.ID
+                AuthorId = userModel.ID
             };
 
             postModel = _fixture.PostsRepository.Add(postModel);

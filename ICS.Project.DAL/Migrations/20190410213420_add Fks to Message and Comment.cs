@@ -30,13 +30,13 @@ namespace ICS.Project.BL.Migrations
                 newName: "IX_Comments_PostId");
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "AutorId",
+                name: "AuthorId",
                 table: "Posts",
                 nullable: true,
                 oldClrType: typeof(Guid));
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "AutorId",
+                name: "AuthorId",
                 table: "Comments",
                 nullable: true,
                 oldClrType: typeof(Guid));
@@ -44,7 +44,7 @@ namespace ICS.Project.BL.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Comments_Users_AutorId",
                 table: "Comments",
-                column: "AutorId",
+                column: "AuthorId",
                 principalTable: "Users",
                 principalColumn: "ID",
                 onDelete: ReferentialAction.Restrict);
@@ -60,7 +60,7 @@ namespace ICS.Project.BL.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_Users_AutorId",
                 table: "Posts",
-                column: "AutorId",
+                column: "AuthorId",
                 principalTable: "Users",
                 principalColumn: "ID",
                 onDelete: ReferentialAction.Restrict);
@@ -91,14 +91,14 @@ namespace ICS.Project.BL.Migrations
                 newName: "IX_Comments_PostEntityID");
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "AutorId",
+                name: "AuthorId",
                 table: "Posts",
                 nullable: false,
                 oldClrType: typeof(Guid),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "AutorId",
+                name: "AuthorId",
                 table: "Comments",
                 nullable: false,
                 oldClrType: typeof(Guid),
@@ -107,7 +107,7 @@ namespace ICS.Project.BL.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Comments_Users_AutorId",
                 table: "Comments",
-                column: "AutorId",
+                column: "AuthorId",
                 principalTable: "Users",
                 principalColumn: "ID",
                 onDelete: ReferentialAction.Cascade);
@@ -123,7 +123,7 @@ namespace ICS.Project.BL.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_Users_AutorId",
                 table: "Posts",
-                column: "AutorId",
+                column: "AuthorId",
                 principalTable: "Users",
                 principalColumn: "ID",
                 onDelete: ReferentialAction.Cascade);

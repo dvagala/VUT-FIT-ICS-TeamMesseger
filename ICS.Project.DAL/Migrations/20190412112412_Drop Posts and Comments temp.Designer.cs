@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ICS.Project.BL.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    [Migration("20190412084930_remove msg text from user")]
-    partial class removemsgtextfromuser
+    [Migration("20190412112412_Drop Posts and Comments temp")]
+    partial class DropPostsandCommentstemp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,48 +20,6 @@ namespace ICS.Project.BL.Migrations
                 .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ICS.Project.DAL.Entities.CommentEntity", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid?>("AuthorId");
-
-                    b.Property<string>("MessageText");
-
-                    b.Property<Guid?>("PostId");
-
-                    b.Property<DateTime>("PublishDate");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AuthorId");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("ICS.Project.DAL.Entities.PostEntity", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid?>("AuthorId");
-
-                    b.Property<string>("MessageText");
-
-                    b.Property<DateTime>("PublishDate");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("Posts");
-                });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.TeamEntity", b =>
                 {
@@ -115,32 +73,14 @@ namespace ICS.Project.BL.Migrations
                     b.ToTable("UserInTeam");
                 });
 
-            modelBuilder.Entity("ICS.Project.DAL.Entities.CommentEntity", b =>
-                {
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
-
-                    b.HasOne("ICS.Project.DAL.Entities.PostEntity", "Post")
-                        .WithMany("Comments")
-                        .HasForeignKey("PostId");
-                });
-
-            modelBuilder.Entity("ICS.Project.DAL.Entities.PostEntity", b =>
-                {
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
-                });
-
             modelBuilder.Entity("ICS.Project.DAL.Entities.UserInTeamEntity", b =>
                 {
                     b.HasOne("ICS.Project.DAL.Entities.TeamEntity", "Team")
-                        .WithMany("UsersInTeams")
+                        .WithMany()
                         .HasForeignKey("TeamId");
 
                     b.HasOne("ICS.Project.DAL.Entities.UserEntity", "User")
-                        .WithMany("UsersInTeams")
+                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618

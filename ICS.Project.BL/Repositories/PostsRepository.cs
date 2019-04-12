@@ -24,8 +24,8 @@ namespace ICS.Project.BL.Repositories
                 .CreateDbContext()
                 .Posts
                 .Where(s => s.ID == id)
-                .Include(s => s.Autor)
-                .Select(s => s.Autor)
+                .Include(s => s.Author)
+                .Select(s => s.Author)
                 .FirstOrDefault();
 
             return Mapper.MapUserModelFromEntity(postEntityWithAuthor);

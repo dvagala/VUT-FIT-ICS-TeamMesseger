@@ -4,7 +4,7 @@ namespace ICS.Project.DAL.Entities.Base
 {
     public interface IMessageEntity
     {
-        UserEntity Autor { get; }
+        UserEntity Author { get; }
         string MessageText { get; }
         DateTime PublishDate { get; }
     }

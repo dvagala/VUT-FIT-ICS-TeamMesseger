@@ -64,7 +64,7 @@ namespace ICS.Project.DAL.Tests
             PEntity.MessageText = "See you space cowboy!";
             PEntity.PublishDate = new DateTime(2018, 10, 10);
             PEntity.Title = "Accelerated spread of Weebs";
-            PEntity.AutorId = new Guid();
+            PEntity.AuthorId = new Guid();
 
 
             //Act

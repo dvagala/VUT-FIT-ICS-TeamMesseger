@@ -18,7 +18,7 @@ internal static class PostEntityComparer
             if (x.GetType() != y.GetType()) return false;
 
             return string.Equals(x.MessageText, y.MessageText) && Equals(x.PublishDate, y.PublishDate) &&
-                   string.Equals(x.Title, y.Title) && x.ID.Equals(y.ID) && x.AutorId.Equals(y.AutorId);
+                   string.Equals(x.Title, y.Title) && x.ID.Equals(y.ID) && x.AuthorId.Equals(y.AuthorId);
         }
 
         public int GetHashCode(PostEntity obj)

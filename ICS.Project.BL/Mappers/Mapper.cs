@@ -12,7 +12,7 @@ namespace ICS.Project.BL.Mappers
                 ID = model.ID,
                 MessageText = model.MessageText,
                 PublishDate = model.PublishDate,
-                AutorId = model.AutorId,
+                AuthorId = model.AuthorId,
                 PostId = model.PostId
             };
         }
@@ -24,7 +24,7 @@ namespace ICS.Project.BL.Mappers
                 ID = comment.ID,
                 MessageText = comment.MessageText,
                 PublishDate = comment.PublishDate,
-                AutorId = comment.AutorId,
+                AuthorId = comment.AuthorId,
                 PostId = comment.PostId
             };
         }
@@ -37,7 +37,7 @@ namespace ICS.Project.BL.Mappers
                 Title = model.Title,
                 MessageText = model.MessageText,
                 PublishDate = model.PublishDate,
-                AutorId = model.AutorId
+                AuthorId = model.AuthorId
             };
         }
 
@@ -49,7 +49,7 @@ namespace ICS.Project.BL.Mappers
                 Title = post.Title,
                 MessageText = post.MessageText,
                 PublishDate = post.PublishDate,
-                AutorId = post.AutorId
+                AuthorId = post.AuthorId
             };
         }
 

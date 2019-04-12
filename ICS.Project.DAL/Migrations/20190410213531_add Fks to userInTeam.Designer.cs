@@ -26,7 +26,7 @@ namespace ICS.Project.BL.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AutorId");
+                    b.Property<Guid?>("AuthorId");
 
                     b.Property<string>("MessageText");
 
@@ -36,7 +36,7 @@ namespace ICS.Project.BL.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AutorId");
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("PostId");
 
@@ -48,7 +48,7 @@ namespace ICS.Project.BL.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AutorId");
+                    b.Property<Guid?>("AuthorId");
 
                     b.Property<string>("MessageText");
 
@@ -58,7 +58,7 @@ namespace ICS.Project.BL.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AutorId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Posts");
                 });
@@ -119,9 +119,9 @@ namespace ICS.Project.BL.Migrations
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.CommentEntity", b =>
                 {
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Autor")
+                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Author")
                         .WithMany()
-                        .HasForeignKey("AutorId");
+                        .HasForeignKey("AuthorId");
 
                     b.HasOne("ICS.Project.DAL.Entities.PostEntity", "Post")
                         .WithMany("Comments")
@@ -130,9 +130,9 @@ namespace ICS.Project.BL.Migrations
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.PostEntity", b =>
                 {
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Autor")
+                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Author")
                         .WithMany()
-                        .HasForeignKey("AutorId");
+                        .HasForeignKey("AuthorId");
                 });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.UserInTeamEntity", b =>

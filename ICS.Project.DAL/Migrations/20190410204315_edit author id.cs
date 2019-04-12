@@ -42,7 +42,7 @@ namespace ICS.Project.BL.Migrations
             migrationBuilder.RenameColumn(
                 name: "AutorID",
                 table: "Posts",
-                newName: "AutorId");
+                newName: "AuthorId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_Posts_AutorID",
@@ -52,7 +52,7 @@ namespace ICS.Project.BL.Migrations
             migrationBuilder.RenameColumn(
                 name: "AutorID",
                 table: "Comments",
-                newName: "AutorId");
+                newName: "AuthorId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_Comments_AutorID",
@@ -60,14 +60,14 @@ namespace ICS.Project.BL.Migrations
                 newName: "IX_Comments_AutorId");
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "AutorId",
+                name: "AuthorId",
                 table: "Posts",
                 nullable: false,
                 oldClrType: typeof(Guid),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "AutorId",
+                name: "AuthorId",
                 table: "Comments",
                 nullable: false,
                 oldClrType: typeof(Guid),
@@ -76,7 +76,7 @@ namespace ICS.Project.BL.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Comments_Users_AutorId",
                 table: "Comments",
-                column: "AutorId",
+                column: "AuthorId",
                 principalTable: "Users",
                 principalColumn: "ID",
                 onDelete: ReferentialAction.Cascade);
@@ -84,7 +84,7 @@ namespace ICS.Project.BL.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_Users_AutorId",
                 table: "Posts",
-                column: "AutorId",
+                column: "AuthorId",
                 principalTable: "Users",
                 principalColumn: "ID",
                 onDelete: ReferentialAction.Cascade);
@@ -101,7 +101,7 @@ namespace ICS.Project.BL.Migrations
                 table: "Posts");
 
             migrationBuilder.RenameColumn(
-                name: "AutorId",
+                name: "AuthorId",
                 table: "Posts",
                 newName: "AutorID");
 
@@ -111,7 +111,7 @@ namespace ICS.Project.BL.Migrations
                 newName: "IX_Posts_AutorID");
 
             migrationBuilder.RenameColumn(
-                name: "AutorId",
+                name: "AuthorId",
                 table: "Comments",
                 newName: "AutorID");
 

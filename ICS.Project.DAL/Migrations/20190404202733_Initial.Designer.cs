@@ -113,14 +113,14 @@ namespace ICS.Project.BL.Migrations
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.CommentEntity", b =>
                 {
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Autor")
+                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Author")
                         .WithMany()
                         .HasForeignKey("AutorID");
                 });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.PostEntity", b =>
                 {
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Autor")
+                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Author")
                         .WithMany()
                         .HasForeignKey("AutorID");
 

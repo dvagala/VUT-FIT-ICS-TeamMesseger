@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ICS.Project.BL.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    [Migration("20190410213420_add Fks to Message and Comment")]
-    partial class addFkstoMessageandComment
+    [Migration("20190412110157_rename autor to author")]
+    partial class renameautortoauthor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,8 +86,6 @@ namespace ICS.Project.BL.Migrations
 
                     b.Property<DateTime>("LastActivity");
 
-                    b.Property<string>("MessageText");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("Password");
@@ -104,15 +102,15 @@ namespace ICS.Project.BL.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("TeamID");
+                    b.Property<Guid?>("TeamId");
 
-                    b.Property<Guid?>("UserID");
+                    b.Property<Guid?>("UserId");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("TeamID");
+                    b.HasIndex("TeamId");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserInTeam");
                 });
@@ -124,7 +122,7 @@ namespace ICS.Project.BL.Migrations
                         .HasForeignKey("AuthorId");
 
                     b.HasOne("ICS.Project.DAL.Entities.PostEntity", "Post")
-                        .WithMany("Comments")
+                        .WithMany()
                         .HasForeignKey("PostId");
                 });
 
@@ -138,12 +136,12 @@ namespace ICS.Project.BL.Migrations
             modelBuilder.Entity("ICS.Project.DAL.Entities.UserInTeamEntity", b =>
                 {
                     b.HasOne("ICS.Project.DAL.Entities.TeamEntity", "Team")
-                        .WithMany("UsersInTeams")
-                        .HasForeignKey("TeamID");
+                        .WithMany()
+                        .HasForeignKey("TeamId");
 
                     b.HasOne("ICS.Project.DAL.Entities.UserEntity", "User")
-                        .WithMany("UsersInTeams")
-                        .HasForeignKey("UserID");
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
