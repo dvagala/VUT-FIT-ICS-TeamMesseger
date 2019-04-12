@@ -4,14 +4,16 @@ using ICS.Project.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ICS.Project.BL.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    partial class DataDBContextModelSnapshot : ModelSnapshot
+    [Migration("20190412084930_remove msg text from user")]
+    partial class removemsgtextfromuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,7 +122,7 @@ namespace ICS.Project.BL.Migrations
                         .HasForeignKey("AutorId");
 
                     b.HasOne("ICS.Project.DAL.Entities.PostEntity", "Post")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("PostId");
                 });
 
@@ -134,11 +136,11 @@ namespace ICS.Project.BL.Migrations
             modelBuilder.Entity("ICS.Project.DAL.Entities.UserInTeamEntity", b =>
                 {
                     b.HasOne("ICS.Project.DAL.Entities.TeamEntity", "Team")
-                        .WithMany()
+                        .WithMany("UsersInTeams")
                         .HasForeignKey("TeamId");
 
                     b.HasOne("ICS.Project.DAL.Entities.UserEntity", "User")
-                        .WithMany()
+                        .WithMany("UsersInTeams")
                         .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618

@@ -1,29 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ICS.Project.BL.Mapper;
+using ICS.Project.BL.Mappers;
 using ICS.Project.BL.Models;
 using ICS.Project.DAL;
 using ICS.Project.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ICS.Project.BL.Repositories
 {
     public class TeamsRepository : ITeamsRepository
     {
         private readonly IDbContextFactory dbContextFactory;
-        private readonly IMapper mapper;
 
-        public TeamsRepository(IDbContextFactory dbContextFactory, IMapper mapper)
+        public TeamsRepository(IDbContextFactory dbContextFactory)
         {
             this.dbContextFactory = dbContextFactory;
-            this.mapper = mapper;
+        }
+
+        public IEnumerable<UserModel> GetTeamMembers(Guid teamId)
+        {
+            var t = dbContextFactory.CreateDbContext()
+                .UserInTeam
+                .Where(s => s.TeamId == teamId)
+                .Include(s => s.User)
+                .Select(s => Mapper.MapUserModelFromEntity(s.User));
+
+            return t;
+        }
+
+        public void AddUserToTeam(Guid userId, Guid teamId)
+        {
+            using (var dbContext = dbContextFactory.CreateDbContext())
+            {
+                var entity = new UserInTeamEntity
+                {
+                    UserId = userId,
+                    TeamId = teamId
+                };
+
+                dbContext.UserInTeam.Add(entity);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void RemoveUserFromTeam(Guid userId, Guid teamId)
+        {
+            var userInTeamId = dbContextFactory.CreateDbContext()
+                .UserInTeam
+                .Where(s => s.TeamId == teamId && s.UserId == userId)
+                .Select(s => s.ID)
+                .FirstOrDefault();
+
+            using (var dbContext = dbContextFactory.CreateDbContext())
+            {
+                var userInTeamEntity = new UserInTeamEntity
+                {
+                    ID = userInTeamId
+                };
+                dbContext.UserInTeam.Attach(userInTeamEntity);
+                dbContext.UserInTeam.Remove(userInTeamEntity);
+                dbContext.SaveChanges();
+            }
         }
 
         public IEnumerable<TeamModel> GetAll()
         {
             return dbContextFactory.CreateDbContext()
                 .Teams
-                .Select(mapper.MapTeamModelFromEntity);
+                .Select(Mapper.MapTeamModelFromEntity);
         }
 
         public TeamModel GetById(Guid id)
@@ -32,14 +77,14 @@ namespace ICS.Project.BL.Repositories
                 .CreateDbContext()
                 .Teams
                 .FirstOrDefault(t => t.ID == id);
-            return foundEntity == null ? null : mapper.MapTeamModelFromEntity(foundEntity);
+            return foundEntity == null ? null : Mapper.MapTeamModelFromEntity(foundEntity);
         }
 
         public void Update(TeamModel post)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = mapper.MapTeamModelToEntity(post);
+                var entity = Mapper.MapTeamModelToEntity(post);
                 dbContext.Teams.Update(entity);
                 dbContext.SaveChanges();
             }
@@ -49,10 +94,10 @@ namespace ICS.Project.BL.Repositories
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = mapper.MapTeamModelToEntity(post);
+                var entity = Mapper.MapTeamModelToEntity(post);
                 dbContext.Teams.Add(entity);
                 dbContext.SaveChanges();
-                return mapper.MapTeamModelFromEntity(entity);
+                return Mapper.MapTeamModelFromEntity(entity);
             }
         }
 

@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using ICS.Project.DAL.Entities;
 
 internal static class UserEntityComparer
@@ -19,7 +17,7 @@ internal static class UserEntityComparer
 
             if (x.GetType() != y.GetType()) return false;
 
-            return x.Teams.SequenceEqual(y.Teams) && x.Teams.Count == y.Teams.Count && string.Equals(x.Name, y.Name) &&
+            return string.Equals(x.Name, y.Name) && x.ID.Equals(y.ID) &&
                    string.Equals(x.Surname, y.Surname) && string.Equals(x.Email, y.Email) && Equals(
                        x.LastActivity.ToString("MM/dd/yyyy HH:mm:ss"), y.LastActivity.ToString("MM/dd/yyyy HH:mm:ss"));
         }
@@ -28,8 +26,7 @@ internal static class UserEntityComparer
         {
             unchecked
             {
-                var hashCode = obj.Teams != null ? obj.Teams.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (obj.Name != null ? obj.Name.GetHashCode() : 0);
+                var hashCode = obj.Name != null ? obj.Name.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ (obj.Surname != null ? obj.Surname.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (obj.Email != null ? obj.Email.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (obj.Password != null ? obj.Password.GetHashCode() : 0);

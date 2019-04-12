@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ICS.Project.BL.Mapper;
+using ICS.Project.BL.Mappers;
 using ICS.Project.BL.Models;
 using ICS.Project.DAL;
 using ICS.Project.DAL.Entities;
@@ -11,19 +11,17 @@ namespace ICS.Project.BL.Repositories
     public class CommentsRepository : ICommentsRepository
     {
         private readonly IDbContextFactory dbContextFactory;
-        private readonly IMapper mapper;
 
-        public CommentsRepository(IDbContextFactory dbContextFactory, IMapper mapper)
+        public CommentsRepository(IDbContextFactory dbContextFactory)
         {
             this.dbContextFactory = dbContextFactory;
-            this.mapper = mapper;
         }
 
         public IEnumerable<CommentModel> GetAll()
         {
             return dbContextFactory.CreateDbContext()
                 .Comments
-                .Select(mapper.MapCommentModelFromEntity);
+                .Select(Mapper.MapCommentModelFromEntity);
         }
 
         public CommentModel GetById(Guid id)
@@ -32,14 +30,14 @@ namespace ICS.Project.BL.Repositories
                 .CreateDbContext()
                 .Comments
                 .FirstOrDefault(t => t.ID == id);
-            return foundEntity == null ? null : mapper.MapCommentModelFromEntity(foundEntity);
+            return foundEntity == null ? null : Mapper.MapCommentModelFromEntity(foundEntity);
         }
 
         public void Update(CommentModel comment)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = mapper.MapCommentModelToEntity(comment);
+                var entity = Mapper.MapCommentModelToEntity(comment);
                 dbContext.Comments.Update(entity);
                 dbContext.SaveChanges();
             }
@@ -49,10 +47,10 @@ namespace ICS.Project.BL.Repositories
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = mapper.MapCommentModelToEntity(comment);
+                var entity = Mapper.MapCommentModelToEntity(comment);
                 dbContext.Comments.Add(entity);
                 dbContext.SaveChanges();
-                return mapper.MapCommentModelFromEntity(entity);
+                return Mapper.MapCommentModelFromEntity(entity);
             }
         }
 

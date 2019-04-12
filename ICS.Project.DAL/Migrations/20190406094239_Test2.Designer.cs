@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ICS.Project.DAL.Migrations
+namespace ICS.Project.BL.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
     [Migration("20190406094239_Test2")]

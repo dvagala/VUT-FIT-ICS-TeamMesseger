@@ -6,6 +6,7 @@ namespace ICS.Project.BL.Repositories
 {
     public interface IUsersRepository
     {
+        IEnumerable<TeamModel> GetUserTeams(Guid userId);
         IEnumerable<UserModel> GetAll();
         UserModel GetById(Guid id);
         void Update(UserModel post);

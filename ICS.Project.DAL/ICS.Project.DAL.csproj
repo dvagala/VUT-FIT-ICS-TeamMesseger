@@ -5,6 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190410205404_add more Fks.cs" />
+    <Compile Remove="Migrations\20190410205404_add more Fks.Designer.cs" />
+    <Compile Remove="Migrations\20190410210032_comment FK as nullable.cs" />
+    <Compile Remove="Migrations\20190410210032_comment FK as nullable.Designer.cs" />
+    <Compile Remove="Migrations\20190410210239_FK nullable everywhere.cs" />
+    <Compile Remove="Migrations\20190410210239_FK nullable everywhere.Designer.cs" />
+    <Compile Remove="Migrations\20190410211146_Restrict delete cascade on comments.cs" />
+    <Compile Remove="Migrations\20190410211146_Restrict delete cascade on comments.Designer.cs" />
+    <Compile Remove="Migrations\20190410211956_test3.cs" />
+    <Compile Remove="Migrations\20190410211956_test3.Designer.cs" />
+    <Compile Remove="Migrations\20190410212115_test4.cs" />
+    <Compile Remove="Migrations\20190410212115_test4.Designer.cs" />
+    <Compile Remove="Migrations\20190410212208_test5.cs" />
+    <Compile Remove="Migrations\20190410212208_test5.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.3" />

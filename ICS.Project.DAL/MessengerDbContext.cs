@@ -17,6 +17,7 @@ namespace ICS.Project.DAL
         public DbSet<PostEntity> Posts { get; set; }
         public DbSet<TeamEntity> Teams { get; set; }
         public DbSet<UserEntity> Users { get; set; }
+        public DbSet<UserInTeamEntity> UserInTeam { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

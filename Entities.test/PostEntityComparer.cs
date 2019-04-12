@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using ICS.Project.DAL.Entities;
 
 internal static class PostEntityComparer
@@ -18,16 +17,15 @@ internal static class PostEntityComparer
 
             if (x.GetType() != y.GetType()) return false;
 
-            return x.Comments.SequenceEqual(y.Comments) && x.Comments.Count == y.Comments.Count &&
-                   string.Equals(x.Title, y.Title) && x.ID.Equals(y.ID);
+            return string.Equals(x.MessageText, y.MessageText) && Equals(x.PublishDate, y.PublishDate) &&
+                   string.Equals(x.Title, y.Title) && x.ID.Equals(y.ID) && x.AutorId.Equals(y.AutorId);
         }
 
         public int GetHashCode(PostEntity obj)
         {
             unchecked
             {
-                var hashCode = obj.Comments != null ? obj.Comments.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (obj.Title != null ? obj.Title.GetHashCode() : 0);
+                var hashCode = obj.Title != null ? obj.Title.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ obj.ID.GetHashCode();
                 return hashCode;
             }

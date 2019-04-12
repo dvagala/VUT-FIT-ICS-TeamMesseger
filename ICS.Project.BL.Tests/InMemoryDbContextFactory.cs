@@ -8,7 +8,7 @@ namespace ICS.Project.BL.Tests
         public MessengerDbContext CreateDbContext()
         {
             var optionsBuilder = new DbContextOptionsBuilder<MessengerDbContext>();
-            optionsBuilder.UseInMemoryDatabase("TodoDbName");
+            optionsBuilder.UseInMemoryDatabase("MessengerDb");
             return new MessengerDbContext(optionsBuilder.Options);
         }
     }

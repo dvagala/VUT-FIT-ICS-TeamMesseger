@@ -1,12 +1,11 @@
 ﻿using System;
-using ICS.Project.DAL;
 using Microsoft.EntityFrameworkCore;
 
-namespace Project.DAL.Tests
+namespace ICS.Project.DAL.Tests
 {
-    public class MessengerDbContextTestsClassSetupFixture : IDisposable
+    public class EntitiesTestsFixture : IDisposable
     {
-        public MessengerDbContextTestsClassSetupFixture()
+        public EntitiesTestsFixture()
         {
             MessengerDbContextSUT = CreateMessengerDbContext();
         }
@@ -26,7 +25,7 @@ namespace Project.DAL.Tests
         private DbContextOptions<MessengerDbContext> CreateDbContextOptions()
         {
             var contextOptionsBuilder = new DbContextOptionsBuilder<MessengerDbContext>();
-            contextOptionsBuilder.UseInMemoryDatabase("Messenger");
+            contextOptionsBuilder.UseInMemoryDatabase("MessengerDb");
             return contextOptionsBuilder.Options;
         }
     }

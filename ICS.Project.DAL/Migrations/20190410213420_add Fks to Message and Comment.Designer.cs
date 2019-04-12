@@ -4,14 +4,16 @@ using ICS.Project.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ICS.Project.BL.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    partial class DataDBContextModelSnapshot : ModelSnapshot
+    [Migration("20190410213420_add Fks to Message and Comment")]
+    partial class addFkstoMessageandComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,6 +86,8 @@ namespace ICS.Project.BL.Migrations
 
                     b.Property<DateTime>("LastActivity");
 
+                    b.Property<string>("MessageText");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("Password");
@@ -100,15 +104,15 @@ namespace ICS.Project.BL.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("TeamId");
+                    b.Property<Guid?>("TeamID");
 
-                    b.Property<Guid?>("UserId");
+                    b.Property<Guid?>("UserID");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("TeamID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserID");
 
                     b.ToTable("UserInTeam");
                 });
@@ -120,7 +124,7 @@ namespace ICS.Project.BL.Migrations
                         .HasForeignKey("AutorId");
 
                     b.HasOne("ICS.Project.DAL.Entities.PostEntity", "Post")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("PostId");
                 });
 
@@ -134,12 +138,12 @@ namespace ICS.Project.BL.Migrations
             modelBuilder.Entity("ICS.Project.DAL.Entities.UserInTeamEntity", b =>
                 {
                     b.HasOne("ICS.Project.DAL.Entities.TeamEntity", "Team")
-                        .WithMany()
-                        .HasForeignKey("TeamId");
+                        .WithMany("UsersInTeams")
+                        .HasForeignKey("TeamID");
 
                     b.HasOne("ICS.Project.DAL.Entities.UserEntity", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithMany("UsersInTeams")
+                        .HasForeignKey("UserID");
                 });
 #pragma warning restore 612, 618
         }

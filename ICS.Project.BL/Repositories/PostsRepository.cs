@@ -1,29 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ICS.Project.BL.Mapper;
+using ICS.Project.BL.Mappers;
 using ICS.Project.BL.Models;
 using ICS.Project.DAL;
 using ICS.Project.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ICS.Project.BL.Repositories
 {
     public class PostsRepository : IPostsRepository
     {
         private readonly IDbContextFactory dbContextFactory;
-        private readonly IMapper mapper;
 
-        public PostsRepository(IDbContextFactory dbContextFactory, IMapper mapper)
+        public PostsRepository(IDbContextFactory dbContextFactory)
         {
             this.dbContextFactory = dbContextFactory;
-            this.mapper = mapper;
+        }
+
+        public UserModel GetAuthorOfPost(Guid id)
+        {
+            var postEntityWithAuthor = dbContextFactory
+                .CreateDbContext()
+                .Posts
+                .Where(s => s.ID == id)
+                .Include(s => s.Autor)
+                .Select(s => s.Autor)
+                .FirstOrDefault();
+
+            return Mapper.MapUserModelFromEntity(postEntityWithAuthor);
         }
 
         public IEnumerable<PostModel> GetAll()
         {
             return dbContextFactory.CreateDbContext()
                 .Posts
-                .Select(mapper.MapPostModelFromEntity);
+                .Select(Mapper.MapPostModelFromEntity);
         }
 
         public PostModel GetById(Guid id)
@@ -32,14 +44,14 @@ namespace ICS.Project.BL.Repositories
                 .CreateDbContext()
                 .Posts
                 .FirstOrDefault(t => t.ID == id);
-            return foundEntity == null ? null : mapper.MapPostModelFromEntity(foundEntity);
+            return foundEntity == null ? null : Mapper.MapPostModelFromEntity(foundEntity);
         }
 
         public void Update(PostModel post)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = mapper.MapPostModelToEntity(post);
+                var entity = Mapper.MapPostModelToEntity(post);
                 dbContext.Posts.Update(entity);
                 dbContext.SaveChanges();
             }
@@ -49,10 +61,10 @@ namespace ICS.Project.BL.Repositories
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = mapper.MapPostModelToEntity(post);
+                var entity = Mapper.MapPostModelToEntity(post);
                 dbContext.Posts.Add(entity);
                 dbContext.SaveChanges();
-                return mapper.MapPostModelFromEntity(entity);
+                return Mapper.MapPostModelFromEntity(entity);
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ICS.Project.DAL.Migrations
+namespace ICS.Project.BL.Migrations
 {
     public partial class Fixpassword : Migration
     {
