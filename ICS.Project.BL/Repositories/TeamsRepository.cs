@@ -20,13 +20,13 @@ namespace ICS.Project.BL.Repositories
 
         public IEnumerable<UserModel> GetTeamMembers(Guid teamId)
         {
-            var t = dbContextFactory.CreateDbContext()
+            var members = dbContextFactory.CreateDbContext()
                 .UserInTeam
                 .Where(s => s.TeamId == teamId)
                 .Include(s => s.User)
                 .Select(s => Mapper.MapUserModelFromEntity(s.User));
 
-            return t;
+            return members;
         }
 
         public void AddUserToTeam(Guid userId, Guid teamId)
@@ -64,11 +64,11 @@ namespace ICS.Project.BL.Repositories
             }
         }
 
-        public IEnumerable<TeamModel> GetAll()
+        public IList<TeamModel> GetAll()
         {
             return dbContextFactory.CreateDbContext()
                 .Teams
-                .Select(Mapper.MapTeamModelFromEntity);
+                .Select(Mapper.MapTeamModelFromEntity).ToList();
         }
 
         public TeamModel GetById(Guid id)

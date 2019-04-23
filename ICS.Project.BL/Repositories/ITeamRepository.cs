@@ -9,7 +9,7 @@ namespace ICS.Project.BL.Repositories
         IEnumerable<UserModel> GetTeamMembers(Guid teamId);
         void AddUserToTeam(Guid userId, Guid teamId);
         void RemoveUserFromTeam(Guid userId, Guid teamId);
-        IEnumerable<TeamModel> GetAll();
+        IList<TeamModel> GetAll();
         TeamModel GetById(Guid id);
         void Update(TeamModel post);
         TeamModel Add(TeamModel post);

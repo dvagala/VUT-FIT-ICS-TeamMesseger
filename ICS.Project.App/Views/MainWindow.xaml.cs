@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ICS.Project.App
+namespace ICS.Project.App.Views
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
