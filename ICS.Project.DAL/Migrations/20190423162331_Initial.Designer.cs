@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ICS.Project.BL.Migrations
+namespace ICS.Project.DAL.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    [Migration("20190410203347_Add FK to messageEnitityBase")]
-    partial class AddFKtomessageEnitityBase
+    [Migration("20190423162331_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,23 +26,19 @@ namespace ICS.Project.BL.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AutorID");
+                    b.Property<Guid?>("AuthorId");
 
                     b.Property<string>("MessageText");
 
-                    b.Property<Guid?>("PostEntityID");
+                    b.Property<Guid?>("PostId");
 
                     b.Property<DateTime>("PublishDate");
 
-                    b.Property<Guid?>("UserEntity");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("AutorID");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("PostEntityID");
-
-                    b.HasIndex("UserEntity");
+                    b.HasIndex("PostId");
 
                     b.ToTable("Comments");
                 });
@@ -52,7 +48,7 @@ namespace ICS.Project.BL.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AutorID");
+                    b.Property<Guid?>("AuthorId");
 
                     b.Property<string>("MessageText");
 
@@ -60,13 +56,9 @@ namespace ICS.Project.BL.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<Guid?>("UserEntity");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("AutorID");
-
-                    b.HasIndex("UserEntity");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Posts");
                 });
@@ -94,8 +86,6 @@ namespace ICS.Project.BL.Migrations
 
                     b.Property<DateTime>("LastActivity");
 
-                    b.Property<string>("MessageText");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("Password");
@@ -112,15 +102,15 @@ namespace ICS.Project.BL.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("TeamID");
+                    b.Property<Guid?>("TeamId");
 
-                    b.Property<Guid?>("UserID");
+                    b.Property<Guid?>("UserId");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("TeamID");
+                    b.HasIndex("TeamId");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserInTeam");
                 });
@@ -129,37 +119,29 @@ namespace ICS.Project.BL.Migrations
                 {
                     b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Author")
                         .WithMany()
-                        .HasForeignKey("AutorID");
+                        .HasForeignKey("AuthorId");
 
-                    b.HasOne("ICS.Project.DAL.Entities.PostEntity")
-                        .WithMany("Comments")
-                        .HasForeignKey("PostEntityID");
-
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "AuthorId")
+                    b.HasOne("ICS.Project.DAL.Entities.PostEntity", "Post")
                         .WithMany()
-                        .HasForeignKey("UserEntity");
+                        .HasForeignKey("PostId");
                 });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.PostEntity", b =>
                 {
                     b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Author")
                         .WithMany()
-                        .HasForeignKey("AutorID");
-
-                    b.HasOne("ICS.Project.DAL.Entities.UserEntity", "AuthorId")
-                        .WithMany()
-                        .HasForeignKey("UserEntity");
+                        .HasForeignKey("AuthorId");
                 });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.UserInTeamEntity", b =>
                 {
                     b.HasOne("ICS.Project.DAL.Entities.TeamEntity", "Team")
-                        .WithMany("UsersInTeams")
-                        .HasForeignKey("TeamID");
+                        .WithMany()
+                        .HasForeignKey("TeamId");
 
                     b.HasOne("ICS.Project.DAL.Entities.UserEntity", "User")
-                        .WithMany("UsersInTeams")
-                        .HasForeignKey("UserID");
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
