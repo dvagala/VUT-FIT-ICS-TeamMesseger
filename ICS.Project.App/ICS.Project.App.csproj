@@ -143,9 +143,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converters\VisibilityToCollapseConverter.cs" />
+    <Compile Include="Converters\ToggleButtonToChangeTextToSaveConverter.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
+    <Compile Include="ViewModels\TeamDetailViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\TeamDetailView.xaml.cs">
+      <DependentUpon>TeamDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TeamListView.xaml.cs">
       <DependentUpon>TeamListView.xaml</DependentUpon>
     </Compile>
@@ -164,6 +170,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\TeamDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\TeamListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

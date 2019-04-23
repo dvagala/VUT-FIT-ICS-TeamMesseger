@@ -2,11 +2,11 @@
 namespace ICS.Project.App.Views
 {
     /// <summary>
-    /// Interaction logic for TeamDetailView.xaml
+    /// Interaction logic for TeamListView.xaml
     /// </summary>
-    public partial class TeamDetailView
+    public partial class TeamListView
     {
-        public TeamDetailView()
+        public TeamListView()
         {
             InitializeComponent();
         }

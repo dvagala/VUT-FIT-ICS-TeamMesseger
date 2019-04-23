@@ -9,6 +9,7 @@ namespace ICS.Project.App.ViewModels
         private readonly ITeamsRepository teamRepository;
 
         public TeamsListViewModel TeamsListViewModel => new TeamsListViewModel(teamRepository);
+        public TeamDetailViewModel TeamDetailViewModel => new TeamDetailViewModel(teamRepository);
 
         public ViewModelLocator()
         {

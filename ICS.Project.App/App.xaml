@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ICS.Project.App"
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
+             xmlns:converters="clr-namespace:ICS.Project.App.Converters"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <viewModels:ViewModelLocator x:Key="ViewModelLocator"/>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:VisibilityToCollapseConverter x:Key="VisibilityToCollapseConverter"/>
+            <converters:ToggleButtonToChangeTextToSaveConverter x:Key="ToggleButtonToChangeTextToSaveConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
