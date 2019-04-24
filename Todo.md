@@ -1,6 +1,9 @@
 ## Todo
 
 
+**Hodiť do šprintu tieto veci**
+
+
 **Testy**
 
     Spraviť testy na nové veci, čo pribudli/pribudnú
