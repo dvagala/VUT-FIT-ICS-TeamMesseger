@@ -14,6 +14,17 @@ namespace ICS.Project.App.ViewModels
         private readonly ITeamsRepository _teamsRepository;
         private readonly IMediator _mediator;
 
+        private bool _isDescriptionInEditMode;
+        public bool IsDescriptionInEditMode
+        {
+            get => _isDescriptionInEditMode;
+            set
+            {
+                _isDescriptionInEditMode = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         private TeamModel _team;
         public TeamModel Team
@@ -28,39 +39,46 @@ namespace ICS.Project.App.ViewModels
 
 
         public ICommand EditDescriptionCommand { get; set; }
+        public ICommand SaveDescriptionCommand { get; set; }
 
 
         public TeamDetailViewModel(ITeamsRepository teamsRepository, IMediator mediator)
         {
-            EditDescriptionCommand = new RelayCommand(SaveDescription, CanSaveDescription);
+            EditDescriptionCommand = new RelayCommand(EditDescription);
+            SaveDescriptionCommand = new RelayCommand(SaveDescription, CanSaveDescription);
 
             _mediator = mediator;
             _teamsRepository = teamsRepository;
             _mediator.Register<SelectedTeamMessage>(TeamSelected);
 
             Team = _teamsRepository.GetFirst();
-
+            IsDescriptionInEditMode = false;
         }
 
         public void Load()
         {
         }
 
+        public void EditDescription()
+        {
+            IsDescriptionInEditMode = true;
+        }
 
         public void SaveDescription()
         {
-            Load();
-
+            _teamsRepository.Update(Team);
+            IsDescriptionInEditMode = false;
         }
 
         private bool CanSaveDescription()
         {
-            return true;
+            return Team != null && !string.IsNullOrWhiteSpace(Team.Description);
         }
 
         private void TeamSelected( SelectedTeamMessage selectedTeamMessage)
         {            
             Team = _teamsRepository.GetById(selectedTeamMessage.Id);
+            IsDescriptionInEditMode = false;
         }
     }
 }

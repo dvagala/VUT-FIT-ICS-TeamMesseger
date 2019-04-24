@@ -149,8 +149,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Converters\VisibilityToCollapseConverter.cs" />
     <Compile Include="Converters\ToggleButtonToChangeTextToSaveConverter.cs" />
+    <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\VisibilityToCollapseConverter.cs" />
+    <Compile Include="Converters\InvertBoolConvertor.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\TeamDetailViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
