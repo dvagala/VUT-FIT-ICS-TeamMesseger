@@ -11,7 +11,7 @@
 
     <StackPanel Grid.Row="1" Orientation="Vertical">
 
-        <Label Content="Team1" />
+        <Label Content= "{Binding Team.Name}"/>
 
         <TextBlock Visibility="{Binding ElementName=DescriptionTextBox, Path=IsVisible, Converter={StaticResource VisibilityToCollapseConverter}}" TextWrapping="Wrap" Text="This is description asdfasdfasdf asdfasdfasdf asdf asdf asd asd asd  asdf as " />
         <TextBox x:Name="DescriptionTextBox" Visibility="{Binding ElementName=EditDescription, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Text="This is description asdfasdfasdf asdfasdfasdf asdf asdf asd asd asd  asdf as " />

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:ICS.Project.App.Views"
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
              mc:Ignorable="d" 
@@ -11,14 +12,20 @@
 
     <StackPanel Grid.Row="1" Orientation="Vertical">
 
-        <ListBox ItemsSource="{Binding Teams }">
+        <ListBox x:Name="TeamsListBox" ItemsSource="{Binding Teams }"  SelectedIndex="0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding TeamSelectedCommand}"
+                                           CommandParameter="{Binding ElementName=TeamsListBox, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
         <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
             <TextBox Text="{Binding NewTeam.Name, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="0,0,5,0" TextWrapping="Wrap" Width="80" />
             <Button Content="+" Command="{Binding NewTeamAddedCommand}" Width="30"/>

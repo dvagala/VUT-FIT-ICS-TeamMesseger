@@ -6,32 +6,34 @@ using ICS.Project.BL.Models.Base;
 
 namespace ICS.Project.BL.Models
 {
-    public class TeamModel : ModelBase, INotifyPropertyChanged
+    public class TeamModel : ModelBase//, INotifyPropertyChanged
     {
-        private string _name;
+//        private string _name;
+//
+//        public string Name
+//        {
+//            get => _name;
+//            set
+//            {
+//                if (value == _name) return;
+//                _name = value;
+//                OnPropertyChanged(nameof(Name));
+//            }
+//        }
 
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                if (value == _name) return;
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
 
+        public string Name { get; set; }
 
         public string Description { get; set; }
         
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+//        public event PropertyChangedEventHandler PropertyChanged;
+//
+//        [NotifyPropertyChangedInvocator]
+//        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+//        {
+//            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+//        }
     }
 }

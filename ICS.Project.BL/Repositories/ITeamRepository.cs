@@ -10,6 +10,7 @@ namespace ICS.Project.BL.Repositories
         void AddUserToTeam(Guid userId, Guid teamId);
         void RemoveUserFromTeam(Guid userId, Guid teamId);
         IList<TeamModel> GetAll();
+        TeamModel GetFirst();
         TeamModel GetById(Guid id);
         void Update(TeamModel post);
         TeamModel Add(TeamModel post);

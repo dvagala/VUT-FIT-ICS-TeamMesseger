@@ -71,6 +71,16 @@ namespace ICS.Project.BL.Repositories
                 .Select(Mapper.MapTeamModelFromEntity).ToList();
         }
 
+
+        public TeamModel GetFirst()
+        {
+            var foundEntity = dbContextFactory
+                .CreateDbContext()
+                .Teams
+                .FirstOrDefault();
+            return foundEntity == null ? null : Mapper.MapTeamModelFromEntity(foundEntity);
+        }
+
         public TeamModel GetById(Guid id)
         {
             var foundEntity = dbContextFactory
