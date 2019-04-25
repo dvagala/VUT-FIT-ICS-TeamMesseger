@@ -1,0 +1,20 @@
+﻿<local:UserControlCustom x:Class="ICS.Project.App.Views.LoginScreenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:ICS.Project.App.Views"
+             xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModels:TeamsListViewModel}"
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=TeamsListViewModel}">
+
+    <StackPanel Grid.Row="1" Orientation="Vertical">
+        <Label Content="Team messenger" HorizontalAlignment="Center"/>
+        <TextBox Width="200" Margin="5" />
+        <TextBox Width="200" Margin="5" />
+        <Button Content="Login" Margin="5"/>
+        <Button Content="Create a new account" Margin="5"/>
+    </StackPanel>
+</local:UserControlCustom>

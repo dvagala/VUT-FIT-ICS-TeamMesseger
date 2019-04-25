@@ -46,21 +46,21 @@ namespace ICS.Project.BL.Repositories
             return foundEntity == null ? null : Mapper.MapUserModelFromEntity(foundEntity);
         }
 
-        public void Update(UserModel post)
+        public void Update(UserModel user)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = Mapper.MapUserModelToEntity(post);
+                var entity = Mapper.MapUserModelToEntity(user);
                 dbContext.Users.Update(entity);
                 dbContext.SaveChanges();
             }
         }
 
-        public UserModel Add(UserModel post)
+        public UserModel Add(UserModel user)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = Mapper.MapUserModelToEntity(post);
+                var entity = Mapper.MapUserModelToEntity(user);
                 dbContext.Users.Add(entity);
                 dbContext.SaveChanges();
                 return Mapper.MapUserModelFromEntity(entity);
@@ -71,12 +71,12 @@ namespace ICS.Project.BL.Repositories
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var post = new UserEntity
+                var user = new UserEntity
                 {
                     ID = id
                 };
-                dbContext.Users.Attach(post);
-                dbContext.Users.Remove(post);
+                dbContext.Users.Attach(user);
+                dbContext.Users.Remove(user);
                 dbContext.SaveChanges();
             }
         }

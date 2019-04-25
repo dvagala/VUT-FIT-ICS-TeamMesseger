@@ -11,7 +11,7 @@ using ICS.Project.BL.Services;
 
 namespace ICS.Project.App.ViewModels
 {
-    public class TeamsListViewModel : ViewModelBase, IViewModel
+    public class LoginScreenViewModel : ViewModelBase, IViewModel
     {
         private readonly ITeamsRepository _teamsRepository;
         private readonly IMediator _mediator;
@@ -33,10 +33,8 @@ namespace ICS.Project.App.ViewModels
         public ICommand NewTeamAddedCommand { get; set; }
         public ICommand TeamSelectedCommand { get; set; }
 
-        public string Mock { get; set; }
 
-
-        public TeamsListViewModel(ITeamsRepository teamsRepository, IMediator mediator)
+        public LoginScreenViewModel(ITeamsRepository teamsRepository, IMediator mediator)
         {
             NewTeamAddedCommand = new RelayCommand(AddNewTeam, CanAddNewTeam);
             TeamSelectedCommand = new RelayCommand<TeamModel>(TeamSelected);
@@ -45,13 +43,6 @@ namespace ICS.Project.App.ViewModels
             _teamsRepository = teamsRepository;
 
             NewTeam = new TeamModel();
-
-            PasswordHelper passwordHelper = new PasswordHelper();
-            UserModel user = passwordHelper.AddEncryptedPasswordToUserModel("password");
-            bool correct = passwordHelper.IsPasswordCorrect("password", null, null, 10000);
-
-            Mock = "IsPassCorrect: ";
-            Mock += correct.ToString();
         }
 
         public void Load()

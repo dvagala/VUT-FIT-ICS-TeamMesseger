@@ -7,20 +7,50 @@
         xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
         xmlns:views="clr-namespace:ICS.Project.App.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance viewModels:ViewModelLocator}"
+        DataContext="{Binding Source={StaticResource ViewModelLocator}}">
+
+    <Window.Resources>
+        <DataTemplate x:Key="View1Template" DataType="{x:Type viewModels:ViewModelLocator}">
+            <views:LoginScreenView />
+        </DataTemplate>
+        <DataTemplate x:Key="View2Template" DataType="{x:Type viewModels:ViewModelLocator}">
+            <views:MessengerScreenView />
+        </DataTemplate>
+    </Window.Resources>
 
     <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="140" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <views:TeamListView Grid.Column="0" Grid.Row="1"/>
-        <views:TeamDetailView Grid.Column="2" Grid.Row="1"/>
+        <views:MessengerScreenView />
+        <!-- <ContentControl Content="{Binding }"> -->
+        <!--     <ContentControl.Style> -->
+        <!--         <Style TargetType="{x:Type ContentControl}"> -->
+        <!--             <Setter Property="ContentTemplate" Value="{StaticResource View1Template}" /> -->
+        <!--             <Style.Triggers> -->
+        <!--                 <DataTrigger Binding="{Binding CurrentViewState}" Value="2"> -->
+        <!--                     <Setter Property="ContentTemplate" Value="{StaticResource View1Template}" /> -->
+        <!--                 </DataTrigger> -->
+        <!--                 <DataTrigger Binding="{Binding CurrentViewState}" Value="1"> -->
+        <!--                     <Setter Property="ContentTemplate" Value="{StaticResource View2Template}" /> -->
+        <!--                 </DataTrigger> -->
+        <!--             </Style.Triggers> -->
+        <!--         </Style> -->
+        <!--     </ContentControl.Style> -->
+        <!-- </ContentControl> -->
+
+        <!-- <StackPanel> -->
+        <!--     <StackPanel.Style> -->
+        <!--         <Style TargetType="StackPanel"> -->
+        <!--             <Setter Property="Visibility" Value="Collapsed" /> -->
+        <!--             <Style.Triggers> -->
+        <!--                 <DataTrigger Binding="{Binding Path=CurrentViewState}" Value="1"> -->
+        <!--                     <Setter Property="Visibility" Value="Visible" /> -->
+        <!--                 </DataTrigger> -->
+        <!--             </Style.Triggers> -->
+        <!--         </Style> -->
+        <!--     </StackPanel.Style> -->
+        <!-- </StackPanel> -->
+
     </Grid>
 </Window>
     
