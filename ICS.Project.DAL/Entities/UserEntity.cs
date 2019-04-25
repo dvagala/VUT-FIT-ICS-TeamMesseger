@@ -9,6 +9,8 @@ namespace ICS.Project.DAL.Entities
         public string Surname { get; set; }
         public DateTime LastActivity { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; } //has to be kept in secure form               
+        public byte[] Password { get; set; }
+        public byte[] Salt { get; set; }
+        public int IterationCount { get; set; }
     }
 }

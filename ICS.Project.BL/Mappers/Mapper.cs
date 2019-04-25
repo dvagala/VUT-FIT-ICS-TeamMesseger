@@ -1,4 +1,5 @@
 ﻿using ICS.Project.BL.Models;
+using ICS.Project.BL.Repositories;
 using ICS.Project.DAL.Entities;
 
 namespace ICS.Project.BL.Mappers
@@ -96,7 +97,9 @@ namespace ICS.Project.BL.Mappers
                 Surname = user.Surname,
                 LastActivity = user.LastActivity,
                 Email = user.Email,
-                Password = user.Password
+                Password = user.Password,
+                IterationCount= user.IterationCount,
+                Salt = user.Salt
             };
         }
     }
