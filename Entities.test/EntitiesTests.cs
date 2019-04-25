@@ -189,7 +189,7 @@ namespace ICS.Project.DAL.Tests
             User.Surname = "G";
             User.LastActivity = new DateTime(2017, 5, 5);
             User.Email = "xjojog@vutbr.cz";
-            User.Password = "123jojo";
+//            User.Password = "123jojo";
 
 
             //Act

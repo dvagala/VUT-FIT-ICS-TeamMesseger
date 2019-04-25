@@ -14,14 +14,14 @@ namespace ICS.Project.BL.Services
             UserModel user = new UserModel
             {
                 Salt = new byte[0],
-                Hash = new byte[0],
-                Iterations = 10000
+                Password = new byte[0],
+                IterationCount = 10000
 
             };
             return user;
         }
 
-        public bool IsPasswordCorrect(string plainTextPassword, byte[] salt, byte[] hash, int iterations)
+        public bool IsPasswordCorrect(string plainTextPassword, byte[] password, byte[] hash, int iterationCount)
         {
             return true;
         }
