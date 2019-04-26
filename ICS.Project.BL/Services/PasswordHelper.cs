@@ -50,7 +50,7 @@ namespace ICS.Project.BL.Services
         {
             byte[] bytePassword = Encoding.ASCII.GetBytes(plainTextPassword);
             byte[] usedPassword = hashPassword(bytePassword, user.Salt, user.IterationCount);
-            if (bytePassword.SequenceEqual(usedPassword))
+            if (usedPassword.SequenceEqual(user.Password))
             {
                 return true;
             }

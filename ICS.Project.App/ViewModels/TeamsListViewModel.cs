@@ -47,8 +47,8 @@ namespace ICS.Project.App.ViewModels
             NewTeam = new TeamModel();
 
             PasswordHelper passwordHelper = new PasswordHelper();
-            UserModel user = passwordHelper.AddEncryptedPasswordToUserModel("password");
-            bool correct = passwordHelper.IsPasswordCorrect("password", user);
+            UserModel user = passwordHelper.AddEncryptedPasswordToUserModel("password1234");
+            bool correct = passwordHelper.IsPasswordCorrect("password1234", user);
 
             Mock = "IsPassCorrect: ";
             Mock += correct.ToString();
