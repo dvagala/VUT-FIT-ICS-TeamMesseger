@@ -48,7 +48,7 @@ namespace ICS.Project.App.ViewModels
 
             PasswordHelper passwordHelper = new PasswordHelper();
             UserModel user = passwordHelper.AddEncryptedPasswordToUserModel("password");
-            bool correct = passwordHelper.IsPasswordCorrect("password", null, null, 10000);
+            bool correct = passwordHelper.IsPasswordCorrect("password", user);
 
             Mock = "IsPassCorrect: ";
             Mock += correct.ToString();
