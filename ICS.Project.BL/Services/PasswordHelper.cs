@@ -40,7 +40,7 @@ namespace ICS.Project.BL.Services
 
                 Salt = salting,
                 IterationCount = iterCount,
-                Password = hashPassword(bytePassword,salting,iterCount)
+                PasswordHash = hashPassword(bytePassword,salting,iterCount)
 
             };
             return user;
@@ -50,7 +50,7 @@ namespace ICS.Project.BL.Services
         {
             byte[] bytePassword = Encoding.ASCII.GetBytes(plainTextPassword);
             byte[] usedPassword = hashPassword(bytePassword, user.Salt, user.IterationCount);
-            if (usedPassword.SequenceEqual(user.Password))
+            if (usedPassword.SequenceEqual(user.PasswordHash))
             {
                 return true;
             }

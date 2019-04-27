@@ -9,7 +9,7 @@ namespace ICS.Project.BL.Models
         public string Surname { get; set; }
         public DateTime LastActivity { get; set; }
         public string Email { get; set; }
-        public byte[] Password { get; set; }
+        public byte[] PasswordHash { get; set; }
         public byte[] Salt { get; set; }
         public int IterationCount { get; set; }
     }

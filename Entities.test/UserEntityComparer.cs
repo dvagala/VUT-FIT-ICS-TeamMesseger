@@ -29,7 +29,7 @@ internal static class UserEntityComparer
                 var hashCode = obj.Name != null ? obj.Name.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ (obj.Surname != null ? obj.Surname.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (obj.Email != null ? obj.Email.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (obj.Password != null ? obj.Password.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (obj.PasswordHash != null ? obj.PasswordHash.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (obj.LastActivity != null ? obj.LastActivity.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ obj.ID.GetHashCode();
                 return hashCode;

@@ -84,7 +84,7 @@ namespace ICS.Project.BL.Mappers
                 Surname = model.Surname,
                 LastActivity = model.LastActivity,
                 Email = model.Email,
-                Password = model.Password
+                PasswordHash = model.PasswordHash
             };
         }
 
@@ -97,7 +97,7 @@ namespace ICS.Project.BL.Mappers
                 Surname = user.Surname,
                 LastActivity = user.LastActivity,
                 Email = user.Email,
-                Password = user.Password,
+                PasswordHash = user.PasswordHash,
                 IterationCount= user.IterationCount,
                 Salt = user.Salt
             };
