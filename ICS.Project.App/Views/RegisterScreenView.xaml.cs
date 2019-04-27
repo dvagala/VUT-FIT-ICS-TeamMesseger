@@ -4,9 +4,9 @@ namespace ICS.Project.App.Views
     /// <summary>
     /// Interaction logic for TeamDetailView.xaml
     /// </summary>
-    public partial class RegisterScreenView
+    public partial class LoginScreenView
     {
-        public RegisterScreenView()
+        public LoginScreenView()
         {
             InitializeComponent();
         }

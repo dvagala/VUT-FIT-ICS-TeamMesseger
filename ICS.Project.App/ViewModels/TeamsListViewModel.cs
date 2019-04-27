@@ -32,6 +32,7 @@ namespace ICS.Project.App.ViewModels
 
         public ICommand NewTeamAddedCommand { get; set; }
         public ICommand TeamSelectedCommand { get; set; }
+        public ICommand LogoutCommand { get; set; }
 
         public string Mock { get; set; }
 
@@ -40,6 +41,7 @@ namespace ICS.Project.App.ViewModels
         {
             NewTeamAddedCommand = new RelayCommand(AddNewTeam, CanAddNewTeam);
             TeamSelectedCommand = new RelayCommand<TeamModel>(TeamSelected);
+            LogoutCommand = new RelayCommand(Logout);
 
             _mediator = mediator;
             _teamsRepository = teamsRepository;
@@ -76,6 +78,11 @@ namespace ICS.Project.App.ViewModels
         private void TeamSelected(TeamModel selectedTeamModel)
         {
             _mediator.Send(new SelectedTeamMessage{ Id = selectedTeamModel.ID});
+        }
+
+        private void Logout()
+        {
+            _mediator.Send(new GoToLoginScreenMessage());
         }
     }
 }

@@ -154,10 +154,14 @@
     <Compile Include="Converters\VisibilityToCollapseConverter.cs" />
     <Compile Include="Converters\InvertBoolConvertor.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
+    <Compile Include="ViewModels\RegisterScreenViewModel.cs" />
     <Compile Include="ViewModels\TeamDetailViewModel.cs" />
     <Compile Include="ViewModels\LoginScreenViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\RegisterScreenView.xaml.cs">
+      <DependentUpon>RegisterScreenView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MessengerScreenView.xaml.cs">
       <DependentUpon>MessengerScreenView.xaml</DependentUpon>
     </Compile>
@@ -171,6 +175,10 @@
       <DependentUpon>TeamListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControlCustom.cs" />
+    <Page Include="Views\RegisterScreenView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MessengerScreenView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

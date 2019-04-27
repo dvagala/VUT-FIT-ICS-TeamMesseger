@@ -13,60 +13,35 @@ namespace ICS.Project.App.ViewModels
 {
     public class LoginScreenViewModel : ViewModelBase, IViewModel
     {
-        private readonly ITeamsRepository _teamsRepository;
         private readonly IMediator _mediator;
 
 
-        private TeamModel _newTeam;
-        public TeamModel NewTeam
-        {
-            get => _newTeam;
-            set
-            {
-                _newTeam = value;
-                OnPropertyChanged();
-            }
-        }
-        public ObservableCollection<TeamModel> Teams { get; set; } = new ObservableCollection<TeamModel>();
 
-
-        public ICommand NewTeamAddedCommand { get; set; }
-        public ICommand TeamSelectedCommand { get; set; }
+        public ICommand GoToRegisterScreenCommand { get; set; }
+        public ICommand TryToLoginCommand { get; set; }
 
 
         public LoginScreenViewModel(ITeamsRepository teamsRepository, IMediator mediator)
         {
-            NewTeamAddedCommand = new RelayCommand(AddNewTeam, CanAddNewTeam);
-            TeamSelectedCommand = new RelayCommand<TeamModel>(TeamSelected);
+            GoToRegisterScreenCommand = new RelayCommand(GoToRegisterScreen);
+            TryToLoginCommand = new RelayCommand(TryToLogin);
 
             _mediator = mediator;
-            _teamsRepository = teamsRepository;
-
-            NewTeam = new TeamModel();
         }
 
         public void Load()
         {
-            Teams.Clear();
-            foreach (var team in _teamsRepository.GetAll()) Teams.Add(team);
+
         }
 
-
-        public void AddNewTeam()
+        public void TryToLogin()
         {
-            _teamsRepository.Add(NewTeam);
-            NewTeam = new TeamModel();
-            Load();
+            _mediator.Send(new GoToMessengerScreenMessage());
         }
 
-        private bool CanAddNewTeam()
+        public void GoToRegisterScreen()
         {
-            return NewTeam != null && !string.IsNullOrWhiteSpace(NewTeam.Name);
-        }
-
-        private void TeamSelected(TeamModel selectedTeamModel)
-        {
-            _mediator.Send(new SelectedTeamMessage{ Id = selectedTeamModel.ID});
+            _mediator.Send(new GoToRegisterScreenMessage());
         }
     }
 }

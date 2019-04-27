@@ -57,6 +57,7 @@ namespace ICS.Project.App.ViewModels
 
         public void Load()
         {
+            IsDescriptionInEditMode = false;
         }
 
         public void EditDescription()

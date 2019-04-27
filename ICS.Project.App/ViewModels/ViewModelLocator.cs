@@ -1,4 +1,7 @@
-﻿using ICS.Project.BL.Repositories;
+﻿using System.Windows;
+using ICS.Project.App.Views;
+using ICS.Project.BL.Messages;
+using ICS.Project.BL.Repositories;
 using ICS.Project.BL.Services;
 using ICS.Project.DAL;
 
@@ -10,32 +13,57 @@ namespace ICS.Project.App.ViewModels
         private readonly IDbContextFactory dbContextFactory;
         private readonly ITeamsRepository teamRepository;
 
-        public enum ViewStateEnum { Login, Register, Messenger};
 
-        private ViewStateEnum _CurrentViewState;
-        public ViewStateEnum CurrentViewState
+        private ViewModelBase _currentViewModel;
+        public ViewModelBase CurrentViewModel
         {
-            get => _CurrentViewState;
+            get => _currentViewModel;
             set
             {
-                _CurrentViewState = value;
+                _currentViewModel = value;
                 OnPropertyChanged();
             }
         }
 
-        public TeamsListViewModel TeamsListViewModel => new TeamsListViewModel(teamRepository, mediator);
-        public TeamDetailViewModel TeamDetailViewModel => new TeamDetailViewModel(teamRepository, mediator);
 
+        public LoginScreenViewModel LoginScreenViewModel { get; }
+        public RegisterScreenViewModel RegisterScreenViewModel { get; }
+        public TeamsListViewModel TeamsListViewModel { get; }
+        public TeamDetailViewModel TeamDetailViewModel { get; }
 
         public ViewModelLocator()
         {
-            CurrentViewState = ViewStateEnum.Login;
-
             dbContextFactory = new DefaultDbContextFactory();
 
             mediator = new Mediator();
 
-            teamRepository = new TeamsRepository(dbContextFactory);            
+            mediator.Register<GoToRegisterScreenMessage>(GoToRegisterScreen);
+            mediator.Register<GoToLoginScreenMessage>(GoToLoginScreen);
+            mediator.Register<GoToMessengerScreenMessage>(GoToMessengerScreen);
+
+            teamRepository = new TeamsRepository(dbContextFactory);
+
+            TeamDetailViewModel = new TeamDetailViewModel(teamRepository, mediator); 
+            LoginScreenViewModel = new LoginScreenViewModel(teamRepository, mediator);
+            RegisterScreenViewModel = new RegisterScreenViewModel(teamRepository, mediator);
+            TeamsListViewModel = new TeamsListViewModel(teamRepository, mediator);
+
+            CurrentViewModel = LoginScreenViewModel;
+        }
+
+        public void GoToLoginScreen(GoToLoginScreenMessage message)
+        {
+            CurrentViewModel = LoginScreenViewModel;
+        }
+
+        public void GoToRegisterScreen(GoToRegisterScreenMessage message)
+        {
+            CurrentViewModel = RegisterScreenViewModel;
+        }
+
+        public void GoToMessengerScreen(GoToMessengerScreenMessage message)
+        {
+            CurrentViewModel = TeamsListViewModel;
         }
     }
 }

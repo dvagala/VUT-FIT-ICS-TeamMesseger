@@ -31,5 +31,7 @@
             <Button Content="+" Command="{Binding NewTeamAddedCommand}" Width="30"/>
         </StackPanel>
         <Label Content="{Binding Mock}" Width="140"/>
+
+        <Button Content="Logout" VerticalAlignment="Bottom" Command="{Binding LogoutCommand}" />
     </StackPanel>
 </local:UserControlCustom>
