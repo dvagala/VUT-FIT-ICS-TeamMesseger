@@ -4,9 +4,9 @@ namespace ICS.Project.App.Views
     /// <summary>
     /// Interaction logic for TeamListView.xaml
     /// </summary>
-    public partial class TeamListView
+    public partial class ChatView
     {
-        public TeamListView()
+        public ChatView()
         {
             InitializeComponent();
         }

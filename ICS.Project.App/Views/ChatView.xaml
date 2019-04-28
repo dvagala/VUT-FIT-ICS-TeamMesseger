@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ICS.Project.App.Views"
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
-             xmlns:messengerViewModels="clr-namespace:ICS.Project.App.ViewModels.Messenger"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance messengerViewModels:TeamDetailViewModel}"
+             d:DataContext="{d:DesignInstance viewModels:TeamDetailViewModel}"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=TeamDetailViewModel}">
 
     <StackPanel Grid.Row="1" Orientation="Vertical">

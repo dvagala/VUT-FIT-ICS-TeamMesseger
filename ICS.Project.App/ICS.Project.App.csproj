@@ -164,6 +164,9 @@
     <Compile Include="ViewModels\LoginScreenViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\ChatView.xaml.cs">
+      <DependentUpon>ChatView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OptionsPanelView.xaml.cs">
       <DependentUpon>OptionsPanelView.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,10 @@
       <DependentUpon>TeamListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControlCustom.cs" />
+    <Page Include="Views\ChatView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\OptionsPanelView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

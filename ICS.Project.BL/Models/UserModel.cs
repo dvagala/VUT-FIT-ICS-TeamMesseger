@@ -12,13 +12,13 @@ namespace ICS.Project.BL.Models
         public string Name
         {
             get => _name;
-            set => _name = value.Trim();
+            set => _name = value?.Trim();
         }
 
         public string Surname
         {
             get => _surname;
-            set => _surname = value.Trim();
+            set => _surname = value?.Trim();
         }
 
         public DateTime LastActivity { get; set; }
@@ -26,7 +26,7 @@ namespace ICS.Project.BL.Models
         public string Email
         {
             get => _email;
-            set => _email = value.Trim();
+            set => _email = value?.Trim();
         }
 
         public byte[] PasswordHash { get; set; }
