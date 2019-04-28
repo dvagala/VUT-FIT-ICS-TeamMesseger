@@ -21,6 +21,7 @@
         </Grid.RowDefinitions>
         <views:OptionsPanelView/>
         <views:TeamListView Grid.Column="0" Grid.Row="1"/>
+        <views:ChatView Grid.Column="1" Grid.Row="1" />
         <views:TeamDetailView Grid.Column="2" Grid.Row="1"/>
     </Grid>
 </ContentControl>

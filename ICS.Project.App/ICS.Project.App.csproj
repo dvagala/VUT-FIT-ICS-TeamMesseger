@@ -158,6 +158,7 @@
     <Compile Include="Converters\VisibilityToCollapseConverter.cs" />
     <Compile Include="Converters\InvertBoolConvertor.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
+    <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\OptionsPanelViewModel.cs" />
     <Compile Include="ViewModels\RegisterScreenViewModel.cs" />
     <Compile Include="ViewModels\TeamDetailViewModel.cs" />

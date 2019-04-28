@@ -22,6 +22,7 @@ namespace ICS.Project.App.ViewModels
         public OptionsPanelViewModel OptionsPanelViewModel { get; }
         public TeamsListViewModel TeamsListViewModel { get; }
         public TeamDetailViewModel TeamDetailViewModel { get; }
+        public ChatViewModel ChatViewModel { get; }
 
         public ViewModelLocator()
         {
@@ -42,8 +43,9 @@ namespace ICS.Project.App.ViewModels
             OptionsPanelViewModel = new OptionsPanelViewModel(usersRepository, mediator); 
             TeamDetailViewModel = new TeamDetailViewModel(teamsRepository, mediator);
             TeamsListViewModel = new TeamsListViewModel(teamsRepository, mediator);
+            ChatViewModel = new ChatViewModel(usersRepository, mediator);
 
-            CurrentViewModel = LoginScreenViewModel;
+            CurrentViewModel = TeamsListViewModel;
         }
 
         public void GoToLoginScreen(GoToLoginScreenMessage message)
