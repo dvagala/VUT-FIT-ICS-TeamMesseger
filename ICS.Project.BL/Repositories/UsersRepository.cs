@@ -18,14 +18,14 @@ namespace ICS.Project.BL.Repositories
             this.dbContextFactory = dbContextFactory;
         }
 
-        public bool IsEmailUsedByAnyUser(string email)
+        public UserModel GetByEmail(string email)
         {
             var user = dbContextFactory
                 .CreateDbContext()
                 .Users
                 .FirstOrDefault(t => t.Email == email);
 
-            return user != null;
+            return user == null ? null : Mapper.MapUserModelFromEntity(user); ;
         }
 
 

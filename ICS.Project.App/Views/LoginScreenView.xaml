@@ -12,8 +12,8 @@
 
     <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
         <Label Content="Team messenger" HorizontalAlignment="Center"/>
-        <TextBox Width="200" Margin="5" />
-        <TextBox Width="200" Margin="5" />
+        <TextBox Width="200" Margin="5" Text="{Binding User.Email, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Width="200" Margin="5" Text="{Binding PlainTextPassword, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Content="Login" Margin="5" Width="200" Command="{Binding TryToLoginCommand}" />
         <Button Content="Create a new account" Margin="5" Width="200" Command="{Binding GoToRegisterScreenCommand}" />
     </StackPanel>

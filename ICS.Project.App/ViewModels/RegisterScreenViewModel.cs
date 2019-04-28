@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ICS.Project.App.Commands;
@@ -23,17 +19,7 @@ namespace ICS.Project.App.ViewModels
 
         public UserModel NewUser { get; set; }
 
-
-        private string _plainTextPassword;
-
-        public string PlainTextPassword
-        {
-            get => _plainTextPassword;
-            set
-            {
-                _plainTextPassword = value.Trim();
-            }
-        }
+        public string PlainTextPassword { get; set; }
 
 
         public RegisterScreenViewModel(IUsersRepository usersRepository, IMediator mediator)
@@ -54,15 +40,14 @@ namespace ICS.Project.App.ViewModels
 
         public bool CanTryToRegister()
         {
-            return NewUser?.Name != null && NewUser?.Surname != null && NewUser?.Email != null &&
-                   PlainTextPassword != null && NewUser?.Name != "" && NewUser?.Surname != "" && NewUser?.Email != "" &&
-                PlainTextPassword != "";
+            return !string.IsNullOrEmpty(NewUser?.Name) && !string.IsNullOrEmpty(NewUser?.Surname) &&
+                   !string.IsNullOrEmpty(NewUser?.Email) && !string.IsNullOrEmpty(PlainTextPassword);
         }
 
 
         public void TryToRegister()
         {
-            if (_usersRepository.IsEmailUsedByAnyUser(NewUser.Email))
+            if (_usersRepository.GetByEmail(NewUser.Email) != null)
             {
                 MessageBox.Show($"You are already registered!", "Registration failed");
                 return;
@@ -87,6 +72,7 @@ namespace ICS.Project.App.ViewModels
 
             _mediator.Send(new GoToMessengerScreenMessage());
             MessageBox.Show($"Hi {NewUser.Name}! Welcome to Team messenger", "Registration success");
+            PlainTextPassword = "";
             NewUser = null;
         }
 

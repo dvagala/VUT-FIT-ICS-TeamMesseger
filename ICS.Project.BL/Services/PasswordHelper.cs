@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using ICS.Project.BL.Models;
-using ICS.Project.BL.Repositories;
-using System.Windows;
 using System.Security.Cryptography;
 
 namespace ICS.Project.BL.Services

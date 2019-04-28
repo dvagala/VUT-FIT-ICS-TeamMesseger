@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -13,30 +14,60 @@ namespace ICS.Project.App.ViewModels
 {
     public class LoginScreenViewModel : ViewModelBase, IViewModel
     {
+        private readonly IUsersRepository _usersRepository;
         private readonly IMediator _mediator;
-
-
 
         public ICommand GoToRegisterScreenCommand { get; set; }
         public ICommand TryToLoginCommand { get; set; }
-        
+
+        public UserModel User { get; set; }
+        public string PlainTextPassword { get; set; }
+
 
         public LoginScreenViewModel(IUsersRepository usersRepository, IMediator mediator)
         {
             GoToRegisterScreenCommand = new RelayCommand(GoToRegisterScreen);
-            TryToLoginCommand = new RelayCommand(TryToLogin);
+            TryToLoginCommand = new RelayCommand(TryToLogin, CanTryToLogin);
 
+            _usersRepository = usersRepository;
             _mediator = mediator;
         }
 
         public void Load()
         {
+            PlainTextPassword = "";
+            User = new UserModel();
+        }
 
+        public bool CanTryToLogin()
+        {
+            return !string.IsNullOrEmpty(User?.Email) && !string.IsNullOrEmpty(PlainTextPassword);
         }
 
         public void TryToLogin()
         {
+            UserModel userFromDb = _usersRepository.GetByEmail(User.Email);
+
+            if (userFromDb == null)
+            {
+                MessageBox.Show($"Wrong email!", "Login failed");
+                return;
+            }
+
+            PasswordHelper passwordHelper = new PasswordHelper();
+            if (passwordHelper.IsPasswordCorrect(PlainTextPassword, userFromDb))
+            {
+                MessageBox.Show($"Hi {userFromDb.Name}! Welcome back", "Login success");
+            }
+            else
+            {
+                MessageBox.Show($"Wrong password!", "Login failed");
+                return;
+            }
+
             _mediator.Send(new GoToMessengerScreenMessage());
+            PlainTextPassword = "";
+            User = null;
         }
 
         public void GoToRegisterScreen()
