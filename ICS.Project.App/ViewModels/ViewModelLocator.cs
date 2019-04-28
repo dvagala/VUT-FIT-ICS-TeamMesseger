@@ -11,19 +11,10 @@ namespace ICS.Project.App.ViewModels
     {
         private readonly IMediator mediator;
         private readonly IDbContextFactory dbContextFactory;
-        private readonly ITeamsRepository teamRepository;
+        private readonly ITeamsRepository teamsRepository;
+        private readonly IUsersRepository usersRepository;
 
-
-        private ViewModelBase _currentViewModel;
-        public ViewModelBase CurrentViewModel
-        {
-            get => _currentViewModel;
-            set
-            {
-                _currentViewModel = value;
-                OnPropertyChanged();
-            }
-        }
+        public ViewModelBase CurrentViewModel { get; set; }
 
 
         public LoginScreenViewModel LoginScreenViewModel { get; }
@@ -41,12 +32,14 @@ namespace ICS.Project.App.ViewModels
             mediator.Register<GoToLoginScreenMessage>(GoToLoginScreen);
             mediator.Register<GoToMessengerScreenMessage>(GoToMessengerScreen);
 
-            teamRepository = new TeamsRepository(dbContextFactory);
+            teamsRepository = new TeamsRepository(dbContextFactory);
+            usersRepository = new UsersRepository(dbContextFactory);
 
-            TeamDetailViewModel = new TeamDetailViewModel(teamRepository, mediator); 
-            LoginScreenViewModel = new LoginScreenViewModel(teamRepository, mediator);
-            RegisterScreenViewModel = new RegisterScreenViewModel(teamRepository, mediator);
-            TeamsListViewModel = new TeamsListViewModel(teamRepository, mediator);
+            LoginScreenViewModel = new LoginScreenViewModel(usersRepository, mediator);
+            RegisterScreenViewModel = new RegisterScreenViewModel(usersRepository, mediator);
+
+            TeamDetailViewModel = new TeamDetailViewModel(teamsRepository, mediator); 
+            TeamsListViewModel = new TeamsListViewModel(teamsRepository, mediator);
 
             CurrentViewModel = LoginScreenViewModel;
         }

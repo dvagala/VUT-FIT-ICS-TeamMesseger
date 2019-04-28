@@ -19,9 +19,9 @@ namespace ICS.Project.App.ViewModels
 
         public ICommand GoToRegisterScreenCommand { get; set; }
         public ICommand TryToLoginCommand { get; set; }
+        
 
-
-        public LoginScreenViewModel(ITeamsRepository teamsRepository, IMediator mediator)
+        public LoginScreenViewModel(IUsersRepository usersRepository, IMediator mediator)
         {
             GoToRegisterScreenCommand = new RelayCommand(GoToRegisterScreen);
             TryToLoginCommand = new RelayCommand(TryToLogin);

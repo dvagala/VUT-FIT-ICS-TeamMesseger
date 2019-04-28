@@ -18,6 +18,17 @@ namespace ICS.Project.BL.Repositories
             this.dbContextFactory = dbContextFactory;
         }
 
+        public bool IsEmailUsedByAnyUser(string email)
+        {
+            var user = dbContextFactory
+                .CreateDbContext()
+                .Users
+                .FirstOrDefault(t => t.Email == email);
+
+            return user != null;
+        }
+
+
         public IEnumerable<TeamModel> GetUserTeams(Guid userId)
         {
             var t = dbContextFactory.CreateDbContext()

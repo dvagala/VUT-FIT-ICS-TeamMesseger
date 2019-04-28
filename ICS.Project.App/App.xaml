@@ -11,10 +11,10 @@
             <viewModels:ViewModelLocator x:Key="ViewModelLocator"/>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <converters:VisibilityToCollapseConverter x:Key="VisibilityToCollapseConverter"/>
-            <converters:ToggleButtonToChangeTextToSaveConverter x:Key="ToggleButtonToChangeTextToSaveConverter" />
             <converters:InvertBoolConvertor x:Key="InvertBoolConvertor" />
             <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
-            
+
+
             <DataTemplate DataType="{x:Type viewModels:LoginScreenViewModel}">
                 <views:LoginScreenView />
             </DataTemplate>

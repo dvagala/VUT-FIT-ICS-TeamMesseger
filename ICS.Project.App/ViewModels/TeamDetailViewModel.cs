@@ -26,16 +26,7 @@ namespace ICS.Project.App.ViewModels
         }
 
 
-        private TeamModel _team;
-        public TeamModel Team
-        {
-            get => _team;
-            set
-            {
-                _team = value;
-                OnPropertyChanged();
-            }
-        }
+        public TeamModel Team { get; set; }
 
 
         public ICommand EditDescriptionCommand { get; set; }

@@ -29,21 +29,15 @@ namespace ICS.Project.BL.Services
         }
 
 
-        public UserModel AddEncryptedPasswordToUserModel(string plainTextPassword)
+        public void AddEncryptedPasswordToUserModel(UserModel user, string plainTextPassword)
         {
             byte[] bytePassword = Encoding.ASCII.GetBytes(plainTextPassword);
             byte[] salting = GenerateSalt();
             int iterCount = 10000 + plainTextPassword.Length;
 
-            UserModel user = new UserModel
-            {
-
-                Salt = salting,
-                IterationCount = iterCount,
-                PasswordHash = hashPassword(bytePassword,salting,iterCount)
-
-            };
-            return user;
+            user.Salt = salting;
+            user.IterationCount = iterCount;
+            user.PasswordHash = hashPassword(bytePassword, salting, iterCount);
         }
 
         public bool IsPasswordCorrect(string plainTextPassword, UserModel user)
