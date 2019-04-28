@@ -1,4 +1,4 @@
-﻿<local:UserControlCustom x:Class="ICS.Project.App.Views.OptionsPanelView"
+﻿<base:UserControlCustom x:Class="ICS.Project.App.Views.MessengerScreenControls.OptionsPanelView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,8 +6,10 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:ICS.Project.App.Views"
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
+             xmlns:messengerScreenViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels"
+             xmlns:base="clr-namespace:ICS.Project.App.Views.Base"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance viewModels:OptionsPanelViewModel}"
+             d:DataContext="{d:DesignInstance messengerScreenViewModels:OptionsPanelViewModel}"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=OptionsPanelViewModel}">
 
     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -24,4 +26,4 @@
         </Button>
         <Button Content="Refresh" VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Left" Command="{Binding RefreshCommand}"/>
     </StackPanel>
-</local:UserControlCustom>
+</base:UserControlCustom>

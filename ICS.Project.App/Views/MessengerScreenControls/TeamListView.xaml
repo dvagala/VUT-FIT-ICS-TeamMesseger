@@ -1,4 +1,4 @@
-﻿<local:UserControlCustom x:Class="ICS.Project.App.Views.TeamListView"
+﻿<base:UserControlCustom x:Class="ICS.Project.App.Views.MessengerScreenControls.TeamListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,8 +6,10 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:ICS.Project.App.Views"
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
+             xmlns:messengerScreenViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels"
+             xmlns:base="clr-namespace:ICS.Project.App.Views.Base"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance viewModels:TeamsListViewModel}"
+             d:DataContext="{d:DesignInstance messengerScreenViewModels:TeamsListViewModel}"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=TeamsListViewModel}">
 
     <StackPanel Grid.Row="1" Orientation="Vertical">
@@ -31,4 +33,4 @@
             <Button Content="+" Command="{Binding NewTeamAddedCommand}" Width="30"/>
         </StackPanel>
     </StackPanel>
-</local:UserControlCustom>
+</base:UserControlCustom>

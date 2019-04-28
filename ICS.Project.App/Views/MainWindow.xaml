@@ -6,13 +6,31 @@
         xmlns:local="clr-namespace:ICS.Project.App"
         xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
         xmlns:views="clr-namespace:ICS.Project.App.Views"
+        xmlns:messengerScreenControls="clr-namespace:ICS.Project.App.Views.MessengerScreenControls"
+        xmlns:baseViewModels="clr-namespace:ICS.Project.App.ViewModels.BaseViewModels"
+        xmlns:messengerScreenViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         d:DataContext="{d:DesignInstance viewModels:ViewModelLocator}"
         DataContext="{Binding Source={StaticResource ViewModelLocator}}">
 
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:LoginScreenViewModel}">
+            <views:LoginScreenView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:RegisterScreenViewModel}">
+            <views:RegisterScreenView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type messengerScreenViewModels:ChatViewModel}">
+            <views:MessengerScreenView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type baseViewModels:ViewModelBase}">
+            <views:LoginScreenView />
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}" />
+        <ContentControl Content="{Binding CurrentViewModel}"  />
     </Grid>
 </Window>
     

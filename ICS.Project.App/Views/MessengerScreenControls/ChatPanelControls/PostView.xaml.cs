@@ -1,12 +1,12 @@
 ﻿
-namespace ICS.Project.App.Views.MessengerControls
+namespace ICS.Project.App.Views.MessengerScreenControls.ChatPanelControls
 {
     /// <summary>
     /// Interaction logic for TeamListView.xaml
     /// </summary>
-    public partial class TeamListView
+    public partial class PostView
     {
-        public TeamListView()
+        public PostView()
         {
             InitializeComponent();
         }

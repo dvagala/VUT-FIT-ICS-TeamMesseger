@@ -13,17 +13,6 @@
             <converters:VisibilityToCollapseConverter x:Key="VisibilityToCollapseConverter"/>
             <converters:InvertBoolConvertor x:Key="InvertBoolConvertor" />
             <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
-
-
-            <DataTemplate DataType="{x:Type viewModels:LoginScreenViewModel}">
-                <views:LoginScreenView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:RegisterScreenViewModel}">
-                <views:RegisterScreenView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:TeamsListViewModel}">
-                <views:MessengerScreenView />
-            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application> 

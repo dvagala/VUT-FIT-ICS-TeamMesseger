@@ -7,6 +7,7 @@ using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
 using ICS.Project.BL.Services;
 using System.ComponentModel.DataAnnotations;
+using ICS.Project.App.ViewModels.BaseViewModels;
 
 namespace ICS.Project.App.ViewModels
 {

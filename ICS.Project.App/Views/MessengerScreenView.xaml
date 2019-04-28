@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:ICS.Project.App.Views"
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
              xmlns:views="clr-namespace:ICS.Project.App.Views"
+             xmlns:messengerScreenControls="clr-namespace:ICS.Project.App.Views.MessengerScreenControls"
              mc:Ignorable="d" >
 
     <Grid >
@@ -19,9 +20,9 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <views:OptionsPanelView/>
-        <views:TeamListView Grid.Column="0" Grid.Row="1"/>
-        <views:ChatView Grid.Column="1" Grid.Row="1" />
-        <views:TeamDetailView Grid.Column="2" Grid.Row="1"/>
+        <messengerScreenControls:OptionsPanelView/>
+        <messengerScreenControls:TeamListView Grid.Column="0" Grid.Row="1"/>
+        <messengerScreenControls:ChatPanelView Grid.Column="1" Grid.Row="1" />
+        <messengerScreenControls:TeamDetailView Grid.Column="2" Grid.Row="1"/>
     </Grid>
 </ContentControl>

@@ -1,13 +1,12 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using ICS.Project.App.Commands;
+using ICS.Project.App.ViewModels.BaseViewModels;
+using ICS.Project.BL.Messages;
 using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
-using ICS.Project.BL.Messages;
 using ICS.Project.BL.Services;
 
-namespace ICS.Project.App.ViewModels
+namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 {
     public class TeamDetailViewModel : ViewModelBase, IViewModel
     {

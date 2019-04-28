@@ -1,12 +1,12 @@
 ﻿
-namespace ICS.Project.App.Views
+namespace ICS.Project.App.Views.MessengerScreenControls
 {
     /// <summary>
     /// Interaction logic for TeamDetailView.xaml
     /// </summary>
-    public partial class LoginScreenView
+    public partial class OptionsPanelView
     {
-        public LoginScreenView()
+        public OptionsPanelView()
         {
             InitializeComponent();
         }

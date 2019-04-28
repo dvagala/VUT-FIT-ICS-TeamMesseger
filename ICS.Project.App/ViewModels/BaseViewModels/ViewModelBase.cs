@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ICS.Project.App.ViewModels.Base
+namespace ICS.Project.App.ViewModels.BaseViewModels
 {
     public class ViewModelBase: INotifyPropertyChanged
     {

@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using ICS.Project.App.ViewModels.BaseViewModels;
+using ICS.Project.App.ViewModels.MessengerScreenViewModels;
 using ICS.Project.App.Views;
 using ICS.Project.BL.Messages;
 using ICS.Project.BL.Repositories;
@@ -45,7 +47,7 @@ namespace ICS.Project.App.ViewModels
             TeamsListViewModel = new TeamsListViewModel(teamsRepository, mediator);
             ChatViewModel = new ChatViewModel(usersRepository, mediator);
 
-            CurrentViewModel = TeamsListViewModel;
+            CurrentViewModel = ChatViewModel;
         }
 
         public void GoToLoginScreen(GoToLoginScreenMessage message)
@@ -60,7 +62,7 @@ namespace ICS.Project.App.ViewModels
 
         public void GoToMessengerScreen(GoToMessengerScreenMessage message)
         {
-            CurrentViewModel = TeamsListViewModel;
+            CurrentViewModel = ChatViewModel;
         }
     }
 }

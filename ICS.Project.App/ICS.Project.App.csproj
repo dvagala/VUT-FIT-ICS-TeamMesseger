@@ -157,18 +157,22 @@
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\VisibilityToCollapseConverter.cs" />
     <Compile Include="Converters\InvertBoolConvertor.cs" />
-    <Compile Include="ViewModels\IViewModel.cs" />
-    <Compile Include="ViewModels\ChatViewModel.cs" />
-    <Compile Include="ViewModels\OptionsPanelViewModel.cs" />
+    <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\PostViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModels\IViewModel.cs" />
+    <Compile Include="ViewModels\MessengerScreenViewModels\ChatViewModel.cs" />
+    <Compile Include="ViewModels\MessengerScreenViewModels\OptionsPanelViewModel.cs" />
     <Compile Include="ViewModels\RegisterScreenViewModel.cs" />
-    <Compile Include="ViewModels\TeamDetailViewModel.cs" />
+    <Compile Include="ViewModels\MessengerScreenViewModels\TeamDetailViewModel.cs" />
     <Compile Include="ViewModels\LoginScreenViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\BaseViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\ChatView.xaml.cs">
-      <DependentUpon>ChatView.xaml</DependentUpon>
+    <Compile Include="Views\MessengerScreenControls\ChatPanelControls\PostView.xaml.cs">
+      <DependentUpon>PostView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OptionsPanelView.xaml.cs">
+    <Compile Include="Views\MessengerScreenControls\ChatPanelView.xaml.cs">
+      <DependentUpon>ChatPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessengerScreenControls\OptionsPanelView.xaml.cs">
       <DependentUpon>OptionsPanelView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterScreenView.xaml.cs">
@@ -177,21 +181,25 @@
     <Compile Include="Views\MessengerScreenView.xaml.cs">
       <DependentUpon>MessengerScreenView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TeamDetailView.xaml.cs">
+    <Compile Include="Views\MessengerScreenControls\TeamDetailView.xaml.cs">
       <DependentUpon>TeamDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginScreenView.xaml.cs">
       <DependentUpon>LoginScreenView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TeamListView.xaml.cs">
+    <Compile Include="Views\MessengerScreenControls\TeamListView.xaml.cs">
       <DependentUpon>TeamListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControlCustom.cs" />
-    <Page Include="Views\ChatView.xaml">
+    <Compile Include="Views\Base\UserControlCustom.cs" />
+    <Page Include="Views\MessengerScreenControls\ChatPanelControls\PostView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\OptionsPanelView.xaml">
+    <Page Include="Views\MessengerScreenControls\ChatPanelView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MessengerScreenControls\OptionsPanelView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -212,12 +220,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModels\TeamsListViewModel.cs" />
+    <Compile Include="ViewModels\MessengerScreenViewModels\TeamsListViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\TeamDetailView.xaml">
+    <Page Include="Views\MessengerScreenControls\TeamDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -225,7 +233,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\TeamListView.xaml">
+    <Page Include="Views\MessengerScreenControls\TeamListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,6 +278,7 @@
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

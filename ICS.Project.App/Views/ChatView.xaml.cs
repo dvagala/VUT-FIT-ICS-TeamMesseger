@@ -1,5 +1,5 @@
 ﻿
-namespace ICS.Project.App.Views
+namespace ICS.Project.App.Views.MessengerControls
 {
     /// <summary>
     /// Interaction logic for TeamListView.xaml

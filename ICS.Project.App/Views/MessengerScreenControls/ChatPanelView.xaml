@@ -1,0 +1,36 @@
+﻿<base:UserControlCustom x:Class="ICS.Project.App.Views.MessengerScreenControls.ChatPanelView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:local="clr-namespace:ICS.Project.App.Views"
+                         xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
+                         xmlns:views="clr-namespace:ICS.Project.App.Views"
+                         xmlns:chatPanelControls="clr-namespace:ICS.Project.App.Views.MessengerScreenControls.ChatPanelControls"
+                         xmlns:messengerScreenViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels"
+                         xmlns:chatPanelViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewModels"
+                         xmlns:base="clr-namespace:ICS.Project.App.Views.Base"
+                         mc:Ignorable="d"
+                         d:DataContext="{d:DesignInstance messengerScreenViewModels:ChatViewModel}"
+                         DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ChatViewModel}">
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type chatPanelViewModels:PostViewModel}">
+            <chatPanelControls:PostView DataContext="{Binding}" />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding PostsVMs}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <ContentControl Content="{Binding}"  />                             
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</base:UserControlCustom>
