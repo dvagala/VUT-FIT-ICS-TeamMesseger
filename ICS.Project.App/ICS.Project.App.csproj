@@ -118,6 +118,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Interactive.Async, Version=3.2.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Interactive.Async.3.2.0\lib\net46\System.Interactive.Async.dll</HintPath>
     </Reference>
@@ -157,11 +158,15 @@
     <Compile Include="Converters\VisibilityToCollapseConverter.cs" />
     <Compile Include="Converters\InvertBoolConvertor.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
+    <Compile Include="ViewModels\OptionsPanelViewModel.cs" />
     <Compile Include="ViewModels\RegisterScreenViewModel.cs" />
     <Compile Include="ViewModels\TeamDetailViewModel.cs" />
     <Compile Include="ViewModels\LoginScreenViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\OptionsPanelView.xaml.cs">
+      <DependentUpon>OptionsPanelView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegisterScreenView.xaml.cs">
       <DependentUpon>RegisterScreenView.xaml</DependentUpon>
     </Compile>
@@ -178,6 +183,10 @@
       <DependentUpon>TeamListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControlCustom.cs" />
+    <Page Include="Views\OptionsPanelView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\RegisterScreenView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -228,7 +237,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />

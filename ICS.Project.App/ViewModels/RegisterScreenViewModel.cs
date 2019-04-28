@@ -6,6 +6,7 @@ using ICS.Project.BL.Messages;
 using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
 using ICS.Project.BL.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace ICS.Project.App.ViewModels
 {
@@ -41,7 +42,7 @@ namespace ICS.Project.App.ViewModels
         public bool CanTryToRegister()
         {
             return !string.IsNullOrEmpty(NewUser?.Name) && !string.IsNullOrEmpty(NewUser?.Surname) &&
-                   !string.IsNullOrEmpty(NewUser?.Email) && !string.IsNullOrEmpty(PlainTextPassword);
+                   !string.IsNullOrEmpty(NewUser?.Email) && !string.IsNullOrEmpty(PlainTextPassword) && new EmailAddressAttribute().IsValid(NewUser.Email);
         }
 
 

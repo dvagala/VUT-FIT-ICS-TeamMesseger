@@ -1,0 +1,27 @@
+﻿<local:UserControlCustom x:Class="ICS.Project.App.Views.OptionsPanelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:ICS.Project.App.Views"
+             xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModels:OptionsPanelViewModel}"
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=OptionsPanelViewModel}">
+
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <Button Content="Profile" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Change email" Command="{Binding ChangeEmailCommand}" />
+                    <MenuItem Header="Change password" Command="{Binding ChangePasswordCommand}" />
+                    <MenuItem Header="Delete my account" Command="{Binding DeleteAccountCommand}" />
+                    <Separator />
+                    <MenuItem Header="Logout" Command="{Binding LogoutCommand}"/>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <Button Content="Refresh" VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Left" Command="{Binding RefreshCommand}"/>
+    </StackPanel>
+</local:UserControlCustom>

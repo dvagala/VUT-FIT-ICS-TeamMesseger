@@ -19,6 +19,7 @@ namespace ICS.Project.App.ViewModels
 
         public LoginScreenViewModel LoginScreenViewModel { get; }
         public RegisterScreenViewModel RegisterScreenViewModel { get; }
+        public OptionsPanelViewModel OptionsPanelViewModel { get; }
         public TeamsListViewModel TeamsListViewModel { get; }
         public TeamDetailViewModel TeamDetailViewModel { get; }
 
@@ -38,7 +39,8 @@ namespace ICS.Project.App.ViewModels
             LoginScreenViewModel = new LoginScreenViewModel(usersRepository, mediator);
             RegisterScreenViewModel = new RegisterScreenViewModel(usersRepository, mediator);
 
-            TeamDetailViewModel = new TeamDetailViewModel(teamsRepository, mediator); 
+            OptionsPanelViewModel = new OptionsPanelViewModel(usersRepository, mediator); 
+            TeamDetailViewModel = new TeamDetailViewModel(teamsRepository, mediator);
             TeamsListViewModel = new TeamsListViewModel(teamsRepository, mediator);
 
             CurrentViewModel = LoginScreenViewModel;
