@@ -22,7 +22,7 @@
 
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding PostsVMs}">
+            <ItemsControl ItemsSource="{Binding PostViewModels}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>

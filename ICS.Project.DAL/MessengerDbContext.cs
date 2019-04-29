@@ -58,7 +58,7 @@ namespace ICS.Project.DAL
             modelBuilder.Entity<UserEntity>().HasData(new UserEntity
             {
                 ID = user1, Name = "Student", Surname = "Roberts",
-                Email = "student@fit.cz", PasswordHash = hash,
+                Email = "student@fit", PasswordHash = hash,
                 Salt = salt,
                 IterationCount = 10007
             }, new UserEntity
@@ -161,49 +161,54 @@ namespace ICS.Project.DAL
                 });
 
 
-            Guid post1Team1 = new Guid("ec16e27a-07e2-0f47-b19d-0b362003ca83");
-            Guid post2Team1 = new Guid("ec16e27a-17e2-4f47-b19d-0b362003ca83");
-            Guid post3Team1 = new Guid("ec16e27a-27e2-4f47-b19d-0b362003ca83");
-
-            Guid post1Team2 = new Guid("ec16e27a-07e2-1f47-b19d-0b362003ca83");
-            Guid post2Team2 = new Guid("ec16e27a-17e2-2f47-b19d-0b362003ca83");
-
-            Guid post1Team3 = new Guid("ec16e27a-07e2-4f47-b19d-0b362003ca83");
+            Guid post1Team1 = new Guid("ec16e27b-07e2-0f47-b19d-0b362003ca83");
+            Guid post2Team1 = new Guid("ec16e27b-17e2-4f47-b19d-0b362003ca83");
+            Guid post3Team1 = new Guid("ec16e27b-27e2-4f47-b19d-0b362003ca83");
+                                                 
+            Guid post1Team2 = new Guid("ec16e27b-07e2-1f47-b19d-0b362003ca83");
+            Guid post2Team2 = new Guid("ec16e27b-17e2-2f47-b19d-0b362003ca83");
+                                                 
+            Guid post1Team3 = new Guid("ec16e27b-07e2-4f47-b19d-0b362003ca83");
 
             modelBuilder.Entity<PostEntity>().HasData(new PostEntity
             {
                 ID = post1Team1, Title = "Mediocrem", MessageText = loremIpsum6,
-                AuthorId = user1
+                AuthorId = user1, TeamId = team1
             }, new PostEntity
             {
                 ID = post2Team1,
                 Title = "Novum",
                 MessageText = loremIpsum1,
-                AuthorId = user2
+                AuthorId = user2,
+                TeamId = team1
             }, new PostEntity
             {
                 ID = post3Team1,
                 Title = "Euismod",
                 MessageText = loremIpsum2,
-                AuthorId = user3
+                AuthorId = user3,
+                TeamId = team1
             }, new PostEntity
             {
                 ID = post1Team2,
                 Title = "Splendide",
                 MessageText = loremIpsum3,
-                AuthorId = user2
+                AuthorId = user2,
+                TeamId = team2
             }, new PostEntity
             {
                 ID = post2Team2,
                 Title = "Imperdiet",
                 MessageText = loremIpsum4,
-                AuthorId = user1
+                AuthorId = user1,
+                TeamId = team2
             }, new PostEntity
             {
                 ID = post1Team3,
                 Title = "Putent",
                 MessageText = loremIpsum5,
-                AuthorId = user4
+                AuthorId = user4,
+                TeamId = team3
             });
 
             Guid comment1Post1Team1 = new Guid("ec16e27a-07e2-0f47-b09d-0f362003ca83");

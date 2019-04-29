@@ -13,18 +13,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         private readonly ITeamsRepository _teamsRepository;
         private readonly IMediator _mediator;
 
-        private bool _isDescriptionInEditMode;
-        public bool IsDescriptionInEditMode
-        {
-            get => _isDescriptionInEditMode;
-            set
-            {
-                _isDescriptionInEditMode = value;
-                OnPropertyChanged();
-            }
-        }
-
-
+        public bool IsDescriptionInEditMode { get; set; } = false;
         public TeamModel Team { get; set; }
 
 
@@ -40,9 +29,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             _mediator = mediator;
             _teamsRepository = teamsRepository;
             _mediator.Register<SelectedTeamMessage>(TeamSelected);
-
-            Team = _teamsRepository.GetFirst();
-            IsDescriptionInEditMode = false;
         }
 
         public void Load()

@@ -18,6 +18,16 @@ namespace ICS.Project.BL.Repositories
             this.dbContextFactory = dbContextFactory;
         }
 
+        public IList<PostModel> GetPosts(Guid teamId)
+        {
+            var posts = dbContextFactory.CreateDbContext()
+                .Posts
+                .Where(s => s.TeamId == teamId)
+                .Select(s => Mapper.MapPostModelFromEntity(s)).ToList();
+
+            return posts;
+        }
+
         public IEnumerable<UserModel> GetTeamMembers(Guid teamId)
         {
             var members = dbContextFactory.CreateDbContext()

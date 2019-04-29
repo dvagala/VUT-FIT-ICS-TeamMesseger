@@ -42,12 +42,14 @@ namespace ICS.Project.App.ViewModels
             LoginScreenViewModel = new LoginScreenViewModel(usersRepository, mediator);
             RegisterScreenViewModel = new RegisterScreenViewModel(usersRepository, mediator);
 
-            OptionsPanelViewModel = new OptionsPanelViewModel(usersRepository, mediator); 
+            OptionsPanelViewModel = new OptionsPanelViewModel(usersRepository, mediator);
             TeamDetailViewModel = new TeamDetailViewModel(teamsRepository, mediator);
             TeamsListViewModel = new TeamsListViewModel(teamsRepository, mediator);
-            ChatViewModel = new ChatViewModel(usersRepository, mediator);
+            ChatViewModel = new ChatViewModel(teamsRepository, mediator);
 
             CurrentViewModel = ChatViewModel;
+
+            mediator.Send(new SelectedTeamMessage {Id = teamsRepository.GetFirst().ID});
         }
 
         public void GoToLoginScreen(GoToLoginScreenMessage message)
