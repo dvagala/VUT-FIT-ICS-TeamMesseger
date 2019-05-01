@@ -55,6 +55,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewMode
 
         public void AddNewComment()
         {
+            NewComment.PublishDate = DateTime.Now;
             var commentFromDb = _commentsRepository.Add(NewComment);
             commentFromDb.Author = LoggedUser;
             CommentViewModels.Add(new CommentViewModel { Comment = commentFromDb, NewCommentUserInitialsCircleViewModel = new UserInitialsCircleViewModel { User = commentFromDb.Author } });

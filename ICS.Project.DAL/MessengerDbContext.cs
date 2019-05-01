@@ -174,7 +174,7 @@ namespace ICS.Project.DAL
             {
                 ID = post1Team1, Title = "Mediocrem", MessageText = loremIpsum6,
                 AuthorId = user1, TeamId = team1,
-                PublishDate = new DateTime(2019, 2, 1, 0, 0, 0)
+                PublishDate = new DateTime(2019, 2, 1, 3, 31, 12)
             }, new PostEntity
             {
                 ID = post2Team1,
@@ -182,7 +182,7 @@ namespace ICS.Project.DAL
                 MessageText = loremIpsum1,
                 AuthorId = user2,
                 TeamId = team1,
-                PublishDate = new DateTime(2019, 3, 1, 0, 0, 0)
+                PublishDate = new DateTime(2019, 3, 1, 1, 8, 54)
             }, new PostEntity
             {
                 ID = post3Team1,
@@ -190,7 +190,7 @@ namespace ICS.Project.DAL
                 MessageText = loremIpsum2,
                 AuthorId = user3,
                 TeamId = team1,
-                PublishDate = new DateTime(2019, 5, 1, 0, 0, 0)
+                PublishDate = new DateTime(2019, 5, 14, 18, 21, 7)
             }, new PostEntity
             {
                 ID = post1Team2,

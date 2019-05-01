@@ -10,14 +10,13 @@ using ICS.Project.BL.Models;
 
 namespace ICS.Project.App.Converters
 {
-    class GetNameInitials : IValueConverter
+    class GetNameInitialsConvertor : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is UserModel user)
             {
                 return $"{user.Name[0]}";
-//                return $"{user.Name[0]} {user.Surname[0]}";
             }
             else
             {

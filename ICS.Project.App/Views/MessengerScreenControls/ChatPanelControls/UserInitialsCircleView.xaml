@@ -11,16 +11,14 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance chatPanelViewModels:UserInitialsCircleViewModel}">
 
-    <StackPanel Orientation="Horizontal">
-        <Button  Width="30" Height="30" Content="{Binding User, Converter={StaticResource GetNameInitials}}" Command="{Binding ShowUserDetailCommand}">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid >
-                        <Ellipse Fill="Beige" Stroke="Black" StrokeThickness="1"/>
-                        <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-    </StackPanel>
+    <Button  Width="30" Height="30" VerticalAlignment="Top" Margin="0,0,6,0" Content="{Binding User, Converter={StaticResource GetNameInitials}}" Command="{Binding ShowUserDetailCommand}">
+        <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+                <Grid >
+                    <Ellipse Fill="Beige" Stroke="Black" StrokeThickness="1"/>
+                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </ControlTemplate>
+        </Button.Template>
+    </Button>
 </base:UserControlCustom>

@@ -23,7 +23,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         public ObservableCollection<PostViewModel> PostViewModels { get; set; } = new ObservableCollection<PostViewModel>();
 
-        public PostModel NewPost { get; set; }
+        public PostModel NewPost { get; set; } = new PostModel();
         public UserInitialsCircleViewModel NewPostUserInitialsCircleViewModel { get; set; }
 
         public TeamModel Team { get; set; }
@@ -43,9 +43,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             _mediator.Register<UserLoggedMessage>(UserLogged);
 
             AddNewPostCommand = new RelayCommand(AddNewPost, CanAddNewPost);
-
-            NewPost = new PostModel();
-
         }
 
         public bool CanAddNewPost()
@@ -56,8 +53,8 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         public void AddNewPost()
         {
+            NewPost.PublishDate = DateTime.Now;
             _postsRepository.Add(NewPost);
-//            PostViewModels.Insert(0, new PostViewModel(_commentsRepository, _mediator, postFromDb, LoggedUser));
             NewPost = new PostModel{ TeamId = Team.ID, AuthorId = LoggedUser.ID, Author = LoggedUser};
 
             Refresh();

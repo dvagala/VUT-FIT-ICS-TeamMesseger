@@ -13,7 +13,8 @@
             <converters:EmptyTextBoxUnfocusedToVisibilityConverter x:Key="EmptyTextBoxUnfocusedToVisibilityConverter"/>
             <converters:InvertBoolConvertor x:Key="InvertBoolConvertor" />
             <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
-            <converters:GetNameInitials x:Key="GetNameInitials" />
+            <converters:GetNameInitialsConvertor x:Key="GetNameInitials" />
+            <converters:DateTimeFormatConvertor x:Key="DateTimeFormatConvertor" />
         </ResourceDictionary>
     </Application.Resources>
 </Application> 

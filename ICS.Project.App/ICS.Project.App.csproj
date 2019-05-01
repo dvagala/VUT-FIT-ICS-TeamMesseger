@@ -155,7 +155,8 @@
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\EmptyTextBoxUnfocusedToVisibilityConverter.cs" />
-    <Compile Include="Converters\GetNameInitials.cs" />
+    <Compile Include="Converters\DateTimeFormatConvertor.cs" />
+    <Compile Include="Converters\GetNameInitialsConvertor.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\InvertBoolConvertor.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\UserInitialsCircleViewModel.cs" />
