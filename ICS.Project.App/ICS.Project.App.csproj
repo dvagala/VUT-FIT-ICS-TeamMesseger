@@ -154,7 +154,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Converters\UserToFullNameConvertor.cs" />
     <Compile Include="Converters\EmptyTextBoxUnfocusedToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeFormatConvertor.cs" />
     <Compile Include="Converters\GetNameInitialsConvertor.cs" />

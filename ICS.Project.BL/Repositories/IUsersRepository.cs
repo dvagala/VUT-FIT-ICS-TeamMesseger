@@ -8,7 +8,8 @@ namespace ICS.Project.BL.Repositories
     {
         IEnumerable<TeamModel> GetUserTeams(Guid userId);
         UserModel GetByEmail(string email);
-        IEnumerable<UserModel> GetAll();
+        IEnumerable<UserModel> GetTeamMembers(Guid teamId);
+        IList<UserModel> GetAll();
         UserModel GetById(Guid id);
         void Update(UserModel post);
         UserModel Add(UserModel post);

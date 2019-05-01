@@ -13,7 +13,7 @@
              d:DataContext="{d:DesignInstance chatPanelViewModels:CommentViewModel}">
 
     <StackPanel Orientation="Vertical" Margin="0,0,0,0">
-        <TextBlock Text="{Binding Comment.Author, Converter={StaticResource UserToFullNameConvertor}}" Margin="40,0,0,0" />
+        <TextBlock Text="{Binding Comment.Author.FullName}" Margin="40,0,0,0" />
         <StackPanel Orientation="Horizontal">
         <chatPanelControls:UserInitialsCircleView DataContext="{Binding NewCommentUserInitialsCircleViewModel}" />
         <Border VerticalAlignment="Top"

@@ -26,7 +26,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewMode
 
         public void ShowUserDetail()
         {
-            MessageBox.Show($"{User.Name} {User.ID}");
+            MessageBox.Show("Todo show user detail");
         }
 
         public void Load()

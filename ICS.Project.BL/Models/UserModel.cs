@@ -21,6 +21,8 @@ namespace ICS.Project.BL.Models
             set => _surname = value?.Trim();
         }
 
+        public string FullName => $"{_name} {_surname}";
+
         public DateTime LastActivity { get; set; }
 
         public string Email

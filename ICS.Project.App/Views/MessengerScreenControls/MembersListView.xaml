@@ -49,7 +49,7 @@
             <ListView.ItemTemplate >
                 <DataTemplate >
                     <DockPanel>
-                        <TextBlock x:Name="MemberTextBlock" Height="20" Text="{Binding Name}" />
+                        <TextBlock x:Name="MemberTextBlock" Height="20" Text="{Binding FullName}" />
                             <Button x:Name="xButton" Height="{Binding ElementName=MemberTextBlock, Path=Height}"
                                 Background="Transparent"
                                 BorderThickness="0"  
@@ -62,9 +62,13 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
-            <TextBox Text="{Binding NewTeam.Name, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="0,0,5,0" TextWrapping="Wrap" Width="80" />
-            <Button Content="+" Command="{Binding NewTeamAddedCommand}" Width="30"/>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <!-- <TextBox Text="{Binding NewTeam.Name, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="0,0,5,0" TextWrapping="Wrap" Width="80" /> -->
+            <ComboBox
+                      ItemsSource="{Binding Path=AvailableMembers}"
+                      DisplayMemberPath="FullName"
+                      SelectedItem="{Binding Path=SelectedUser}"/>
+            <Button Content="+" Command="{Binding AddNewMemberCommand}" Width="30"/>
         </StackPanel>
     </StackPanel>
 </base:UserControlCustom>

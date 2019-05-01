@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using ICS.Project.App.Commands;
@@ -13,66 +14,112 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
     public class MembersListViewModel : ViewModelBase, IViewModel
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly ITeamsRepository _teamsRepository;
         private readonly IMediator _mediator;
 
-        public UserModel NewMember { get; set; }
+        public UserModel SelectedUser { get; set; }
 
         public ObservableCollection<UserModel> Members { get; set; } = new ObservableCollection<UserModel>();
+        public ObservableCollection<UserModel> AvailableMembers { get; set; } = new ObservableCollection<UserModel>();
+        public TeamModel Team { get; set; }
+        public UserModel LoggedUser { get; set; }
 
 
-        public ICommand RemoveMemberCommand { get; set; }
         public ICommand MemberClickedCommand { get; set; }
+        public ICommand RemoveMemberCommand { get; set; }
+        public ICommand AddNewMemberCommand { get; set; }
 
 
-        public MembersListViewModel(IUsersRepository usersRepository, IMediator mediator)
+        public MembersListViewModel(IUsersRepository usersRepository, ITeamsRepository teamsRepository, IMediator mediator)
         {
-//            NewMemberAddedCommand = new RelayCommand(AddNewTeam, CanAddNewTeam);
-//            MemberClickedCommand = new RelayCommand<UserModel>(MemberClicked);
             MemberClickedCommand = new RelayCommand(MemberClicked);
             RemoveMemberCommand = new RelayCommand<UserModel>(RemoveMember);
+            AddNewMemberCommand = new RelayCommand(AddNewTeamMember, CanAddNewMember);
 
             _mediator = mediator;
             _usersRepository = usersRepository;
+            _teamsRepository = teamsRepository;
 
-            NewMember = new UserModel();
+            SelectedUser = new UserModel();
+
+            _mediator.Register<SelectedTeamMessage>(TeamSelected);
+            _mediator.Register<UserLoggedMessage>(UserLogged);
+
+        }
+
+        private void UserLogged(UserLoggedMessage userLoggedMessage)
+        {
+            LoggedUser = userLoggedMessage.User;
+        }
+
+        private void TeamSelected(SelectedTeamMessage selectedTeamMessage)
+        {
+            Team = selectedTeamMessage.Team;
+
+            Members.Clear();
+            foreach (var member in _usersRepository.GetTeamMembers(Team.ID))
+            {
+                Members.Add(member);
+            }
+
+            AvailableMembers.Clear();
+            foreach (var member in _usersRepository.GetAll().Where(s => !Members.Select(e => e.ID).Contains(s.ID)))
+            {
+                AvailableMembers.Add(member);
+            }
+
+            SelectedUser = AvailableMembers.FirstOrDefault();
         }
 
         public void Load()
         {
-            Members.Clear();
-            foreach (var user in _usersRepository.GetAll()) Members.Add(user);
         }
 
 
-        public void AddNewTeam()
+        public void AddNewTeamMember()
         {
-            _usersRepository.Add(NewMember);
-            NewMember = new UserModel();
-            Load();
+            _teamsRepository.AddUserToTeam(SelectedUser.ID, Team.ID);
+            Members.Add(SelectedUser);
+            AvailableMembers.Remove(SelectedUser);
+            SelectedUser = AvailableMembers.FirstOrDefault();
         }
 
         private bool CanAddNewMember()
         {
-            return NewMember != null && !string.IsNullOrWhiteSpace(NewMember.Name);
+            return SelectedUser != null;
         }
 
         private void RemoveMember(UserModel clickedUser)
         {
-            MessageBox.Show($"Member removed, {clickedUser.Name}");
+            MessageBoxResult messageBoxResult;
+            if (clickedUser.ID == LoggedUser.ID)
+            {
+                if (Members.Count() == 1)
+                {
+                    messageBoxResult = MessageBox.Show("You are the last member of this team. The team with all posts will be discarded if you leave! Are you sure to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+                }
+                else
+                {
+                    messageBoxResult = MessageBox.Show("Are you sure to remove yourself from this team? All your posts will reamain, but you lose access to the team!", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+                }
+            }
+            else
+            {
+                messageBoxResult = MessageBox.Show($"Are you sure to cancel {clickedUser.FullName} access to this team? All posts from the user will reamain.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+            }
+
+            if (messageBoxResult == MessageBoxResult.No) return;
+
+            _teamsRepository.RemoveUserFromTeam(clickedUser.ID, Team.ID);
+            Members.Remove(clickedUser);
+            AvailableMembers.Add(clickedUser);
+            SelectedUser = AvailableMembers.FirstOrDefault();
         }
 
 
         private void MemberClicked()
         {
-            MessageBox.Show("clicked");
+            MessageBox.Show("Todo show user detail");
         }
-
-//        private void MemberClicked(UserModel clickedUser)
-//        {
-////            _mediator.Send(new SelectedTeamMessage{ Team= selectedTeamModel});
-//            MessageBox.Show("clicked");
-//        }
-
-
     }
 }

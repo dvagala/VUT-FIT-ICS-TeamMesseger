@@ -28,6 +28,16 @@ namespace ICS.Project.BL.Repositories
             return user == null ? null : Mapper.MapUserModelFromEntity(user); ;
         }
 
+        public IEnumerable<UserModel> GetTeamMembers(Guid teamId)
+        {
+            var members = dbContextFactory.CreateDbContext()
+                .UserInTeam
+                .Where(s => s.TeamId == teamId)
+                .Include(s => s.User)
+                .Select(s => Mapper.MapUserModelFromEntity(s.User));
+
+            return members;
+        }
 
         public IEnumerable<TeamModel> GetUserTeams(Guid userId)
         {
@@ -40,11 +50,11 @@ namespace ICS.Project.BL.Repositories
             return t;
         }
 
-        public IEnumerable<UserModel> GetAll()
+        public IList<UserModel> GetAll()
         {
             return dbContextFactory.CreateDbContext()
                 .Users
-                .Select(Mapper.MapUserModelFromEntity);
+                .Select(Mapper.MapUserModelFromEntity).ToList();
         }
 
         public UserModel GetById(Guid id)

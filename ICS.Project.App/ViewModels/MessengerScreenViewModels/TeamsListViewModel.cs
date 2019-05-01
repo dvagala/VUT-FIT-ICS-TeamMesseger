@@ -19,14 +19,14 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         public ObservableCollection<TeamModel> Teams { get; set; } = new ObservableCollection<TeamModel>();
 
 
-        public ICommand NewTeamAddedCommand { get; set; }
+        public ICommand AddNewTeamCommand { get; set; }
         public ICommand TeamSelectedCommand { get; set; }
         public string Mock { get; set; }
 
 
         public TeamsListViewModel(ITeamsRepository teamsRepository, IMediator mediator)
         {
-            NewTeamAddedCommand = new RelayCommand(AddNewTeam, CanAddNewTeam);
+            AddNewTeamCommand = new RelayCommand(AddNewTeam, CanAddNewTeam);
             TeamSelectedCommand = new RelayCommand<TeamModel>(TeamSelected);
 
             _mediator = mediator;
