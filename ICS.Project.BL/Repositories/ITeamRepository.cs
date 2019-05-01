@@ -11,6 +11,10 @@ namespace ICS.Project.BL.Repositories
         void RemoveUserFromTeam(Guid userId, Guid teamId);
         IList<PostModel> GetPosts(Guid teamId);
 
+        IList<PostModel> GetPostsWithAuthors(Guid teamId);
+
+        IList<PostModel> GetPostsWithCommentsAndAuthors(Guid teamId);
+
         IList<TeamModel> GetAll();
         TeamModel GetFirst();
         TeamModel GetById(Guid id);

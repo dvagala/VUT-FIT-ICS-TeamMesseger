@@ -64,15 +64,16 @@ namespace ICS.Project.App.ViewModels
                 return;
             }
 
-            UserModel savedUser =_usersRepository.Add(NewUser);
+            UserModel userFromDb = _usersRepository.Add(NewUser);
 
-            if (savedUser.ID == Guid.Empty)
+            if (userFromDb.ID == Guid.Empty)
             {
                 MessageBox.Show($"Error in database", "Registration failed");
                 return;
             }
 
             _mediator.Send(new GoToMessengerScreenMessage());
+            _mediator.Send(new UserLoggedMessage { User = userFromDb});
             MessageBox.Show($"Hi {NewUser.Name}! Welcome to Team messenger", "Registration success");
             PlainTextPassword = "";
             NewUser = null;

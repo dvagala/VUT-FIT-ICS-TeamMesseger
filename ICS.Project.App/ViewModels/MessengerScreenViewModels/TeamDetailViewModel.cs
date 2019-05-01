@@ -53,8 +53,8 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         }
 
         private void TeamSelected( SelectedTeamMessage selectedTeamMessage)
-        {            
-            Team = _teamsRepository.GetById(selectedTeamMessage.Id);
+        {
+            Team = selectedTeamMessage.Team;
             IsDescriptionInEditMode = false;
         }
     }

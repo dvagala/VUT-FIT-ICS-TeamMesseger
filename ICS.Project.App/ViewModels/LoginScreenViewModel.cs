@@ -63,6 +63,7 @@ namespace ICS.Project.App.ViewModels
             }
 
             _mediator.Send(new GoToMessengerScreenMessage());
+            _mediator.Send(new UserLoggedMessage{ User = userFromDb});
             PlainTextPassword = "";
             User = null;
         }

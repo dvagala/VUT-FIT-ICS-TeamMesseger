@@ -1,0 +1,27 @@
+﻿<base:UserControlCustom x:Class="ICS.Project.App.Views.MessengerScreenControls.ChatPanelControls.UserInitialsCircleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ICS.Project.App.Views"
+             xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
+             xmlns:views="clr-namespace:ICS.Project.App.Views"
+             xmlns:chatPanelViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewModels"
+             xmlns:base="clr-namespace:ICS.Project.App.Views.Base"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance chatPanelViewModels:PostViewModel}">
+
+    <StackPanel Orientation="Horizontal">
+        <Border VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="5"
+                CornerRadius="100"
+                Height="30"
+                Width="30"
+                Background="Beige"
+                BorderThickness="1"
+                BorderBrush="Black">
+            <TextBlock Text="{Binding Post.Author, Converter={StaticResource GetNameInitials}}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Border>
+    </StackPanel>
+</base:UserControlCustom>

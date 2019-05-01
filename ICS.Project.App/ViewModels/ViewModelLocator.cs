@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ICS.Project.App.ViewModels.BaseViewModels;
 using ICS.Project.App.ViewModels.MessengerScreenViewModels;
 using ICS.Project.App.Views;
@@ -13,8 +14,11 @@ namespace ICS.Project.App.ViewModels
     {
         private readonly IMediator mediator;
         private readonly IDbContextFactory dbContextFactory;
+
         private readonly ITeamsRepository teamsRepository;
         private readonly IUsersRepository usersRepository;
+        private readonly IPostsRepository postsRepository;
+        private readonly ICommentsRepository commentsRepository;
 
         public ViewModelBase CurrentViewModel { get; set; }
 
@@ -38,6 +42,8 @@ namespace ICS.Project.App.ViewModels
 
             teamsRepository = new TeamsRepository(dbContextFactory);
             usersRepository = new UsersRepository(dbContextFactory);
+            postsRepository = new PostsRepository(dbContextFactory);
+            commentsRepository = new CommentsRepository(dbContextFactory);
 
             LoginScreenViewModel = new LoginScreenViewModel(usersRepository, mediator);
             RegisterScreenViewModel = new RegisterScreenViewModel(usersRepository, mediator);
@@ -45,11 +51,16 @@ namespace ICS.Project.App.ViewModels
             OptionsPanelViewModel = new OptionsPanelViewModel(usersRepository, mediator);
             TeamDetailViewModel = new TeamDetailViewModel(teamsRepository, mediator);
             TeamsListViewModel = new TeamsListViewModel(teamsRepository, mediator);
-            ChatViewModel = new ChatViewModel(teamsRepository, mediator);
+            ChatViewModel = new ChatViewModel(teamsRepository, postsRepository, commentsRepository, mediator);
 
+//            CurrentViewModel = LoginScreenViewModel;
             CurrentViewModel = ChatViewModel;
 
-            mediator.Send(new SelectedTeamMessage {Id = teamsRepository.GetFirst().ID});
+            mediator.Send(new SelectedTeamMessage { Team = teamsRepository.GetFirst()});
+
+
+            // Hack: Default logged user is student admin
+            mediator.Send(new UserLoggedMessage { User = usersRepository.GetById(new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83")) });
         }
 
         public void GoToLoginScreen(GoToLoginScreenMessage message)

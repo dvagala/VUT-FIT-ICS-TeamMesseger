@@ -1,4 +1,5 @@
-﻿using ICS.Project.BL.Models;
+﻿using System.Linq;
+using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
 using ICS.Project.DAL.Entities;
 
@@ -30,6 +31,19 @@ namespace ICS.Project.BL.Mappers
             };
         }
 
+        public static CommentModel MapCommentModelFromEntityWithAuthor(CommentEntity comment)
+        {
+            return new CommentModel
+            {
+                ID = comment.ID,
+                MessageText = comment.MessageText,
+                PublishDate = comment.PublishDate,
+                AuthorId = comment.AuthorId,
+                PostId = comment.PostId,
+                Author = MapUserModelFromEntity(comment.Author)
+            };
+        }
+
         public static PostEntity MapPostModelToEntity(PostModel model)
         {
             return new PostEntity
@@ -38,7 +52,8 @@ namespace ICS.Project.BL.Mappers
                 Title = model.Title,
                 MessageText = model.MessageText,
                 PublishDate = model.PublishDate,
-                AuthorId = model.AuthorId
+                AuthorId = model.AuthorId,
+                TeamId = model.TeamId
             };
         }
 
@@ -50,7 +65,37 @@ namespace ICS.Project.BL.Mappers
                 Title = post.Title,
                 MessageText = post.MessageText,
                 PublishDate = post.PublishDate,
-                AuthorId = post.AuthorId
+                AuthorId = post.AuthorId,
+                TeamId = post.TeamId
+            };
+        }
+        
+
+        public static PostModel MapPostModelFromEntityWithCommentsAndAuthor(PostEntity post)
+        {
+            return new PostModel
+            {
+                ID = post.ID,
+                Title = post.Title,
+                MessageText = post.MessageText,
+                PublishDate = post.PublishDate,
+                AuthorId = post.AuthorId,
+                TeamId = post.TeamId,
+                Author = MapUserModelFromEntity(post.Author),
+                Comments = post.Comments.Select(MapCommentModelFromEntityWithAuthor).ToList()
+            };
+        }
+        public static PostModel MapPostModelFromEntityWithAuthor(PostEntity post)
+        {
+            return new PostModel
+            {
+                ID = post.ID,
+                Title = post.Title,
+                MessageText = post.MessageText,
+                PublishDate = post.PublishDate,
+                AuthorId = post.AuthorId,
+                TeamId = post.TeamId,
+                Author = MapUserModelFromEntity(post.Author)
             };
         }
 

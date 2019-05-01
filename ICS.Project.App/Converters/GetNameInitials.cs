@@ -6,16 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using ICS.Project.BL.Models;
 
 namespace ICS.Project.App.Converters
 {
-    class InvertBooleanToVisibilityConverter : IValueConverter
+    class GetNameInitials : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool boolValue)
+            if (value is UserModel user)
             {
-                return boolValue ? Visibility.Collapsed : Visibility.Visible;
+                return $"{user.Name[0]}";
+//                return $"{user.Name[0]} {user.Surname[0]}";
             }
             else
             {

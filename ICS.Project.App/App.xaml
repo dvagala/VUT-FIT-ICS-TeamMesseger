@@ -10,9 +10,10 @@
         <ResourceDictionary>
             <viewModels:ViewModelLocator x:Key="ViewModelLocator"/>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-            <converters:VisibilityToCollapseConverter x:Key="VisibilityToCollapseConverter"/>
+            <converters:EmptyTextBoxUnfocusedToVisibilityConverter x:Key="EmptyTextBoxUnfocusedToVisibilityConverter"/>
             <converters:InvertBoolConvertor x:Key="InvertBoolConvertor" />
             <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
+            <converters:GetNameInitials x:Key="GetNameInitials" />
         </ResourceDictionary>
     </Application.Resources>
 </Application> 

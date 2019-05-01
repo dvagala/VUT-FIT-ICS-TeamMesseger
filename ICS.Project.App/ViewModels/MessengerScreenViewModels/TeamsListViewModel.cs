@@ -56,7 +56,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         private void TeamSelected(TeamModel selectedTeamModel)
         {
-            _mediator.Send(new SelectedTeamMessage{ Id = selectedTeamModel.ID});
+            _mediator.Send(new SelectedTeamMessage{ Team= selectedTeamModel});
         }
 
 

@@ -5,8 +5,8 @@ using ICS.Project.BL.Models;
 
 namespace ICS.Project.BL.Messages
 {
-    public class SelectedTeamMessage : IMessage
+    public class UserLoggedMessage : IMessage
     {
-        public TeamModel Team { get; set; }
+        public UserModel User { get; set; }
     }
 }

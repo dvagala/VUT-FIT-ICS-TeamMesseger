@@ -18,6 +18,39 @@ namespace ICS.Project.BL.Repositories
             this.dbContextFactory = dbContextFactory;
         }
 
+        public IList<PostModel> GetPostsWithAuthors(Guid teamId)
+        {
+            var posts = dbContextFactory.CreateDbContext()
+                .Posts
+                .Include(s => s.Author)
+                .Where(s => s.TeamId == teamId && s.AuthorId == s.Author.ID)
+                .Select(s => Mapper.MapPostModelFromEntityWithAuthor(s)).ToList();
+
+            return posts;
+        }
+
+        public IList<CommentModel> GetCommentsWithAuthors(Guid id)
+        {
+            var comments = dbContextFactory.CreateDbContext()
+                .Comments
+                .Include(s => s.Author)
+                .Where(s => s.PostId == id)
+                .Select(s => Mapper.MapCommentModelFromEntityWithAuthor(s)).ToList();
+
+            return comments;
+        }
+
+
+        public IList<CommentModel> GetComments(Guid id)
+        {
+            var comments = dbContextFactory.CreateDbContext()
+                .Comments
+                .Where(s => s.PostId == id)
+                .Select(s => Mapper.MapCommentModelFromEntity(s)).ToList();
+
+            return comments;
+        }
+
         public UserModel GetAuthorOfPost(Guid id)
         {
             var postEntityWithAuthor = dbContextFactory
@@ -36,6 +69,16 @@ namespace ICS.Project.BL.Repositories
             return dbContextFactory.CreateDbContext()
                 .Posts
                 .Select(Mapper.MapPostModelFromEntity);
+        }
+
+        public PostModel GetByIdWithAuthor(Guid id)
+        {
+            var foundEntity = dbContextFactory
+                .CreateDbContext()
+                .Posts
+                .Include(s => s.Author)
+                .FirstOrDefault(t => t.ID == id);
+            return foundEntity == null ? null : Mapper.MapPostModelFromEntityWithAuthor(foundEntity);
         }
 
         public PostModel GetById(Guid id)

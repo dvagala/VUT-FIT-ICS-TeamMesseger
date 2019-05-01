@@ -154,9 +154,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converters\EmptyTextBoxUnfocusedToVisibilityConverter.cs" />
+    <Compile Include="Converters\GetNameInitials.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
-    <Compile Include="Converters\VisibilityToCollapseConverter.cs" />
     <Compile Include="Converters\InvertBoolConvertor.cs" />
+    <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\PostViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatViewModel.cs" />
@@ -166,6 +168,12 @@
     <Compile Include="ViewModels\LoginScreenViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\MessengerScreenControls\ChatPanelControls\CommentView.xaml.cs">
+      <DependentUpon>CommentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessengerScreenControls\ChatPanelControls\UserInitialsCircleView.xaml.cs">
+      <DependentUpon>UserInitialsCircleView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MessengerScreenControls\ChatPanelControls\PostView.xaml.cs">
       <DependentUpon>PostView.xaml</DependentUpon>
     </Compile>
@@ -191,6 +199,14 @@
       <DependentUpon>TeamListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Base\UserControlCustom.cs" />
+    <Page Include="Views\MessengerScreenControls\ChatPanelControls\CommentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MessengerScreenControls\ChatPanelControls\UserInitialsCircleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MessengerScreenControls\ChatPanelControls\PostView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

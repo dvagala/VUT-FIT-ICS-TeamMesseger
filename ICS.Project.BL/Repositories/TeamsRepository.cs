@@ -18,6 +18,30 @@ namespace ICS.Project.BL.Repositories
             this.dbContextFactory = dbContextFactory;
         }
 
+        public IList<PostModel> GetPostsWithCommentsAndAuthors(Guid teamId)
+        {
+            var posts = dbContextFactory.CreateDbContext()
+                .Posts
+                .Include(s => s.Author)
+                .Include(s => s.Comments)
+                .ThenInclude(s => s.Author)
+                .Where(s => s.TeamId == teamId)
+                .Select(s => Mapper.MapPostModelFromEntityWithCommentsAndAuthor(s)).ToList();
+
+            return posts;
+        }
+
+        public IList<PostModel> GetPostsWithAuthors(Guid teamId)
+        {
+            var posts = dbContextFactory.CreateDbContext()
+                .Posts
+                .Include(s => s.Author)
+                .Where(s => s.TeamId == teamId)
+                .Select(s => Mapper.MapPostModelFromEntityWithAuthor(s)).ToList();
+
+            return posts;
+        }
+
         public IList<PostModel> GetPosts(Guid teamId)
         {
             var posts = dbContextFactory.CreateDbContext()
@@ -90,6 +114,7 @@ namespace ICS.Project.BL.Repositories
                 .FirstOrDefault();
             return foundEntity == null ? null : Mapper.MapTeamModelFromEntity(foundEntity);
         }
+
 
         public TeamModel GetById(Guid id)
         {

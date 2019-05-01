@@ -4,9 +4,9 @@ namespace ICS.Project.App.Views.MessengerScreenControls.ChatPanelControls
     /// <summary>
     /// Interaction logic for TeamListView.xaml
     /// </summary>
-    public partial class UserInitialsCircleView
+    public partial class CommentView
     {
-        public UserInitialsCircleView()
+        public CommentView()
         {
             InitializeComponent();
         }

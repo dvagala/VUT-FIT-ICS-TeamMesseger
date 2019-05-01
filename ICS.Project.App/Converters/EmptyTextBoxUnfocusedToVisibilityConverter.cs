@@ -5,19 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace ICS.Project.App.Converters
 {
-    class VisibilityToCollapseConverter : IValueConverter
+    class EmptyTextBoxUnfocusedToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool)
+            if (value is TextBox textBox)
             {
-                bool isTextBoxVisible = (bool) value;
-
-                if (isTextBoxVisible)
+                if (textBox.IsFocused == true)
                 {
                     return Visibility.Collapsed;
                 }

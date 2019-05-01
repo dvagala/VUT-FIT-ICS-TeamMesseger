@@ -161,114 +161,138 @@ namespace ICS.Project.DAL
                 });
 
 
-            Guid post1Team1 = new Guid("ec16e27b-07e2-0f47-b19d-0b362003ca83");
-            Guid post2Team1 = new Guid("ec16e27b-17e2-4f47-b19d-0b362003ca83");
-            Guid post3Team1 = new Guid("ec16e27b-27e2-4f47-b19d-0b362003ca83");
-                                                 
-            Guid post1Team2 = new Guid("ec16e27b-07e2-1f47-b19d-0b362003ca83");
-            Guid post2Team2 = new Guid("ec16e27b-17e2-2f47-b19d-0b362003ca83");
-                                                 
-            Guid post1Team3 = new Guid("ec16e27b-07e2-4f47-b19d-0b362003ca83");
+            Guid post1Team1 = new Guid("ec16e28b-07e2-0f47-b19d-0b362003ca83");
+            Guid post2Team1 = new Guid("ec16e28b-17e2-4f47-b19d-0b362003ca83");
+            Guid post3Team1 = new Guid("ec16e28b-27e2-4f47-b19d-0b362003ca83");
+                                                
+            Guid post1Team2 = new Guid("ec16e28b-07e2-1f47-b19d-0b362003ca83");
+            Guid post2Team2 = new Guid("ec16e28b-17e2-2f47-b19d-0b362003ca83");
+                                                
+            Guid post1Team3 = new Guid("ec16e28b-07e2-4f47-b19d-0b362003ca83");
 
             modelBuilder.Entity<PostEntity>().HasData(new PostEntity
             {
                 ID = post1Team1, Title = "Mediocrem", MessageText = loremIpsum6,
-                AuthorId = user1, TeamId = team1
+                AuthorId = user1, TeamId = team1,
+                PublishDate = new DateTime(2019, 2, 1, 0, 0, 0)
             }, new PostEntity
             {
                 ID = post2Team1,
                 Title = "Novum",
                 MessageText = loremIpsum1,
                 AuthorId = user2,
-                TeamId = team1
+                TeamId = team1,
+                PublishDate = new DateTime(2019, 3, 1, 0, 0, 0)
             }, new PostEntity
             {
                 ID = post3Team1,
                 Title = "Euismod",
                 MessageText = loremIpsum2,
                 AuthorId = user3,
-                TeamId = team1
+                TeamId = team1,
+                PublishDate = new DateTime(2019, 5, 1, 0, 0, 0)
             }, new PostEntity
             {
                 ID = post1Team2,
                 Title = "Splendide",
                 MessageText = loremIpsum3,
                 AuthorId = user2,
-                TeamId = team2
+                TeamId = team2,
+                PublishDate = new DateTime(2019, 1, 1, 7, 13, 50)
             }, new PostEntity
             {
                 ID = post2Team2,
                 Title = "Imperdiet",
                 MessageText = loremIpsum4,
                 AuthorId = user1,
-                TeamId = team2
+                TeamId = team2,
+                PublishDate = new DateTime(2019, 2, 1, 7, 13, 50)
             }, new PostEntity
             {
                 ID = post1Team3,
                 Title = "Putent",
                 MessageText = loremIpsum5,
                 AuthorId = user4,
-                TeamId = team3
+                TeamId = team3,
+                PublishDate = new DateTime(2019, 4, 1, 7, 13, 50)
             });
 
-            Guid comment1Post1Team1 = new Guid("ec16e27a-07e2-0f47-b09d-0f362003ca83");
-            Guid comment2Post1Team1 = new Guid("ec16e27a-07e2-0f47-b19d-0f362003ca83");
-            Guid comment3Post1Team1 = new Guid("ec16e27a-07e2-0f47-b29d-0f362003ca83");
-            Guid comment4Post1Team1 = new Guid("ec16e27a-07e2-0f47-b39d-0f362003ca83");
-                                                                           
-            Guid comment1Post2Team1 = new Guid("ec16e27a-07e2-4f47-b49d-0f362003ca83");
-            Guid comment2Post2Team1 = new Guid("ec16e27a-07e2-4f47-b59d-0f362003ca83");
-                                                                           
-            Guid comment1Post1Team2 = new Guid("ec16e27a-07e2-1f47-b69d-0f362003ca83");
-            Guid comment2Post1Team2 = new Guid("ec16e27a-07e2-1f47-b79d-0f362003ca83");
-                                                                           
-            Guid comment1Post2Team2 = new Guid("ec16e27a-07e2-2f47-b89d-0f362003ca83");
+            Guid comment1Post1Team1 = new Guid("dc16e27a-07e2-0f47-b09d-0f362003ca83");
+            Guid comment2Post1Team1 = new Guid("dc16e27a-07e2-0f47-b19d-0f362003ca83");
+            Guid comment3Post1Team1 = new Guid("dc16e27a-07e2-0f47-b29d-0f362003ca83");
+            Guid comment4Post1Team1 = new Guid("dc16e27a-07e2-0f47-b39d-0f362003ca83");
+                                                                         
+            Guid comment1Post2Team1 = new Guid("dc16e27a-07e2-4f47-b49d-0f362003ca83");
+            Guid comment2Post2Team1 = new Guid("dc16e27a-07e2-4f47-b59d-0f362003ca83");
+                                                                          
+            Guid comment1Post1Team2 = new Guid("dc16e27a-07e2-1f47-b69d-0f362003ca83");
+            Guid comment2Post1Team2 = new Guid("dc16e27a-07e2-1f47-b79d-0f362003ca83");
+                                                                          
+            Guid comment1Post2Team2 = new Guid("dc16e27a-07e2-2f47-b89d-0f362003ca83");
 
             modelBuilder.Entity<CommentEntity>().HasData(new CommentEntity
             {
                 ID = comment1Post1Team1,
                 MessageText = loremIpsum2,
-                AuthorId = user2
+                AuthorId = user2,
+                PostId = post1Team1,
+                PublishDate = new DateTime(2019, 2, 1, 5, 12, 4)
             }, new CommentEntity
             {
                 ID = comment2Post1Team1,
                 MessageText = loremIpsum1,
-                AuthorId = user3
+                AuthorId = user3,
+                PostId = post1Team1,
+                PublishDate = new DateTime(2019, 2, 3, 4, 17, 40)
             }, new CommentEntity
             {
                 ID = comment3Post1Team1,
                 MessageText = loremIpsum3,
-                AuthorId = user1
+                AuthorId = user1,
+                PostId = post1Team1,
+                PublishDate = new DateTime(2019, 3, 10, 11, 19, 31)
             }, new CommentEntity
             {
                 ID = comment4Post1Team1,
                 MessageText = loremIpsum4,
-                AuthorId = user4
+                AuthorId = user4,
+                PostId = post1Team1,
+                PublishDate = new DateTime(2019, 3, 10, 11, 20, 39)
             }, new CommentEntity
             {
                 ID = comment1Post2Team1,
                 MessageText = loremIpsum5,
-                AuthorId = user4
+                AuthorId = user4,
+                PostId = post2Team1,
+                PublishDate = new DateTime(2019, 3, 1, 1, 14, 2)
             }, new CommentEntity
             {
                 ID = comment2Post2Team1,
                 MessageText = loremIpsum6,
-                AuthorId = user3
+                AuthorId = user3,
+                PostId = post2Team1,
+                PublishDate = new DateTime(2019, 3, 1, 2, 4, 20)
             }, new CommentEntity
             {
                 ID = comment1Post1Team2,
                 MessageText = loremIpsum7,
-                AuthorId = user3
+                AuthorId = user3,
+                PostId = post1Team2,
+                PublishDate = new DateTime(2019, 1, 1, 7, 14, 50)
             }, new CommentEntity
             {
                 ID = comment2Post1Team2,
                 MessageText = loremIpsum8,
-                AuthorId = user2
+                AuthorId = user2,
+                PostId = post1Team2,
+                PublishDate = new DateTime(2019, 1, 1, 7, 15, 50)
             }, new CommentEntity
             {
                 ID = comment1Post2Team2,
                 MessageText = loremIpsum9,
-                AuthorId = user3
+                AuthorId = user3,
+                PostId = post2Team2,
+                PublishDate = new DateTime(2019, 2, 12, 7, 13, 52)
             });
         }
     }
