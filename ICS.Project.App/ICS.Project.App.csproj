@@ -158,10 +158,11 @@
     <Compile Include="Converters\GetNameInitials.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\InvertBoolConvertor.cs" />
+    <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\UserInitialsCircleViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\PostViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModels\IViewModel.cs" />
-    <Compile Include="ViewModels\MessengerScreenViewModels\ChatViewModel.cs" />
+    <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\OptionsPanelViewModel.cs" />
     <Compile Include="ViewModels\RegisterScreenViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\TeamDetailViewModel.cs" />

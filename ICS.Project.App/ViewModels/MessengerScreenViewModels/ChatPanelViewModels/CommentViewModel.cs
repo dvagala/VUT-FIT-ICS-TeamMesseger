@@ -12,6 +12,8 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewMode
 
         public CommentModel Comment { get; set; }
 
+        public UserInitialsCircleViewModel NewCommentUserInitialsCircleViewModel { get; set; }
+
 
         public CommentViewModel()
         {

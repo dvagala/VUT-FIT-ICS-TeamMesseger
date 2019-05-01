@@ -21,7 +21,7 @@
         <DataTemplate DataType="{x:Type viewModels:RegisterScreenViewModel}">
             <views:RegisterScreenView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type messengerScreenViewModels:ChatViewModel}">
+        <DataTemplate DataType="{x:Type messengerScreenViewModels:ChatPanelViewModel}">
             <views:MessengerScreenView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type baseViewModels:ViewModelBase}">

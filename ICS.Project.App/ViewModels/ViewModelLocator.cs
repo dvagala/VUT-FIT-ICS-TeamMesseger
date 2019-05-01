@@ -28,7 +28,7 @@ namespace ICS.Project.App.ViewModels
         public OptionsPanelViewModel OptionsPanelViewModel { get; }
         public TeamsListViewModel TeamsListViewModel { get; }
         public TeamDetailViewModel TeamDetailViewModel { get; }
-        public ChatViewModel ChatViewModel { get; }
+        public ChatPanelViewModel ChatPanelViewModel { get; }
 
         public ViewModelLocator()
         {
@@ -51,16 +51,18 @@ namespace ICS.Project.App.ViewModels
             OptionsPanelViewModel = new OptionsPanelViewModel(usersRepository, mediator);
             TeamDetailViewModel = new TeamDetailViewModel(teamsRepository, mediator);
             TeamsListViewModel = new TeamsListViewModel(teamsRepository, mediator);
-            ChatViewModel = new ChatViewModel(teamsRepository, postsRepository, commentsRepository, mediator);
+            ChatPanelViewModel = new ChatPanelViewModel(teamsRepository, postsRepository, commentsRepository, mediator);
 
 //            CurrentViewModel = LoginScreenViewModel;
-            CurrentViewModel = ChatViewModel;
+            CurrentViewModel = ChatPanelViewModel;
+
+            mediator.Send(new UserLoggedMessage { User = usersRepository.GetById(new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83")) });
+
 
             mediator.Send(new SelectedTeamMessage { Team = teamsRepository.GetFirst()});
 
 
             // Hack: Default logged user is student admin
-            mediator.Send(new UserLoggedMessage { User = usersRepository.GetById(new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83")) });
         }
 
         public void GoToLoginScreen(GoToLoginScreenMessage message)
@@ -75,7 +77,7 @@ namespace ICS.Project.App.ViewModels
 
         public void GoToMessengerScreen(GoToMessengerScreenMessage message)
         {
-            CurrentViewModel = ChatViewModel;
+            CurrentViewModel = ChatPanelViewModel;
         }
     }
 }

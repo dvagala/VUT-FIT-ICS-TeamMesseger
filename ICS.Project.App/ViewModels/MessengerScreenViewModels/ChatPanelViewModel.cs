@@ -14,7 +14,7 @@ using ICS.Project.BL.Services;
 
 namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 {
-    public class ChatViewModel : ViewModelBase, IViewModel
+    public class ChatPanelViewModel : ViewModelBase, IViewModel
     {
         private readonly ITeamsRepository _teamsRepository;
         private readonly IPostsRepository _postsRepository;
@@ -22,14 +22,17 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         private readonly IMediator _mediator;
 
         public ObservableCollection<PostViewModel> PostViewModels { get; set; } = new ObservableCollection<PostViewModel>();
-        public PostViewModel NewPostViewModel { get; set; }
+
+        public PostModel NewPost { get; set; }
+        public UserInitialsCircleViewModel NewPostUserInitialsCircleViewModel { get; set; }
+
         public TeamModel Team { get; set; }
         public UserModel LoggedUser { get; set; }
 
         public ICommand AddNewPostCommand { get; set; }
 
 
-        public ChatViewModel(ITeamsRepository teamsRepository, IPostsRepository postsRepository, ICommentsRepository commentsRepository, IMediator mediator)
+        public ChatPanelViewModel(ITeamsRepository teamsRepository, IPostsRepository postsRepository, ICommentsRepository commentsRepository, IMediator mediator)
         {
             _teamsRepository = teamsRepository;
             _postsRepository = postsRepository;
@@ -41,20 +44,22 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
             AddNewPostCommand = new RelayCommand(AddNewPost, CanAddNewPost);
 
-            NewPostViewModel = new PostViewModel(_commentsRepository, _mediator) { Post = new PostModel() };
+            NewPost = new PostModel();
 
         }
 
         public bool CanAddNewPost()
         {
-            return !string.IsNullOrEmpty(NewPostViewModel.Post.Title) &&
-                   !string.IsNullOrEmpty(NewPostViewModel.Post.MessageText);
+            return !string.IsNullOrEmpty(NewPost.Title) &&
+                   !string.IsNullOrEmpty(NewPost.MessageText);
         }
 
         public void AddNewPost()
         {
-            _postsRepository.Add(NewPostViewModel.Post);
-            NewPostViewModel = new PostViewModel(_commentsRepository, _mediator){ Post = new PostModel{ TeamId = Team.ID, AuthorId = LoggedUser.ID, Author = LoggedUser}};
+            _postsRepository.Add(NewPost);
+//            PostViewModels.Insert(0, new PostViewModel(_commentsRepository, _mediator, postFromDb, LoggedUser));
+            NewPost = new PostModel{ TeamId = Team.ID, AuthorId = LoggedUser.ID, Author = LoggedUser};
+
             Refresh();
         }
 
@@ -62,16 +67,15 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         {
             LoggedUser = userLoggedMessage.User;
 
-            NewPostViewModel = new PostViewModel(_commentsRepository, _mediator) { Post = new PostModel{ TeamId = Team.ID, Author = LoggedUser, AuthorId = LoggedUser.ID}};
-//
-//            NewPostViewModel.Post.Author = LoggedUser;
-//            NewPostViewModel.Post.AuthorId = LoggedUser.ID;
+            NewPost.Author = LoggedUser;
+            NewPost.AuthorId = LoggedUser.ID;
+            NewPostUserInitialsCircleViewModel = new UserInitialsCircleViewModel {User = LoggedUser};
         }
 
         private void TeamSelected(SelectedTeamMessage selectedTeamMessage)
         {
             Team = selectedTeamMessage.Team;
-            NewPostViewModel.Post.TeamId = Team.ID;
+            NewPost.TeamId = Team.ID;
             Refresh();
         }
 
@@ -83,7 +87,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             // Sort here
             foreach (var post in posts)
             {
-                PostViewModels.Add(new PostViewModel(_commentsRepository, _mediator) { Post = post, LoggedUser = LoggedUser});
+                PostViewModels.Add(new PostViewModel(_commentsRepository, _mediator, post, LoggedUser));
             }
         }
 

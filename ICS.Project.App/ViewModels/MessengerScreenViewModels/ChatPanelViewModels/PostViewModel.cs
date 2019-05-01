@@ -20,56 +20,49 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewMode
         public ICommand AddNewCommentCommand { get; set; }
 
         public ObservableCollection<CommentViewModel> CommentViewModels { get; set; } = new ObservableCollection<CommentViewModel>();
-        public CommentViewModel NewCommentViewModel { get; set; }
+
+        public CommentModel NewComment { get; set; }
+        public UserInitialsCircleViewModel NewCommentUserInitialsCircleViewModel { get; set; }
 
         public PostModel Post { get; set; }
         public UserModel LoggedUser { get; set; }
+        public UserInitialsCircleViewModel PostUserInitialsCircleViewModel { get; set; }
 
 
-        public PostViewModel( ICommentsRepository commentsRepository, IMediator mediator)
+        public PostViewModel( ICommentsRepository commentsRepository, IMediator mediator, PostModel post, UserModel loggedUser)
         {
             _commentsRepository = commentsRepository;
             _mediator = mediator;
 
+            Post = post;
+            LoggedUser = loggedUser;
+            PostUserInitialsCircleViewModel = new UserInitialsCircleViewModel { User = Post.Author };
+            NewComment = new CommentModel{Author = LoggedUser, AuthorId = LoggedUser.ID, PostId = Post.ID};
+            NewCommentUserInitialsCircleViewModel = new UserInitialsCircleViewModel { User = LoggedUser };
+
             AddNewCommentCommand = new RelayCommand(AddNewComment, CanAddNewComment);
 
-
+            foreach (var comment in Post.Comments)
+            {
+                CommentViewModels.Add(new CommentViewModel { Comment = comment, NewCommentUserInitialsCircleViewModel = new UserInitialsCircleViewModel { User = comment.Author } });
+            }
         }
 
         public bool CanAddNewComment()
         {
-            return !string.IsNullOrEmpty(NewCommentViewModel.Comment.MessageText);
+            return !string.IsNullOrEmpty(NewComment.MessageText);
         }
 
         public void AddNewComment()
         {
-            _commentsRepository.Add(NewCommentViewModel.Comment);
-            NewCommentViewModel = new CommentViewModel{ Comment = new CommentModel { PostId = Post.ID, Author = LoggedUser, AuthorId = LoggedUser.ID } };
-            Refresh();
+            var commentFromDb = _commentsRepository.Add(NewComment);
+            commentFromDb.Author = LoggedUser;
+            CommentViewModels.Add(new CommentViewModel { Comment = commentFromDb, NewCommentUserInitialsCircleViewModel = new UserInitialsCircleViewModel { User = commentFromDb.Author } });
+            NewComment = new CommentModel{Author = LoggedUser, AuthorId = LoggedUser.ID, PostId = Post.ID};
         }
-
 
         public void Load()
         {
-            NewCommentViewModel = new CommentViewModel { Comment = new CommentModel { PostId = Post.ID, Author = LoggedUser, AuthorId = LoggedUser.ID } };
-
-            Refresh();
-        }
-
-        public void Refresh()
-        {
-            CommentViewModels.Clear();
-
-            if (Post.Comments == null)
-            {
-                return;
-            }
-
-            // Sort here
-            foreach (var comment in Post.Comments)
-            {
-                CommentViewModels.Add(new CommentViewModel { Comment = comment });
-            }
         }
     }
 }

@@ -13,7 +13,7 @@
              d:DataContext="{d:DesignInstance chatPanelViewModels:CommentViewModel}">
 
     <StackPanel Orientation="Horizontal">
-        <chatPanelControls:UserInitialsCircleView DataContext="{Binding}" />
+        <chatPanelControls:UserInitialsCircleView DataContext="{Binding NewCommentUserInitialsCircleViewModel}" />
         <Border VerticalAlignment="Top"
                 HorizontalAlignment="Left"
                 Margin="0, 10"
