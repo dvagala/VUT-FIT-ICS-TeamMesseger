@@ -14,6 +14,7 @@
 
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Vertical" Margin="0,20,0,0">
+            <TextBlock Text="{Binding Post.Author, Converter={StaticResource UserToFullNameConvertor}}" Margin="40,0,0,0" />
             <StackPanel Orientation="Horizontal">
                 <chatPanelControls:UserInitialsCircleView DataContext="{Binding PostUserInitialsCircleViewModel}" />
                 <Border VerticalAlignment="Top"

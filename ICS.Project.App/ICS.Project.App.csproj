@@ -154,6 +154,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converters\UserToFullNameConvertor.cs" />
     <Compile Include="Converters\EmptyTextBoxUnfocusedToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeFormatConvertor.cs" />
     <Compile Include="Converters\GetNameInitialsConvertor.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\PostViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModel.cs" />
+    <Compile Include="ViewModels\MessengerScreenViewModels\MembersListViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\OptionsPanelViewModel.cs" />
     <Compile Include="ViewModels\RegisterScreenViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\TeamDetailViewModel.cs" />
@@ -181,6 +183,9 @@
     </Compile>
     <Compile Include="Views\MessengerScreenControls\ChatPanelView.xaml.cs">
       <DependentUpon>ChatPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessengerScreenControls\MembersListView.xaml.cs">
+      <DependentUpon>MembersListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MessengerScreenControls\OptionsPanelView.xaml.cs">
       <DependentUpon>OptionsPanelView.xaml</DependentUpon>
@@ -214,6 +219,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MessengerScreenControls\ChatPanelView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MessengerScreenControls\MembersListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
