@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.InteropServices;
-using System.Windows;
+using System.Linq;
 using System.Windows.Input;
 using ICS.Project.App.Commands;
 using ICS.Project.App.ViewModels.BaseViewModels;
@@ -21,7 +19,8 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         private readonly ICommentsRepository _commentsRepository;
         private readonly IMediator _mediator;
 
-        public ObservableCollection<PostViewModel> PostViewModels { get; set; } = new ObservableCollection<PostViewModel>();
+        public ObservableCollection<PostViewModel> PostViewModels { get; set; } =
+            new ObservableCollection<PostViewModel>();
 
         public PostModel NewPost { get; set; }
         public UserInitialsCircleViewModel NewPostUserInitialsCircleViewModel { get; set; }
@@ -32,7 +31,8 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         public ICommand AddNewPostCommand { get; set; }
 
 
-        public ChatPanelViewModel(ITeamsRepository teamsRepository, IPostsRepository postsRepository, ICommentsRepository commentsRepository, IMediator mediator)
+        public ChatPanelViewModel(ITeamsRepository teamsRepository, IPostsRepository postsRepository,
+            ICommentsRepository commentsRepository, IMediator mediator)
         {
             _teamsRepository = teamsRepository;
             _postsRepository = postsRepository;
@@ -42,8 +42,31 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             _mediator.Register<SelectedTeamMessage>(TeamSelected);
             _mediator.Register<UserLoggedMessage>(UserLogged);
             _mediator.Register<UserLogoutMessage>(UserLogout);
+            _mediator.Register<UserWantsToSearchText>(FilterPostViewModels);
 
             AddNewPostCommand = new RelayCommand(AddNewPost, CanAddNewPost);
+        }
+
+
+        public void FilterPostViewModels(UserWantsToSearchText userWantsToSearchText)
+        {
+            var searchedText = userWantsToSearchText.SearchedText;
+
+            if (!string.IsNullOrEmpty(searchedText))
+            {
+                PostViewModels.Clear();
+                var posts = _teamsRepository.GetPostsWithCommentsAndAuthors(Team.ID);
+
+                // Sort here
+                foreach (var post in posts)
+                    if (post.MessageText.Contains(searchedText) || post.Author.FullName.Contains(searchedText) ||
+                        post.Title.Contains(searchedText) || post.Comments.Any(s => s.MessageText.Contains(searchedText) || s.Author.FullName.Contains(searchedText)))
+                        PostViewModels.Add(new PostViewModel(_commentsRepository, _mediator, post, LoggedUser));
+            }
+            else
+            {
+                if (Team != null) Refresh();
+            }
         }
 
         public bool CanAddNewPost()
@@ -56,7 +79,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         {
             NewPost.PublishDate = DateTime.Now;
             _postsRepository.Add(NewPost);
-            NewPost = new PostModel{ TeamId = Team.ID, AuthorId = LoggedUser.ID, Author = LoggedUser};
+            NewPost = new PostModel {TeamId = Team.ID, AuthorId = LoggedUser.ID, Author = LoggedUser};
 
             Refresh();
         }
@@ -84,13 +107,10 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         private void TeamSelected(SelectedTeamMessage selectedTeamMessage)
         {
-//            MessageBox.Show($"ChatPanel receive msg Team: {selectedTeamMessage.Team?.Name} {selectedTeamMessage.Team?.ID}");
-
             if (selectedTeamMessage.Team == null)
             {
                 Team = null;
                 PostViewModels.Clear();
-//                MessageBox.Show("isnull");
             }
             else
             {
@@ -103,13 +123,11 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         public void Refresh()
         {
             PostViewModels.Clear();
-            IList<PostModel> posts = _teamsRepository.GetPostsWithCommentsAndAuthors(Team.ID);
+            var posts = _teamsRepository.GetPostsWithCommentsAndAuthors(Team.ID);
 
             // Sort here
             foreach (var post in posts)
-            {
                 PostViewModels.Add(new PostViewModel(_commentsRepository, _mediator, post, LoggedUser));
-            }
         }
 
         public void Load()

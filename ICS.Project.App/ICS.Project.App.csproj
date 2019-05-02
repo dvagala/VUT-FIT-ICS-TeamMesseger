@@ -167,6 +167,7 @@
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\PostViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModel.cs" />
+    <Compile Include="ViewModels\MessengerScreenViewModels\SearchPanelViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\TeamDetailViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\OptionsPanelViewModel.cs" />
     <Compile Include="ViewModels\RegisterScreenViewModel.cs" />
@@ -184,6 +185,9 @@
     </Compile>
     <Compile Include="Views\MessengerScreenControls\ChatPanelView.xaml.cs">
       <DependentUpon>ChatPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessengerScreenControls\SearchPanelView.xaml.cs">
+      <DependentUpon>SearchPanelView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MessengerScreenControls\TeamDetailView.xaml.cs">
       <DependentUpon>TeamDetailView.xaml</DependentUpon>
@@ -217,6 +221,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MessengerScreenControls\ChatPanelView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MessengerScreenControls\SearchPanelView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

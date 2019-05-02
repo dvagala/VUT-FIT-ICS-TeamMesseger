@@ -22,11 +22,10 @@ namespace ICS.Project.App.ViewModels
         private readonly ICommentsRepository commentsRepository;
 
         public ViewModelBase CurrentViewModel { get; set; }
-
-
         public LoginScreenViewModel LoginScreenViewModel { get; }
         public RegisterScreenViewModel RegisterScreenViewModel { get; }
         public OptionsPanelViewModel OptionsPanelViewModel { get; }
+        public SearchPanelViewModel SearchPanelViewModel { get; }
         public TeamsListViewModel TeamsListViewModel { get; }
         public TeamDetailViewModel TeamDetailViewModel { get; }
         public ChatPanelViewModel ChatPanelViewModel { get; }
@@ -50,16 +49,12 @@ namespace ICS.Project.App.ViewModels
             RegisterScreenViewModel = new RegisterScreenViewModel(usersRepository, mediator);
 
             OptionsPanelViewModel = new OptionsPanelViewModel(usersRepository, mediator);
+            SearchPanelViewModel = new SearchPanelViewModel(mediator);
             TeamsListViewModel = new TeamsListViewModel(teamsRepository, mediator);
             TeamDetailViewModel = new TeamDetailViewModel(usersRepository, teamsRepository, mediator);
             ChatPanelViewModel = new ChatPanelViewModel(teamsRepository, postsRepository, commentsRepository, mediator);
 
             CurrentViewModel = LoginScreenViewModel;
-
-//            // Hack: Default logged user is student admin
-//            CurrentViewModel = ChatPanelViewModel;
-//            mediator.Send(new UserLoggedMessage { User = usersRepository.GetById(new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83")) });
-//            mediator.Send(new SelectedTeamMessage { Team = teamsRepository.GetUserTeams(new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83")).First()});
         }
 
         public void GoToLoginScreen(GoToLoginScreenMessage message)

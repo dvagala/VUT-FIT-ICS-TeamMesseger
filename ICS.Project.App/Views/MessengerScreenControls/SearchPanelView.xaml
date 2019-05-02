@@ -1,0 +1,22 @@
+﻿<base:UserControlCustom x:Class="ICS.Project.App.Views.MessengerScreenControls.SearchPanelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:ICS.Project.App.Views"
+             xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
+             xmlns:messengerScreenViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels"
+             xmlns:base="clr-namespace:ICS.Project.App.Views.Base"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance messengerScreenViewModels:SearchPanelViewModel}"
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SearchPanelViewModel}">
+
+    <DockPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" Visibility="{Binding Team, Converter={StaticResource NullToVisibilityConverter}}">
+        <TextBlock Text="{Binding Team.Name}" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <TextBlock Text="Serch in team" Margin="0,0,10,0" />
+            <TextBox Width="150" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+    </DockPanel>
+</base:UserControlCustom>
