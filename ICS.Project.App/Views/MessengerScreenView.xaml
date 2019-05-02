@@ -26,9 +26,6 @@
             <messengerScreenControls:ChatPanelView />
             <ToggleButton x:Name="CollapsingToggleButton" IsChecked="True" Width="10" Height="25" Content=">" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,30" />
         </Grid>
-        <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="1">
-            <messengerScreenControls:TeamDetailView />
-            <messengerScreenControls:MembersListView Margin="0,0,0,0"/>
-        </StackPanel>
+        <messengerScreenControls:TeamDetailView Grid.Column="2" Grid.Row="1"/>
     </Grid>
 </ContentControl>

@@ -17,6 +17,11 @@ namespace ICS.Project.BL.Repositories
 
         IList<PostModel> GetPostsWithCommentsAndAuthors(Guid teamId);
 
+        IList<PostModel> GetPostsWithComments(Guid teamId);
+
+
+        void RemoveWithAllPostsAndComments(Guid id);
+
         IList<TeamModel> GetAll();
         TeamModel GetFirst();
         TeamModel GetById(Guid id);

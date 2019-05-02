@@ -5,7 +5,7 @@ using ICS.Project.BL.Models;
 
 namespace ICS.Project.BL.Messages
 {
-    public class UserRemovedHimselfFromTeamMessage : IMessage
+    public class UserLostAccessToTeam : IMessage
     {
         public TeamModel Team { get; set; }
     }

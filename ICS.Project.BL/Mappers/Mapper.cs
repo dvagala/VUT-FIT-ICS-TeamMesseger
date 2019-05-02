@@ -85,6 +85,21 @@ namespace ICS.Project.BL.Mappers
                 Comments = post.Comments.Select(MapCommentModelFromEntityWithAuthor).ToList()
             };
         }
+
+        public static PostModel MapPostModelFromEntityWithComments(PostEntity post)
+        {
+            return new PostModel
+            {
+                ID = post.ID,
+                Title = post.Title,
+                MessageText = post.MessageText,
+                PublishDate = post.PublishDate,
+                AuthorId = post.AuthorId,
+                TeamId = post.TeamId,
+                Comments = post.Comments.Select(MapCommentModelFromEntity).ToList()
+            };
+        }
+
         public static PostModel MapPostModelFromEntityWithAuthor(PostEntity post)
         {
             return new PostModel

@@ -2,11 +2,11 @@
 namespace ICS.Project.App.Views.MessengerScreenControls
 {
     /// <summary>
-    /// Interaction logic for TeamListView.xaml
+    /// Interaction logic for TeamDetailView.xaml
     /// </summary>
-    public partial class TeamListView
+    public partial class TeamDetailView
     {
-        public TeamListView()
+        public TeamDetailView()
         {
             InitializeComponent();
         }

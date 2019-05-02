@@ -31,6 +31,17 @@ namespace ICS.Project.BL.Repositories
             return posts;
         }
 
+        public IList<PostModel> GetPostsWithComments(Guid teamId)
+        {
+            var posts = dbContextFactory.CreateDbContext()
+                .Posts
+                .Include(s => s.Comments)
+                .Where(s => s.TeamId == teamId)
+                .Select(s => Mapper.MapPostModelFromEntityWithComments(s)).ToList();
+
+            return posts;
+        }
+
         public IList<PostModel> GetPostsWithAuthors(Guid teamId)
         {
             var posts = dbContextFactory.CreateDbContext()
@@ -155,17 +166,52 @@ namespace ICS.Project.BL.Repositories
                 return Mapper.MapTeamModelFromEntity(entity);
             }
         }
+        public void RemoveWithAllPostsAndComments(Guid id)
+        {
+            foreach (var post in GetPostsWithComments(id))
+            {                
+                foreach (var comment in post.Comments)
+                {
+                    using (var dbContext = dbContextFactory.CreateDbContext())
+                    {
+                        var commentEntity = new CommentEntity
+                        {
+                            ID = comment.ID
+                        };
+                        dbContext.Comments.Attach(commentEntity);
+                        dbContext.Comments.Remove(commentEntity);
+                        dbContext.SaveChanges();
+                    }
+                }
+                using (var dbContext = dbContextFactory.CreateDbContext())
+                {
+                    var postEntity = new PostEntity()
+                    {
+                        ID = post.ID
+                    };
+                    dbContext.Posts.Attach(postEntity);
+                    dbContext.Posts.Remove(postEntity);
+                    dbContext.SaveChanges();
+                }
+            }
+
+            foreach (var member in GetTeamMembers(id))
+            {
+                RemoveUserFromTeam(member.ID, id);
+            }
+            Remove(id);
+        }
 
         public void Remove(Guid id)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var post = new TeamEntity
+                var team = new TeamEntity
                 {
                     ID = id
                 };
-                dbContext.Teams.Attach(post);
-                dbContext.Teams.Remove(post);
+                dbContext.Teams.Attach(team);
+                dbContext.Teams.Remove(team);
                 dbContext.SaveChanges();
             }
         }

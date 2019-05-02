@@ -36,7 +36,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
             _mediator.Register<UserLoggedMessage>(UserLogged);
             _mediator.Register<UserLogoutMessage>(UserLogout);
-            _mediator.Register<UserRemovedHimselfFromTeamMessage>(UserRemovedHimselfFromTeam);
+            _mediator.Register<UserLostAccessToTeam>(RemoveTeamInListView);
             _mediator.Register<RefreshDataInMesssengerScreenMessage>(RefreshDataInMesssengerScreen);
         }
 
@@ -62,10 +62,10 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             _mediator.Send(new SelectedTeamMessage { Team = _teamsRepository.GetUserTeams(LoggedUser.ID).FirstOrDefault() });
         }
 
-        public void UserRemovedHimselfFromTeam(UserRemovedHimselfFromTeamMessage userRemovedHimselfFromTeamMessage)
+        public void RemoveTeamInListView(UserLostAccessToTeam userLostAccessToTeam)
         {
             int oldSelectedIndex = SelectedIndexInListBox;
-            Teams.Remove(Teams.Single(i => i.ID == userRemovedHimselfFromTeamMessage.Team.ID));
+            Teams.Remove(Teams.Single(i => i.ID == userLostAccessToTeam.Team.ID));
 
             if (!Teams.Any())
             {
