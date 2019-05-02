@@ -13,7 +13,7 @@
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=TeamsListViewModel}">
 
     <StackPanel Grid.Row="1" Orientation="Vertical">
-
+        <TextBlock Text="My teams" FontWeight="Bold"/>
         <ListBox x:Name="TeamsListBox" ItemsSource="{Binding Teams }" SelectedIndex="{Binding SelectedIndexInListBox, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">

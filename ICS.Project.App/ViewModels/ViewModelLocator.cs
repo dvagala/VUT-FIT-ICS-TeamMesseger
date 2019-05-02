@@ -56,12 +56,12 @@ namespace ICS.Project.App.ViewModels
             MembersListViewModel = new MembersListViewModel(usersRepository, teamsRepository, mediator);
             ChatPanelViewModel = new ChatPanelViewModel(teamsRepository, postsRepository, commentsRepository, mediator);
 
-//            CurrentViewModel = LoginScreenViewModel;
-            CurrentViewModel = ChatPanelViewModel;
+            CurrentViewModel = LoginScreenViewModel;
+//            CurrentViewModel = ChatPanelViewModel;
 
-            // Hack: Default logged user is student admin
-            mediator.Send(new UserLoggedMessage { User = usersRepository.GetById(new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83")) });
-            mediator.Send(new SelectedTeamMessage { Team = teamsRepository.GetUserTeams(new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83")).First()});
+//            // Hack: Default logged user is student admin
+//            mediator.Send(new UserLoggedMessage { User = usersRepository.GetById(new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83")) });
+//            mediator.Send(new SelectedTeamMessage { Team = teamsRepository.GetUserTeams(new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83")).First()});
         }
 
         public void GoToLoginScreen(GoToLoginScreenMessage message)

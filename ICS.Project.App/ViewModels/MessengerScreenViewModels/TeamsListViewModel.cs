@@ -34,9 +34,8 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             _mediator = mediator;
             _teamsRepository = teamsRepository;
 
-            NewTeam = new TeamModel();
-
             _mediator.Register<UserLoggedMessage>(UserLogged);
+            _mediator.Register<UserLogoutMessage>(UserLogout);
             _mediator.Register<UserRemovedHimselfFromTeamMessage>(UserRemovedHimselfFromTeam);
             _mediator.Register<RefreshDataInMesssengerScreenMessage>(RefreshDataInMesssengerScreen);
         }
@@ -44,28 +43,44 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         private void UserLogged(UserLoggedMessage userLoggedMessage)
         {
             LoggedUser = userLoggedMessage.User;
-            Refresh();
-            SelectedIndexInListBox = 0;
+        }
+
+        private void UserLogout(UserLogoutMessage userLoggedMessage)
+        {
+            LoggedUser = null;
+            NewTeam = null;
+            Teams.Clear();
         }
 
         public void Load()
         {
+            NewTeam = new TeamModel();
+            SelectedIndexInListBox = 0;
+
+            Refresh();
+
+            _mediator.Send(new SelectedTeamMessage { Team = _teamsRepository.GetUserTeams(LoggedUser.ID).FirstOrDefault() });
         }
 
         public void UserRemovedHimselfFromTeam(UserRemovedHimselfFromTeamMessage userRemovedHimselfFromTeamMessage)
         {
             int oldSelectedIndex = SelectedIndexInListBox;
-            Teams.Remove(userRemovedHimselfFromTeamMessage.Team);
+            Teams.Remove(Teams.Single(i => i.ID == userRemovedHimselfFromTeamMessage.Team.ID));
 
+            if (!Teams.Any())
+            {
+                _mediator.Send(new SelectedTeamMessage { Team = null });
+            }
+
+            // Deleting item at the bottom
             if (Teams.Count == oldSelectedIndex)
             {
                 SelectedIndexInListBox = oldSelectedIndex - 1;
             }
-            else
+            else  // Deleting item in the middle
             {
                 SelectedIndexInListBox = oldSelectedIndex;
             }
-
         }
 
         public void RefreshDataInMesssengerScreen(RefreshDataInMesssengerScreenMessage refreshDataInMesssengerScreenMessage)
@@ -78,7 +93,20 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             int oldSelectedIndex = SelectedIndexInListBox;
             Teams.Clear();
             foreach (var team in _teamsRepository.GetUserTeams(LoggedUser.ID)) Teams.Add(team);
-            SelectedIndexInListBox = oldSelectedIndex;
+
+            if (!Teams.Any())
+            {
+                _mediator.Send(new SelectedTeamMessage { Team = null });
+            }
+
+            if (oldSelectedIndex < 0 || oldSelectedIndex >= Teams.Count)
+            {
+                SelectedIndexInListBox = 0;
+            }
+            else
+            {
+                SelectedIndexInListBox = oldSelectedIndex;
+            }
         }
 
         public void AddNewTeam()

@@ -11,7 +11,7 @@
              d:DataContext="{d:DesignInstance messengerScreenViewModels:TeamDetailViewModel}"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=TeamDetailViewModel}">
 
-    <StackPanel Grid.Row="1" Orientation="Vertical">
+    <StackPanel Orientation="Vertical" Visibility="{Binding Team, Converter={StaticResource NullToVisibilityConverter}}">
         <Label Content= "{Binding Team.Name}" FontWeight="Bold"/>
         <TextBlock Visibility="{Binding IsDescriptionInEditMode, Converter={ StaticResource InvertBooleanToVisibilityConverter}}" TextWrapping="Wrap" Text="{Binding Team.Description, TargetNullValue='Here write a description'}" />
         <TextBox x:Name="DescriptionTextBox" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Text="{Binding Team.Description, UpdateSourceTrigger=PropertyChanged}" />

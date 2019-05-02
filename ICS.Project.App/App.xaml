@@ -15,6 +15,7 @@
             <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
             <converters:GetNameInitialsConvertor x:Key="GetNameInitials" />
             <converters:DateTimeFormatConvertor x:Key="DateTimeFormatConvertor" />
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application> 

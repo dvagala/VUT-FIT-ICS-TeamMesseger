@@ -13,7 +13,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         private readonly ITeamsRepository _teamsRepository;
         private readonly IMediator _mediator;
 
-        public bool IsDescriptionInEditMode { get; set; } = false;
+        public bool IsDescriptionInEditMode { get; set; }
         public TeamModel Team { get; set; }
 
 

@@ -60,6 +60,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         private void Logout()
         {
             _mediator.Send(new GoToLoginScreenMessage());
+            _mediator.Send(new UserLogoutMessage());
         }
 
         private void Refresh()

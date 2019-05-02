@@ -12,7 +12,8 @@
              d:DataContext="{d:DesignInstance messengerScreenViewModels:MembersListViewModel}"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=MembersListViewModel}">
 
-    <StackPanel Grid.Row="1" Orientation="Vertical">
+    <StackPanel Grid.Row="1" Orientation="Vertical" Visibility="{Binding Team, Converter={StaticResource NullToVisibilityConverter}}">
+        <Separator Margin="15"/>
         <TextBlock Text="Members:" FontWeight="Bold">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseLeftButtonUp">
@@ -64,7 +65,7 @@
         </ListView>
         <StackPanel Orientation="Horizontal" Margin="5">
             <!-- <TextBox Text="{Binding NewTeam.Name, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="0,0,5,0" TextWrapping="Wrap" Width="80" /> -->
-            <ComboBox
+            <ComboBox Width="100"
                       ItemsSource="{Binding Path=AvailableMembers}"
                       DisplayMemberPath="FullName"
                       SelectedItem="{Binding Path=SelectedUserInComboBox}"/>

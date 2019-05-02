@@ -40,10 +40,9 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             _usersRepository = usersRepository;
             _teamsRepository = teamsRepository;
 
-            SelectedUserInComboBox = new UserModel();
-
             _mediator.Register<SelectedTeamMessage>(TeamSelected);
             _mediator.Register<UserLoggedMessage>(UserLogged);
+            _mediator.Register<UserLogoutMessage>(UserLogout);
         }
 
         private void UserLogged(UserLoggedMessage userLoggedMessage)
@@ -51,29 +50,45 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             LoggedUser = userLoggedMessage.User;
         }
 
+        private void UserLogout(UserLogoutMessage userLoggedMessage)
+        {
+            LoggedUser = null;
+        }
+
         private void TeamSelected(SelectedTeamMessage selectedTeamMessage)
         {
-            Team = selectedTeamMessage.Team;
 
-            Members.Clear();
-            foreach (var member in _usersRepository.GetTeamMembers(Team.ID))
+            if (selectedTeamMessage.Team == null)
             {
-                Members.Add(member);
+                Team = null;
+                Members.Clear();
+                AvailableMembers.Clear();
+                SelectedUserInComboBox = null;
             }
-
-            AvailableMembers.Clear();
-            foreach (var member in _usersRepository.GetAll().Where(s => !Members.Select(e => e.ID).Contains(s.ID)))
+            else
             {
-                AvailableMembers.Add(member);
-            }
+                Team = selectedTeamMessage.Team;
 
-            SelectedUserInComboBox = AvailableMembers.FirstOrDefault();
+                Members.Clear();
+                foreach (var member in _usersRepository.GetTeamMembers(Team.ID))
+                {
+                    Members.Add(member);
+                }
+
+                AvailableMembers.Clear();
+                foreach (var member in _usersRepository.GetAll().Where(s => !Members.Select(e => e.ID).Contains(s.ID)))
+                {
+                    AvailableMembers.Add(member);
+                }
+
+                SelectedUserInComboBox = AvailableMembers.FirstOrDefault();
+            }
         }
 
         public void Load()
         {
+            SelectedUserInComboBox = new UserModel();
         }
-
 
         public void AddNewTeamMember()
         {
@@ -110,16 +125,18 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             if (messageBoxResult == MessageBoxResult.No) return;
 
             _teamsRepository.RemoveUserFromTeam(clickedUser.ID, Team.ID);
-            Members.Remove(clickedUser);
-            AvailableMembers.Add(clickedUser);
-            SelectedUserInComboBox = AvailableMembers.FirstOrDefault();
 
             if (clickedUser.ID == LoggedUser.ID)
             {
                 _mediator.Send(new UserRemovedHimselfFromTeamMessage { Team = Team });
             }
+            else
+            {
+                Members.Remove(clickedUser);
+                AvailableMembers.Add(clickedUser);
+                SelectedUserInComboBox = AvailableMembers.FirstOrDefault();
+            }
         }
-
 
         private void MemberClicked()
         {

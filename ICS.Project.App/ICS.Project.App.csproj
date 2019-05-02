@@ -157,8 +157,10 @@
     <Compile Include="Converters\EmptyTextBoxUnfocusedToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeFormatConvertor.cs" />
     <Compile Include="Converters\GetNameInitialsConvertor.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\InvertBoolConvertor.cs" />
+    <Compile Include="ViewModels\MessengerScreenViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\UserInitialsCircleViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\PostViewModel.cs" />

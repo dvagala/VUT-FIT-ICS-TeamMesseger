@@ -15,7 +15,8 @@
                          DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ChatPanelViewModel}">
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10" >
+        <TextBlock Text="&lt;---  Add a new team or select existing one to see something." Margin="10" Visibility="{Binding ElementName=ChatScrollViewer, Path=IsVisible, Converter={StaticResource InvertBooleanToVisibilityConverter}}"/>
+        <ScrollViewer x:Name="ChatScrollViewer" VerticalScrollBarVisibility="Auto" Margin="10" Visibility="{Binding Team, Converter={StaticResource NullToVisibilityConverter}}" >
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <chatPanelControls:UserInitialsCircleView DataContext="{Binding NewPostUserInitialsCircleViewModel}" />

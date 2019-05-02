@@ -23,7 +23,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         public ObservableCollection<PostViewModel> PostViewModels { get; set; } = new ObservableCollection<PostViewModel>();
 
-        public PostModel NewPost { get; set; } = new PostModel();
+        public PostModel NewPost { get; set; }
         public UserInitialsCircleViewModel NewPostUserInitialsCircleViewModel { get; set; }
 
         public TeamModel Team { get; set; }
@@ -41,14 +41,15 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
             _mediator.Register<SelectedTeamMessage>(TeamSelected);
             _mediator.Register<UserLoggedMessage>(UserLogged);
+            _mediator.Register<UserLogoutMessage>(UserLogout);
 
             AddNewPostCommand = new RelayCommand(AddNewPost, CanAddNewPost);
         }
 
         public bool CanAddNewPost()
         {
-            return !string.IsNullOrEmpty(NewPost.Title) &&
-                   !string.IsNullOrEmpty(NewPost.MessageText);
+            return !string.IsNullOrEmpty(NewPost?.Title) &&
+                   !string.IsNullOrEmpty(NewPost?.MessageText);
         }
 
         public void AddNewPost()
@@ -64,16 +65,39 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         {
             LoggedUser = userLoggedMessage.User;
 
-            NewPost.Author = LoggedUser;
-            NewPost.AuthorId = LoggedUser.ID;
+            NewPost = new PostModel
+            {
+                Author = LoggedUser,
+                AuthorId = LoggedUser.ID
+            };
             NewPostUserInitialsCircleViewModel = new UserInitialsCircleViewModel {User = LoggedUser};
+        }
+
+        private void UserLogout(UserLogoutMessage userLoggedMessage)
+        {
+            LoggedUser = null;
+            Team = null;
+            NewPost = null;
+            PostViewModels.Clear();
+            NewPostUserInitialsCircleViewModel = null;
         }
 
         private void TeamSelected(SelectedTeamMessage selectedTeamMessage)
         {
-            Team = selectedTeamMessage.Team;
-            NewPost.TeamId = Team.ID;
-            Refresh();
+//            MessageBox.Show($"ChatPanel receive msg Team: {selectedTeamMessage.Team?.Name} {selectedTeamMessage.Team?.ID}");
+
+            if (selectedTeamMessage.Team == null)
+            {
+                Team = null;
+                PostViewModels.Clear();
+//                MessageBox.Show("isnull");
+            }
+            else
+            {
+                Team = selectedTeamMessage.Team;
+                NewPost.TeamId = Team.ID;
+                Refresh();
+            }
         }
 
         public void Refresh()

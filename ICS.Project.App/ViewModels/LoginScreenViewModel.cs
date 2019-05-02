@@ -43,6 +43,8 @@ namespace ICS.Project.App.ViewModels
 
         public void TryToLogin()
         {
+
+
             UserModel userFromDb = _usersRepository.GetByEmail(User.Email);
 
             if (userFromDb == null)
@@ -61,6 +63,8 @@ namespace ICS.Project.App.ViewModels
                 MessageBox.Show($"Wrong password!", "Login failed");
                 return;
             }
+
+//            return;
 
             _mediator.Send(new GoToMessengerScreenMessage());
             _mediator.Send(new UserLoggedMessage{ User = userFromDb});
