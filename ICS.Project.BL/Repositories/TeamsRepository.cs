@@ -42,6 +42,16 @@ namespace ICS.Project.BL.Repositories
             return posts;
         }
 
+        public IEnumerable<TeamModel> GetUserTeams(Guid userId)
+        {
+            var t = dbContextFactory.CreateDbContext()
+                .UserInTeam
+                .Where(s => s.UserId == userId)
+                .Include(s => s.Team)
+                .Select(s => Mapper.MapTeamModelFromEntity(s.Team));
+
+            return t;
+        }
         public IList<PostModel> GetPosts(Guid teamId)
         {
             var posts = dbContextFactory.CreateDbContext()

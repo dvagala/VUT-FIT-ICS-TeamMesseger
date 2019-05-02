@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using ICS.Project.App.ViewModels.BaseViewModels;
 using ICS.Project.App.ViewModels.MessengerScreenViewModels;
@@ -60,8 +61,7 @@ namespace ICS.Project.App.ViewModels
 
             // Hack: Default logged user is student admin
             mediator.Send(new UserLoggedMessage { User = usersRepository.GetById(new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83")) });
-
-            mediator.Send(new SelectedTeamMessage { Team = teamsRepository.GetFirst()});
+            mediator.Send(new SelectedTeamMessage { Team = teamsRepository.GetUserTeams(new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83")).First()});
         }
 
         public void GoToLoginScreen(GoToLoginScreenMessage message)

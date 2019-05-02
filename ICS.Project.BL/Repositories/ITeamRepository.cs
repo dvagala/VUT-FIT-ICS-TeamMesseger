@@ -13,6 +13,8 @@ namespace ICS.Project.BL.Repositories
 
         IList<PostModel> GetPostsWithAuthors(Guid teamId);
 
+        IEnumerable<TeamModel> GetUserTeams(Guid userId);
+
         IList<PostModel> GetPostsWithCommentsAndAuthors(Guid teamId);
 
         IList<TeamModel> GetAll();

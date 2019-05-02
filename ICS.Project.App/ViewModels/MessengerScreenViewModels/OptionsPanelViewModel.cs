@@ -64,6 +64,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         private void Refresh()
         {
+            _mediator.Send(new RefreshDataInMesssengerScreenMessage());
         }
     }
 }

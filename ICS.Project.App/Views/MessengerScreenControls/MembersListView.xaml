@@ -67,7 +67,7 @@
             <ComboBox
                       ItemsSource="{Binding Path=AvailableMembers}"
                       DisplayMemberPath="FullName"
-                      SelectedItem="{Binding Path=SelectedUser}"/>
+                      SelectedItem="{Binding Path=SelectedUserInComboBox}"/>
             <Button Content="+" Command="{Binding AddNewMemberCommand}" Width="30"/>
         </StackPanel>
     </StackPanel>

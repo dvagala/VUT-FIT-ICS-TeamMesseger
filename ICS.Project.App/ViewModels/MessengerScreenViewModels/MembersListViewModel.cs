@@ -17,7 +17,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         private readonly ITeamsRepository _teamsRepository;
         private readonly IMediator _mediator;
 
-        public UserModel SelectedUser { get; set; }
+        public UserModel SelectedUserInComboBox { get; set; }
 
         public ObservableCollection<UserModel> Members { get; set; } = new ObservableCollection<UserModel>();
         public ObservableCollection<UserModel> AvailableMembers { get; set; } = new ObservableCollection<UserModel>();
@@ -40,11 +40,10 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             _usersRepository = usersRepository;
             _teamsRepository = teamsRepository;
 
-            SelectedUser = new UserModel();
+            SelectedUserInComboBox = new UserModel();
 
             _mediator.Register<SelectedTeamMessage>(TeamSelected);
             _mediator.Register<UserLoggedMessage>(UserLogged);
-
         }
 
         private void UserLogged(UserLoggedMessage userLoggedMessage)
@@ -68,7 +67,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
                 AvailableMembers.Add(member);
             }
 
-            SelectedUser = AvailableMembers.FirstOrDefault();
+            SelectedUserInComboBox = AvailableMembers.FirstOrDefault();
         }
 
         public void Load()
@@ -78,15 +77,15 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         public void AddNewTeamMember()
         {
-            _teamsRepository.AddUserToTeam(SelectedUser.ID, Team.ID);
-            Members.Add(SelectedUser);
-            AvailableMembers.Remove(SelectedUser);
-            SelectedUser = AvailableMembers.FirstOrDefault();
+            _teamsRepository.AddUserToTeam(SelectedUserInComboBox.ID, Team.ID);
+            Members.Add(SelectedUserInComboBox);
+            AvailableMembers.Remove(SelectedUserInComboBox);
+            SelectedUserInComboBox = AvailableMembers.FirstOrDefault();
         }
 
         private bool CanAddNewMember()
         {
-            return SelectedUser != null;
+            return SelectedUserInComboBox != null;
         }
 
         private void RemoveMember(UserModel clickedUser)
@@ -113,7 +112,12 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             _teamsRepository.RemoveUserFromTeam(clickedUser.ID, Team.ID);
             Members.Remove(clickedUser);
             AvailableMembers.Add(clickedUser);
-            SelectedUser = AvailableMembers.FirstOrDefault();
+            SelectedUserInComboBox = AvailableMembers.FirstOrDefault();
+
+            if (clickedUser.ID == LoggedUser.ID)
+            {
+                _mediator.Send(new UserRemovedHimselfFromTeamMessage { Team = Team });
+            }
         }
 
 

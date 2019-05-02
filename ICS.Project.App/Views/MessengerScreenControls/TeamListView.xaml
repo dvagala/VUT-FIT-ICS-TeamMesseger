@@ -14,7 +14,7 @@
 
     <StackPanel Grid.Row="1" Orientation="Vertical">
 
-        <ListBox x:Name="TeamsListBox" ItemsSource="{Binding Teams }"  SelectedIndex="0">
+        <ListBox x:Name="TeamsListBox" ItemsSource="{Binding Teams }" SelectedIndex="{Binding SelectedIndexInListBox, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding TeamSelectedCommand}"
