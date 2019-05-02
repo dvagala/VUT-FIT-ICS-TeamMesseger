@@ -14,7 +14,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="140" />
+            <ColumnDefinition Width="{Binding ElementName=CollapsingToggleButton, Path=IsChecked, Converter={StaticResource BooleanToSpecificValueConvertor}, ConverterParameter=140}" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -24,7 +24,7 @@
         <messengerScreenControls:TeamListView Grid.Column="0" Grid.Row="1"/>
         <Grid Grid.Column="1" Grid.Row="1" >
             <messengerScreenControls:ChatPanelView />
-            <!-- <Button Width="20" Height="30" Content=">" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,30" /> -->
+            <ToggleButton x:Name="CollapsingToggleButton" IsChecked="True" Width="10" Height="25" Content=">" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,30" />
         </Grid>
         <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="1">
             <messengerScreenControls:TeamDetailView />

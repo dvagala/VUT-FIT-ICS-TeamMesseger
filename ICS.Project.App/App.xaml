@@ -16,6 +16,7 @@
             <converters:GetNameInitialsConvertor x:Key="GetNameInitials" />
             <converters:DateTimeFormatConvertor x:Key="DateTimeFormatConvertor" />
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <converters:BooleanToSpecificValueConvertor x:Key="BooleanToSpecificValueConvertor" />
         </ResourceDictionary>
     </Application.Resources>
 </Application> 
