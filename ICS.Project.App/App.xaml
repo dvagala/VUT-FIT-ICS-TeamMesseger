@@ -5,7 +5,8 @@
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
              xmlns:converters="clr-namespace:ICS.Project.App.Converters"
              xmlns:views="clr-namespace:ICS.Project.App.Views"
-             StartupUri="Views/MainWindow.xaml">
+             StartupUri="Views/MainWindow.xaml"
+             ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <ResourceDictionary>
             <viewModels:ViewModelLocator x:Key="ViewModelLocator"/>
@@ -19,4 +20,4 @@
             <converters:BooleanToSpecificValueConvertor x:Key="BooleanToSpecificValueConvertor" />
         </ResourceDictionary>
     </Application.Resources>
-</Application> 
+</Application>

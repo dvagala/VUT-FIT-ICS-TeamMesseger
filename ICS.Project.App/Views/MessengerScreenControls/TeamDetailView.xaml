@@ -22,23 +22,17 @@
 
             <Separator Margin="15"/>
 
-            <TextBlock Text="Members:" FontWeight="Bold">
+            <TextBlock Text="Members:" FontWeight="Bold"/>
+            <ListView x:Name="MembersListView" ItemsSource="{Binding Members }" >
+
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonUp">
-                        <i:InvokeCommandAction Command="{Binding MemberClickedCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBlock>
-            <ListView ItemsSource="{Binding Members }" >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseLeftButtonUp">
-                        <i:InvokeCommandAction Command="{Binding MemberClickedCommand}"/>
+                        <i:InvokeCommandAction Command="{Binding MemberClickedCommand}" CommandParameter="{Binding ElementName=MembersListView, Path=SelectedItem}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="Focusable" Value="false"/>
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate >

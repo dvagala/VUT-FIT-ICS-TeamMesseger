@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using ICS.Project.BL.Messages;
+using ICS.Project.BL.Services;
 
 namespace ICS.Project.App.Views
 {
@@ -10,6 +12,27 @@ namespace ICS.Project.App.Views
         public MainWindow()
         {
             InitializeComponent();
+            Mediator.Instance.Register<UserWasClickedMessage>(ShowUserDetailWindow);
+        }
+
+        public void ShowUserDetailWindow(UserWasClickedMessage userWasClickedMessage)
+        {
+            CloseOldUserDetailWindowsIfOpen();
+
+            UserDetailWindow userDetailWindow = new UserDetailWindow();
+            userDetailWindow.Show();
+        }
+
+        private void CloseOldUserDetailWindowsIfOpen()
+        {
+            foreach (var window in Application.Current.Windows)
+            {
+                Window windowInstance = window as Window;
+                if (windowInstance?.GetType().Name == "UserDetailWindow")
+                {
+                    windowInstance.Close();
+                }
+            }
         }
     }
 }

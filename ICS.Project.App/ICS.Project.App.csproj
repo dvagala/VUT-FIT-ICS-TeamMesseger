@@ -161,6 +161,7 @@
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\InvertBoolConvertor.cs" />
+    <Compile Include="ViewModels\UserDetailScreenViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\UserInitialsCircleViewModel.cs" />
     <Compile Include="ViewModels\MessengerScreenViewModels\ChatPanelViewModels\CommentViewModel.cs" />

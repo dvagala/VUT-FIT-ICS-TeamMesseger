@@ -28,6 +28,7 @@ namespace ICS.Project.App.ViewModels
         public TeamsListViewModel TeamsListViewModel { get; }
         public TeamDetailViewModel TeamDetailViewModel { get; }
         public ChatPanelViewModel ChatPanelViewModel { get; }
+        public UserDetailScreenViewModel UserDetailScreenViewModel { get; }
 
         public ViewModelLocator()
         {
@@ -50,6 +51,7 @@ namespace ICS.Project.App.ViewModels
             TeamsListViewModel = new TeamsListViewModel(teamsRepository);
             TeamDetailViewModel = new TeamDetailViewModel(usersRepository, teamsRepository);
             ChatPanelViewModel = new ChatPanelViewModel(teamsRepository, postsRepository, commentsRepository);
+            UserDetailScreenViewModel = new UserDetailScreenViewModel(teamsRepository);
 
             CurrentViewModel = LoginScreenViewModel;
         }

@@ -35,7 +35,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         public TeamDetailViewModel(IUsersRepository usersRepository, ITeamsRepository teamsRepository)
         {
-            MemberClickedCommand = new RelayCommand(MemberClicked);
+            MemberClickedCommand = new RelayCommand<UserModel>(MemberClicked);
             RemoveMemberCommand = new RelayCommand<UserModel>(RemoveMember);
             AddNewMemberCommand = new RelayCommand(AddNewTeamMember, CanAddNewMember);
             DeleteTeamCommand = new RelayCommand(DeleteTeam);
@@ -48,6 +48,12 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             Mediator.Instance.Register<SelectedTeamMessage>(TeamSelected);
             Mediator.Instance.Register<UserLoggedMessage>(UserLogged);
             Mediator.Instance.Register<UserLogoutMessage>(UserLogout);
+        }
+
+
+        private void MemberClicked(UserModel clickedMember)
+        {
+            Mediator.Instance.Send(new UserWasClickedMessage { User = clickedMember });
         }
 
         private void UserLogged(UserLoggedMessage userLoggedMessage)
@@ -159,10 +165,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             Mediator.Instance.Send(new UserLostAccessToTeam { Team = Team });
         }
 
-        private void MemberClicked()
-        {
-            MessageBox.Show("Todo show user detail");
-        }
 
         public void EditDescription()
         {

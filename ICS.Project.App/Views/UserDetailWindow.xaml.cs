@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ICS.Project.BL.Messages;
 using ICS.Project.BL.Services;
 
 namespace ICS.Project.App.Views
@@ -23,12 +24,6 @@ namespace ICS.Project.App.Views
         public UserDetailWindow()
         {
             InitializeComponent();
-            Mediator mediator;
-        }
-
-        public void ShowThisWindow()
-        {
-            this.Show();
         }
     }
 }
