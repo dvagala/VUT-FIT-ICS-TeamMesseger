@@ -18,7 +18,7 @@ namespace ICS.Project.BL.Repositories
             this.dbContextFactory = dbContextFactory;
         }
 
-        public IList<PostModel> GetPostsWithCommentsAndAuthors(Guid teamId)
+        public IEnumerable<PostModel> GetPostsWithCommentsAndAuthors(Guid teamId)
         {
             var posts = dbContextFactory.CreateDbContext()
                 .Posts
@@ -26,29 +26,18 @@ namespace ICS.Project.BL.Repositories
                 .Include(s => s.Comments)
                 .ThenInclude(s => s.Author)
                 .Where(s => s.TeamId == teamId)
-                .Select(s => Mapper.MapPostModelFromEntityWithCommentsAndAuthor(s)).ToList();
+                .Select(s => Mapper.MapPostModelFromEntityWithCommentsAndAuthor(s));
 
             return posts;
         }
 
-        public IList<PostModel> GetPostsWithComments(Guid teamId)
+        public IEnumerable<PostModel> GetPostsWithComments(Guid teamId)
         {
             var posts = dbContextFactory.CreateDbContext()
                 .Posts
                 .Include(s => s.Comments)
                 .Where(s => s.TeamId == teamId)
                 .Select(s => Mapper.MapPostModelFromEntityWithComments(s)).ToList();
-
-            return posts;
-        }
-
-        public IList<PostModel> GetPostsWithAuthors(Guid teamId)
-        {
-            var posts = dbContextFactory.CreateDbContext()
-                .Posts
-                .Include(s => s.Author)
-                .Where(s => s.TeamId == teamId)
-                .Select(s => Mapper.MapPostModelFromEntityWithAuthor(s)).ToList();
 
             return posts;
         }
@@ -63,16 +52,6 @@ namespace ICS.Project.BL.Repositories
 
             return t;
         }
-        public IList<PostModel> GetPosts(Guid teamId)
-        {
-            var posts = dbContextFactory.CreateDbContext()
-                .Posts
-                .Where(s => s.TeamId == teamId)
-                .Select(s => Mapper.MapPostModelFromEntity(s)).ToList();
-
-            return posts;
-        }
-
         public IEnumerable<UserModel> GetTeamMembers(Guid teamId)
         {
             var members = dbContextFactory.CreateDbContext()

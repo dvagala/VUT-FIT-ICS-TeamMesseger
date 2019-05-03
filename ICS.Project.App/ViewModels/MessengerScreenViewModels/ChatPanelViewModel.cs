@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using ICS.Project.App.Commands;
 using ICS.Project.App.ViewModels.BaseViewModels;
@@ -57,8 +58,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
                 PostViewModels.Clear();
                 var posts = _teamsRepository.GetPostsWithCommentsAndAuthors(Team.ID);
 
-                // Sort here
-                foreach (var post in posts)
+                foreach (var post in posts.OrderByDescending(p => p.Comments.Any() ? p.Comments.Max(c => c.PublishDate) : p.PublishDate))
                     if (post.MessageText.Contains(searchedText) || post.Author.FullName.Contains(searchedText) ||
                         post.Title.Contains(searchedText) || post.Comments.Any(s => s.MessageText.Contains(searchedText) || s.Author.FullName.Contains(searchedText)))
                         PostViewModels.Add(new PostViewModel(_commentsRepository, _mediator, post, LoggedUser));
@@ -125,8 +125,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             PostViewModels.Clear();
             var posts = _teamsRepository.GetPostsWithCommentsAndAuthors(Team.ID);
 
-            // Sort here
-            foreach (var post in posts)
+            foreach (var post in posts.OrderByDescending(p => p.Comments.Any() ? p.Comments.Max(c => c.PublishDate) : p.PublishDate))
                 PostViewModels.Add(new PostViewModel(_commentsRepository, _mediator, post, LoggedUser));
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using ICS.Project.App.Commands;
@@ -42,7 +43,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewMode
 
             AddNewCommentCommand = new RelayCommand(AddNewComment, CanAddNewComment);
 
-            foreach (var comment in Post.Comments)
+            foreach (var comment in Post.Comments.OrderByDescending(s => s.PublishDate))
             {
                 CommentViewModels.Add(new CommentViewModel { Comment = comment, NewCommentUserInitialsCircleViewModel = new UserInitialsCircleViewModel { User = comment.Author } });
             }

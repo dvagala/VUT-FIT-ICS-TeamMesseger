@@ -6,9 +6,8 @@ namespace ICS.Project.BL.Repositories
 {
     public interface IUsersRepository
     {
-        IEnumerable<TeamModel> GetUserTeams(Guid userId);
         UserModel GetByEmail(string email);
-        IEnumerable<UserModel> GetTeamMembers(Guid teamId);
+
         IList<UserModel> GetAll();
         UserModel GetById(Guid id);
         void Update(UserModel post);

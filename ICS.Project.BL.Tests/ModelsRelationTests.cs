@@ -123,7 +123,7 @@ namespace ICS.Project.BL.Tests
             _fixture.TeamsRepository.AddUserToTeam(userModel.ID, teamModel2.ID);
             _fixture.TeamsRepository.AddUserToTeam(userModel.ID, teamModel3.ID);
 
-            var retrievedTeams = _fixture.UsersRepository.GetUserTeams(userModel.ID);
+            var retrievedTeams = _fixture.TeamsRepository.GetUserTeams(userModel.ID);
 
             Assert.Equal(teamModel1.ID, retrievedTeams.ElementAt(0).ID);
             Assert.Equal(teamModel2.ID, retrievedTeams.ElementAt(1).ID);

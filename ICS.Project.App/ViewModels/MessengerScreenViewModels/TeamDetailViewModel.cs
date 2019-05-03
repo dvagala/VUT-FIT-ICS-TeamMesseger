@@ -78,7 +78,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
                 Team = selectedTeamMessage.Team;
 
                 Members.Clear();
-                foreach (var member in _usersRepository.GetTeamMembers(Team.ID))
+                foreach (var member in _teamsRepository.GetTeamMembers(Team.ID))
                 {
                     Members.Add(member);
                 }

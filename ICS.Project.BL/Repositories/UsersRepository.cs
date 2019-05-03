@@ -28,28 +28,6 @@ namespace ICS.Project.BL.Repositories
             return user == null ? null : Mapper.MapUserModelFromEntity(user); ;
         }
 
-        public IEnumerable<UserModel> GetTeamMembers(Guid teamId)
-        {
-            var members = dbContextFactory.CreateDbContext()
-                .UserInTeam
-                .Where(s => s.TeamId == teamId)
-                .Include(s => s.User)
-                .Select(s => Mapper.MapUserModelFromEntity(s.User));
-
-            return members;
-        }
-
-        public IEnumerable<TeamModel> GetUserTeams(Guid userId)
-        {
-            var t = dbContextFactory.CreateDbContext()
-                .UserInTeam
-                .Where(s => s.UserId == userId)
-                .Include(s => s.Team)
-                .Select(s => Mapper.MapTeamModelFromEntity(s.Team));
-
-            return t;
-        }
-
         public IList<UserModel> GetAll()
         {
             return dbContextFactory.CreateDbContext()
