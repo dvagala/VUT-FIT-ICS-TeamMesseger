@@ -15,7 +15,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
     {
         private readonly IUsersRepository _usersRepository;
         private readonly ITeamsRepository _teamsRepository;
-        private readonly IMediator _mediator;
 
         public bool IsDescriptionInEditMode { get; set; }
         public UserModel SelectedUserInComboBox { get; set; }
@@ -34,7 +33,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         public ICommand DeleteTeamCommand { get; set; }
 
 
-        public TeamDetailViewModel(IUsersRepository usersRepository, ITeamsRepository teamsRepository, IMediator mediator)
+        public TeamDetailViewModel(IUsersRepository usersRepository, ITeamsRepository teamsRepository)
         {
             MemberClickedCommand = new RelayCommand(MemberClicked);
             RemoveMemberCommand = new RelayCommand<UserModel>(RemoveMember);
@@ -43,13 +42,12 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             EditDescriptionCommand = new RelayCommand(EditDescription);
             SaveDescriptionCommand = new RelayCommand(SaveDescription, CanSaveDescription);
 
-            _mediator = mediator;
             _usersRepository = usersRepository;
             _teamsRepository = teamsRepository;
 
-            _mediator.Register<SelectedTeamMessage>(TeamSelected);
-            _mediator.Register<UserLoggedMessage>(UserLogged);
-            _mediator.Register<UserLogoutMessage>(UserLogout);
+            Mediator.Instance.Register<SelectedTeamMessage>(TeamSelected);
+            Mediator.Instance.Register<UserLoggedMessage>(UserLogged);
+            Mediator.Instance.Register<UserLogoutMessage>(UserLogout);
         }
 
         private void UserLogged(UserLoggedMessage userLoggedMessage)
@@ -141,7 +139,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
                 {
                     _teamsRepository.RemoveWithAllPostsAndComments(Team.ID);
                 }
-                _mediator.Send(new UserLostAccessToTeam { Team = Team });
+                Mediator.Instance.Send(new UserLostAccessToTeam { Team = Team });
             }
             else
             {
@@ -158,7 +156,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             if (messageBoxResult == MessageBoxResult.No) return;
 
             _teamsRepository.RemoveWithAllPostsAndComments(Team.ID);
-            _mediator.Send(new UserLostAccessToTeam { Team = Team });
+            Mediator.Instance.Send(new UserLostAccessToTeam { Team = Team });
         }
 
         private void MemberClicked()

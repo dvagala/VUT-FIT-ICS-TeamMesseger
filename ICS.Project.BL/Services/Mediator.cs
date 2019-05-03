@@ -7,6 +7,20 @@ namespace ICS.Project.BL.Services
 {
     public class Mediator : IMediator
     {
+        private static Mediator _instance;
+
+        public static Mediator Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new Mediator();
+
+                return _instance;
+            }
+        }
+
+
         private readonly Dictionary<Type, List<Delegate>> registeredActions = new Dictionary<Type, List<Delegate>>();
 
         public void Register<TMessage>(Action<TMessage> action)

@@ -14,7 +14,6 @@ namespace ICS.Project.App.ViewModels
     public class RegisterScreenViewModel : ViewModelBase, IViewModel
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly IMediator _mediator;
 
         public ICommand GoToLoginScreenCommand { get; set; }
         public ICommand TryToRegisterCommand { get; set; }
@@ -24,14 +23,12 @@ namespace ICS.Project.App.ViewModels
         public string PlainTextPassword { get; set; }
 
 
-        public RegisterScreenViewModel(IUsersRepository usersRepository, IMediator mediator)
+        public RegisterScreenViewModel(IUsersRepository usersRepository)
         {
             GoToLoginScreenCommand = new RelayCommand(GoToLoginScreen);
             TryToRegisterCommand = new RelayCommand(TryToRegister, CanTryToRegister);
 
             _usersRepository = usersRepository;
-            _mediator = mediator;
-
         }
 
         public void Load()
@@ -72,8 +69,8 @@ namespace ICS.Project.App.ViewModels
                 return;
             }
 
-            _mediator.Send(new GoToMessengerScreenMessage());
-            _mediator.Send(new UserLoggedMessage { User = userFromDb});
+            Mediator.Instance.Send(new GoToMessengerScreenMessage());
+            Mediator.Instance.Send(new UserLoggedMessage { User = userFromDb});
             MessageBox.Show($"Hi {NewUser.Name}! Welcome to Team messenger", "Registration success");
             PlainTextPassword = "";
             NewUser = null;
@@ -81,7 +78,7 @@ namespace ICS.Project.App.ViewModels
 
         public void GoToLoginScreen()
         {
-            _mediator.Send(new GoToLoginScreenMessage());
+            Mediator.Instance.Send(new GoToLoginScreenMessage());
         }
     }
 }

@@ -16,7 +16,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewMode
     public class PostViewModel : ViewModelBase, IViewModel
     {
         private readonly ICommentsRepository _commentsRepository;
-        private readonly IMediator _mediator;
 
         public ICommand AddNewCommentCommand { get; set; }
 
@@ -30,10 +29,9 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewMode
         public UserInitialsCircleViewModel PostUserInitialsCircleViewModel { get; set; }
 
 
-        public PostViewModel( ICommentsRepository commentsRepository, IMediator mediator, PostModel post, UserModel loggedUser)
+        public PostViewModel( ICommentsRepository commentsRepository, PostModel post, UserModel loggedUser)
         {
             _commentsRepository = commentsRepository;
-            _mediator = mediator;
 
             Post = post;
             LoggedUser = loggedUser;

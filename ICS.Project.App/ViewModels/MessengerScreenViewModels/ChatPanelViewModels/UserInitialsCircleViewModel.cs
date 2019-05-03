@@ -21,7 +21,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewMode
         public UserInitialsCircleViewModel()
         {
             ShowUserDetailCommand = new RelayCommand(ShowUserDetail);
-
         }
 
         public void ShowUserDetail()

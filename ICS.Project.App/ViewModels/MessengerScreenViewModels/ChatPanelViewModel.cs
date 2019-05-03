@@ -18,7 +18,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         private readonly ITeamsRepository _teamsRepository;
         private readonly IPostsRepository _postsRepository;
         private readonly ICommentsRepository _commentsRepository;
-        private readonly IMediator _mediator;
 
         public ObservableCollection<PostViewModel> PostViewModels { get; set; } =
             new ObservableCollection<PostViewModel>();
@@ -33,17 +32,16 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
 
         public ChatPanelViewModel(ITeamsRepository teamsRepository, IPostsRepository postsRepository,
-            ICommentsRepository commentsRepository, IMediator mediator)
+            ICommentsRepository commentsRepository)
         {
             _teamsRepository = teamsRepository;
             _postsRepository = postsRepository;
             _commentsRepository = commentsRepository;
-            _mediator = mediator;
 
-            _mediator.Register<SelectedTeamMessage>(TeamSelected);
-            _mediator.Register<UserLoggedMessage>(UserLogged);
-            _mediator.Register<UserLogoutMessage>(UserLogout);
-            _mediator.Register<UserWantsToSearchText>(FilterPostViewModels);
+            Mediator.Instance.Register<SelectedTeamMessage>(TeamSelected);
+            Mediator.Instance.Register<UserLoggedMessage>(UserLogged);
+            Mediator.Instance.Register<UserLogoutMessage>(UserLogout);
+            Mediator.Instance.Register<UserWantsToSearchText>(FilterPostViewModels);
 
             AddNewPostCommand = new RelayCommand(AddNewPost, CanAddNewPost);
         }
@@ -61,7 +59,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
                 foreach (var post in posts.OrderByDescending(p => p.Comments.Any() ? p.Comments.Max(c => c.PublishDate) : p.PublishDate))
                     if (post.MessageText.Contains(searchedText) || post.Author.FullName.Contains(searchedText) ||
                         post.Title.Contains(searchedText) || post.Comments.Any(s => s.MessageText.Contains(searchedText) || s.Author.FullName.Contains(searchedText)))
-                        PostViewModels.Add(new PostViewModel(_commentsRepository, _mediator, post, LoggedUser));
+                        PostViewModels.Add(new PostViewModel(_commentsRepository, post, LoggedUser));
             }
             else
             {
@@ -126,7 +124,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             var posts = _teamsRepository.GetPostsWithCommentsAndAuthors(Team.ID);
 
             foreach (var post in posts.OrderByDescending(p => p.Comments.Any() ? p.Comments.Max(c => c.PublishDate) : p.PublishDate))
-                PostViewModels.Add(new PostViewModel(_commentsRepository, _mediator, post, LoggedUser));
+                PostViewModels.Add(new PostViewModel(_commentsRepository, post, LoggedUser));
         }
 
         public void Load()

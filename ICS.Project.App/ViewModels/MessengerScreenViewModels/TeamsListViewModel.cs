@@ -15,7 +15,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
     public class TeamsListViewModel : ViewModelBase, IViewModel
     {
         private readonly ITeamsRepository _teamsRepository;
-        private readonly IMediator _mediator;
 
         public UserModel LoggedUser { get; set; }
         public TeamModel NewTeam { get; set; }
@@ -26,18 +25,17 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         public ICommand AddNewTeamCommand { get; set; }
         public ICommand TeamSelectedCommand { get; set; }
 
-        public TeamsListViewModel(ITeamsRepository teamsRepository, IMediator mediator)
+        public TeamsListViewModel(ITeamsRepository teamsRepository)
         {
             AddNewTeamCommand = new RelayCommand(AddNewTeam, CanAddNewTeam);
             TeamSelectedCommand = new RelayCommand<TeamModel>(TeamSelected);
 
-            _mediator = mediator;
             _teamsRepository = teamsRepository;
 
-            _mediator.Register<UserLoggedMessage>(UserLogged);
-            _mediator.Register<UserLogoutMessage>(UserLogout);
-            _mediator.Register<UserLostAccessToTeam>(RemoveTeamInListView);
-            _mediator.Register<RefreshDataInMesssengerScreenMessage>(RefreshDataInMesssengerScreen);
+            Mediator.Instance.Register<UserLoggedMessage>(UserLogged);
+            Mediator.Instance.Register<UserLogoutMessage>(UserLogout);
+            Mediator.Instance.Register<UserLostAccessToTeam>(RemoveTeamInListView);
+            Mediator.Instance.Register<RefreshDataInMesssengerScreenMessage>(RefreshDataInMesssengerScreen);
         }
 
         private void UserLogged(UserLoggedMessage userLoggedMessage)
@@ -59,7 +57,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
             Refresh();
 
-            _mediator.Send(new SelectedTeamMessage { Team = _teamsRepository.GetUserTeams(LoggedUser.ID).FirstOrDefault() });
+            Mediator.Instance.Send(new SelectedTeamMessage { Team = _teamsRepository.GetUserTeams(LoggedUser.ID).FirstOrDefault() });
         }
 
         public void RemoveTeamInListView(UserLostAccessToTeam userLostAccessToTeam)
@@ -69,7 +67,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
             if (!Teams.Any())
             {
-                _mediator.Send(new SelectedTeamMessage { Team = null });
+                Mediator.Instance.Send(new SelectedTeamMessage { Team = null });
             }
 
             // Deleting item at the bottom
@@ -96,7 +94,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
             if (!Teams.Any())
             {
-                _mediator.Send(new SelectedTeamMessage { Team = null });
+                Mediator.Instance.Send(new SelectedTeamMessage { Team = null });
             }
 
             if (oldSelectedIndex < 0 || oldSelectedIndex >= Teams.Count)
@@ -128,7 +126,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         private void TeamSelected(TeamModel selectedTeamModel)
         {
-            _mediator.Send(new SelectedTeamMessage{ Team = selectedTeamModel});
+            Mediator.Instance.Send(new SelectedTeamMessage{ Team = selectedTeamModel});
         }
     }
 }

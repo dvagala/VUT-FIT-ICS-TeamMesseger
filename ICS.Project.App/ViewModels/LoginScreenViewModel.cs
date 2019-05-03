@@ -12,7 +12,6 @@ namespace ICS.Project.App.ViewModels
     public class LoginScreenViewModel : ViewModelBase, IViewModel
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly IMediator _mediator;
 
         public ICommand GoToRegisterScreenCommand { get; set; }
         public ICommand TryToLoginCommand { get; set; }
@@ -21,13 +20,12 @@ namespace ICS.Project.App.ViewModels
         public string PlainTextPassword { get; set; }
 
 
-        public LoginScreenViewModel(IUsersRepository usersRepository, IMediator mediator)
+        public LoginScreenViewModel(IUsersRepository usersRepository)
         {
             GoToRegisterScreenCommand = new RelayCommand(GoToRegisterScreen);
             TryToLoginCommand = new RelayCommand(TryToLogin, CanTryToLogin);
 
             _usersRepository = usersRepository;
-            _mediator = mediator;
         }
 
         public void Load()
@@ -64,17 +62,15 @@ namespace ICS.Project.App.ViewModels
                 return;
             }
 
-//            return;
-
-            _mediator.Send(new GoToMessengerScreenMessage());
-            _mediator.Send(new UserLoggedMessage{ User = userFromDb});
+            Mediator.Instance.Send(new GoToMessengerScreenMessage());
+            Mediator.Instance.Send(new UserLoggedMessage{ User = userFromDb});
             PlainTextPassword = "";
             User = null;
         }
 
         public void GoToRegisterScreen()
         {
-            _mediator.Send(new GoToRegisterScreenMessage());
+            Mediator.Instance.Send(new GoToRegisterScreenMessage());
         }
     }
 }

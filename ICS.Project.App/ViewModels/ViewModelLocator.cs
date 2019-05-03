@@ -13,7 +13,6 @@ namespace ICS.Project.App.ViewModels
 {
     public class ViewModelLocator : ViewModelBase
     {
-        private readonly IMediator mediator;
         private readonly IDbContextFactory dbContextFactory;
 
         private readonly ITeamsRepository teamsRepository;
@@ -34,25 +33,23 @@ namespace ICS.Project.App.ViewModels
         {
             dbContextFactory = new DefaultDbContextFactory();
 
-            mediator = new Mediator();
-
-            mediator.Register<GoToRegisterScreenMessage>(GoToRegisterScreen);
-            mediator.Register<GoToLoginScreenMessage>(GoToLoginScreen);
-            mediator.Register<GoToMessengerScreenMessage>(GoToMessengerScreen);
+            Mediator.Instance.Register<GoToRegisterScreenMessage>(GoToRegisterScreen);
+            Mediator.Instance.Register<GoToLoginScreenMessage>(GoToLoginScreen);
+            Mediator.Instance.Register<GoToMessengerScreenMessage>(GoToMessengerScreen);
 
             teamsRepository = new TeamsRepository(dbContextFactory);
             usersRepository = new UsersRepository(dbContextFactory);
             postsRepository = new PostsRepository(dbContextFactory);
             commentsRepository = new CommentsRepository(dbContextFactory);
 
-            LoginScreenViewModel = new LoginScreenViewModel(usersRepository, mediator);
-            RegisterScreenViewModel = new RegisterScreenViewModel(usersRepository, mediator);
+            LoginScreenViewModel = new LoginScreenViewModel(usersRepository);
+            RegisterScreenViewModel = new RegisterScreenViewModel(usersRepository);
 
-            OptionsPanelViewModel = new OptionsPanelViewModel(usersRepository, mediator);
-            SearchPanelViewModel = new SearchPanelViewModel(mediator);
-            TeamsListViewModel = new TeamsListViewModel(teamsRepository, mediator);
-            TeamDetailViewModel = new TeamDetailViewModel(usersRepository, teamsRepository, mediator);
-            ChatPanelViewModel = new ChatPanelViewModel(teamsRepository, postsRepository, commentsRepository, mediator);
+            OptionsPanelViewModel = new OptionsPanelViewModel(usersRepository);
+            SearchPanelViewModel = new SearchPanelViewModel();
+            TeamsListViewModel = new TeamsListViewModel(teamsRepository);
+            TeamDetailViewModel = new TeamDetailViewModel(usersRepository, teamsRepository);
+            ChatPanelViewModel = new ChatPanelViewModel(teamsRepository, postsRepository, commentsRepository);
 
             CurrentViewModel = LoginScreenViewModel;
         }

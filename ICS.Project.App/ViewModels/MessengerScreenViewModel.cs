@@ -12,13 +12,12 @@ namespace ICS.Project.App.ViewModels
     public class MessengerScreenViewModel : ViewModelBase, IViewModel
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly IMediator _mediator;
 
 
         public TeamModel Team { get; set; }
 
 
-        public MessengerScreenViewModel(IUsersRepository usersRepository, IMediator mediator)
+        public MessengerScreenViewModel(IUsersRepository usersRepository)
         {
 
         }

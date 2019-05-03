@@ -11,8 +11,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 {
     public class SearchPanelViewModel : ViewModelBase, IViewModel
     {
-        private readonly IMediator _mediator;
-
         public TeamModel Team { get; set; }
 
         private string _searchedText;
@@ -22,21 +20,20 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             set
             {
                 _searchedText = value;
-                _mediator.Send(new UserWantsToSearchText { SearchedText = _searchedText });
+                Mediator.Instance.Send(new UserWantsToSearchText { SearchedText = _searchedText });
             }
         }
 
-        public SearchPanelViewModel(IMediator mediator)
+        public SearchPanelViewModel()
         {
-            _mediator = mediator;
-            _mediator.Register<SelectedTeamMessage>(TeamSelected);
+            Mediator.Instance.Register<SelectedTeamMessage>(TeamSelected);
         }
 
         private void TeamSelected(SelectedTeamMessage selectedTeamMessage)
         {
             SearchedText = "";
             Team = selectedTeamMessage.Team;
-            _mediator.Send(new UserWantsToSearchText{SearchedText = SearchedText});
+            Mediator.Instance.Send(new UserWantsToSearchText{SearchedText = SearchedText});
         }
 
         public void Load()

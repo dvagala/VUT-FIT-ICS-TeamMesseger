@@ -12,7 +12,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
     public class OptionsPanelViewModel : ViewModelBase, IViewModel
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly IMediator _mediator;
 
         public ICommand ChangeEmailCommand { get; set; }
         public ICommand ChangePasswordCommand { get; set; }
@@ -24,7 +23,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         public string PlainTextPassword { get; set; }
 
 
-        public OptionsPanelViewModel(IUsersRepository usersRepository, IMediator mediator)
+        public OptionsPanelViewModel(IUsersRepository usersRepository)
         {
             ChangeEmailCommand = new RelayCommand(ChangeEmail);
             ChangePasswordCommand = new RelayCommand(ChangePassword);
@@ -33,7 +32,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             RefreshCommand = new RelayCommand(Refresh);
 
             _usersRepository = usersRepository;
-            _mediator = mediator;
         }
 
         public void Load()
@@ -59,13 +57,13 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         private void Logout()
         {
-            _mediator.Send(new GoToLoginScreenMessage());
-            _mediator.Send(new UserLogoutMessage());
+            Mediator.Instance.Send(new GoToLoginScreenMessage());
+            Mediator.Instance.Send(new UserLogoutMessage());
         }
 
         private void Refresh()
         {
-            _mediator.Send(new RefreshDataInMesssengerScreenMessage());
+            Mediator.Instance.Send(new RefreshDataInMesssengerScreenMessage());
         }
     }
 }
