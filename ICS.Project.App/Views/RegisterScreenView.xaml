@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:ICS.Project.App.Views"
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
              xmlns:base="clr-namespace:ICS.Project.App.Views.Base"
+             xmlns:attachedProperties="clr-namespace:ICS.Project.App.AttachedProperties"
 
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:RegisterScreenViewModel}"
@@ -28,7 +29,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Label Content="Password"  HorizontalAlignment="Left"/>
-            <TextBox Width="200" Text="{Binding PlainTextPassword, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+            <PasswordBox Width="200"  Margin="5"  attachedProperties:PasswordBoxAttachedProperty.EncryptedPassword="{Binding SecureStringPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  PasswordChanged="PasswordBox_PasswordChanged" />
         </StackPanel>
         <Button Content="Register" Margin="5" Width="200"  Command="{Binding TryToRegisterCommand}"/>
         <Button Content="Go back to login" Margin="5" Width="200" Command="{Binding GoToLoginScreenCommand}" />

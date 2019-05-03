@@ -6,6 +6,7 @@ using ICS.Project.BL.Messages;
 using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
 using ICS.Project.BL.Services;
+using System.Security;
 
 namespace ICS.Project.App.ViewModels
 {
@@ -17,8 +18,7 @@ namespace ICS.Project.App.ViewModels
         public ICommand TryToLoginCommand { get; set; }
 
         public UserModel User { get; set; }
-        public string PlainTextPassword { get; set; }
-
+        public SecureString SecureStringPassword { get; set; }
 
         public LoginScreenViewModel(IUsersRepository usersRepository)
         {
@@ -30,13 +30,13 @@ namespace ICS.Project.App.ViewModels
 
         public void Load()
         {
-            PlainTextPassword = "";
             User = new UserModel();
+            SecureStringPassword?.Clear();
         }
 
         public bool CanTryToLogin()
-        {
-            return !string.IsNullOrEmpty(User?.Email) && !string.IsNullOrEmpty(PlainTextPassword);
+        { 
+            return !string.IsNullOrEmpty(User?.Email) && SecureStringPassword?.Length != 0;
         }
 
         public void TryToLogin()
@@ -50,7 +50,7 @@ namespace ICS.Project.App.ViewModels
             }
 
             PasswordHelper passwordHelper = new PasswordHelper();
-            if (passwordHelper.IsPasswordCorrect(PlainTextPassword, userFromDb))
+            if (passwordHelper.IsPasswordCorrect(userFromDb, SecureStringPassword))
             {
                 MessageBox.Show($"Hi {userFromDb.Name}! Welcome back", "Login success");
             }
@@ -65,7 +65,7 @@ namespace ICS.Project.App.ViewModels
 
             Mediator.Instance.Send(new GoToMessengerScreenMessage());
             Mediator.Instance.Send(new UserLoggedMessage{ User = userFromDb});
-            PlainTextPassword = "";
+            SecureStringPassword?.Clear();
             User = null;
         }
 

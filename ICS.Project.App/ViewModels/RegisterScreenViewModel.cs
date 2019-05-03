@@ -7,6 +7,7 @@ using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
 using ICS.Project.BL.Services;
 using System.ComponentModel.DataAnnotations;
+using System.Security;
 using ICS.Project.App.ViewModels.BaseViewModels;
 
 namespace ICS.Project.App.ViewModels
@@ -19,8 +20,8 @@ namespace ICS.Project.App.ViewModels
         public ICommand TryToRegisterCommand { get; set; }
 
         public UserModel NewUser { get; set; }
+        public SecureString SecureStringPassword { get; set; }
 
-        public string PlainTextPassword { get; set; }
 
 
         public RegisterScreenViewModel(IUsersRepository usersRepository)
@@ -33,14 +34,14 @@ namespace ICS.Project.App.ViewModels
 
         public void Load()
         {
-            PlainTextPassword = "";
+            SecureStringPassword?.Clear();
             NewUser = new UserModel();
         }
 
         public bool CanTryToRegister()
         {
             return !string.IsNullOrEmpty(NewUser?.Name) && !string.IsNullOrEmpty(NewUser?.Surname) &&
-                   !string.IsNullOrEmpty(NewUser?.Email) && !string.IsNullOrEmpty(PlainTextPassword) && new EmailAddressAttribute().IsValid(NewUser.Email);
+                   !string.IsNullOrEmpty(NewUser?.Email) && new EmailAddressAttribute().IsValid(NewUser.Email) && SecureStringPassword?.Length != 0;
         }
 
 
@@ -53,7 +54,7 @@ namespace ICS.Project.App.ViewModels
             }
 
             PasswordHelper passwordHelper = new PasswordHelper();
-            passwordHelper.AddEncryptedPasswordToUserModel(NewUser, PlainTextPassword);
+            passwordHelper.AddEncryptedPasswordToUserModel(NewUser, SecureStringPassword);
 
             if (NewUser.PasswordHash == null || NewUser.Salt == null)
             {
@@ -75,7 +76,7 @@ namespace ICS.Project.App.ViewModels
             Mediator.Instance.Send(new GoToMessengerScreenMessage());
             Mediator.Instance.Send(new UserLoggedMessage { User = userFromDb});
             MessageBox.Show($"Hi {NewUser.Name}! Welcome to Team messenger", "Registration success");
-            PlainTextPassword = "";
+            SecureStringPassword?.Clear();
             NewUser = null;
         }
 

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:ICS.Project.App.Views"
+             xmlns:attachedProperties="clr-namespace:ICS.Project.App.AttachedProperties"
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
              xmlns:base="clr-namespace:ICS.Project.App.Views.Base"
              mc:Ignorable="d" 
@@ -14,7 +15,7 @@
     <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
         <Label Content="Team messenger" HorizontalAlignment="Center"/>
         <TextBox Width="200" Margin="5" Text="{Binding User.Email, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Width="200" Margin="5" Text="{Binding PlainTextPassword, UpdateSourceTrigger=PropertyChanged}"/>
+        <PasswordBox Width="200"  Margin="5" attachedProperties:PasswordBoxAttachedProperty.EncryptedPassword="{Binding SecureStringPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  PasswordChanged="PasswordBox_PasswordChanged" />
         <Button Content="Login" Margin="5" Width="200" Command="{Binding TryToLoginCommand}" />
         <Button Content="Create a new account" Margin="5" Width="200" Command="{Binding GoToRegisterScreenCommand}" />
     </StackPanel>

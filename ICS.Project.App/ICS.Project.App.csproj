@@ -153,6 +153,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttachedProperties\PasswordBoxAttachedProperty.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\UserToLastActivityConvertor.cs" />
     <Compile Include="Converters\EmptyTextBoxUnfocusedToVisibilityConverter.cs" />
