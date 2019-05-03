@@ -11,7 +11,7 @@
         xmlns:messengerScreenViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="600" Width="900" WindowStartupLocation="CenterScreen" Background="#34333b"
         d:DataContext="{d:DesignInstance viewModels:ViewModelLocator}"
         DataContext="{Binding Source={StaticResource ViewModelLocator}}">
 
