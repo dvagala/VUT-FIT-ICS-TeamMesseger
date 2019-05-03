@@ -40,16 +40,15 @@ namespace ICS.Project.DAL
             // Generated for password 'student'
             byte[] salt =
             {
-                116, 214, 110, 237, 125, 7, 30, 5, 219, 149, 182, 93, 62, 91, 71, 69, 105, 152, 66, 44, 114, 122, 219,
-                28, 219, 147, 127, 133, 67, 116, 206, 143
+                163, 239, 2, 208, 228, 143, 175, 191, 180, 132, 51, 246, 231, 59, 71, 67, 111, 210, 241, 123, 21, 17, 125, 143, 167, 195, 204, 109, 188, 100, 47, 255
             };
-            byte[] hash = {19, 36, 234, 204, 83, 41, 69, 76, 27, 40, 176, 157, 35, 181, 37, 35};
+            byte[] hash = { 202, 82, 20, 32, 112, 253, 84, 38, 27, 97, 23, 217, 243, 164, 66, 10 };
 
 
-            var user1 = new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca84");
-            var user2 = new Guid("ec16e27a-47e2-4f47-b19d-1a362003ca84");
-            var user3 = new Guid("ec16e27a-47e2-4f47-b19d-2a362003ca84");
-            var user4 = new Guid("ec16e27a-47e2-4f47-b19d-3a362003ca84");
+            var user1 = new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca85");
+            var user2 = new Guid("ec16e27a-47e2-4f47-b19d-1a362003ca85");
+            var user3 = new Guid("ec16e27a-47e2-4f47-b19d-2a362003ca85");
+            var user4 = new Guid("ec16e27a-47e2-4f47-b19d-3a362003ca85");
 
             modelBuilder.Entity<UserEntity>().HasData(new UserEntity
             {
@@ -82,10 +81,10 @@ namespace ICS.Project.DAL
                 LastLogoutTime = new DateTime(2019, 4, 28, 14, 24, 11)
             });
 
-            var team1 = new Guid("ec16e27a-07e2-4f47-b19d-0a362003ca84");
-            var team2 = new Guid("ec16e27a-17e2-4f47-b19d-0a362003ca84");
-            var team3 = new Guid("ec16e27a-27e2-4f47-b19d-0a362003ca84");
-            var team4 = new Guid("ec16e27a-37e2-4f47-b19d-0a362003ca84");
+            var team1 = new Guid("ec16e27a-07e2-4f47-b19d-0a362003ca85");
+            var team2 = new Guid("ec16e27a-17e2-4f47-b19d-0a362003ca85");
+            var team3 = new Guid("ec16e27a-27e2-4f47-b19d-0a362003ca85");
+            var team4 = new Guid("ec16e27a-37e2-4f47-b19d-0a362003ca85");
 
             modelBuilder.Entity<TeamEntity>()
                 .HasData(new TeamEntity
@@ -112,67 +111,67 @@ namespace ICS.Project.DAL
 
             modelBuilder.Entity<UserInTeamEntity>().HasData(new UserInTeamEntity
                 {
-                    ID = new Guid("0c16e27a-07e2-4f47-b19d-0a362003ca84"),
+                    ID = new Guid("0c16e27a-07e2-4f47-b19d-0a362003ca85"),
                     UserId = user1,
                     TeamId = team1
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("1c16e27a-07e2-4f47-b19d-0a362003ca84"),
+                    ID = new Guid("1c16e27a-07e2-4f47-b19d-0a362003ca85"),
                     UserId = user1,
                     TeamId = team2
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("2c16e27a-07e2-4f47-b19d-0a362003ca84"),
+                    ID = new Guid("2c16e27a-07e2-4f47-b19d-0a362003ca85"),
                     UserId = user1,
                     TeamId = team3
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("3c16e27a-07e2-4f47-b19d-0a362003ca84"),
+                    ID = new Guid("3c16e27a-07e2-4f47-b19d-0a362003ca85"),
                     UserId = user1,
                     TeamId = team4
                 },
                 new UserInTeamEntity
                 {
-                    ID = new Guid("4c16e27a-07e2-4f47-b19d-0a362003ca84"),
+                    ID = new Guid("4c16e27a-07e2-4f47-b19d-0a362003ca85"),
                     UserId = user2,
                     TeamId = team1
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("5c16e27a-07e2-4f47-b19d-0a362003ca84"),
+                    ID = new Guid("5c16e27a-07e2-4f47-b19d-0a362003ca85"),
                     UserId = user3,
                     TeamId = team1
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("6c16e27a-07e2-4f47-b19d-0a362003ca84"),
+                    ID = new Guid("6c16e27a-07e2-4f47-b19d-0a362003ca85"),
                     UserId = user4,
                     TeamId = team1
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("7c16e27a-07e2-4f47-b19d-0a362003ca84"),
+                    ID = new Guid("7c16e27a-07e2-4f47-b19d-0a362003ca85"),
                     UserId = user2,
                     TeamId = team2
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("8c16e27a-07e2-4f47-b19d-0a362003ca84"),
+                    ID = new Guid("8c16e27a-07e2-4f47-b19d-0a362003ca85"),
                     UserId = user3,
                     TeamId = team2
                 },
                 new UserInTeamEntity
                 {
-                    ID = new Guid("9c16e27a-07e2-4f47-b19d-0a362003ca84"),
+                    ID = new Guid("9c16e27a-07e2-4f47-b19d-0a362003ca85"),
                     UserId = user4,
                     TeamId = team3
                 });
 
 
-            var post1Team1 = new Guid("ec16e28b-07e2-0f47-b19d-0b362003ca84");
-            var post2Team1 = new Guid("ec16e28b-17e2-4f47-b19d-0b362003ca84");
-            var post3Team1 = new Guid("ec16e28b-27e2-4f47-b19d-0b362003ca84");
+            var post1Team1 = new Guid("ec16e28b-07e2-0f47-b19d-0b362003ca85");
+            var post2Team1 = new Guid("ec16e28b-17e2-4f47-b19d-0b362003ca85");
+            var post3Team1 = new Guid("ec16e28b-27e2-4f47-b19d-0b362003ca85");
 
-            var post1Team2 = new Guid("ec16e28b-07e2-1f47-b19d-0b362003ca84");
-            var post2Team2 = new Guid("ec16e28b-17e2-2f47-b19d-0b362003ca84");
+            var post1Team2 = new Guid("ec16e28b-07e2-1f47-b19d-0b362003ca85");
+            var post2Team2 = new Guid("ec16e28b-17e2-2f47-b19d-0b362003ca85");
 
-            var post1Team3 = new Guid("ec16e28b-07e2-4f47-b19d-0b362003ca84");
+            var post1Team3 = new Guid("ec16e28b-07e2-4f47-b19d-0b362003ca85");
 
             modelBuilder.Entity<PostEntity>().HasData(new PostEntity
             {
@@ -221,18 +220,18 @@ namespace ICS.Project.DAL
                 PublishDate = new DateTime(2019, 4, 1, 7, 13, 50)
             });
 
-            var comment1Post1Team1 = new Guid("dc16e27a-07e2-0f47-b09d-0f362003ca84");
-            var comment2Post1Team1 = new Guid("dc16e27a-07e2-0f47-b19d-0f362003ca84");
-            var comment3Post1Team1 = new Guid("dc16e27a-07e2-0f47-b29d-0f362003ca84");
-            var comment4Post1Team1 = new Guid("dc16e27a-07e2-0f47-b39d-0f362003ca84");
+            var comment1Post1Team1 = new Guid("dc16e27a-07e2-0f47-b09d-0f362003ca85");
+            var comment2Post1Team1 = new Guid("dc16e27a-07e2-0f47-b19d-0f362003ca85");
+            var comment3Post1Team1 = new Guid("dc16e27a-07e2-0f47-b29d-0f362003ca85");
+            var comment4Post1Team1 = new Guid("dc16e27a-07e2-0f47-b39d-0f362003ca85");
 
-            var comment1Post2Team1 = new Guid("dc16e27a-07e2-4f47-b49d-0f362003ca84");
-            var comment2Post2Team1 = new Guid("dc16e27a-07e2-4f47-b59d-0f362003ca84");
+            var comment1Post2Team1 = new Guid("dc16e27a-07e2-4f47-b49d-0f362003ca85");
+            var comment2Post2Team1 = new Guid("dc16e27a-07e2-4f47-b59d-0f362003ca85");
 
-            var comment1Post1Team2 = new Guid("dc16e27a-07e2-1f47-b69d-0f362003ca84");
-            var comment2Post1Team2 = new Guid("dc16e27a-07e2-1f47-b79d-0f362003ca84");
+            var comment1Post1Team2 = new Guid("dc16e27a-07e2-1f47-b69d-0f362003ca85");
+            var comment2Post1Team2 = new Guid("dc16e27a-07e2-1f47-b79d-0f362003ca85");
 
-            var comment1Post2Team2 = new Guid("dc16e27a-07e2-2f47-b89d-0f362003ca84");
+            var comment1Post2Team2 = new Guid("dc16e27a-07e2-2f47-b89d-0f362003ca85");
 
             modelBuilder.Entity<CommentEntity>().HasData(new CommentEntity
             {
