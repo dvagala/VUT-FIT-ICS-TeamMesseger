@@ -1,5 +1,4 @@
-﻿
-namespace ICS.Project.App.ViewModels.BaseViewModels
+﻿namespace ICS.Project.App.ViewModels.BaseViewModels
 {
     public interface IViewModel
     {

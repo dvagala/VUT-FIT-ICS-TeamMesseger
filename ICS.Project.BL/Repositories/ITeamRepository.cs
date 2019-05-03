@@ -12,7 +12,6 @@ namespace ICS.Project.BL.Repositories
         IEnumerable<TeamModel> GetUserTeams(Guid userId);
         IEnumerable<PostModel> GetPostsWithCommentsAndAuthors(Guid teamId);
         void RemoveWithAllPostsAndComments(Guid id);
-
         IList<TeamModel> GetAll();
         TeamModel GetFirst();
         TeamModel GetById(Guid id);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using ICS.Project.App.Commands;
 using ICS.Project.App.ViewModels.BaseViewModels;
@@ -15,26 +14,16 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 {
     public class ChatPanelViewModel : ViewModelBase, IViewModel
     {
-        private readonly ITeamsRepository _teamsRepository;
-        private readonly IPostsRepository _postsRepository;
         private readonly ICommentsRepository _commentsRepository;
+        private readonly IPostsRepository _postsRepository;
+        private readonly ITeamsRepository _teamsRepository;
         private readonly IUsersRepository _usersRepository;
-
-        public ObservableCollection<PostViewModel> PostViewModels { get; set; } =
-            new ObservableCollection<PostViewModel>();
-
-        public PostModel NewPost { get; set; }
-        public UserInitialsCircleViewModel NewPostUserInitialsCircleViewModel { get; set; }
-
-        public TeamModel Team { get; set; }
-        public UserModel LoggedUser { get; set; }
-
-        public ICommand AddNewPostCommand { get; set; }
-
 
         public ChatPanelViewModel(ITeamsRepository teamsRepository, IPostsRepository postsRepository,
             ICommentsRepository commentsRepository, IUsersRepository usersRepository)
         {
+            AddNewPostCommand = new RelayCommand(AddNewPost, CanAddNewPost);
+
             _teamsRepository = teamsRepository;
             _postsRepository = postsRepository;
             _commentsRepository = commentsRepository;
@@ -44,8 +33,20 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             Mediator.Instance.Register<UserLoggedMessage>(UserLogged);
             Mediator.Instance.Register<UserLogoutMessage>(UserLogout);
             Mediator.Instance.Register<UserWantsToSearchText>(FilterPostViewModels);
+        }
 
-            AddNewPostCommand = new RelayCommand(AddNewPost, CanAddNewPost);
+        public ICommand AddNewPostCommand { get; set; }
+
+        public ObservableCollection<PostViewModel> PostViewModels { get; set; } =
+            new ObservableCollection<PostViewModel>();
+
+        public PostModel NewPost { get; set; }
+        public UserInitialsCircleViewModel NewPostUserInitialsCircleViewModel { get; set; }
+        public TeamModel Team { get; set; }
+        public UserModel LoggedUser { get; set; }
+
+        public void Load()
+        {
         }
 
         public void FilterPostViewModels(UserWantsToSearchText userWantsToSearchText)
@@ -57,9 +58,11 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
                 PostViewModels.Clear();
                 var posts = _teamsRepository.GetPostsWithCommentsAndAuthors(Team.ID);
 
-                foreach (var post in posts.OrderByDescending(p => p.Comments.Any() ? p.Comments.Max(c => c.PublishDate) : p.PublishDate))
+                foreach (var post in posts.OrderByDescending(p =>
+                    p.Comments.Any() ? p.Comments.Max(c => c.PublishDate) : p.PublishDate))
                     if (post.MessageText.Contains(searchedText) || post.Author.FullName.Contains(searchedText) ||
-                        post.Title.Contains(searchedText) || post.Comments.Any(s => s.MessageText.Contains(searchedText) || s.Author.FullName.Contains(searchedText)))
+                        post.Title.Contains(searchedText) || post.Comments.Any(s =>
+                            s.MessageText.Contains(searchedText) || s.Author.FullName.Contains(searchedText)))
                         PostViewModels.Add(new PostViewModel(_commentsRepository, post, LoggedUser));
             }
             else
@@ -128,12 +131,9 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             PostViewModels.Clear();
             var posts = _teamsRepository.GetPostsWithCommentsAndAuthors(Team.ID);
 
-            foreach (var post in posts.OrderByDescending(p => p.Comments.Any() ? p.Comments.Max(c => c.PublishDate) : p.PublishDate))
+            foreach (var post in posts.OrderByDescending(p =>
+                p.Comments.Any() ? p.Comments.Max(c => c.PublishDate) : p.PublishDate))
                 PostViewModels.Add(new PostViewModel(_commentsRepository, post, LoggedUser));
-        }
-
-        public void Load()
-        {
         }
     }
 }

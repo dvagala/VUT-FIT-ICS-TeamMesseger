@@ -8,7 +8,6 @@ namespace ICS.Project.BL.Repositories
     {
         IEnumerable<CommentModel> GetAll();
         CommentModel GetById(Guid id);
-
         void Update(CommentModel comment);
         CommentModel Add(CommentModel comment);
         void Remove(Guid id);

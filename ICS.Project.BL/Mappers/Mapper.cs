@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using ICS.Project.BL.Models;
-using ICS.Project.BL.Repositories;
 using ICS.Project.DAL.Entities;
 
 namespace ICS.Project.BL.Mappers
@@ -69,7 +68,6 @@ namespace ICS.Project.BL.Mappers
                 TeamId = post.TeamId
             };
         }
-        
 
         public static PostModel MapPostModelFromEntityWithCommentsAndAuthor(PostEntity post)
         {
@@ -97,20 +95,6 @@ namespace ICS.Project.BL.Mappers
                 AuthorId = post.AuthorId,
                 TeamId = post.TeamId,
                 Comments = post.Comments.Select(MapCommentModelFromEntity).ToList()
-            };
-        }
-
-        public static PostModel MapPostModelFromEntityWithAuthor(PostEntity post)
-        {
-            return new PostModel
-            {
-                ID = post.ID,
-                Title = post.Title,
-                MessageText = post.MessageText,
-                PublishDate = post.PublishDate,
-                AuthorId = post.AuthorId,
-                TeamId = post.TeamId,
-                Author = MapUserModelFromEntity(post.Author)
             };
         }
 
@@ -163,7 +147,7 @@ namespace ICS.Project.BL.Mappers
                 Email = user.Email,
                 PasswordHash = user.PasswordHash,
                 Salt = user.Salt,
-                IterationCount= user.IterationCount
+                IterationCount = user.IterationCount
             };
         }
     }

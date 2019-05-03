@@ -9,7 +9,6 @@ namespace ICS.Project.BL.Models
         public Guid? TeamId { get; set; }
         public TeamModel Team { get; set; }
         public string Title { get; set; }
-
         public IList<CommentModel> Comments { get; set; }
     }
 }

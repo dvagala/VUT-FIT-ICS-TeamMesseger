@@ -19,7 +19,8 @@ internal static class UserEntityComparer
 
             return string.Equals(x.Name, y.Name) && x.ID.Equals(y.ID) &&
                    string.Equals(x.Surname, y.Surname) && string.Equals(x.Email, y.Email) && Equals(
-                       x.LastLogoutTime.ToString("MM/dd/yyyy HH:mm:ss"), y.LastLogoutTime.ToString("MM/dd/yyyy HH:mm:ss"));
+                       x.LastLogoutTime.ToString("MM/dd/yyyy HH:mm:ss"),
+                       y.LastLogoutTime.ToString("MM/dd/yyyy HH:mm:ss"));
         }
 
         public int GetHashCode(UserEntity obj)

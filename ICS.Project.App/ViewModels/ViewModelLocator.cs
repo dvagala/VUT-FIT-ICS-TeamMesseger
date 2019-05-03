@@ -1,14 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Windows;
-using System.Windows.Input;
-using ICS.Project.App.Commands;
+﻿using System.Threading;
 using ICS.Project.App.ViewModels.BaseViewModels;
 using ICS.Project.App.ViewModels.MessengerScreenViewModels;
-using ICS.Project.App.Views;
 using ICS.Project.BL.Messages;
-using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
 using ICS.Project.BL.Services;
 using ICS.Project.DAL;
@@ -17,36 +10,19 @@ namespace ICS.Project.App.ViewModels
 {
     public class ViewModelLocator : ViewModelBase
     {
-        private readonly IDbContextFactory dbContextFactory;
-
-        private readonly ITeamsRepository teamsRepository;
-        private readonly IUsersRepository usersRepository;
-        private readonly IPostsRepository postsRepository;
-        private readonly ICommentsRepository commentsRepository;
-
-        public ViewModelBase CurrentViewModel { get; set; }
-        public LoginScreenViewModel LoginScreenViewModel { get; }
-        public RegisterScreenViewModel RegisterScreenViewModel { get; }
-        public OptionsPanelViewModel OptionsPanelViewModel { get; }
-        public SearchPanelViewModel SearchPanelViewModel { get; }
-        public TeamsListViewModel TeamsListViewModel { get; }
-        public TeamDetailViewModel TeamDetailViewModel { get; }
-        public ChatPanelViewModel ChatPanelViewModel { get; }
-        public UserDetailScreenViewModel UserDetailScreenViewModel { get; }
-
         public ViewModelLocator()
         {
-            dbContextFactory = new DefaultDbContextFactory();
+            IDbContextFactory dbContextFactory = new DefaultDbContextFactory();
 
             Mediator.Instance.Register<GoToRegisterScreenMessage>(GoToRegisterScreen);
             Mediator.Instance.Register<GoToLoginScreenMessage>(GoToLoginScreen);
             Mediator.Instance.Register<GoToMessengerScreenMessage>(GoToMessengerScreen);
             Mediator.Instance.Register<UserClosedMainWindowMessage>(UserClosedMainWindow);
 
-            teamsRepository = new TeamsRepository(dbContextFactory);
-            usersRepository = new UsersRepository(dbContextFactory);
-            postsRepository = new PostsRepository(dbContextFactory);
-            commentsRepository = new CommentsRepository(dbContextFactory);
+            ITeamsRepository teamsRepository = new TeamsRepository(dbContextFactory);
+            IUsersRepository usersRepository = new UsersRepository(dbContextFactory);
+            IPostsRepository postsRepository = new PostsRepository(dbContextFactory);
+            ICommentsRepository commentsRepository = new CommentsRepository(dbContextFactory);
 
             LoginScreenViewModel = new LoginScreenViewModel(usersRepository);
             RegisterScreenViewModel = new RegisterScreenViewModel(usersRepository);
@@ -55,7 +31,8 @@ namespace ICS.Project.App.ViewModels
             SearchPanelViewModel = new SearchPanelViewModel();
             TeamsListViewModel = new TeamsListViewModel(teamsRepository);
             TeamDetailViewModel = new TeamDetailViewModel(usersRepository, teamsRepository);
-            ChatPanelViewModel = new ChatPanelViewModel(teamsRepository, postsRepository, commentsRepository, usersRepository);
+            ChatPanelViewModel =
+                new ChatPanelViewModel(teamsRepository, postsRepository, commentsRepository, usersRepository);
             UserDetailScreenViewModel = new UserDetailScreenViewModel(teamsRepository, usersRepository);
 
             CurrentViewModel = LoginScreenViewModel;
@@ -68,12 +45,19 @@ namespace ICS.Project.App.ViewModels
             }).Start();
         }
 
+        public ViewModelBase CurrentViewModel { get; set; }
+        public LoginScreenViewModel LoginScreenViewModel { get; }
+        public RegisterScreenViewModel RegisterScreenViewModel { get; }
+        public OptionsPanelViewModel OptionsPanelViewModel { get; }
+        public SearchPanelViewModel SearchPanelViewModel { get; }
+        public TeamsListViewModel TeamsListViewModel { get; }
+        public TeamDetailViewModel TeamDetailViewModel { get; }
+        public ChatPanelViewModel ChatPanelViewModel { get; }
+        public UserDetailScreenViewModel UserDetailScreenViewModel { get; }
+
         public void UserClosedMainWindow(UserClosedMainWindowMessage message)
         {
-            if(CurrentViewModel == ChatPanelViewModel)
-            {
-                Mediator.Instance.Send(new UserLogoutMessage());
-            }
+            if (CurrentViewModel == ChatPanelViewModel) Mediator.Instance.Send(new UserLogoutMessage());
         }
 
         public void GoToLoginScreen(GoToLoginScreenMessage message)

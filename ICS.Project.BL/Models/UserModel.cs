@@ -5,9 +5,10 @@ namespace ICS.Project.BL.Models
 {
     public class UserModel : ModelBase
     {
-        private string _name;
-        private string _surname;
         private string _email;
+        private string _name;
+
+        private string _surname;
 
         public string Name
         {
@@ -21,16 +22,13 @@ namespace ICS.Project.BL.Models
             set => _surname = value?.Trim();
         }
 
-        public string FullName => $"{_name} {_surname}";
-
-        public DateTime LastActivity { get; set; }
-
         public string Email
         {
             get => _email;
             set => _email = value?.Trim();
         }
 
+        public string FullName => $"{_name} {_surname}";
         public byte[] PasswordHash { get; set; }
         public byte[] Salt { get; set; }
         public int IterationCount { get; set; }

@@ -9,6 +9,8 @@ namespace ICS.Project.BL.Services
     {
         private static Mediator _instance;
 
+        private readonly Dictionary<Type, List<Delegate>> registeredActions = new Dictionary<Type, List<Delegate>>();
+
         public static Mediator Instance
         {
             get
@@ -20,17 +22,11 @@ namespace ICS.Project.BL.Services
             }
         }
 
-
-        private readonly Dictionary<Type, List<Delegate>> registeredActions = new Dictionary<Type, List<Delegate>>();
-
         public void Register<TMessage>(Action<TMessage> action)
             where TMessage : IMessage
         {
             var key = typeof(TMessage);
-            if (!registeredActions.TryGetValue(key, out _))
-            {
-                registeredActions[key] = new List<Delegate>();
-            }
+            if (!registeredActions.TryGetValue(key, out _)) registeredActions[key] = new List<Delegate>();
             registeredActions[key].Add(action);
         }
 
@@ -51,12 +47,9 @@ namespace ICS.Project.BL.Services
             where TMessage : IMessage
         {
             if (registeredActions.TryGetValue(typeof(TMessage), out var actions))
-            {
-                foreach (var action in actions.Select(action => action as Action<TMessage>).Where(action => action != null))
-                {
+                foreach (var action in actions.Select(action => action as Action<TMessage>)
+                    .Where(action => action != null))
                     action(message);
-                }
-            }
         }
     }
 }

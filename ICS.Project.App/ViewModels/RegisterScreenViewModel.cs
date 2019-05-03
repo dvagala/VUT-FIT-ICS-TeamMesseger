@@ -1,28 +1,20 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Security;
 using System.Windows;
 using System.Windows.Input;
 using ICS.Project.App.Commands;
+using ICS.Project.App.ViewModels.BaseViewModels;
 using ICS.Project.BL.Messages;
 using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
 using ICS.Project.BL.Services;
-using System.ComponentModel.DataAnnotations;
-using System.Security;
-using ICS.Project.App.ViewModels.BaseViewModels;
 
 namespace ICS.Project.App.ViewModels
 {
     public class RegisterScreenViewModel : ViewModelBase, IViewModel
     {
         private readonly IUsersRepository _usersRepository;
-
-        public ICommand GoToLoginScreenCommand { get; set; }
-        public ICommand TryToRegisterCommand { get; set; }
-
-        public UserModel NewUser { get; set; }
-        public SecureString SecureStringPassword { get; set; }
-
-
 
         public RegisterScreenViewModel(IUsersRepository usersRepository)
         {
@@ -31,6 +23,12 @@ namespace ICS.Project.App.ViewModels
 
             _usersRepository = usersRepository;
         }
+
+        public ICommand GoToLoginScreenCommand { get; set; }
+        public ICommand TryToRegisterCommand { get; set; }
+
+        public UserModel NewUser { get; set; }
+        public SecureString SecureStringPassword { get; set; }
 
         public void Load()
         {
@@ -41,7 +39,8 @@ namespace ICS.Project.App.ViewModels
         public bool CanTryToRegister()
         {
             return !string.IsNullOrEmpty(NewUser?.Name) && !string.IsNullOrEmpty(NewUser?.Surname) &&
-                   !string.IsNullOrEmpty(NewUser?.Email) && new EmailAddressAttribute().IsValid(NewUser.Email) && SecureStringPassword.Length != 0 && SecureStringPassword != null;
+                   !string.IsNullOrEmpty(NewUser?.Email) && new EmailAddressAttribute().IsValid(NewUser.Email) &&
+                   SecureStringPassword.Length != 0 && SecureStringPassword != null;
         }
 
 
@@ -49,24 +48,24 @@ namespace ICS.Project.App.ViewModels
         {
             if (_usersRepository.GetByEmail(NewUser.Email) != null)
             {
-                MessageBox.Show($"You are already registered!", "Registration failed");
+                MessageBox.Show("You are already registered!", "Registration failed");
                 return;
             }
 
-            PasswordHelper passwordHelper = new PasswordHelper();
+            var passwordHelper = new PasswordHelper();
             passwordHelper.AddEncryptedPasswordToUserModel(NewUser, SecureStringPassword);
 
             if (NewUser.PasswordHash == null || NewUser.Salt == null)
             {
-                MessageBox.Show($"Cant proccess password", "Registration failed");
+                MessageBox.Show("Cant proccess password", "Registration failed");
                 return;
             }
 
-            UserModel userFromDb = _usersRepository.Add(NewUser);
+            var userFromDb = _usersRepository.Add(NewUser);
 
             if (userFromDb.ID == Guid.Empty)
             {
-                MessageBox.Show($"Error in database", "Registration failed");
+                MessageBox.Show("Error in database", "Registration failed");
                 return;
             }
 
@@ -74,7 +73,7 @@ namespace ICS.Project.App.ViewModels
             _usersRepository.Update(userFromDb);
 
             Mediator.Instance.Send(new GoToMessengerScreenMessage());
-            Mediator.Instance.Send(new UserLoggedMessage { User = userFromDb});
+            Mediator.Instance.Send(new UserLoggedMessage {User = userFromDb});
             MessageBox.Show($"Hi {NewUser.Name}! Welcome to Team messenger", "Registration success");
             SecureStringPassword?.Clear();
             NewUser = null;

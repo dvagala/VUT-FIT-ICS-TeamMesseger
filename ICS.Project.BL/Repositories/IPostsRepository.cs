@@ -7,7 +7,6 @@ namespace ICS.Project.BL.Repositories
     public interface IPostsRepository
     {
         UserModel GetAuthorOfPost(Guid id);
-
         IEnumerable<PostModel> GetAll();
         PostModel GetById(Guid id);
         void Update(PostModel post);

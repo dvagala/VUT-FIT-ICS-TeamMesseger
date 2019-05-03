@@ -10,23 +10,23 @@ namespace ICS.Project.BL.Repositories
 {
     public class CommentsRepository : ICommentsRepository
     {
-        private readonly IDbContextFactory dbContextFactory;
+        private readonly IDbContextFactory _dbContextFactory;
 
         public CommentsRepository(IDbContextFactory dbContextFactory)
         {
-            this.dbContextFactory = dbContextFactory;
+            _dbContextFactory = dbContextFactory;
         }
 
         public IEnumerable<CommentModel> GetAll()
         {
-            return dbContextFactory.CreateDbContext()
+            return _dbContextFactory.CreateDbContext()
                 .Comments
                 .Select(Mapper.MapCommentModelFromEntity);
         }
 
         public CommentModel GetById(Guid id)
         {
-            var foundEntity = dbContextFactory
+            var foundEntity = _dbContextFactory
                 .CreateDbContext()
                 .Comments
                 .FirstOrDefault(t => t.ID == id);
@@ -35,7 +35,7 @@ namespace ICS.Project.BL.Repositories
 
         public void Update(CommentModel comment)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var entity = Mapper.MapCommentModelToEntity(comment);
                 dbContext.Comments.Update(entity);
@@ -45,7 +45,7 @@ namespace ICS.Project.BL.Repositories
 
         public CommentModel Add(CommentModel comment)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var entity = Mapper.MapCommentModelToEntity(comment);
                 dbContext.Comments.Add(entity);
@@ -56,7 +56,7 @@ namespace ICS.Project.BL.Repositories
 
         public void Remove(Guid id)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var comment = new CommentEntity
                 {

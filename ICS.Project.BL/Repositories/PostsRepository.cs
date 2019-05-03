@@ -11,16 +11,16 @@ namespace ICS.Project.BL.Repositories
 {
     public class PostsRepository : IPostsRepository
     {
-        private readonly IDbContextFactory dbContextFactory;
+        private readonly IDbContextFactory _dbContextFactory;
 
         public PostsRepository(IDbContextFactory dbContextFactory)
         {
-            this.dbContextFactory = dbContextFactory;
+            _dbContextFactory = dbContextFactory;
         }
 
         public UserModel GetAuthorOfPost(Guid id)
         {
-            var postEntityWithAuthor = dbContextFactory
+            var postEntityWithAuthor = _dbContextFactory
                 .CreateDbContext()
                 .Posts
                 .Where(s => s.ID == id)
@@ -33,13 +33,14 @@ namespace ICS.Project.BL.Repositories
 
         public IEnumerable<PostModel> GetAll()
         {
-            return dbContextFactory.CreateDbContext()
+            return _dbContextFactory.CreateDbContext()
                 .Posts
                 .Select(Mapper.MapPostModelFromEntity);
         }
+
         public PostModel GetById(Guid id)
         {
-            var foundEntity = dbContextFactory
+            var foundEntity = _dbContextFactory
                 .CreateDbContext()
                 .Posts
                 .FirstOrDefault(t => t.ID == id);
@@ -48,7 +49,7 @@ namespace ICS.Project.BL.Repositories
 
         public void Update(PostModel post)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var entity = Mapper.MapPostModelToEntity(post);
                 dbContext.Posts.Update(entity);
@@ -58,7 +59,7 @@ namespace ICS.Project.BL.Repositories
 
         public PostModel Add(PostModel post)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var entity = Mapper.MapPostModelToEntity(post);
                 dbContext.Posts.Add(entity);
@@ -69,7 +70,7 @@ namespace ICS.Project.BL.Repositories
 
         public void Remove(Guid id)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var post = new PostEntity
                 {

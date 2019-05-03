@@ -1,10 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace ICS.Project.BL.Models.Base
 {
-    public class ModelBase : IModelBase//, INotifyPropertyChanged
+    public class ModelBase : IModelBase //, INotifyPropertyChanged
     {
         public Guid ID { get; set; }
 //        public event PropertyChangedEventHandler PropertyChanged;

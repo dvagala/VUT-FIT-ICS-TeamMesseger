@@ -11,8 +11,6 @@
         <ResourceDictionary>
             <viewModels:ViewModelLocator x:Key="ViewModelLocator"/>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-            <converters:EmptyTextBoxUnfocusedToVisibilityConverter x:Key="EmptyTextBoxUnfocusedToVisibilityConverter"/>
-            <converters:InvertBoolConvertor x:Key="InvertBoolConvertor" />
             <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
             <converters:GetNameInitialsConvertor x:Key="GetNameInitials" />
             <converters:DateTimeFormatConvertor x:Key="DateTimeFormatConvertor" />

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Security;
 using System.Windows;
 using System.Windows.Input;
 using ICS.Project.App.Commands;
@@ -7,19 +7,12 @@ using ICS.Project.BL.Messages;
 using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
 using ICS.Project.BL.Services;
-using System.Security;
 
 namespace ICS.Project.App.ViewModels
 {
     public class LoginScreenViewModel : ViewModelBase, IViewModel
     {
         private readonly IUsersRepository _usersRepository;
-
-        public ICommand GoToRegisterScreenCommand { get; set; }
-        public ICommand TryToLoginCommand { get; set; }
-
-        public UserModel User { get; set; }
-        public SecureString SecureStringPassword { get; set; }
 
         public LoginScreenViewModel(IUsersRepository usersRepository)
         {
@@ -29,6 +22,12 @@ namespace ICS.Project.App.ViewModels
             _usersRepository = usersRepository;
         }
 
+        public ICommand GoToRegisterScreenCommand { get; set; }
+        public ICommand TryToLoginCommand { get; set; }
+
+        public UserModel User { get; set; }
+        public SecureString SecureStringPassword { get; set; }
+
         public void Load()
         {
             User = new UserModel();
@@ -36,28 +35,29 @@ namespace ICS.Project.App.ViewModels
         }
 
         public bool CanTryToLogin()
-        { 
-            return !string.IsNullOrEmpty(User?.Email) && SecureStringPassword != null && SecureStringPassword.Length != 0;
+        {
+            return !string.IsNullOrEmpty(User?.Email) && SecureStringPassword != null &&
+                   SecureStringPassword.Length != 0;
         }
 
         public void TryToLogin()
         {
-            UserModel userFromDb = _usersRepository.GetByEmail(User.Email);
+            var userFromDb = _usersRepository.GetByEmail(User.Email);
 
             if (userFromDb == null)
             {
-                MessageBox.Show($"Wrong email!", "Login failed");
+                MessageBox.Show("Wrong email!", "Login failed");
                 return;
             }
 
-            PasswordHelper passwordHelper = new PasswordHelper();
+            var passwordHelper = new PasswordHelper();
             if (passwordHelper.IsPasswordCorrect(userFromDb, SecureStringPassword))
             {
                 MessageBox.Show($"Hi {userFromDb.Name}! Welcome back", "Login success");
             }
             else
             {
-                MessageBox.Show($"Wrong password!", "Login failed");
+                MessageBox.Show("Wrong password!", "Login failed");
                 return;
             }
 
@@ -65,7 +65,7 @@ namespace ICS.Project.App.ViewModels
             _usersRepository.Update(userFromDb);
 
             Mediator.Instance.Send(new GoToMessengerScreenMessage());
-            Mediator.Instance.Send(new UserLoggedMessage{ User = userFromDb});
+            Mediator.Instance.Send(new UserLoggedMessage {User = userFromDb});
             SecureStringPassword?.Clear();
             User = null;
         }

@@ -5,39 +5,39 @@ using ICS.Project.BL.Mappers;
 using ICS.Project.BL.Models;
 using ICS.Project.DAL;
 using ICS.Project.DAL.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace ICS.Project.BL.Repositories
 {
     public class UsersRepository : IUsersRepository
     {
-        private readonly IDbContextFactory dbContextFactory;
+        private readonly IDbContextFactory _dbContextFactory;
 
         public UsersRepository(IDbContextFactory dbContextFactory)
         {
-            this.dbContextFactory = dbContextFactory;
+            _dbContextFactory = dbContextFactory;
         }
 
         public UserModel GetByEmail(string email)
         {
-            var user = dbContextFactory
+            var user = _dbContextFactory
                 .CreateDbContext()
                 .Users
                 .FirstOrDefault(t => t.Email == email);
 
-            return user == null ? null : Mapper.MapUserModelFromEntity(user); ;
+            return user == null ? null : Mapper.MapUserModelFromEntity(user);
+            ;
         }
 
         public IList<UserModel> GetAll()
         {
-            return dbContextFactory.CreateDbContext()
+            return _dbContextFactory.CreateDbContext()
                 .Users
                 .Select(Mapper.MapUserModelFromEntity).ToList();
         }
 
         public UserModel GetById(Guid id)
         {
-            var foundEntity = dbContextFactory
+            var foundEntity = _dbContextFactory
                 .CreateDbContext()
                 .Users
                 .FirstOrDefault(t => t.ID == id);
@@ -47,7 +47,7 @@ namespace ICS.Project.BL.Repositories
 
         public UserModel GetFirst()
         {
-            var foundEntity = dbContextFactory
+            var foundEntity = _dbContextFactory
                 .CreateDbContext()
                 .Users
                 .FirstOrDefault();
@@ -56,7 +56,7 @@ namespace ICS.Project.BL.Repositories
 
         public void Update(UserModel user)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var entity = Mapper.MapUserModelToEntity(user);
                 dbContext.Users.Update(entity);
@@ -66,7 +66,7 @@ namespace ICS.Project.BL.Repositories
 
         public UserModel Add(UserModel user)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var entity = Mapper.MapUserModelToEntity(user);
                 dbContext.Users.Add(entity);
@@ -77,7 +77,7 @@ namespace ICS.Project.BL.Repositories
 
         public void Remove(Guid id)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var user = new UserEntity
                 {

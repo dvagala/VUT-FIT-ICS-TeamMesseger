@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using ICS.Project.App.Commands;
 using ICS.Project.App.ViewModels.BaseViewModels;
 using ICS.Project.BL.Messages;
@@ -13,20 +12,8 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
     {
         private readonly IUsersRepository _usersRepository;
 
-        public ICommand ChangeEmailCommand { get; set; }
-        public ICommand ChangePasswordCommand { get; set; }
-        public ICommand LogoutCommand { get; set; }
-        public ICommand DeleteAccountCommand { get; set; }
-        public ICommand RefreshCommand { get; set; }
-
-        public UserModel User { get; set; }
-        public string PlainTextPassword { get; set; }
-
-
         public OptionsPanelViewModel(IUsersRepository usersRepository)
         {
-            ChangeEmailCommand = new RelayCommand(ChangeEmail);
-            ChangePasswordCommand = new RelayCommand(ChangePassword);
             DeleteAccountCommand = new RelayCommand(DeleteAccount);
             LogoutCommand = new RelayCommand(Logout);
             RefreshCommand = new RelayCommand(Refresh);
@@ -34,25 +21,21 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             _usersRepository = usersRepository;
         }
 
+        public ICommand LogoutCommand { get; set; }
+        public ICommand DeleteAccountCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
+
+        public UserModel User { get; set; }
+        public string PlainTextPassword { get; set; }
+
         public void Load()
         {
             PlainTextPassword = "";
             User = new UserModel();
         }
 
-        public void ChangePassword()
-        {
-
-        }
-
-        public void ChangeEmail()
-        {
-            MessageBox.Show("changemeil");
-        }
-
         public void DeleteAccount()
         {
-
         }
 
         private void Logout()

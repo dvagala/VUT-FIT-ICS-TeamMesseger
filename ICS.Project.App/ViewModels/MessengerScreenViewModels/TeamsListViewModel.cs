@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using ICS.Project.App.Commands;
 using ICS.Project.App.ViewModels.BaseViewModels;
@@ -8,7 +7,6 @@ using ICS.Project.BL.Messages;
 using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
 using ICS.Project.BL.Services;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 {
@@ -16,14 +14,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
     {
         private readonly ITeamsRepository _teamsRepository;
 
-        public UserModel LoggedUser { get; set; }
-        public TeamModel NewTeam { get; set; }
-        public ObservableCollection<TeamModel> Teams { get; set; } = new ObservableCollection<TeamModel>();
-
-        public int SelectedIndexInListBox { get; set; }
-
-        public ICommand AddNewTeamCommand { get; set; }
-        public ICommand TeamSelectedCommand { get; set; }
 
         public TeamsListViewModel(ITeamsRepository teamsRepository)
         {
@@ -38,6 +28,25 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             Mediator.Instance.Register<RefreshDataInMesssengerScreenMessage>(RefreshDataInMesssengerScreen);
         }
 
+        public ICommand AddNewTeamCommand { get; set; }
+        public ICommand TeamSelectedCommand { get; set; }
+
+        public UserModel LoggedUser { get; set; }
+        public TeamModel NewTeam { get; set; }
+        public ObservableCollection<TeamModel> Teams { get; set; } = new ObservableCollection<TeamModel>();
+        public int SelectedIndexInListBox { get; set; }
+
+        public void Load()
+        {
+            NewTeam = new TeamModel();
+            SelectedIndexInListBox = 0;
+
+            Refresh();
+
+            Mediator.Instance.Send(new SelectedTeamMessage
+                {Team = _teamsRepository.GetUserTeams(LoggedUser.ID).FirstOrDefault()});
+        }
+
         private void UserLogged(UserLoggedMessage userLoggedMessage)
         {
             LoggedUser = userLoggedMessage.User;
@@ -50,66 +59,43 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             Teams.Clear();
         }
 
-        public void Load()
-        {
-            NewTeam = new TeamModel();
-            SelectedIndexInListBox = 0;
-
-            Refresh();
-
-            Mediator.Instance.Send(new SelectedTeamMessage { Team = _teamsRepository.GetUserTeams(LoggedUser.ID).FirstOrDefault() });
-        }
-
         public void RemoveTeamInListView(UserLostAccessToTeam userLostAccessToTeam)
         {
-            int oldSelectedIndex = SelectedIndexInListBox;
+            var oldSelectedIndex = SelectedIndexInListBox;
             Teams.Remove(Teams.Single(i => i.ID == userLostAccessToTeam.Team.ID));
 
-            if (!Teams.Any())
-            {
-                Mediator.Instance.Send(new SelectedTeamMessage { Team = null });
-            }
+            if (!Teams.Any()) Mediator.Instance.Send(new SelectedTeamMessage {Team = null});
 
             // Deleting item at the bottom
             if (Teams.Count == oldSelectedIndex)
-            {
                 SelectedIndexInListBox = oldSelectedIndex - 1;
-            }
-            else  // Deleting item in the middle
-            {
+            else // Deleting item in the middle
                 SelectedIndexInListBox = oldSelectedIndex;
-            }
         }
 
-        public void RefreshDataInMesssengerScreen(RefreshDataInMesssengerScreenMessage refreshDataInMesssengerScreenMessage)
+        public void RefreshDataInMesssengerScreen(
+            RefreshDataInMesssengerScreenMessage refreshDataInMesssengerScreenMessage)
         {
             Refresh();
         }
 
         public void Refresh()
         {
-            int oldSelectedIndex = SelectedIndexInListBox;
+            var oldSelectedIndex = SelectedIndexInListBox;
             Teams.Clear();
             foreach (var team in _teamsRepository.GetUserTeams(LoggedUser.ID)) Teams.Add(team);
 
-            if (!Teams.Any())
-            {
-                Mediator.Instance.Send(new SelectedTeamMessage { Team = null });
-            }
+            if (!Teams.Any()) Mediator.Instance.Send(new SelectedTeamMessage {Team = null});
 
             if (oldSelectedIndex < 0 || oldSelectedIndex >= Teams.Count)
-            {
                 SelectedIndexInListBox = 0;
-            }
             else
-            {
                 SelectedIndexInListBox = oldSelectedIndex;
-            }
         }
 
         public void AddNewTeam()
         {
-            TeamModel teamFromDb = _teamsRepository.Add(NewTeam);
+            var teamFromDb = _teamsRepository.Add(NewTeam);
             _teamsRepository.AddUserToTeam(LoggedUser.ID, teamFromDb.ID);
 
             NewTeam = new TeamModel();
@@ -126,7 +112,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         private void TeamSelected(TeamModel selectedTeamModel)
         {
-            Mediator.Instance.Send(new SelectedTeamMessage{ Team = selectedTeamModel});
+            Mediator.Instance.Send(new SelectedTeamMessage {Team = selectedTeamModel});
         }
     }
 }

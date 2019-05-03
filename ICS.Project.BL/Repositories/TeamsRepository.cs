@@ -11,16 +11,16 @@ namespace ICS.Project.BL.Repositories
 {
     public class TeamsRepository : ITeamsRepository
     {
-        private readonly IDbContextFactory dbContextFactory;
+        private readonly IDbContextFactory _dbContextFactory;
 
         public TeamsRepository(IDbContextFactory dbContextFactory)
         {
-            this.dbContextFactory = dbContextFactory;
+            _dbContextFactory = dbContextFactory;
         }
 
         public IEnumerable<PostModel> GetPostsWithCommentsAndAuthors(Guid teamId)
         {
-            var posts = dbContextFactory.CreateDbContext()
+            var posts = _dbContextFactory.CreateDbContext()
                 .Posts
                 .Include(s => s.Author)
                 .Include(s => s.Comments)
@@ -31,20 +31,9 @@ namespace ICS.Project.BL.Repositories
             return posts;
         }
 
-        public IEnumerable<PostModel> GetPostsWithComments(Guid teamId)
-        {
-            var posts = dbContextFactory.CreateDbContext()
-                .Posts
-                .Include(s => s.Comments)
-                .Where(s => s.TeamId == teamId)
-                .Select(s => Mapper.MapPostModelFromEntityWithComments(s)).ToList();
-
-            return posts;
-        }
-
         public IEnumerable<TeamModel> GetUserTeams(Guid userId)
         {
-            var t = dbContextFactory.CreateDbContext()
+            var t = _dbContextFactory.CreateDbContext()
                 .UserInTeam
                 .Where(s => s.UserId == userId)
                 .Include(s => s.Team)
@@ -52,9 +41,10 @@ namespace ICS.Project.BL.Repositories
 
             return t;
         }
+
         public IEnumerable<UserModel> GetTeamMembers(Guid teamId)
         {
-            var members = dbContextFactory.CreateDbContext()
+            var members = _dbContextFactory.CreateDbContext()
                 .UserInTeam
                 .Where(s => s.TeamId == teamId)
                 .Include(s => s.User)
@@ -65,7 +55,7 @@ namespace ICS.Project.BL.Repositories
 
         public void AddUserToTeam(Guid userId, Guid teamId)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var entity = new UserInTeamEntity
                 {
@@ -80,13 +70,13 @@ namespace ICS.Project.BL.Repositories
 
         public void RemoveUserFromTeam(Guid userId, Guid teamId)
         {
-            var userInTeamId = dbContextFactory.CreateDbContext()
+            var userInTeamId = _dbContextFactory.CreateDbContext()
                 .UserInTeam
                 .Where(s => s.TeamId == teamId && s.UserId == userId)
                 .Select(s => s.ID)
                 .FirstOrDefault();
 
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var userInTeamEntity = new UserInTeamEntity
                 {
@@ -100,7 +90,7 @@ namespace ICS.Project.BL.Repositories
 
         public IList<TeamModel> GetAll()
         {
-            return dbContextFactory.CreateDbContext()
+            return _dbContextFactory.CreateDbContext()
                 .Teams
                 .Select(Mapper.MapTeamModelFromEntity).ToList();
         }
@@ -108,7 +98,7 @@ namespace ICS.Project.BL.Repositories
 
         public TeamModel GetFirst()
         {
-            var foundEntity = dbContextFactory
+            var foundEntity = _dbContextFactory
                 .CreateDbContext()
                 .Teams
                 .FirstOrDefault();
@@ -118,7 +108,7 @@ namespace ICS.Project.BL.Repositories
 
         public TeamModel GetById(Guid id)
         {
-            var foundEntity = dbContextFactory
+            var foundEntity = _dbContextFactory
                 .CreateDbContext()
                 .Teams
                 .FirstOrDefault(t => t.ID == id);
@@ -127,7 +117,7 @@ namespace ICS.Project.BL.Repositories
 
         public void Update(TeamModel team)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var entity = Mapper.MapTeamModelToEntity(team);
                 dbContext.Teams.Update(entity);
@@ -137,7 +127,7 @@ namespace ICS.Project.BL.Repositories
 
         public TeamModel Add(TeamModel team)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var entity = Mapper.MapTeamModelToEntity(team);
                 dbContext.Teams.Add(entity);
@@ -145,13 +135,13 @@ namespace ICS.Project.BL.Repositories
                 return Mapper.MapTeamModelFromEntity(entity);
             }
         }
+
         public void RemoveWithAllPostsAndComments(Guid id)
         {
             foreach (var post in GetPostsWithComments(id))
-            {                
+            {
                 foreach (var comment in post.Comments)
-                {
-                    using (var dbContext = dbContextFactory.CreateDbContext())
+                    using (var dbContext = _dbContextFactory.CreateDbContext())
                     {
                         var commentEntity = new CommentEntity
                         {
@@ -161,10 +151,10 @@ namespace ICS.Project.BL.Repositories
                         dbContext.Comments.Remove(commentEntity);
                         dbContext.SaveChanges();
                     }
-                }
-                using (var dbContext = dbContextFactory.CreateDbContext())
+
+                using (var dbContext = _dbContextFactory.CreateDbContext())
                 {
-                    var postEntity = new PostEntity()
+                    var postEntity = new PostEntity
                     {
                         ID = post.ID
                     };
@@ -174,16 +164,13 @@ namespace ICS.Project.BL.Repositories
                 }
             }
 
-            foreach (var member in GetTeamMembers(id))
-            {
-                RemoveUserFromTeam(member.ID, id);
-            }
+            foreach (var member in GetTeamMembers(id)) RemoveUserFromTeam(member.ID, id);
             Remove(id);
         }
 
         public void Remove(Guid id)
         {
-            using (var dbContext = dbContextFactory.CreateDbContext())
+            using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var team = new TeamEntity
                 {
@@ -193,6 +180,17 @@ namespace ICS.Project.BL.Repositories
                 dbContext.Teams.Remove(team);
                 dbContext.SaveChanges();
             }
+        }
+
+        public IEnumerable<PostModel> GetPostsWithComments(Guid teamId)
+        {
+            var posts = _dbContextFactory.CreateDbContext()
+                .Posts
+                .Include(s => s.Comments)
+                .Where(s => s.TeamId == teamId)
+                .Select(s => Mapper.MapPostModelFromEntityWithComments(s)).ToList();
+
+            return posts;
         }
     }
 }
