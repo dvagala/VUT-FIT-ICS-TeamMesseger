@@ -22,8 +22,8 @@
                 <PasswordBox Margin="15" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="PASSWORD"
                              attachedProperties:PasswordBoxAttachedProperty.EncryptedPassword="{Binding SecureStringPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  PasswordChanged="PasswordBox_PasswordChanged"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Foreground="#efebe8" Margin="15 30" Content="LOG IN" Background="#FF0058FF" BorderBrush="#FF0058FF" Command="{Binding TryToLoginCommand}"/>
-                    <Button Foreground="#efebe8" Margin="15 30" Content="SIGN UP" Background="#FF0058FF" BorderBrush="#FF0058FF" Command="{Binding GoToRegisterScreenCommand}"/>
+                    <Button Foreground="#efebe8" Margin="15 30" Content="Login" Background="#FF0058FF" BorderBrush="#FF0058FF" Command="{Binding TryToLoginCommand}"/>
+                    <Button Foreground="#efebe8" Margin="15 30" Content="Signup" Background="#FF0058FF" BorderBrush="#FF0058FF" Command="{Binding GoToRegisterScreenCommand}"/>
                 </StackPanel>
             </StackPanel>
         </Border>
