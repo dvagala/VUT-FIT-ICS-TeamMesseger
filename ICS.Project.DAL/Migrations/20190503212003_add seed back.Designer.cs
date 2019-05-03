@@ -4,14 +4,16 @@ using ICS.Project.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ICS.Project.DAL.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    partial class MessengerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190503212003_add seed back")]
+    partial class addseedback
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,8 +271,8 @@ namespace ICS.Project.DAL.Migrations
                             IterationCount = 10007,
                             LastLogoutTime = new DateTime(2019, 4, 4, 14, 13, 50, 0, DateTimeKind.Unspecified),
                             Name = "Student",
-                            PasswordHash = new byte[] { 202, 82, 20, 32, 112, 253, 84, 38, 27, 97, 23, 217, 243, 164, 66, 10 },
-                            Salt = new byte[] { 163, 239, 2, 208, 228, 143, 175, 191, 180, 132, 51, 246, 231, 59, 71, 67, 111, 210, 241, 123, 21, 17, 125, 143, 167, 195, 204, 109, 188, 100, 47, 255 },
+                            PasswordHash = new byte[] { 19, 36, 234, 204, 83, 41, 69, 76, 27, 40, 176, 157, 35, 181, 37, 35 },
+                            Salt = new byte[] { 116, 214, 110, 237, 125, 7, 30, 5, 219, 149, 182, 93, 62, 91, 71, 69, 105, 152, 66, 44, 114, 122, 219, 28, 219, 147, 127, 133, 67, 116, 206, 143 },
                             Surname = "Roberts"
                         },
                         new
