@@ -41,7 +41,7 @@ namespace ICS.Project.App.ViewModels
         public bool CanTryToRegister()
         {
             return !string.IsNullOrEmpty(NewUser?.Name) && !string.IsNullOrEmpty(NewUser?.Surname) &&
-                   !string.IsNullOrEmpty(NewUser?.Email) && new EmailAddressAttribute().IsValid(NewUser.Email) && SecureStringPassword?.Length != 0;
+                   !string.IsNullOrEmpty(NewUser?.Email) && new EmailAddressAttribute().IsValid(NewUser.Email) && SecureStringPassword.Length != 0 && SecureStringPassword != null;
         }
 
 

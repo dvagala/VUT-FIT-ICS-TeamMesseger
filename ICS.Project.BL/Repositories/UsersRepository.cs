@@ -45,6 +45,15 @@ namespace ICS.Project.BL.Repositories
             return foundEntity == null ? null : Mapper.MapUserModelFromEntity(foundEntity);
         }
 
+        public UserModel GetFirst()
+        {
+            var foundEntity = dbContextFactory
+                .CreateDbContext()
+                .Users
+                .FirstOrDefault();
+            return foundEntity == null ? null : Mapper.MapUserModelFromEntity(foundEntity);
+        }
+
         public void Update(UserModel user)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())

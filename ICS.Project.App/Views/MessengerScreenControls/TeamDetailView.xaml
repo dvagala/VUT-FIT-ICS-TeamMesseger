@@ -12,6 +12,12 @@
              d:DataContext="{d:DesignInstance messengerScreenViewModels:TeamDetailViewModel}"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=TeamDetailViewModel}">
 
+    <UserControl.Resources>
+        <ControlTemplate x:Key="NoScroll">
+            <ItemsPresenter/>
+        </ControlTemplate>
+    </UserControl.Resources>
+
     <ScrollViewer VerticalScrollBarVisibility="Hidden" Visibility="{Binding Team, Converter={StaticResource NullToVisibilityConverter}}">
         <StackPanel Orientation="Vertical">
             <Label Content= "{Binding Team.Name}" FontWeight="Bold"/>
@@ -23,8 +29,7 @@
             <Separator Margin="15"/>
 
             <TextBlock Text="Members:" FontWeight="Bold"/>
-            <ListView x:Name="MembersListView" ItemsSource="{Binding Members }" >
-
+            <ListView x:Name="MembersListView" ItemsSource="{Binding Members }" ScrollViewer.VerticalScrollBarVisibility="Disabled" Template="{StaticResource NoScroll}" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding MemberClickedCommand}" CommandParameter="{Binding ElementName=MembersListView, Path=SelectedItem}"/>

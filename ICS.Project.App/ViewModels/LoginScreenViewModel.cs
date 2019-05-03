@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using ICS.Project.App.Commands;
 using ICS.Project.App.ViewModels.BaseViewModels;
@@ -36,7 +37,7 @@ namespace ICS.Project.App.ViewModels
 
         public bool CanTryToLogin()
         { 
-            return !string.IsNullOrEmpty(User?.Email) && SecureStringPassword?.Length != 0;
+            return !string.IsNullOrEmpty(User?.Email) && SecureStringPassword != null && SecureStringPassword.Length != 0;
         }
 
         public void TryToLogin()

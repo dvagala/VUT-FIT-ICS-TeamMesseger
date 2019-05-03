@@ -19,7 +19,7 @@ namespace ICS.Project.App.Views
 
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Mediator.Instance.Send(new UserLogoutMessage());
+            Mediator.Instance.Send(new UserClosedMainWindowMessage());
         }
 
         public void ShowUserDetailWindow(UserWasClickedMessage userWasClickedMessage)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using ICS.Project.App.Commands;
@@ -7,6 +8,7 @@ using ICS.Project.App.ViewModels.BaseViewModels;
 using ICS.Project.App.ViewModels.MessengerScreenViewModels;
 using ICS.Project.App.Views;
 using ICS.Project.BL.Messages;
+using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
 using ICS.Project.BL.Services;
 using ICS.Project.DAL;
@@ -39,6 +41,7 @@ namespace ICS.Project.App.ViewModels
             Mediator.Instance.Register<GoToRegisterScreenMessage>(GoToRegisterScreen);
             Mediator.Instance.Register<GoToLoginScreenMessage>(GoToLoginScreen);
             Mediator.Instance.Register<GoToMessengerScreenMessage>(GoToMessengerScreen);
+            Mediator.Instance.Register<UserClosedMainWindowMessage>(UserClosedMainWindow);
 
             teamsRepository = new TeamsRepository(dbContextFactory);
             usersRepository = new UsersRepository(dbContextFactory);
@@ -56,6 +59,21 @@ namespace ICS.Project.App.ViewModels
             UserDetailScreenViewModel = new UserDetailScreenViewModel(teamsRepository, usersRepository);
 
             CurrentViewModel = LoginScreenViewModel;
+
+            // To speed up later database access
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                usersRepository.GetFirst();
+            }).Start();
+        }
+
+        public void UserClosedMainWindow(UserClosedMainWindowMessage message)
+        {
+            if(CurrentViewModel == ChatPanelViewModel)
+            {
+                Mediator.Instance.Send(new UserLogoutMessage());
+            }
         }
 
         public void GoToLoginScreen(GoToLoginScreenMessage message)
