@@ -187,7 +187,7 @@ namespace ICS.Project.DAL.Tests
             var User = new UserEntity();
             User.Name = "Jojo";
             User.Surname = "G";
-            User.LastActivity = new DateTime(2017, 5, 5);
+            User.LastLogoutTime = new DateTime(2017, 5, 5);
             User.Email = "xjojog@vutbr.cz";
 //            User.Password = "123jojo";
 

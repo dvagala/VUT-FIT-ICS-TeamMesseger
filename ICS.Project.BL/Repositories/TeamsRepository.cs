@@ -125,21 +125,21 @@ namespace ICS.Project.BL.Repositories
             return foundEntity == null ? null : Mapper.MapTeamModelFromEntity(foundEntity);
         }
 
-        public void Update(TeamModel post)
+        public void Update(TeamModel team)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = Mapper.MapTeamModelToEntity(post);
+                var entity = Mapper.MapTeamModelToEntity(team);
                 dbContext.Teams.Update(entity);
                 dbContext.SaveChanges();
             }
         }
 
-        public TeamModel Add(TeamModel post)
+        public TeamModel Add(TeamModel team)
         {
             using (var dbContext = dbContextFactory.CreateDbContext())
             {
-                var entity = Mapper.MapTeamModelToEntity(post);
+                var entity = Mapper.MapTeamModelToEntity(team);
                 dbContext.Teams.Add(entity);
                 dbContext.SaveChanges();
                 return Mapper.MapTeamModelFromEntity(entity);

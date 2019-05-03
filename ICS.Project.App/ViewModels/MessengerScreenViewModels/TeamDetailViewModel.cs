@@ -99,7 +99,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
         public void Load()
         {
-            SelectedUserInComboBox = new UserModel();
             IsDescriptionInEditMode = false;
         }
 

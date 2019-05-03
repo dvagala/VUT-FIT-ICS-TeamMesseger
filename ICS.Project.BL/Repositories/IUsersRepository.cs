@@ -10,8 +10,8 @@ namespace ICS.Project.BL.Repositories
 
         IList<UserModel> GetAll();
         UserModel GetById(Guid id);
-        void Update(UserModel post);
-        UserModel Add(UserModel post);
+        void Update(UserModel user);
+        UserModel Add(UserModel user);
         void Remove(Guid id);
     }
 }

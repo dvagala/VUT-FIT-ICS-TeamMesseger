@@ -5,7 +5,7 @@ using ICS.Project.BL.Models;
 
 namespace ICS.Project.BL.Messages
 {
-    public class UserLogoutMessage : IMessage
+    public class UserClosedMainWindowMessage : IMessage
     {
     }
 }

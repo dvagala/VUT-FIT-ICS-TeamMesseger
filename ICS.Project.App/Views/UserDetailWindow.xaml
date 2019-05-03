@@ -13,8 +13,8 @@
     <StackPanel Orientation="Vertical" Margin="10,5,10,10" >
         <TextBlock Text="{Binding User.FullName}" FontWeight="Bold"/>
         <StackPanel Orientation="Horizontal" Margin="20,0,0,10">
-            <TextBlock Text="Last active" Margin="0,0,10,0"/>
-            <TextBlock Text="{Binding User.LastActivity}" />
+            <TextBlock Text="Last active:" Margin="0,0,10,0"/>
+            <TextBlock Text="{Binding User, Converter={StaticResource UserToLastActivityConvertor}}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Teams:" Margin="0,0,5,0"/>

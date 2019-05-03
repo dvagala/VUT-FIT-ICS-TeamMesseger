@@ -10,13 +10,13 @@ using ICS.Project.BL.Models;
 
 namespace ICS.Project.App.Converters
 {
-    class DateTimeFormatConvertor : IValueConverter
+    class UserToLastActivityConvertor : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is DateTime dateTimeValue)
+            if (value is UserModel user)
             {
-                return dateTimeValue.ToString("HH:mm d.M.yyyy", CultureInfo.InvariantCulture);
+                return user.IsLoggedIn ? "now" : user.LastLogoutTime.ToString("HH:mm d.M.yyyy", CultureInfo.InvariantCulture);
             }
             else
             {

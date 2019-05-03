@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
+using ICS.Project.App.Commands;
 using ICS.Project.App.ViewModels.BaseViewModels;
 using ICS.Project.App.ViewModels.MessengerScreenViewModels;
 using ICS.Project.App.Views;
@@ -50,8 +52,8 @@ namespace ICS.Project.App.ViewModels
             SearchPanelViewModel = new SearchPanelViewModel();
             TeamsListViewModel = new TeamsListViewModel(teamsRepository);
             TeamDetailViewModel = new TeamDetailViewModel(usersRepository, teamsRepository);
-            ChatPanelViewModel = new ChatPanelViewModel(teamsRepository, postsRepository, commentsRepository);
-            UserDetailScreenViewModel = new UserDetailScreenViewModel(teamsRepository);
+            ChatPanelViewModel = new ChatPanelViewModel(teamsRepository, postsRepository, commentsRepository, usersRepository);
+            UserDetailScreenViewModel = new UserDetailScreenViewModel(teamsRepository, usersRepository);
 
             CurrentViewModel = LoginScreenViewModel;
         }

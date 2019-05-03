@@ -69,6 +69,9 @@ namespace ICS.Project.App.ViewModels
                 return;
             }
 
+            userFromDb.IsLoggedIn = true;
+            _usersRepository.Update(userFromDb);
+
             Mediator.Instance.Send(new GoToMessengerScreenMessage());
             Mediator.Instance.Send(new UserLoggedMessage { User = userFromDb});
             MessageBox.Show($"Hi {NewUser.Name}! Welcome to Team messenger", "Registration success");

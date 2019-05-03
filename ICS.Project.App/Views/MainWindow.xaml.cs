@@ -13,6 +13,13 @@ namespace ICS.Project.App.Views
         {
             InitializeComponent();
             Mediator.Instance.Register<UserWasClickedMessage>(ShowUserDetailWindow);
+
+            Closing += WindowClosing;
+        }
+
+        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Mediator.Instance.Send(new UserLogoutMessage());
         }
 
         public void ShowUserDetailWindow(UserWasClickedMessage userWasClickedMessage)

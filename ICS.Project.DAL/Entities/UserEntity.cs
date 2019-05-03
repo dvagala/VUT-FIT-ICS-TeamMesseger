@@ -7,7 +7,8 @@ namespace ICS.Project.DAL.Entities
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public DateTime LastActivity { get; set; }
+        public DateTime LastLogoutTime { get; set; }
+        public bool IsLoggedIn { get; set; }
         public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] Salt { get; set; }

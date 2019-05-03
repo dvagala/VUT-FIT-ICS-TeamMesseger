@@ -14,14 +14,16 @@ namespace ICS.Project.App.ViewModels
     public class UserDetailScreenViewModel : ViewModelBase, IViewModel
     {
         private readonly ITeamsRepository _teamsRepository;
+        private readonly IUsersRepository _usersRepository;
         public UserModel User { get; set; }
 
         public IList<TeamModel> Teams { get; set; }
 
 
-        public UserDetailScreenViewModel(ITeamsRepository teamsRepository)
+        public UserDetailScreenViewModel(ITeamsRepository teamsRepository, IUsersRepository usersRepository)
         {
             _teamsRepository = teamsRepository;
+            _usersRepository = usersRepository;
 
             Mediator.Instance.Register<UserWasClickedMessage>(UserWasClicked);
         }
@@ -32,7 +34,7 @@ namespace ICS.Project.App.ViewModels
 
         public void UserWasClicked(UserWasClickedMessage userWasClickedMessage)
         {
-            User = userWasClickedMessage.User;
+            User = _usersRepository.GetById(userWasClickedMessage.User.ID);     // Just to get fresh data
             Teams = _teamsRepository.GetUserTeams(User.ID).ToList();
         }
     }

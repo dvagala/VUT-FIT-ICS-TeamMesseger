@@ -9,6 +9,7 @@
         xmlns:messengerScreenControls="clr-namespace:ICS.Project.App.Views.MessengerScreenControls"
         xmlns:baseViewModels="clr-namespace:ICS.Project.App.ViewModels.BaseViewModels"
         xmlns:messengerScreenViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         d:DataContext="{d:DesignInstance viewModels:ViewModelLocator}"

@@ -43,7 +43,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             LoggedUser = userLoggedMessage.User;
         }
 
-        private void UserLogout(UserLogoutMessage userLoggedMessage)
+        private void UserLogout(UserLogoutMessage userLogoutMessage)
         {
             LoggedUser = null;
             NewTeam = null;

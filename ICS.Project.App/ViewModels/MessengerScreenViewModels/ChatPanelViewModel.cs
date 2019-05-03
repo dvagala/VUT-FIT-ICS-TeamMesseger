@@ -18,6 +18,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         private readonly ITeamsRepository _teamsRepository;
         private readonly IPostsRepository _postsRepository;
         private readonly ICommentsRepository _commentsRepository;
+        private readonly IUsersRepository _usersRepository;
 
         public ObservableCollection<PostViewModel> PostViewModels { get; set; } =
             new ObservableCollection<PostViewModel>();
@@ -32,11 +33,12 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
 
         public ChatPanelViewModel(ITeamsRepository teamsRepository, IPostsRepository postsRepository,
-            ICommentsRepository commentsRepository)
+            ICommentsRepository commentsRepository, IUsersRepository usersRepository)
         {
             _teamsRepository = teamsRepository;
             _postsRepository = postsRepository;
             _commentsRepository = commentsRepository;
+            _usersRepository = usersRepository;
 
             Mediator.Instance.Register<SelectedTeamMessage>(TeamSelected);
             Mediator.Instance.Register<UserLoggedMessage>(UserLogged);
@@ -45,7 +47,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 
             AddNewPostCommand = new RelayCommand(AddNewPost, CanAddNewPost);
         }
-
 
         public void FilterPostViewModels(UserWantsToSearchText userWantsToSearchText)
         {
@@ -94,8 +95,12 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             NewPostUserInitialsCircleViewModel = new UserInitialsCircleViewModel {User = LoggedUser};
         }
 
-        private void UserLogout(UserLogoutMessage userLoggedMessage)
+        private void UserLogout(UserLogoutMessage userLogoutMessage)
         {
+            LoggedUser.IsLoggedIn = false;
+            LoggedUser.LastLogoutTime = DateTime.Now;
+            _usersRepository.Update(LoggedUser);
+
             LoggedUser = null;
             Team = null;
             NewPost = null;

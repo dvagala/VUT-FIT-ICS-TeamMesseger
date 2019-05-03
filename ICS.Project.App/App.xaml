@@ -18,6 +18,7 @@
             <converters:DateTimeFormatConvertor x:Key="DateTimeFormatConvertor" />
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converters:BooleanToSpecificValueConvertor x:Key="BooleanToSpecificValueConvertor" />
+            <converters:UserToLastActivityConvertor x:Key="UserToLastActivityConvertor" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

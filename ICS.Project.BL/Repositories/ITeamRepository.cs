@@ -16,8 +16,8 @@ namespace ICS.Project.BL.Repositories
         IList<TeamModel> GetAll();
         TeamModel GetFirst();
         TeamModel GetById(Guid id);
-        void Update(TeamModel post);
-        TeamModel Add(TeamModel post);
+        void Update(TeamModel team);
+        TeamModel Add(TeamModel team);
         void Remove(Guid id);
     }
 }

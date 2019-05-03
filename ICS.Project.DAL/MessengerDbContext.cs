@@ -50,38 +50,46 @@ namespace ICS.Project.DAL
             byte[] hash = {19, 36, 234, 204, 83, 41, 69, 76, 27, 40, 176, 157, 35, 181, 37, 35};
 
 
-            Guid user1 = new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca83");
-            Guid user2 = new Guid("ec16e27a-47e2-4f47-b19d-1a362003ca83");
-            Guid user3 = new Guid("ec16e27a-47e2-4f47-b19d-2a362003ca83");
-            Guid user4 = new Guid("ec16e27a-47e2-4f47-b19d-3a362003ca83");
+            Guid user1 = new Guid("ec16e27a-47e2-4f47-b19d-0a362003ca84");
+            Guid user2 = new Guid("ec16e27a-47e2-4f47-b19d-1a362003ca84");
+            Guid user3 = new Guid("ec16e27a-47e2-4f47-b19d-2a362003ca84");
+            Guid user4 = new Guid("ec16e27a-47e2-4f47-b19d-3a362003ca84");
 
             modelBuilder.Entity<UserEntity>().HasData(new UserEntity
             {
                 ID = user1, Name = "Student", Surname = "Roberts",
                 Email = "student@fit", PasswordHash = hash,
                 Salt = salt,
-                IterationCount = 10007
+                IterationCount = 10007,
+                IsLoggedIn = false,
+                LastLogoutTime = new DateTime(2019, 4, 4, 14, 13, 50)
             }, new UserEntity
             {
                 ID = user2,
                 Name = "Regan",
-                Surname = "Wiggins"
+                Surname = "Wiggins",
+                IsLoggedIn = false,
+                LastLogoutTime = new DateTime(2019, 4, 18, 18, 47, 24)
             }, new UserEntity
             {
                 ID = user3,
                 Name = "Kimberl",
-                Surname = "Cohen"
+                Surname = "Cohen",
+                IsLoggedIn = false,
+                LastLogoutTime = new DateTime(2019, 3, 24, 14, 55, 36)
             }, new UserEntity
             {
                 ID = user4,
                 Name = "Kelley",
-                Surname = "Watts"
+                Surname = "Watts",
+                IsLoggedIn = false,
+                LastLogoutTime = new DateTime(2019, 4, 28, 14, 24, 11)
             });
 
-            Guid team1 = new Guid("ec16e27a-07e2-4f47-b19d-0a362003ca83");
-            Guid team2 = new Guid("ec16e27a-17e2-4f47-b19d-0a362003ca83");
-            Guid team3 = new Guid("ec16e27a-27e2-4f47-b19d-0a362003ca83");
-            Guid team4 = new Guid("ec16e27a-37e2-4f47-b19d-0a362003ca83");
+            Guid team1 = new Guid("ec16e27a-07e2-4f47-b19d-0a362003ca84");
+            Guid team2 = new Guid("ec16e27a-17e2-4f47-b19d-0a362003ca84");
+            Guid team3 = new Guid("ec16e27a-27e2-4f47-b19d-0a362003ca84");
+            Guid team4 = new Guid("ec16e27a-37e2-4f47-b19d-0a362003ca84");
 
             modelBuilder.Entity<TeamEntity>()
                 .HasData(new TeamEntity
@@ -108,67 +116,67 @@ namespace ICS.Project.DAL
 
             modelBuilder.Entity<UserInTeamEntity>().HasData(new UserInTeamEntity
                 {
-                    ID = new Guid("709ece27-ac92-4d56-a8aa-2016fa63a6eb"),
+                    ID = new Guid("0c16e27a-07e2-4f47-b19d-0a362003ca84"),
                     UserId = user1,
                     TeamId = team1
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("719ece27-ac92-4d56-a8aa-2016fa63a6eb"),
+                    ID = new Guid("1c16e27a-07e2-4f47-b19d-0a362003ca84"),
                     UserId = user1,
                     TeamId = team2
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("729ece27-ac92-4d56-a8aa-2016fa63a6eb"),
+                    ID = new Guid("2c16e27a-07e2-4f47-b19d-0a362003ca84"),
                     UserId = user1,
                     TeamId = team3
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("739ece27-ac92-4d56-a8aa-2016fa63a6eb"),
+                    ID = new Guid("3c16e27a-07e2-4f47-b19d-0a362003ca84"),
                     UserId = user1,
                     TeamId = team4
                 },
                 new UserInTeamEntity
                 {
-                    ID = new Guid("749ece27-ac92-4d56-a8aa-2016fa63a6eb"),
+                    ID = new Guid("4c16e27a-07e2-4f47-b19d-0a362003ca84"),
                     UserId = user2,
                     TeamId = team1
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("759ece27-ac92-4d56-a8aa-2016fa63a6eb"),
+                    ID = new Guid("5c16e27a-07e2-4f47-b19d-0a362003ca84"),
                     UserId = user3,
                     TeamId = team1
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("769ece27-ac92-4d56-a8aa-2016fa63a6eb"),
+                    ID = new Guid("6c16e27a-07e2-4f47-b19d-0a362003ca84"),
                     UserId = user4,
                     TeamId = team1
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("779ece27-ac92-4d56-a8aa-2016fa63a6eb"),
+                    ID = new Guid("7c16e27a-07e2-4f47-b19d-0a362003ca84"),
                     UserId = user2,
                     TeamId = team2
                 }, new UserInTeamEntity
                 {
-                    ID = new Guid("789ece27-ac92-4d56-a8aa-2016fa63a6eb"),
+                    ID = new Guid("8c16e27a-07e2-4f47-b19d-0a362003ca84"),
                     UserId = user3,
                     TeamId = team2
                 },
                 new UserInTeamEntity
                 {
-                    ID = new Guid("799ece27-ac92-4d56-a8aa-2016fa63a6eb"),
+                    ID = new Guid("9c16e27a-07e2-4f47-b19d-0a362003ca84"),
                     UserId = user4,
                     TeamId = team3
                 });
 
 
-            Guid post1Team1 = new Guid("ec16e28b-07e2-0f47-b19d-0b362003ca83");
-            Guid post2Team1 = new Guid("ec16e28b-17e2-4f47-b19d-0b362003ca83");
-            Guid post3Team1 = new Guid("ec16e28b-27e2-4f47-b19d-0b362003ca83");
+            Guid post1Team1 = new Guid("ec16e28b-07e2-0f47-b19d-0b362003ca84");
+            Guid post2Team1 = new Guid("ec16e28b-17e2-4f47-b19d-0b362003ca84");
+            Guid post3Team1 = new Guid("ec16e28b-27e2-4f47-b19d-0b362003ca84");
                                                 
-            Guid post1Team2 = new Guid("ec16e28b-07e2-1f47-b19d-0b362003ca83");
-            Guid post2Team2 = new Guid("ec16e28b-17e2-2f47-b19d-0b362003ca83");
+            Guid post1Team2 = new Guid("ec16e28b-07e2-1f47-b19d-0b362003ca84");
+            Guid post2Team2 = new Guid("ec16e28b-17e2-2f47-b19d-0b362003ca84");
                                                 
-            Guid post1Team3 = new Guid("ec16e28b-07e2-4f47-b19d-0b362003ca83");
+            Guid post1Team3 = new Guid("ec16e28b-07e2-4f47-b19d-0b362003ca84");
 
             modelBuilder.Entity<PostEntity>().HasData(new PostEntity
             {
@@ -198,7 +206,7 @@ namespace ICS.Project.DAL
                 MessageText = loremIpsum3,
                 AuthorId = user2,
                 TeamId = team2,
-                PublishDate = new DateTime(2019, 1, 1, 7, 13, 50)
+                PublishDate = new DateTime(2019, 1, 1, 8, 36, 50)
             }, new PostEntity
             {
                 ID = post2Team2,
@@ -206,7 +214,7 @@ namespace ICS.Project.DAL
                 MessageText = loremIpsum4,
                 AuthorId = user1,
                 TeamId = team2,
-                PublishDate = new DateTime(2019, 2, 1, 7, 13, 50)
+                PublishDate = new DateTime(2019, 2, 1, 12, 13, 50)
             }, new PostEntity
             {
                 ID = post1Team3,
@@ -217,18 +225,18 @@ namespace ICS.Project.DAL
                 PublishDate = new DateTime(2019, 4, 1, 7, 13, 50)
             });
 
-            Guid comment1Post1Team1 = new Guid("dc16e27a-07e2-0f47-b09d-0f362003ca83");
-            Guid comment2Post1Team1 = new Guid("dc16e27a-07e2-0f47-b19d-0f362003ca83");
-            Guid comment3Post1Team1 = new Guid("dc16e27a-07e2-0f47-b29d-0f362003ca83");
-            Guid comment4Post1Team1 = new Guid("dc16e27a-07e2-0f47-b39d-0f362003ca83");
+            Guid comment1Post1Team1 = new Guid("dc16e27a-07e2-0f47-b09d-0f362003ca84");
+            Guid comment2Post1Team1 = new Guid("dc16e27a-07e2-0f47-b19d-0f362003ca84");
+            Guid comment3Post1Team1 = new Guid("dc16e27a-07e2-0f47-b29d-0f362003ca84");
+            Guid comment4Post1Team1 = new Guid("dc16e27a-07e2-0f47-b39d-0f362003ca84");
                                                                          
-            Guid comment1Post2Team1 = new Guid("dc16e27a-07e2-4f47-b49d-0f362003ca83");
-            Guid comment2Post2Team1 = new Guid("dc16e27a-07e2-4f47-b59d-0f362003ca83");
+            Guid comment1Post2Team1 = new Guid("dc16e27a-07e2-4f47-b49d-0f362003ca84");
+            Guid comment2Post2Team1 = new Guid("dc16e27a-07e2-4f47-b59d-0f362003ca84");
                                                                           
-            Guid comment1Post1Team2 = new Guid("dc16e27a-07e2-1f47-b69d-0f362003ca83");
-            Guid comment2Post1Team2 = new Guid("dc16e27a-07e2-1f47-b79d-0f362003ca83");
+            Guid comment1Post1Team2 = new Guid("dc16e27a-07e2-1f47-b69d-0f362003ca84");
+            Guid comment2Post1Team2 = new Guid("dc16e27a-07e2-1f47-b79d-0f362003ca84");
                                                                           
-            Guid comment1Post2Team2 = new Guid("dc16e27a-07e2-2f47-b89d-0f362003ca83");
+            Guid comment1Post2Team2 = new Guid("dc16e27a-07e2-2f47-b89d-0f362003ca84");
 
             modelBuilder.Entity<CommentEntity>().HasData(new CommentEntity
             {

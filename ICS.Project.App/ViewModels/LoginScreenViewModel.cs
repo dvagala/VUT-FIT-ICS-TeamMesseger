@@ -41,8 +41,6 @@ namespace ICS.Project.App.ViewModels
 
         public void TryToLogin()
         {
-
-
             UserModel userFromDb = _usersRepository.GetByEmail(User.Email);
 
             if (userFromDb == null)
@@ -61,6 +59,9 @@ namespace ICS.Project.App.ViewModels
                 MessageBox.Show($"Wrong password!", "Login failed");
                 return;
             }
+
+            userFromDb.IsLoggedIn = true;
+            _usersRepository.Update(userFromDb);
 
             Mediator.Instance.Send(new GoToMessengerScreenMessage());
             Mediator.Instance.Send(new UserLoggedMessage{ User = userFromDb});

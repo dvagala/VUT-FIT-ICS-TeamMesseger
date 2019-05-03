@@ -34,5 +34,7 @@ namespace ICS.Project.BL.Models
         public byte[] PasswordHash { get; set; }
         public byte[] Salt { get; set; }
         public int IterationCount { get; set; }
+        public DateTime LastLogoutTime { get; set; }
+        public bool IsLoggedIn { get; set; }
     }
 }
