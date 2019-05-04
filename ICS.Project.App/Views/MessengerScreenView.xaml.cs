@@ -17,5 +17,15 @@ namespace ICS.Project.App.Views
         {
             Application.Current.Shutdown();
         }
+
+        private void ChatPanelView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TeamDetailView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
