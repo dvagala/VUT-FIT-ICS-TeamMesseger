@@ -20,17 +20,17 @@
     </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Hidden" Visibility="{Binding Team, Converter={StaticResource NullToVisibilityConverter}}">
-        <StackPanel Orientation="Vertical">
-            <Label Content= "{Binding Team.Name}" FontWeight="Bold"/>
-            <TextBlock Visibility="{Binding IsDescriptionInEditMode, Converter={ StaticResource InvertBooleanToVisibilityConverter}}" TextWrapping="Wrap" Text="{Binding Team.Description, TargetNullValue='Here write a description'}" />
+        <StackPanel Background="#34333B" Orientation="Vertical">
+            <Label FontSize="12" Margin="1" Foreground="#EFEBE8" Content= "{Binding Team.Name}" FontWeight="Bold"/>
+            <TextBlock FontSize="11" Margin="5 9" Foreground="#EFEBE8" Visibility="{Binding IsDescriptionInEditMode, Converter={ StaticResource InvertBooleanToVisibilityConverter}}" TextWrapping="Wrap" Text="{Binding Team.Description, TargetNullValue='Here write a description'}" />
             <TextBox x:Name="DescriptionTextBox" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Text="{Binding Team.Description, UpdateSourceTrigger=PropertyChanged}" />
-            <Button x:Name="EditDescription" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource InvertBooleanToVisibilityConverter}}"  Content="Edit"  Command="{Binding EditDescriptionCommand}"/>
+            <Button Foreground="#34333B" FontSize="12" Background="#3BEFAA" BorderBrush="#3BEFAA" x:Name="EditDescription" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource InvertBooleanToVisibilityConverter}}"  Content="Edit"  Command="{Binding EditDescriptionCommand}" Height="28" Width="128"/>
             <Button x:Name="SaveDescription" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Save" Command="{Binding SaveDescriptionCommand}"/>
 
             <Separator Margin="15"/>
 
-            <TextBlock Text="Members:" FontWeight="Bold"/>
-            <ListView x:Name="MembersListView" ItemsSource="{Binding Members }" ScrollViewer.VerticalScrollBarVisibility="Disabled" Template="{StaticResource NoScroll}" >
+            <TextBlock FontSize="12" Margin="5" Foreground="#EFEBE8" Text="Members:" FontWeight="Bold"/>
+            <ListView FontSize="11" Foreground="#EFEBE8" x:Name="MembersListView" ItemsSource="{Binding Members }" ScrollViewer.VerticalScrollBarVisibility="Disabled" Template="{StaticResource NoScroll}" SelectionChanged="MembersListView_SelectionChanged" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding MemberClickedCommand}" CommandParameter="{Binding ElementName=MembersListView, Path=SelectedItem}"/>
@@ -65,12 +65,14 @@
                           ItemsSource="{Binding Path=AvailableMembers}"
                           DisplayMemberPath="FullName"
                           SelectedItem="{Binding Path=SelectedUserInComboBox}"/>
-                <Button Content="+" Padding="0" Command="{Binding AddNewMemberCommand}" Width="30"/>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Foreground="#3BEFAA" Background="#34333B" BorderBrush="#34333B" Padding="0" Command="{Binding AddNewMemberCommand}" Width="30">
+                    <materialDesign:PackIcon Kind="PlusCircle" Width="24" Height="24"/>
+                </Button>
             </StackPanel>
 
             <Separator Margin="15"/>
 
-            <Button Content="Delete team" VerticalAlignment="Bottom" Command="{Binding DeleteTeamCommand}"/>
+            <Button  Foreground="#34333B"  Background="#3BEFAA" BorderBrush="#3BEFAA" FontSize="12" Content="Delete team" VerticalAlignment="Bottom" Command="{Binding DeleteTeamCommand}" Height="28" Width="128"/>
         </StackPanel>
     </ScrollViewer>
 </base:UserControlCustom>

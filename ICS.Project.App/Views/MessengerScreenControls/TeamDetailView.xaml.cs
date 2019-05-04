@@ -10,5 +10,10 @@ namespace ICS.Project.App.Views.MessengerScreenControls
         {
             InitializeComponent();
         }
+
+        private void MembersListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
