@@ -49,7 +49,7 @@
             <StackPanel Orientation="Horizontal">
                 <chatPanelControls:UserInitialsCircleView DataContext="{Binding NewCommentUserInitialsCircleViewModel}" />
                 <TextBox Foreground="#34333B" x:Name="MessageTextBox" Text="{Binding NewComment.MessageText, UpdateSourceTrigger=PropertyChanged}" Width="220" VerticalAlignment="Center" TextWrapping="Wrap" AcceptsReturn="True" />
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" FontSize="10" HorizontalAlignment="Center" Foreground="#EFEBE8"  Width="20" Height="20" Background="Teal" Command="{Binding AddNewCommentCommand}">
+                <Button Margin="1" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" FontSize="10" HorizontalAlignment="Center" Foreground="#EFEBE8"  Width="20" Height="20" Background="Teal" Command="{Binding AddNewCommentCommand}">
                     <materialDesign:PackIcon Kind="Send" Width="10" Height="10"/>
                 </Button>
             </StackPanel>
