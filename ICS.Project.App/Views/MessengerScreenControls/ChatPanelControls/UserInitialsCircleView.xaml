@@ -15,11 +15,7 @@
         <Button.Template>
             <ControlTemplate TargetType="{x:Type Button}">
                 <Grid >
-                    <Ellipse >
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/Images/chat.png" Stretch="Fill"></ImageBrush>
-                        </Ellipse.Fill>
-                    </Ellipse>
+                    <Ellipse Stretch="Fill" Fill="Teal"/>
                     <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </ControlTemplate>

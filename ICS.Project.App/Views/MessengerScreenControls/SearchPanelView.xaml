@@ -16,8 +16,7 @@
     <DockPanel Background="#34333B" VerticalAlignment="Center" HorizontalAlignment="Stretch" Visibility="{Binding Team, Converter={StaticResource NullToVisibilityConverter}}">
         <TextBlock Foreground="#EFEBE8" Text="{Binding Team.Name}" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" FontWeight="Bold"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-            <TextBlock Foreground="#EFEBE8" Text="Search in team" Margin="0,0,10,0" VerticalAlignment="Center"/>
-            <TextBox Foreground="#EFEBE8" Width="150" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Search in team" Foreground="#EFEBE8" Width="150" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
     </DockPanel>
 </base:UserControlCustom>

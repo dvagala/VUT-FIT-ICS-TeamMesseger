@@ -22,8 +22,8 @@
                 <StackPanel Orientation="Horizontal">
                     <chatPanelControls:UserInitialsCircleView DataContext="{Binding NewPostUserInitialsCircleViewModel}" />
                     <StackPanel>
-                        <TextBox Foreground="#34333B" x:Name="TitleTextBox" Text="{Binding NewPost.Title, UpdateSourceTrigger=PropertyChanged}" Width="90" HorizontalAlignment="Left" TextWrapping="Wrap" AcceptsReturn="True" Margin="2"/>
-                        <TextBox Foreground="#34333B" x:Name="MessageTextBox" Text="{Binding NewPost.MessageText, UpdateSourceTrigger=PropertyChanged}" Width="300" TextWrapping="Wrap" AcceptsReturn="True" Margin="2"/>
+                        <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Theme" Foreground="#34333B" x:Name="TitleTextBox" Text="{Binding NewPost.Title, UpdateSourceTrigger=PropertyChanged}" Width="90" HorizontalAlignment="Left" TextWrapping="Wrap" AcceptsReturn="True" Margin="2"/>
+                        <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Message" Foreground="#34333B" x:Name="MessageTextBox" Text="{Binding NewPost.MessageText, UpdateSourceTrigger=PropertyChanged}" Width="300" TextWrapping="Wrap" AcceptsReturn="True" Margin="2"/>
                     </StackPanel>
                     <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" FontSize="10" HorizontalAlignment="Center" Foreground="#EFEBE8"  Background="Teal" Command="{Binding AddNewPostCommand}" Width="30" Height="30" >
                         <materialDesign:PackIcon Kind="Send" Width="18" Height="18"/>

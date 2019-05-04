@@ -16,7 +16,7 @@
     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
         <Button FontSize="12" Foreground="#EFEBE8" Background="Teal" BorderBrush="Teal"  Content="Logout" VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Left"
                 Command="{Binding LogoutCommand}" Padding="5,0,5,0" Width="55" Height="28"/>
-        <Button FontSize="12" Foreground="#EFEBE8" Background="Teal" BorderBrush="Teal" Content="Refresh" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left"
-                Command="{Binding RefreshCommand}" Padding="5,0,5,0" Height="28" />
+        <Button FontSize="12" Foreground="#EFEBE8" Background="Teal" BorderBrush="Teal" Content="Refresh" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Left"
+                Command="{Binding RefreshCommand}" Padding="5,0,5,0" Height="28" Width="55" />
     </StackPanel>
 </base:UserControlCustom>
