@@ -28,10 +28,11 @@ namespace ICS.Project.App.ViewModels
         {
         }
 
-        public void UserWasClicked(UserWasClickedMessage userWasClickedMessage)
+        public async void UserWasClicked(UserWasClickedMessage userWasClickedMessage)
         {
             User = _usersRepository.GetById(userWasClickedMessage.User.ID); // Just to get fresh data
             Teams = _teamsRepository.GetUserTeams(User.ID).ToList();
+            await MaterialDesignThemes.Wpf.DialogHost.Show(this, "UserDetailDialogHost");
         }
     }
 }

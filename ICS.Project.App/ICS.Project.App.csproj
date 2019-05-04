@@ -214,9 +214,6 @@
       <DependentUpon>TeamListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Base\UserControlCustom.cs" />
-    <Compile Include="Views\UserDetailWindow.xaml.cs">
-      <DependentUpon>UserDetailWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="Views\MessengerScreenControls\ChatPanelControls\CommentView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -272,10 +269,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MessengerScreenControls\TeamListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserDetailWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

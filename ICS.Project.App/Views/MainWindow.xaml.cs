@@ -14,9 +14,6 @@ namespace ICS.Project.App.Views
         public MainWindow()
         {
             InitializeComponent();
-            Mediator.Instance.Register<UserWasClickedMessage>(ShowUserDetailWindow);
-
-            Closing += WindowClosing;
         }
 
         private readonly DispatcherTimer _timerForTimeoutDialog = new DispatcherTimer();
@@ -33,32 +30,5 @@ namespace ICS.Project.App.Views
             TimeoutNotificationDialogHost.IsOpen = false;
             _timerForTimeoutDialog.Stop();
         }
-
-        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Mediator.Instance.Send(new UserClosedMainWindowMessage());
-        }
-
-        public void ShowUserDetailWindow(UserWasClickedMessage userWasClickedMessage)
-        {
-            CloseOldUserDetailWindowsIfOpen();
-
-            UserDetailWindow userDetailWindow = new UserDetailWindow();
-            userDetailWindow.Show();
-        }
-
-        private void CloseOldUserDetailWindowsIfOpen()
-        {
-            foreach (var window in Application.Current.Windows)
-            {
-                Window windowInstance = window as Window;
-                if (windowInstance?.GetType().Name == "UserDetailWindow")
-                {
-                    windowInstance.Close();
-                }
-            }
-        }
-
-
     }
 }
