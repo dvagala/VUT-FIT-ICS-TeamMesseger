@@ -24,10 +24,10 @@
                 <TextBox Margin="5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="EMAIL" x:Name="EmailTextBox" Text="{Binding NewUser.Email, UpdateSourceTrigger=PropertyChanged}"/>
                 <PasswordBox Margin="5" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="PASSWORD" attachedProperties:PasswordBoxAttachedProperty.EncryptedPassword="{Binding SecureStringPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  PasswordChanged="PasswordBox_PasswordChanged" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Foreground="#efebe8" Margin="5 15" Content="Register" Width="200" Background="#FF0058FF" BorderBrush="#FF0058FF" Command="{Binding TryToRegisterCommand}"/>
+                    <Button Foreground="#efebe8" Margin="5 15" Content="Register" Width="200" Background="Teal" BorderBrush="Teal" Command="{Binding TryToRegisterCommand}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Foreground="#efebe8" Margin="5" Content="Go back to login" Width="200" Background="#FF0058FF" BorderBrush="#FF0058FF" Command="{Binding GoToLoginScreenCommand}" />
+                    <Button Foreground="#efebe8" Margin="5" Content="Go back to login" Width="200" Background="Teal" BorderBrush="Teal" Command="{Binding GoToLoginScreenCommand}" />
                 </StackPanel>
             </StackPanel>
         </Border>

@@ -32,8 +32,11 @@
                 <ColumnDefinition Width="140"/>
             </Grid.ColumnDefinitions>
 
+            <TextBox Margin="20 10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Search"/>
+            <messengerScreenControls:SearchPanelView Grid.Column="0"/>
 
-            <ToggleButton Background="#0058FF" x:Name="CollapsingToggleButton" IsChecked="True" Grid.Column="1"
+
+            <ToggleButton Background="Teal" x:Name="CollapsingToggleButton" IsChecked="True" Grid.Column="1"
                           Style="{StaticResource MaterialDesignSwitchToggleButton}"
                           Padding="0" HorizontalAlignment="Right" ToolTip="Toggle team detail" Margin="0,0,10,0">
                 <materialDesign:PackIcon

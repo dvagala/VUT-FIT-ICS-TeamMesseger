@@ -10,6 +10,7 @@
                          xmlns:messengerScreenViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels"
                          xmlns:chatPanelViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewModels"
                          xmlns:base="clr-namespace:ICS.Project.App.Views.Base"
+                         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                          mc:Ignorable="d"
                          d:DataContext="{d:DesignInstance messengerScreenViewModels:ChatPanelViewModel}"
                          DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ChatPanelViewModel}">
@@ -24,7 +25,9 @@
                         <TextBox Foreground="#34333B" x:Name="TitleTextBox" Text="{Binding NewPost.Title, UpdateSourceTrigger=PropertyChanged}" Width="90" HorizontalAlignment="Left" TextWrapping="Wrap" AcceptsReturn="True" Margin="2"/>
                         <TextBox Foreground="#34333B" x:Name="MessageTextBox" Text="{Binding NewPost.MessageText, UpdateSourceTrigger=PropertyChanged}" Width="300" TextWrapping="Wrap" AcceptsReturn="True" Margin="2"/>
                     </StackPanel>
-                    <Button FontSize="10" HorizontalAlignment="Center" Foreground="#34333B" BorderBrush="#3BEFAA" Background="#3BEFAA" Content="Send" Padding="5,0,5,0" Command="{Binding AddNewPostCommand}" Height="20" Margin="10,0,10,0"/>
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" FontSize="10" HorizontalAlignment="Center" Foreground="#EFEBE8"  Background="Teal" Command="{Binding AddNewPostCommand}" Width="30" Height="30" >
+                        <materialDesign:PackIcon Kind="Send" Width="18" Height="18"/>
+                    </Button>
                 </StackPanel>
                 <ItemsControl ItemsSource="{Binding PostViewModels}">
                     <ItemsControl.ItemTemplate>
