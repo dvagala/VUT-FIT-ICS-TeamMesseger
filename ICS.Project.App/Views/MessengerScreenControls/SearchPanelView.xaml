@@ -8,15 +8,16 @@
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
              xmlns:messengerScreenViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels"
              xmlns:base="clr-namespace:ICS.Project.App.Views.Base"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance messengerScreenViewModels:SearchPanelViewModel}"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SearchPanelViewModel}">
 
     <DockPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" Visibility="{Binding Team, Converter={StaticResource NullToVisibilityConverter}}">
-        <TextBlock Text="{Binding Team.Name}" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+        <TextBlock Text="{Binding Team.Name}" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" FontWeight="Bold"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-            <TextBlock Text="Serch in team" Margin="0,0,10,0" />
-            <TextBox Width="150" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Serch in team" Margin="0,0,10,0" VerticalAlignment="Center"/>
+            <TextBox Width="150" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
     </DockPanel>
 </base:UserControlCustom>

@@ -48,7 +48,7 @@
             <StackPanel Orientation="Horizontal">
                 <chatPanelControls:UserInitialsCircleView DataContext="{Binding NewCommentUserInitialsCircleViewModel}" />
                  <TextBox x:Name="MessageTextBox" Text="{Binding NewComment.MessageText, UpdateSourceTrigger=PropertyChanged}" Width="220" VerticalAlignment="Center" TextWrapping="Wrap" AcceptsReturn="True" />
-                <Button Content="Send" Command="{Binding AddNewCommentCommand}" Height="20" Margin="10,0,10,0"/>
+                <Button Content="Send"  Padding="5,0,5,0"  Command="{Binding AddNewCommentCommand}" Height="20" Margin="10,0,10,0"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>

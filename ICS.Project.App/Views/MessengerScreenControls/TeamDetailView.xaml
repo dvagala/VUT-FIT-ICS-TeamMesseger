@@ -8,6 +8,7 @@
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
              xmlns:messengerScreenViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels"
              xmlns:base="clr-namespace:ICS.Project.App.Views.Base"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance messengerScreenViewModels:TeamDetailViewModel}"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=TeamDetailViewModel}">
@@ -23,7 +24,7 @@
             <Label Content= "{Binding Team.Name}" FontWeight="Bold"/>
             <TextBlock Visibility="{Binding IsDescriptionInEditMode, Converter={ StaticResource InvertBooleanToVisibilityConverter}}" TextWrapping="Wrap" Text="{Binding Team.Description, TargetNullValue='Here write a description'}" />
             <TextBox x:Name="DescriptionTextBox" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Text="{Binding Team.Description, UpdateSourceTrigger=PropertyChanged}" />
-            <Button x:Name="EditDescription" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource InvertBooleanToVisibilityConverter}}"  Content="Edit" Command="{Binding EditDescriptionCommand}"/>
+            <Button x:Name="EditDescription" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource InvertBooleanToVisibilityConverter}}"  Content="Edit"  Command="{Binding EditDescriptionCommand}"/>
             <Button x:Name="SaveDescription" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Save" Command="{Binding SaveDescriptionCommand}"/>
 
             <Separator Margin="15"/>
@@ -45,10 +46,13 @@
                         <DockPanel>
                             <TextBlock x:Name="MemberTextBlock" Height="20" Text="{Binding FullName}" />
                                 <Button x:Name="xButton" Height="{Binding ElementName=MemberTextBlock, Path=Height}"
+                                    Content="{materialDesign:PackIcon RemoveCircle}"
                                     Background="Transparent"
-                                    BorderThickness="0"  
+                                    BorderThickness="0"
+                                    Padding="0"
+                                    ToolTip="Remove user from team"
                                     Width="{Binding ElementName=MemberTextBlock, Path=Height}"
-                                    Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Right"
+                                    VerticalContentAlignment="Center" HorizontalAlignment="Right"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBoxItem}},Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}"
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type base:UserControlCustom}}, Path=DataContext.RemoveMemberCommand}"
                                     CommandParameter="{Binding}"/>
@@ -61,7 +65,7 @@
                           ItemsSource="{Binding Path=AvailableMembers}"
                           DisplayMemberPath="FullName"
                           SelectedItem="{Binding Path=SelectedUserInComboBox}"/>
-                <Button Content="+" Command="{Binding AddNewMemberCommand}" Width="30"/>
+                <Button Content="+" Padding="0" Command="{Binding AddNewMemberCommand}" Width="30"/>
             </StackPanel>
 
             <Separator Margin="15"/>

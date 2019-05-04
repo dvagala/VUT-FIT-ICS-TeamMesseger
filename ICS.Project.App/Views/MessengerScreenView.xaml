@@ -8,6 +8,7 @@
              xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
              xmlns:views="clr-namespace:ICS.Project.App.Views"
              xmlns:messengerScreenControls="clr-namespace:ICS.Project.App.Views.MessengerScreenControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" >
 
     <Grid >
@@ -17,16 +18,32 @@
             <ColumnDefinition Width="{Binding ElementName=CollapsingToggleButton, Path=IsChecked, Converter={StaticResource BooleanToSpecificValueConvertor}, ConverterParameter=140}" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="35" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <messengerScreenControls:OptionsPanelView Grid.Column="0" Grid.Row="0"/> 
-        <messengerScreenControls:SearchPanelView Grid.Column="1" Grid.Row="0"/> 
         <messengerScreenControls:TeamListView Grid.Column="0" Grid.Row="1"/>
-        <Grid Grid.Column="1" Grid.Row="1" >
-            <messengerScreenControls:ChatPanelView />
-            <ToggleButton x:Name="CollapsingToggleButton" IsChecked="True" Width="10" Height="25" Content=">" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,30" />
-        </Grid>
+        <messengerScreenControls:ChatPanelView  Grid.Column="1" Grid.Row="1" />
         <messengerScreenControls:TeamDetailView Grid.Column="2" Grid.Row="1"/>
+
+        <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="140"/>
+            </Grid.ColumnDefinitions>
+
+            <messengerScreenControls:SearchPanelView Grid.Column="0"/>
+            <ToggleButton x:Name="CollapsingToggleButton" IsChecked="True" Grid.Column="1"
+                          Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                          Padding="0" HorizontalAlignment="Right" ToolTip="Toggle team detail" Margin="0,0,10,0">
+                <materialDesign:PackIcon
+                    Kind="KeyboardArrowRight"/>
+                <materialDesign:ToggleButtonAssist.OnContent>
+                    <materialDesign:PackIcon
+                        Kind="KeyboardArrowLeft"/>
+                </materialDesign:ToggleButtonAssist.OnContent>
+            </ToggleButton>
+        </Grid>
+
     </Grid>
 </ContentControl>

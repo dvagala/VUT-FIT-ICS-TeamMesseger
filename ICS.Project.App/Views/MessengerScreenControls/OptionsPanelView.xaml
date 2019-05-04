@@ -15,8 +15,8 @@
 
     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
         <Button Content="Logout" VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Left"
-                Command="{Binding LogoutCommand}" />
+                Command="{Binding LogoutCommand}" Padding="5,0,5,0"/>
         <Button Content="Refresh" VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Left"
-                Command="{Binding RefreshCommand}" />
+                Command="{Binding RefreshCommand}" Padding="5,0,5,0" />
     </StackPanel>
 </base:UserControlCustom>
