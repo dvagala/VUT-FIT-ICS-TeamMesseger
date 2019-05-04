@@ -26,7 +26,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewMode
 
             AddNewCommentCommand = new RelayCommand(AddNewComment, CanAddNewComment);
 
-            foreach (var comment in Post.Comments.OrderByDescending(s => s.PublishDate))
+            foreach (var comment in Post.Comments.OrderBy(s => s.PublishDate))
                 CommentViewModels.Add(new CommentViewModel
                 {
                     Comment = comment,
