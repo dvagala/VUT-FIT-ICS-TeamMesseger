@@ -12,7 +12,8 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="900" WindowStartupLocation="CenterScreen" Background="#34333b"
+        Title="Team Messenger" Height="600" Width="900" WindowStartupLocation="CenterScreen" Background="#34333b"
+        MinWidth="700" MinHeight="600"
         d:DataContext="{d:DesignInstance viewModels:ViewModelLocator}"
         DataContext="{Binding Source={StaticResource ViewModelLocator}}">
 
@@ -32,64 +33,65 @@
     </Window.Resources>
 
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}"  />
+        <ContentControl Content="{Binding CurrentViewModel}" />
 
         <materialDesign:DialogHost CloseOnClickAway="True" Identifier="YesOrNoDialogHost">
             <materialDesign:DialogHost.DialogContentTemplate>
-                <DataTemplate >
-                    <StackPanel Margin="20,20,20,10" Orientation="Vertical" Width="250" >
+                <DataTemplate>
+                    <StackPanel Margin="20,20,20,10" Orientation="Vertical" Width="250">
                         <TextBlock Text="{Binding}" TextWrapping="Wrap" />
                         <Grid HorizontalAlignment="Stretch" Margin="5,10,5,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Button Content="Yes" Grid.Column="0" Margin="8"               
+                            <Button Content="Yes" Grid.Column="0" Margin="8"
                                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                    CommandParameter="Yes"/>
-                            <Button Content="No"       Grid.Column="1"      Margin="8"            
+                                    CommandParameter="Yes" />
+                            <Button Content="No" Grid.Column="1" Margin="8"
                                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                    CommandParameter="No"/>
+                                    CommandParameter="No" />
                         </Grid>
                     </StackPanel>
                 </DataTemplate>
             </materialDesign:DialogHost.DialogContentTemplate>
         </materialDesign:DialogHost>
 
-        <materialDesign:DialogHost x:Name="TimeoutNotificationDialogHost" CloseOnClickAway="True" Identifier="TimeoutNotificationDialogHost" DialogOpened="OnTimeoutNotificationDialogHostOpen">
+        <materialDesign:DialogHost x:Name="TimeoutNotificationDialogHost" CloseOnClickAway="True"
+                                   Identifier="TimeoutNotificationDialogHost"
+                                   DialogOpened="OnTimeoutNotificationDialogHostOpen">
             <materialDesign:DialogHost.DialogContentTemplate>
-                <DataTemplate >
-                    <TextBlock Text="{Binding}" TextWrapping="Wrap" Margin="20"  MaxWidth="250"  />
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" TextWrapping="Wrap" Margin="20" MaxWidth="250" />
                 </DataTemplate>
             </materialDesign:DialogHost.DialogContentTemplate>
         </materialDesign:DialogHost>
 
-        <materialDesign:DialogHost CloseOnClickAway="True"  Identifier="UserDetailDialogHost" >
+        <materialDesign:DialogHost CloseOnClickAway="True" Identifier="UserDetailDialogHost">
             <materialDesign:DialogHost.DialogContentTemplate>
                 <DataTemplate DataType="viewModels:UserDetailScreenViewModel">
-                    <StackPanel Orientation="Vertical" Margin="25,25,35,25" >
-                        <TextBlock Text="{Binding User.FullName}" FontWeight="Bold"/>
+                    <StackPanel Orientation="Vertical" Margin="25,25,35,25">
+                        <TextBlock Text="{Binding User.FullName}" FontWeight="Bold" />
                         <StackPanel Orientation="Horizontal" Margin="20,0,0,10">
-                            <TextBlock Text="Last active:" Margin="0,0,10,0"/>
+                            <TextBlock Text="Last active:" Margin="0,0,10,0" />
                             <TextBlock Text="{Binding User, Converter={StaticResource UserToLastActivityConvertor}}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Teams:" FontWeight="Bold" Margin="0,1,5,0"/>
-                            <ListView Margin="0" ItemsSource="{Binding Teams}" BorderThickness="0" >
+                            <TextBlock Text="Teams:" FontWeight="Bold" Margin="0,1,5,0" />
+                            <ListView Margin="0" ItemsSource="{Binding Teams}" BorderThickness="0">
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="ListBoxItem">
-                                        <Setter Property="Focusable" Value="False"/>
+                                        <Setter Property="Focusable" Value="False" />
                                         <!-- This disables list item higlighting -->
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                                     <Grid Background="{TemplateBinding Background}">
                                                         <ContentPresenter
-                                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                                            Content="{TemplateBinding Content}"
-                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                            Margin="{TemplateBinding Padding}">
-                                                        </ContentPresenter>
+                                                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                            Content="{TemplateBinding Content}"
+                                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                            Margin="{TemplateBinding Padding}" />
                                                     </Grid>
                                                 </ControlTemplate>
                                             </Setter.Value>
@@ -111,4 +113,3 @@
         </materialDesign:DialogHost>
     </Grid>
 </Window>
-    

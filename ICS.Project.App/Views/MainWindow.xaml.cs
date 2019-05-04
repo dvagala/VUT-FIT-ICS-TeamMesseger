@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Threading;
-using ICS.Project.BL.Messages;
-using ICS.Project.BL.Services;
+using MaterialDesignThemes.Wpf;
 
 namespace ICS.Project.App.Views
 {
@@ -11,14 +10,14 @@ namespace ICS.Project.App.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly DispatcherTimer _timerForTimeoutDialog = new DispatcherTimer();
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private readonly DispatcherTimer _timerForTimeoutDialog = new DispatcherTimer();
-
-        private void OnTimeoutNotificationDialogHostOpen(object sender, MaterialDesignThemes.Wpf.DialogOpenedEventArgs eventArgs)
+        private void OnTimeoutNotificationDialogHostOpen(object sender, DialogOpenedEventArgs eventArgs)
         {
             _timerForTimeoutDialog.Tick += CloseTimeoutDialog;
             _timerForTimeoutDialog.Interval = new TimeSpan(0, 0, 1);

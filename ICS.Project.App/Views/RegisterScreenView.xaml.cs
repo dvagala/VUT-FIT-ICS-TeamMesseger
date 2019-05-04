@@ -1,11 +1,11 @@
-﻿
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using ICS.Project.App.AttachedProperties;
 
 namespace ICS.Project.App.Views
 {
     /// <summary>
-    /// Interaction logic for TeamDetailView.xaml
+    ///     Interaction logic for RegisterScreenView.xaml
     /// </summary>
     public partial class RegisterScreenView
     {
@@ -16,8 +16,8 @@ namespace ICS.Project.App.Views
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            PasswordBox pBox = sender as PasswordBox;
-            ICS.Project.App.AttachedProperties.PasswordBoxAttachedProperty.SetEncryptedPassword(pBox, pBox.SecurePassword);
+            var pBox = sender as PasswordBox;
+            PasswordBoxAttachedProperty.SetEncryptedPassword(pBox, pBox.SecurePassword);
         }
     }
 }

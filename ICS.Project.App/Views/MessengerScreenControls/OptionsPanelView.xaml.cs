@@ -1,8 +1,7 @@
-﻿
-namespace ICS.Project.App.Views.MessengerScreenControls
+﻿namespace ICS.Project.App.Views.MessengerScreenControls
 {
     /// <summary>
-    /// Interaction logic for TeamDetailView.xaml
+    ///     Interaction logic for OptionsPanelView.xaml
     /// </summary>
     public partial class OptionsPanelView
     {

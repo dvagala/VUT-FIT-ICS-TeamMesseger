@@ -13,10 +13,6 @@ namespace ICS.Project.App.Views
         {
             InitializeComponent();
         }
-        private void ButtonPopUpLogout_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
 
         private void ChatPanelView_Loaded(object sender, RoutedEventArgs e)
         {

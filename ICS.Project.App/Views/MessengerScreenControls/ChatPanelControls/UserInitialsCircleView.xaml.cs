@@ -1,12 +1,11 @@
-﻿
-namespace ICS.Project.App.Views.MessengerScreenControls.ChatPanelControls
+﻿namespace ICS.Project.App.Views.MessengerScreenControls.ChatPanelControls
 {
     /// <summary>
-    /// Interaction logic for TeamListView.xaml
+    ///     Interaction logic for UserInitialsCircleView.xaml
     /// </summary>
-    public partial class PostView
+    public partial class UserInitialsCircleView
     {
-        public PostView()
+        public UserInitialsCircleView()
         {
             InitializeComponent();
         }

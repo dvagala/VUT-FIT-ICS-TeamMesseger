@@ -9,14 +9,11 @@ namespace ICS.Project.App.Views.Base
         public UserControlCustom()
         {
             Loaded += OnLoad;
-        }      
+        }
 
         public void OnLoad(object sender, RoutedEventArgs e)
         {
-            if (DataContext is IViewModel viewModel)
-            {
-                viewModel.Load();
-            }
+            if (DataContext is IViewModel viewModel) viewModel.Load();
         }
     }
 }

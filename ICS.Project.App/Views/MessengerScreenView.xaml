@@ -1,49 +1,51 @@
 ﻿<ContentControl x:Class="ICS.Project.App.Views.MessengerScreenView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             xmlns:local="clr-namespace:ICS.Project.App.Views"
-             xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
-             xmlns:views="clr-namespace:ICS.Project.App.Views"
-             xmlns:messengerScreenControls="clr-namespace:ICS.Project.App.Views.MessengerScreenControls"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" >
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                xmlns:local="clr-namespace:ICS.Project.App.Views"
+                xmlns:viewModels="clr-namespace:ICS.Project.App.ViewModels"
+                xmlns:views="clr-namespace:ICS.Project.App.Views"
+                xmlns:messengerScreenControls="clr-namespace:ICS.Project.App.Views.MessengerScreenControls"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                mc:Ignorable="d">
 
-    <Grid >
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="140" />
+            <ColumnDefinition Width="150" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="{Binding ElementName=CollapsingToggleButton, Path=IsChecked, Converter={StaticResource BooleanToSpecificValueConvertor}, ConverterParameter=140}" />
+            <ColumnDefinition
+                Width="{Binding ElementName=CollapsingToggleButton, Path=IsChecked, Converter={StaticResource BooleanToSpecificValueConvertor}, ConverterParameter=150}" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <messengerScreenControls:OptionsPanelView Grid.Column="0" Grid.Row="0" /> 
-        <messengerScreenControls:TeamListView Grid.Column="0" Grid.Row="1"/>
-        <messengerScreenControls:ChatPanelView  Grid.Column="1" Grid.Row="1" Loaded="ChatPanelView_Loaded" />
+        <messengerScreenControls:OptionsPanelView Grid.Column="0" Grid.Row="0" />
+        <messengerScreenControls:TeamListView Grid.Column="0" Grid.Row="1" />
+        <messengerScreenControls:ChatPanelView Grid.Column="1" Grid.Row="1" Loaded="ChatPanelView_Loaded" />
         <messengerScreenControls:TeamDetailView Grid.Column="2" Grid.Row="1" Loaded="TeamDetailView_Loaded" />
 
         <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="140" />
             </Grid.ColumnDefinitions>
 
-            <TextBox Margin="20 10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Search"/>
-            <messengerScreenControls:SearchPanelView Grid.Column="0"/>
+            <TextBox Margin="20 10" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Search" />
+            <messengerScreenControls:SearchPanelView Grid.Column="0" />
 
 
             <ToggleButton Background="Teal" x:Name="CollapsingToggleButton" IsChecked="True" Grid.Column="1"
                           Style="{StaticResource MaterialDesignSwitchToggleButton}"
                           Padding="0" HorizontalAlignment="Right" ToolTip="Toggle team detail" Margin="0,0,10,0">
                 <materialDesign:PackIcon
-                    Kind="KeyboardArrowRight"/>
+                    Kind="KeyboardArrowRight" />
                 <materialDesign:ToggleButtonAssist.OnContent>
                     <materialDesign:PackIcon
-                        Kind="KeyboardArrowLeft"/>
+                        Kind="KeyboardArrowLeft" />
                 </materialDesign:ToggleButtonAssist.OnContent>
             </ToggleButton>
         </Grid>
