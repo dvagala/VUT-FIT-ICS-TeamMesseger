@@ -1,41 +1,38 @@
-﻿using System.Windows.Input;
+﻿using System.Linq;
+using System.Windows.Input;
 using ICS.Project.App.Commands;
 using ICS.Project.App.ViewModels.BaseViewModels;
 using ICS.Project.BL.Messages;
 using ICS.Project.BL.Models;
 using ICS.Project.BL.Repositories;
 using ICS.Project.BL.Services;
+using MaterialDesignThemes.Wpf;
 
 namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
 {
     public class OptionsPanelViewModel : ViewModelBase, IViewModel
     {
-        private readonly IUsersRepository _usersRepository;
-
-        public OptionsPanelViewModel(IUsersRepository usersRepository)
+        public OptionsPanelViewModel()
         {
-            DeleteAccountCommand = new RelayCommand(DeleteAccount);
             LogoutCommand = new RelayCommand(Logout);
             RefreshCommand = new RelayCommand(Refresh);
 
-            _usersRepository = usersRepository;
+            Mediator.Instance.Register<UserLoggedMessage>(UserLogged);
         }
 
         public ICommand LogoutCommand { get; set; }
         public ICommand DeleteAccountCommand { get; set; }
         public ICommand RefreshCommand { get; set; }
 
-        public UserModel User { get; set; }
-        public string PlainTextPassword { get; set; }
+        public UserModel LoggedUser { get; set; }
 
         public void Load()
         {
-            PlainTextPassword = "";
-            User = new UserModel();
         }
 
-        public void DeleteAccount()
+        private void UserLogged(UserLoggedMessage userLoggedMessage)
         {
+            LoggedUser = userLoggedMessage.User;
         }
 
         private void Logout()

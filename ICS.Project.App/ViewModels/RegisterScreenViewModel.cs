@@ -43,12 +43,11 @@ namespace ICS.Project.App.ViewModels
                    SecureStringPassword != null && SecureStringPassword.Length != 0 ;
         }
 
-
-        public void TryToRegister()
+        public async void TryToRegister()
         {
             if (_usersRepository.GetByEmail(NewUser.Email) != null)
             {
-                MessageBox.Show("You are already registered!", "Registration failed");
+                await MaterialDesignThemes.Wpf.DialogHost.Show("You are already registered!", "TimeoutNotificationDialogHost");
                 return;
             }
 
@@ -57,7 +56,7 @@ namespace ICS.Project.App.ViewModels
 
             if (NewUser.PasswordHash == null || NewUser.Salt == null)
             {
-                MessageBox.Show("Cant proccess password", "Registration failed");
+                await MaterialDesignThemes.Wpf.DialogHost.Show("Cant proccess password", "TimeoutNotificationDialogHost");
                 return;
             }
 
@@ -65,7 +64,7 @@ namespace ICS.Project.App.ViewModels
 
             if (userFromDb.ID == Guid.Empty)
             {
-                MessageBox.Show("Error in database", "Registration failed");
+                await MaterialDesignThemes.Wpf.DialogHost.Show("Error in database", "TimeoutNotificationDialogHost");
                 return;
             }
 
@@ -74,7 +73,7 @@ namespace ICS.Project.App.ViewModels
 
             Mediator.Instance.Send(new GoToMessengerScreenMessage());
             Mediator.Instance.Send(new UserLoggedMessage {User = userFromDb});
-            MessageBox.Show($"Hi {NewUser.Name}! Welcome to Team messenger", "Registration success");
+            await MaterialDesignThemes.Wpf.DialogHost.Show($"Hi {NewUser.Name}! Welcome to Team messenger", "TimeoutNotificationDialogHost");
             SecureStringPassword?.Clear();
             NewUser = null;
         }

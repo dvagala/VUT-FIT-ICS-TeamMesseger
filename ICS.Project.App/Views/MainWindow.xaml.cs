@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Threading;
 using ICS.Project.BL.Messages;
 using ICS.Project.BL.Services;
 
@@ -15,6 +17,21 @@ namespace ICS.Project.App.Views
             Mediator.Instance.Register<UserWasClickedMessage>(ShowUserDetailWindow);
 
             Closing += WindowClosing;
+        }
+
+        private readonly DispatcherTimer _timerForTimeoutDialog = new DispatcherTimer();
+
+        private void OnTimeoutNotificationDialogHostOpen(object sender, MaterialDesignThemes.Wpf.DialogOpenedEventArgs eventArgs)
+        {
+            _timerForTimeoutDialog.Tick += CloseTimeoutDialog;
+            _timerForTimeoutDialog.Interval = new TimeSpan(0, 0, 1);
+            _timerForTimeoutDialog.Start();
+        }
+
+        private void CloseTimeoutDialog(object sender, EventArgs e)
+        {
+            TimeoutNotificationDialogHost.IsOpen = false;
+            _timerForTimeoutDialog.Stop();
         }
 
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -41,5 +58,7 @@ namespace ICS.Project.App.Views
                 }
             }
         }
+
+
     }
 }

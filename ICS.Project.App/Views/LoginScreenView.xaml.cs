@@ -1,6 +1,9 @@
 ﻿
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
+using MaterialDesignThemes.Wpf;
 
 namespace ICS.Project.App.Views
 {
@@ -12,6 +15,7 @@ namespace ICS.Project.App.Views
         public LoginScreenView()
         {
             InitializeComponent();
+
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)

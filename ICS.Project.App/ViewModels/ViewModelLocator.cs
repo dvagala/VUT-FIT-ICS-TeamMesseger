@@ -27,7 +27,7 @@ namespace ICS.Project.App.ViewModels
             LoginScreenViewModel = new LoginScreenViewModel(usersRepository);
             RegisterScreenViewModel = new RegisterScreenViewModel(usersRepository);
 
-            OptionsPanelViewModel = new OptionsPanelViewModel(usersRepository);
+            OptionsPanelViewModel = new OptionsPanelViewModel();
             SearchPanelViewModel = new SearchPanelViewModel();
             TeamsListViewModel = new TeamsListViewModel(teamsRepository);
             TeamDetailViewModel = new TeamDetailViewModel(usersRepository, teamsRepository);

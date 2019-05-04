@@ -10,6 +10,7 @@
         xmlns:baseViewModels="clr-namespace:ICS.Project.App.ViewModels.BaseViewModels"
         xmlns:messengerScreenViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900" WindowStartupLocation="CenterScreen" Background="#34333b"
         d:DataContext="{d:DesignInstance viewModels:ViewModelLocator}"
@@ -32,6 +33,36 @@
 
     <Grid>
         <ContentControl Content="{Binding CurrentViewModel}"  />
+
+        <materialDesign:DialogHost CloseOnClickAway="True" Identifier="YesOrNoDialogHost">
+            <materialDesign:DialogHost.DialogContentTemplate>
+                <DataTemplate >
+                    <StackPanel Margin="20,20,20,10" Orientation="Vertical" Width="250" >
+                        <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                        <Grid HorizontalAlignment="Stretch" Margin="5,10,5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Yes" Grid.Column="0" Margin="8"               
+                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                    CommandParameter="Yes"/>
+                            <Button Content="No"       Grid.Column="1"      Margin="8"            
+                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                    CommandParameter="No"/>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </materialDesign:DialogHost.DialogContentTemplate>
+        </materialDesign:DialogHost>
+
+        <materialDesign:DialogHost x:Name="TimeoutNotificationDialogHost" CloseOnClickAway="True" Identifier="TimeoutNotificationDialogHost" DialogOpened="OnTimeoutNotificationDialogHostOpen">
+            <materialDesign:DialogHost.DialogContentTemplate>
+                <DataTemplate >
+                    <TextBlock Text="{Binding}" TextWrapping="Wrap" Margin="20"  MaxWidth="250"  />
+                </DataTemplate>
+            </materialDesign:DialogHost.DialogContentTemplate>
+        </materialDesign:DialogHost>
     </Grid>
 </Window>
     

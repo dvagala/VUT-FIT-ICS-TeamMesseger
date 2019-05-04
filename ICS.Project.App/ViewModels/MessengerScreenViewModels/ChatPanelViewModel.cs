@@ -110,7 +110,6 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             PostViewModels.Clear();
             NewPostUserInitialsCircleViewModel = null;
         }
-
         private void TeamSelected(SelectedTeamMessage selectedTeamMessage)
         {
             if (selectedTeamMessage.Team == null)

@@ -40,24 +40,24 @@ namespace ICS.Project.App.ViewModels
                    SecureStringPassword.Length != 0;
         }
 
-        public void TryToLogin()
+        public async void TryToLogin()
         {
             var userFromDb = _usersRepository.GetByEmail(User.Email);
 
             if (userFromDb == null)
             {
-                MessageBox.Show("Wrong email!", "Login failed");
+                await MaterialDesignThemes.Wpf.DialogHost.Show("Wrong email!", "TimeoutNotificationDialogHost");
                 return;
             }
 
             var passwordHelper = new PasswordHelper();
             if (passwordHelper.IsPasswordCorrect(userFromDb, SecureStringPassword))
             {
-                MessageBox.Show($"Hi {userFromDb.Name}! Welcome back", "Login success");
+                await MaterialDesignThemes.Wpf.DialogHost.Show($"Hi {userFromDb.Name}! Welcome back", "TimeoutNotificationDialogHost");
             }
             else
             {
-                MessageBox.Show("Wrong password!", "Login failed");
+                await MaterialDesignThemes.Wpf.DialogHost.Show("Wrong password!", "TimeoutNotificationDialogHost");
                 return;
             }
 

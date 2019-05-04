@@ -107,29 +107,22 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             return SelectedUserInComboBox != null;
         }
 
-        private void RemoveMember(UserModel clickedUser)
+        private async void RemoveMember(UserModel clickedUser)
         {
-            MessageBoxResult messageBoxResult;
+            object dialogResult;
             if (clickedUser.ID == LoggedUser.ID)
             {
                 if (Members.Count() == 1)
-                    messageBoxResult = MessageBox.Show(
-                        "You are the last member of this team. The team with all posts will be discarded if you leave! Are you sure to continue?",
-                        "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+                    dialogResult = await MaterialDesignThemes.Wpf.DialogHost.Show("You are the last member of this team. The team with all posts will be discarded if you leave! Are you sure to continue?", "YesOrNoDialogHost");
                 else
-                    messageBoxResult = MessageBox.Show(
-                        "Are you sure to remove yourself from this team? All your posts will reamain, but you lose access to the team!",
-                        "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+                    dialogResult = await MaterialDesignThemes.Wpf.DialogHost.Show("Are you sure to remove yourself from this team? All your posts will reamain, but you lose access to the team!", "YesOrNoDialogHost");
             }
             else
             {
-                messageBoxResult =
-                    MessageBox.Show(
-                        $"Are you sure to cancel {clickedUser.FullName} access to this team? All posts from the user will reamain.",
-                        "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+                dialogResult = await MaterialDesignThemes.Wpf.DialogHost.Show($"Are you sure to cancel {clickedUser.FullName} access to this team? All posts from the user will reamain.", "YesOrNoDialogHost");
             }
 
-            if (messageBoxResult == MessageBoxResult.No) return;
+            if (dialogResult.ToString() == "No") return;
 
             _teamsRepository.RemoveUserFromTeam(clickedUser.ID, Team.ID);
 
@@ -146,13 +139,11 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
             }
         }
 
-        private void DeleteTeam()
+        private async void DeleteTeam()
         {
-            var messageBoxResult =
-                MessageBox.Show($"Team {Team.Name} with all posts will be deleted! Are you sure to continue?",
-                    "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+            object dialogResult = await MaterialDesignThemes.Wpf.DialogHost.Show($"Team {Team.Name} with all posts will be deleted! Are you sure to continue?", "YesOrNoDialogHost");
 
-            if (messageBoxResult == MessageBoxResult.No) return;
+            if(dialogResult.ToString() == "No") return;
 
             _teamsRepository.RemoveWithAllPostsAndComments(Team.ID);
             Mediator.Instance.Send(new UserLostAccessToTeam {Team = Team});
