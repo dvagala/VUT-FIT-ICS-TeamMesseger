@@ -1,4 +1,7 @@
 ﻿
+using System.Net.Mime;
+using System.Windows;
+
 namespace ICS.Project.App.Views
 {
     /// <summary>
@@ -9,6 +12,10 @@ namespace ICS.Project.App.Views
         public MessengerScreenView()
         {
             InitializeComponent();
+        }
+        private void ButtonPopUpLogout_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
