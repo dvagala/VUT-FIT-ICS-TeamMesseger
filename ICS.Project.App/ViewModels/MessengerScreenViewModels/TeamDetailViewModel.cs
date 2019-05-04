@@ -122,7 +122,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
                 dialogResult = await MaterialDesignThemes.Wpf.DialogHost.Show($"Are you sure to cancel {clickedUser.FullName} access to this team? All posts from the user will reamain.", "YesOrNoDialogHost");
             }
 
-            if (dialogResult.ToString() == "No") return;
+            if (dialogResult == null || dialogResult.ToString() == "No") return;
 
             _teamsRepository.RemoveUserFromTeam(clickedUser.ID, Team.ID);
 
@@ -143,7 +143,7 @@ namespace ICS.Project.App.ViewModels.MessengerScreenViewModels
         {
             object dialogResult = await MaterialDesignThemes.Wpf.DialogHost.Show($"Team {Team.Name} with all posts will be deleted! Are you sure to continue?", "YesOrNoDialogHost");
 
-            if(dialogResult.ToString() == "No") return;
+            if(dialogResult == null || dialogResult.ToString() == "No") return;
 
             _teamsRepository.RemoveWithAllPostsAndComments(Team.ID);
             Mediator.Instance.Send(new UserLostAccessToTeam {Team = Team});
