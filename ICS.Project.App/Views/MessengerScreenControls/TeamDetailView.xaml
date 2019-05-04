@@ -25,7 +25,7 @@
             <TextBlock FontSize="11" Margin="10" Foreground="#EFEBE8" Visibility="{Binding IsDescriptionInEditMode, Converter={ StaticResource InvertBooleanToVisibilityConverter}}" TextWrapping="Wrap" Text="{Binding Team.Description, TargetNullValue='Here write a description'}" />
             <TextBox x:Name="DescriptionTextBox" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Text="{Binding Team.Description, UpdateSourceTrigger=PropertyChanged}" />
             <Button Foreground="#EFEBE8" FontSize="12" Background="Teal" BorderBrush="Teal" x:Name="EditDescription" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource InvertBooleanToVisibilityConverter}}"  Content="Edit"  Command="{Binding EditDescriptionCommand}" Height="28" Width="118"/>
-            <Button x:Name="SaveDescription" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Save" Command="{Binding SaveDescriptionCommand}"/>
+            <Button Foreground="#EFEBE8" FontSize="12" Background="Teal" x:Name="SaveDescription" Visibility="{Binding IsDescriptionInEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Save" Command="{Binding SaveDescriptionCommand}" Height="28" Width="118"/>
 
             <Separator Margin="15"/>
 

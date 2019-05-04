@@ -9,6 +9,7 @@
              xmlns:chatPanelControls="clr-namespace:ICS.Project.App.Views.MessengerScreenControls.ChatPanelControls"
              xmlns:chatPanelViewModels="clr-namespace:ICS.Project.App.ViewModels.MessengerScreenViewModels.ChatPanelViewModels"
              xmlns:base="clr-namespace:ICS.Project.App.Views.Base"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance chatPanelViewModels:PostViewModel}">
 
@@ -22,18 +23,18 @@
                         Margin="0, 0"
                         CornerRadius="5"
                         Width="350"
-                        Background="Beige"
+                        Background="#b2dfdb"
                         BorderThickness="1"
-                        BorderBrush="Black">
+                        BorderBrush="#b2dfdb">
                     <StackPanel Margin="5">
-                        <TextBlock Text="{Binding Post.Title}" VerticalAlignment="Top"
+                        <TextBlock Foreground="#34333B" Text="{Binding Post.Title}" VerticalAlignment="Top"
                                    HorizontalAlignment="Left" FontWeight="Bold" />
-                        <TextBlock Text="{Binding Post.MessageText}" VerticalAlignment="Top"
+                        <TextBlock Foreground="#34333B" Text="{Binding Post.MessageText}" VerticalAlignment="Top"
                                    HorizontalAlignment="Left" TextWrapping="Wrap" />
                     </StackPanel>
                 </Border>
             </StackPanel>
-            <TextBlock Text="{Binding Post.PublishDate, Converter={StaticResource DateTimeFormatConvertor}}" HorizontalAlignment="Left" Margin="300,0,10,0"/>
+            <TextBlock FontSize="10" Foreground="#34333B" Text="{Binding Post.PublishDate, Converter={StaticResource DateTimeFormatConvertor}}" HorizontalAlignment="Left" Margin="300,0,10,0"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
             <ItemsControl ItemsSource="{Binding CommentViewModels}">
@@ -47,8 +48,10 @@
             </ItemsControl>
             <StackPanel Orientation="Horizontal">
                 <chatPanelControls:UserInitialsCircleView DataContext="{Binding NewCommentUserInitialsCircleViewModel}" />
-                 <TextBox x:Name="MessageTextBox" Text="{Binding NewComment.MessageText, UpdateSourceTrigger=PropertyChanged}" Width="220" VerticalAlignment="Center" TextWrapping="Wrap" AcceptsReturn="True" />
-                <Button Content="Send"  Padding="5,0,5,0"  Command="{Binding AddNewCommentCommand}" Height="20" Margin="10,0,10,0"/>
+                <TextBox Foreground="#34333B" x:Name="MessageTextBox" Text="{Binding NewComment.MessageText, UpdateSourceTrigger=PropertyChanged}" Width="220" VerticalAlignment="Center" TextWrapping="Wrap" AcceptsReturn="True" />
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" FontSize="10" HorizontalAlignment="Center" Foreground="#EFEBE8"  Width="20" Height="20" Background="Teal" Command="{Binding AddNewCommentCommand}">
+                    <materialDesign:PackIcon Kind="Send" Width="10" Height="10"/>
+                </Button>
             </StackPanel>
         </StackPanel>
     </StackPanel>
