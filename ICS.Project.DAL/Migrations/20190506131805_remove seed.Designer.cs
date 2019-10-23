@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ICS.Project.DAL.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    [Migration("20190428221446_edit ids")]
-    partial class editids
+    [Migration("20190506131805_remove seed")]
+    partial class removeseed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,23 +54,17 @@ namespace ICS.Project.DAL.Migrations
 
                     b.Property<DateTime>("PublishDate");
 
+                    b.Property<Guid?>("TeamId");
+
                     b.Property<string>("Title");
 
                     b.HasKey("ID");
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Posts");
+                    b.HasIndex("TeamId");
 
-                    b.HasData(
-                        new
-                        {
-                            ID = new Guid("7a9ece27-ac92-4d56-a8aa-2015fa63a6ea"),
-                            AuthorId = new Guid("ed16e27a-47e2-4f47-b19d-4a362003ca82"),
-                            MessageText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            PublishDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Title1"
-                        });
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.TeamEntity", b =>
@@ -85,14 +79,6 @@ namespace ICS.Project.DAL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Teams");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = new Guid("0924f8d4-18f1-43f6-b6f7-0be8a4f55403"),
-                            Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            Name = "Black Wariors"
-                        });
                 });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.UserEntity", b =>
@@ -102,9 +88,11 @@ namespace ICS.Project.DAL.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<bool>("IsLoggedIn");
+
                     b.Property<int>("IterationCount");
 
-                    b.Property<DateTime>("LastActivity");
+                    b.Property<DateTime>("LastLogoutTime");
 
                     b.Property<string>("Name");
 
@@ -117,19 +105,6 @@ namespace ICS.Project.DAL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = new Guid("ed16e27a-47e2-4f47-b19d-4a362003ca82"),
-                            Email = "student@fit.cz",
-                            IterationCount = 10007,
-                            LastActivity = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Asher",
-                            PasswordHash = new byte[] { 63, 198, 247, 214, 110, 87, 223, 52, 73, 5, 178, 106, 122, 125, 141, 94 },
-                            Salt = new byte[] { 98, 151, 12, 49, 37, 149, 252, 182, 99, 49, 232, 101, 229, 191, 139, 237, 52, 142, 77, 36, 0, 54, 120, 18, 56, 93, 167, 245, 12, 223, 128, 196 },
-                            Surname = "Roberts"
-                        });
                 });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.UserInTeamEntity", b =>
@@ -157,7 +132,7 @@ namespace ICS.Project.DAL.Migrations
                         .HasForeignKey("AuthorId");
 
                     b.HasOne("ICS.Project.DAL.Entities.PostEntity", "Post")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("PostId");
                 });
 
@@ -166,6 +141,10 @@ namespace ICS.Project.DAL.Migrations
                     b.HasOne("ICS.Project.DAL.Entities.UserEntity", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
+
+                    b.HasOne("ICS.Project.DAL.Entities.TeamEntity", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId");
                 });
 
             modelBuilder.Entity("ICS.Project.DAL.Entities.UserInTeamEntity", b =>
