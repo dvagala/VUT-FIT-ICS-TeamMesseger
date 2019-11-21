@@ -4,4 +4,4 @@ This was my school project in course ICS in VUT FIT. Fully working desktop messe
 
 <br/>
 
-![](https://github.com/dvagala/VUT-FIT-ICS-TeamMesseger/blob/master/final_product_ics.gif)
+![](https://github.com/dvagala/VUT-FIT-ICS-TeamMesseger/blob/develop/final_product_ics.gif)
