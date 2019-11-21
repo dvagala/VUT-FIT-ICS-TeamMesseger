@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using System.Windows;
 using ICS.Project.App.ViewModels.BaseViewModels;
 using ICS.Project.App.ViewModels.MessengerScreenViewModels;
 using ICS.Project.BL.Messages;
@@ -18,6 +19,7 @@ namespace ICS.Project.App.ViewModels
             Mediator.Instance.Register<GoToLoginScreenMessage>(GoToLoginScreen);
             Mediator.Instance.Register<GoToMessengerScreenMessage>(GoToMessengerScreen);
             Mediator.Instance.Register<UserClosedMainWindowMessage>(UserClosedMainWindow);
+
 
             ITeamsRepository teamsRepository = new TeamsRepository(dbContextFactory);
             IUsersRepository usersRepository = new UsersRepository(dbContextFactory);
